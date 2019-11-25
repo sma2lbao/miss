@@ -1,6 +1,9 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -21,3 +24,4 @@ jobs:
         run: |
           npm install
           npm run build
+          npm run deploy
