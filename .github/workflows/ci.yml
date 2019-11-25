@@ -1,4 +1,4 @@
-name: CI
+name: GH-Page Deploy
 
 on:
   push:
@@ -6,22 +6,16 @@ on:
       - master
 
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node_version: [10, 12]
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node_version }}
 
-      - name: build
-        run: |
-          npm install
-          npm run build
-          npm run deploy
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BASE_BRANCH: master # The branch the action should deploy from.
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build # The folder the action should deploy.

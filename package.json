@@ -28,9 +28,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-app-rewired eject"
   },
   "husky": {
     "hooks": {
@@ -83,7 +81,6 @@
     "@types/react-dom": "16.9.4",
     "@types/react-router-dom": "^5.1.2",
     "@types/react-swipeable-views": "^0.13.0",
-    "gh-pages": "^2.1.1",
     "react-app-rewired": "^2.1.5"
   }
 }
