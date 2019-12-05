@@ -46,7 +46,7 @@
       "react-app"
     ],
     "rules": {
-      "additional-rule": "warn"
+      "additional-rule": "off"
     },
     "overrides": [
       {
@@ -54,7 +54,7 @@
           "**/*.ts?(x)"
         ],
         "rules": {
-          "additional-typescript-only-rule": "warn"
+          "additional-typescript-only-rule": "off"
         }
       }
     ]
