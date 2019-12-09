@@ -1,22 +1,24 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
-      display: "flex",
-      justifyContent: "center"
+      maxWidth: 1600
     }
   })
 );
 
 interface BodyScreenProps {
   children: React.ReactNode;
+  className?: String;
 }
 
 export default function BodyScreen(props: BodyScreenProps) {
   const classes = useStyles();
 
-  return <div className={classes.root}>{props.children}</div>;
+  return (
+    <div className={clsx(classes.root, props.className)}>{props.children}</div>
+  );
 }

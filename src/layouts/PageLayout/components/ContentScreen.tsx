@@ -5,7 +5,7 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: 1200
+      maxWidth: 1200
     }
   })
 );

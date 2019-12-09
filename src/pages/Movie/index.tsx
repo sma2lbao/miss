@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     main: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      backgroundColor: theme.palette.background.paper
     },
     content: {
       flex: 1
@@ -30,8 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Movie() {
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
-
-  console.log(classes);
 
   return (
     <Box>
@@ -54,9 +53,9 @@ export default function Movie() {
             {tab === 2 && <About />}
           </div>
         </ContentScreen>
-        <AiderScreen>
+        {/* <AiderScreen>
           <Cast />
-        </AiderScreen>
+        </AiderScreen> */}
       </BodyScreen>
     </Box>
   );
