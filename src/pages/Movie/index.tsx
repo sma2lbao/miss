@@ -2,9 +2,10 @@ import * as React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Box } from "@material-ui/core";
 import Image from "@/components/Image";
+import MovieMain from "./components/MovieMain";
 import About from "./components/About";
-import Cast from "./components/Cast";
 import Relative from "./components/Relative";
+import Cast from "./components/Cast";
 import PageLayout, {
   ContentScreen,
   AiderScreen,
@@ -20,7 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
     main: {
       display: "flex",
       flexDirection: "column",
-      backgroundColor: theme.palette.background.paper
+      backgroundColor: theme.palette.background.paper,
+      padding: theme.spacing(1, 6)
     },
     content: {
       flex: 1
@@ -48,7 +50,7 @@ export default function Movie() {
             <Tab label="About"></Tab>
           </Tabs>
           <div className={classes.content}>
-            {tab === 0 && <Relative />}
+            {tab === 0 && <MovieMain />}
             {tab === 1 && <Relative />}
             {tab === 2 && <About />}
           </div>
