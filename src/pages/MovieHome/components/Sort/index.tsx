@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       backgroundColor: theme.palette.background.paper,
       display: "flex",
-      padding: theme.spacing(2, 3)
+      padding: theme.spacing(2, 0)
     }
   })
 );
@@ -23,7 +23,12 @@ export default function Sort() {
 
   return (
     <Box className={classes.root}>
-      <Chip color="primary" avatar={<Avatar>L</Avatar>} label="类别一" />
+      <Chip
+        variant="outlined"
+        // color="primary"
+        avatar={<Avatar>L</Avatar>}
+        label="类别一"
+      />
     </Box>
   );
 }
