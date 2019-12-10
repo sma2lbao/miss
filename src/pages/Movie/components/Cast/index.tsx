@@ -7,7 +7,8 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-  Box
+  Box,
+  ListSubheader
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MoreVert } from "@material-ui/icons";
@@ -25,7 +26,7 @@ export default function Cast() {
 
   return (
     <Box className={classes.root}>
-      <List>
+      <List subheader={<ListSubheader>演职表</ListSubheader>}>
         {[1, 2, 3, 4].map((_, i) => {
           return (
             <ListItem key={i}>

@@ -15,14 +15,20 @@ import PageLayout, {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    poster: {
-      width: "100%"
+    body: {
+      display: "flex",
+      margin: "0 auto"
     },
     main: {
       display: "flex",
       flexDirection: "column",
       backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(1, 6)
+      padding: theme.spacing(1, 6),
+      borderRight: `1px solid ${theme.palette.divider}`,
+      flex: 4
+    },
+    aider: {
+      flex: 1
     },
     content: {
       flex: 1
@@ -42,12 +48,12 @@ export default function Movie() {
           src="http://img02.tooopen.com/images/20151202/tooopen_sy_150140545166.jpg"
         />
       </FullScreen>
-      <BodyScreen>
+      <BodyScreen className={classes.body}>
         <ContentScreen className={classes.main}>
           <Tabs value={tab} onChange={(e, val) => setTab(val)}>
-            <Tab label="Movie"></Tab>
-            <Tab label="Related Videos"></Tab>
-            <Tab label="About"></Tab>
+            <Tab label="信息"></Tab>
+            <Tab label="相关推荐"></Tab>
+            <Tab label="关于"></Tab>
           </Tabs>
           <div className={classes.content}>
             {tab === 0 && <MovieMain />}
@@ -55,9 +61,9 @@ export default function Movie() {
             {tab === 2 && <About />}
           </div>
         </ContentScreen>
-        {/* <AiderScreen>
+        <AiderScreen className={classes.aider}>
           <Cast />
-        </AiderScreen> */}
+        </AiderScreen>
       </BodyScreen>
     </Box>
   );
