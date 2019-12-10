@@ -38,7 +38,7 @@ export default function Player() {
   return (
     <Box className={classes.root}>
       <FullScreen>
-        {/* <VideoPlayer src="https://player.vimeo.com/external/188421287.sd.mp4?s=bdbf8a61c40502211971571fef384f52fe79dbbe&profile_id=164" /> */}
+        <VideoPlayer src="https://player.vimeo.com/external/188421287.sd.mp4?s=bdbf8a61c40502211971571fef384f52fe79dbbe&profile_id=164" />
       </FullScreen>
       <BodyScreen className={classes.body}>
         <ContentScreen className={classes.content}>
