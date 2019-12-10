@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { ContentScreenLayoutProps } from "../layout.d";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,15 +11,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ContentScreenProps {
-  children: React.ReactNode;
-  className?: String;
-}
-
-export default function ContentScreen(props: ContentScreenProps) {
+export default function ContentScreen(props: ContentScreenLayoutProps) {
   const classes = useStyles();
 
   return (
-    <div className={clsx(classes.root, props.className)}>{props.children}</div>
+    <div
+      style={Object.assign({}, props.width ? { width: props.width } : {})}
+      className={clsx(classes.root, props.className)}
+    >
+      {props.children}
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { FullScreenLayoutProps } from "../layout.d";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,12 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface FullScreenProps {
-  children: React.ReactNode;
-  className?: String;
-}
-
-export default function FullScreen(props: FullScreenProps) {
+export default function FullScreen(props: FullScreenLayoutProps) {
   const classes = useStyles();
 
   return (

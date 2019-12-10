@@ -42,7 +42,7 @@ export default function MovieHome() {
   return (
     <Box padding={0}>
       <FullScreen className={classes.filterFull}>
-        <ContentScreen>
+        <ContentScreen width={1200}>
           <Sort />
           <Filter />
         </ContentScreen>
