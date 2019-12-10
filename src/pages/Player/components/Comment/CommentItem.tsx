@@ -11,15 +11,18 @@ import {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     avatar: {
-      marginRight: theme.spacing(1)
+      marginRight: theme.spacing(2)
     },
     main: {
       flex: 1
     },
     infoItem: {
       "& + &": {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(2)
       }
+    },
+    commentText: {
+      marginTop: theme.spacing(1)
     }
   })
 );
@@ -50,7 +53,7 @@ function CommentItem() {
           </Box>
         </div>
       </Box>
-      <Typography variant="body2">
+      <Typography variant="body2" className={classes.commentText}>
         邯郸驿里逢冬至，抱膝灯前影伴身。 想得家中夜深坐，还应说着远行人。
       </Typography>
     </Box>
