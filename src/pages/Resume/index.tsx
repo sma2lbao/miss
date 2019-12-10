@@ -102,31 +102,31 @@ export default function Rusume() {
       <div id="sections" className={classes.sections}>
         <div id={"section" + 0} data-tab={0} className={classes.section}>
           <Typography className={classes.title} variant="h6">
-            段落一
+            工作经历
           </Typography>
           <Work />
         </div>
         <div id={"section" + 1} data-tab={1} className={classes.section}>
           <Typography className={classes.title} variant="h6">
-            段落二
+            项目经历
           </Typography>
           <Experience />
         </div>
         <div id={"section" + 2} data-tab={2} className={classes.section}>
           <Typography className={classes.title} variant="h6">
-            段落三
+            作品集
           </Typography>
           <Protfolio />
         </div>
         <div id={"section" + 3} data-tab={3} className={classes.section}>
           <Typography className={classes.title} variant="h6">
-            段落四
+            自我描述
           </Typography>
           <SelfEvaluation />
         </div>
         <div id={"section" + 4} data-tab={4} className={classes.section}>
           <Typography className={classes.title} variant="h6">
-            段落五
+            教育经历
           </Typography>
           <Education />
         </div>
@@ -138,11 +138,11 @@ export default function Rusume() {
           value={ctrl.tab}
           onChange={(e, val) => setCtrl({ tab: val, type: "click" })}
         >
-          <Tab label="第一段" />
-          <Tab label="第二段" />
-          <Tab label="第三段" />
-          <Tab label="第四段" />
-          <Tab label="第五段" />
+          <Tab label="工作经历" />
+          <Tab label="项目经历" />
+          <Tab label="作品集" />
+          <Tab label="自我描述" />
+          <Tab label="教育经历" />
         </Tabs>
       </div>
     </div>

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ExperienceCard(props: ProjectItemProps) {
+function ProjectItem(props: ProjectItemProps) {
   const classes = useStyles();
   // const { content } = props;
 
@@ -58,14 +58,17 @@ function ExperienceCard(props: ProjectItemProps) {
         }
       />
       <CardContent>
-        <Typography variant="body2">{props.content}</Typography>
+        <Typography
+          variant="body2"
+          dangerouslySetInnerHTML={{ __html: props.content || "" }}
+        />
       </CardContent>
-      <GridList cellHeight="auto" cols={3} className={classes.pictureWrap}>
+      <GridList cellHeight={140} cols={3} className={classes.pictureWrap}>
         {props.pictures &&
           props.pictures.map((item, i) => {
             return (
               <GridListTile key={i}>
-                <img width="100%" height="100%" src={item} />
+                <img src={item} />
               </GridListTile>
             );
           })}
@@ -79,7 +82,7 @@ function ExperienceCard(props: ProjectItemProps) {
   );
 }
 
-ExperienceCard.defaultProps = {
+ProjectItem.defaultProps = {
   logo:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBouYESt5VYCK60K5uhGZhG-TfP29I6NjM2tBpYdM1sYXQQLyw",
   name: "名称",
@@ -154,4 +157,4 @@ ExperienceCard.defaultProps = {
   ]
 } as Partial<ProjectItemProps>;
 
-export default ExperienceCard;
+export default ProjectItem;

@@ -26,10 +26,10 @@ export default function PersonCard() {
 
   return (
     <Box className={classes.person}>
-      {/* <Avatar
+      <Avatar
         className={classes.avatar}
         alt="avatar"
-        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562763235177&di=ff3c425ba5b3be386d2a76dfd122f0f4&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201504%2F03%2F20150403H4617_Na8vX.jpeg"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBouYESt5VYCK60K5uhGZhG-TfP29I6NjM2tBpYdM1sYXQQLyw"
       ></Avatar>
       <Typography variant="h6" align="center">
         李观保
@@ -42,7 +42,7 @@ export default function PersonCard() {
         <Typography variant="caption" color="textSecondary">
           邮箱
         </Typography>
-        <Typography variant="body2">sma2lbao@gmail.com</Typography>
+        <Typography variant="body2">sma2lbao@qq.com</Typography>
       </div>
       <div className={classes.cell}>
         <Typography variant="caption" color="textSecondary">
@@ -61,7 +61,7 @@ export default function PersonCard() {
           个人网址
         </Typography>
         <Typography variant="body2">https://www.sma2lbao.cn</Typography>
-      </div> */}
+      </div>
     </Box>
   );
 }
