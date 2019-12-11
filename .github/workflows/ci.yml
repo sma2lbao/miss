@@ -29,5 +29,5 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           EXTERNAL_REPOSITORY: sma2lbao/sma2lbao.github.io
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
+          PUBLISH_BRANCH: master
           PUBLISH_DIR: ./build
