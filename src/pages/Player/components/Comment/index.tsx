@@ -37,6 +37,33 @@ export default function Comment() {
         <div className={classes.item}>
           <CommentItem />
         </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
+        <div className={classes.item}>
+          <CommentItem />
+        </div>
       </div>
     </Box>
   );

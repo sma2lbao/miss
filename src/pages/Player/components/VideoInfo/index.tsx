@@ -6,10 +6,26 @@ import { ThumbUpAlt, ThumbDownAlt, MoreVert } from "@material-ui/icons";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
+    header: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: theme.spacing(1)
+    },
     infoItem: {
       "& + &": {
         marginLeft: theme.spacing(1)
       }
+    },
+    toolBox: {
+      display: "flex",
+      alignItems: "center",
+      marginRight: theme.spacing(2)
+    },
+    toolText: {
+      marginLeft: theme.spacing(0.5)
+    },
+    description: {
+      marginBottom: theme.spacing(1)
     }
   })
 );
@@ -19,7 +35,7 @@ export default function VideoInfo() {
 
   return (
     <div>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box className={classes.header}>
         <div>
           <Typography variant="subtitle1">白雪歌送武判官归京</Typography>
           <Box display="flex">
@@ -32,24 +48,24 @@ export default function VideoInfo() {
           </Box>
         </div>
         <Box display="flex" alignItems="center">
-          <Box display="flex" alignItems="center">
+          <Box className={classes.toolBox}>
             <IconButton size="small">
               <ThumbDownAlt />
             </IconButton>
-            <Typography>26.8k</Typography>
+            <Typography className={classes.toolText}>26.8k</Typography>
           </Box>
-          <Box display="flex" alignItems="center">
+          <Box className={classes.toolBox}>
             <IconButton size="small">
               <ThumbUpAlt />
             </IconButton>
-            <Typography>26.8k</Typography>
+            <Typography className={classes.toolText}>26.8k</Typography>
           </Box>
           <IconButton size="small">
             <MoreVert />
           </IconButton>
         </Box>
       </Box>
-      <Typography variant="body2">
+      <Typography className={classes.description} variant="body2">
         北风卷地白草折，胡天八月即飞雪。 忽如一夜春风来，千树万树梨花开。
         散入珠帘湿罗幕，狐裘不暖锦衾薄。 将军角弓不得控，都护铁衣冷难着。(难着
         一作：犹著) 瀚海阑干百丈冰，愁云惨淡万里凝。
@@ -60,10 +76,10 @@ export default function VideoInfo() {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" alignItems="center">
           <Avatar>岑</Avatar>
-          <div>
+          <Box ml={1}>
             <Typography variant="subtitle2">岑参</Typography>
             <Typography variant="caption">唐代</Typography>
-          </div>
+          </Box>
         </Box>
         <Button>订阅</Button>
       </Box>

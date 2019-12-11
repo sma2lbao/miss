@@ -1,13 +1,21 @@
 import React from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { VideoWithAuthor } from "@/components/VideoCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(1, 0)
+    },
+    box: {
+      padding: theme.spacing(2, 0),
+
+      "& + &": {
+        borderTop: `1px solid ${theme.palette.divider}`
+      }
     }
   })
 );
@@ -17,19 +25,42 @@ export default function MovieMain() {
 
   return (
     <Box className={classes.root}>
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          评分
+      <Box className={classes.box}>
+        <Typography variant="subtitle1" gutterBottom>
+          平均评分
         </Typography>
         <Rating
-          name="customized-empty"
+          readOnly
           value={2}
           precision={0.5}
           icon={<Favorite fontSize="inherit" />}
         />
       </Box>
-      <Typography variant="h6">精彩评论</Typography>
-      <Typography>视频图片</Typography>
+      <Box className={classes.box}>
+        <Typography variant="subtitle1" gutterBottom>
+          视频图片
+        </Typography>
+        <GridList cellHeight="auto" cols={4}>
+          <GridListTile cols={1}>
+            <VideoWithAuthor />
+          </GridListTile>
+          <GridListTile cols={1}>
+            <VideoWithAuthor />
+          </GridListTile>
+          <GridListTile cols={1}>
+            <VideoWithAuthor />
+          </GridListTile>
+          <GridListTile cols={1}>
+            <VideoWithAuthor />
+          </GridListTile>
+          <GridListTile cols={1}>
+            <VideoWithAuthor />
+          </GridListTile>
+        </GridList>
+      </Box>
+      <Box className={classes.box}>
+        <Typography variant="subtitle1">精彩点评</Typography>
+      </Box>
     </Box>
   );
 }

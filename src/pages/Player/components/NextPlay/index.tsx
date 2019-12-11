@@ -12,6 +12,18 @@ export default function NextPlay() {
         <GridListTile cols={1}>
           <VideoWithAuthor />
         </GridListTile>
+        <GridListTile cols={1}>
+          <VideoWithAuthor />
+        </GridListTile>
+        <GridListTile cols={1}>
+          <VideoWithAuthor />
+        </GridListTile>
+        <GridListTile cols={1}>
+          <VideoWithAuthor />
+        </GridListTile>
+        <GridListTile cols={1}>
+          <VideoWithAuthor />
+        </GridListTile>
       </GridList>
     </Box>
   );
