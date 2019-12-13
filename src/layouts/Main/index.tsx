@@ -40,7 +40,8 @@ export default function Main(props: MainProps) {
   const { children } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  // const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const isDesktop = useMediaQuery("(min-width: 1600px)");
   const [openSidebar, setOpenSidebar] = React.useState(false);
 
   return (
