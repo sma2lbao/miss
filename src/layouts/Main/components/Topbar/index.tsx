@@ -42,7 +42,7 @@ interface TopbarProps {
 export default function Topbar(props: TopbarProps) {
   const classes = useStyles();
   return (
-    <AppBar color="inherit" position="static" className={classes.appBar}>
+    <AppBar color="inherit" position="sticky" className={classes.appBar}>
       <Toolbar classes={{ root: classes.toolbar }}>
         <Box display="flex" alignItems="center">
           <IconButton
