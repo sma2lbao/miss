@@ -55,7 +55,9 @@ export default function Main(props: MainProps) {
           closeSidebarHandler={() => setOpenSidebar(false)}
         />
         <main
-          className={clsx(classes.main, { [classes.shiftMain]: openSidebar })}
+          className={clsx(classes.main, {
+            [classes.shiftMain]: openSidebar && isDesktop
+          })}
         >
           {children}
         </main>

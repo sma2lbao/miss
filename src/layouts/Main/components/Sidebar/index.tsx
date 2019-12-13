@@ -30,16 +30,19 @@ const menus = [
   {
     icon: <Home />,
     label: "首页",
+    value: "home",
     path: "/home"
   },
   {
     icon: <Movie />,
     label: "电影",
+    value: "movie",
     path: "/movie-home"
   },
   {
     icon: <Tv />,
     label: "剧集",
+    value: "tv",
     path: "/tv-home"
   }
 ];
@@ -48,16 +51,19 @@ const minor_menus = [
   {
     icon: <Home />,
     label: "首页",
+    value: "minor_home",
     path: "/home"
   },
   {
     icon: <Movie />,
     label: "电影",
+    value: "minor_movie",
     path: "/movie-home"
   },
   {
     icon: <Tv />,
     label: "剧集",
+    value: "minor_tv",
     path: "/tv-home"
   }
 ];
@@ -65,13 +71,19 @@ const minor_menus = [
 export default function Sidebar(props: SidebarProps) {
   const { closeSidebarHandler, ...rest } = props;
   const classes = useStyles();
+  const [selected, setSelected] = React.useState("home");
 
   return (
     <Drawer {...rest} onClose={closeSidebarHandler}>
       <div className={classes.toolbar}></div>
       <List>
         {menus.map((menu, index) => (
-          <ListItem button key={menu.label}>
+          <ListItem
+            onClick={() => setSelected(menu.value)}
+            selected={selected === menu.value}
+            button
+            key={menu.label}
+          >
             <ListItemIcon>{menu.icon}</ListItemIcon>
             <ListItemText primary={menu.label} />
           </ListItem>
@@ -80,7 +92,12 @@ export default function Sidebar(props: SidebarProps) {
       <Divider variant="middle" />
       <List>
         {minor_menus.map((menu, index) => (
-          <ListItem button key={menu.label}>
+          <ListItem
+            onClick={() => setSelected(menu.value)}
+            selected={selected === menu.value}
+            button
+            key={menu.label}
+          >
             <ListItemIcon>{menu.icon}</ListItemIcon>
             <ListItemText primary={menu.label} />
           </ListItem>
