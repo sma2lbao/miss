@@ -12,6 +12,8 @@ import PageLayout, {
   FullScreen,
   BodyScreen
 } from "@/layouts/PageLayout";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +38,30 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const MOVIE = gql`
+  query($id: Int!) {
+    movie(id: $id) {
+      title
+      cover
+      posters
+      actors
+      description
+      author {
+        nickname
+        avatar
+      }
+    }
+  }
+`;
+
 export default function Movie() {
+  const { loading, data, error } = useQuery(MOVIE, {
+    variables: {
+      id: 1
+    }
+  });
+  console.log(data, error);
+
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
 
@@ -45,7 +70,7 @@ export default function Movie() {
       <FullScreen>
         <Image
           aspectRatio={16 / 9}
-          src="http://img02.tooopen.com/images/20151202/tooopen_sy_150140545166.jpg"
+          src={data && data.movie && data.movie.cover}
         />
       </FullScreen>
       <BodyScreen className={classes.body}>
@@ -58,7 +83,9 @@ export default function Movie() {
           <div className={classes.content}>
             {tab === 0 && <MovieMain />}
             {tab === 1 && <Relative />}
-            {tab === 2 && <About />}
+            {tab === 2 && (
+              <About html={data && data.movie && data.movie.description} />
+            )}
           </div>
         </ContentScreen>
         <AiderScreen className={classes.aider}>
