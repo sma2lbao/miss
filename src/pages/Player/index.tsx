@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import VideoPlayer from "./components/VideoPlayer";
+// import VideoPlayer from "./components/VideoPlayer";
+import ReactPlayer from "react-player";
 import NextPlay from "./components/NextPlay";
 import VideoInfo from "./components/VideoInfo";
 import Comment from "./components/Comment";
@@ -11,6 +12,7 @@ import {
   ContentScreen,
   AiderScreen
 } from "@/layouts/PageLayout";
+import Image from "@/components/Image";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +23,18 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       display: "flex",
       margin: "0 auto"
+    },
+    videoRoot: {
+      width: "100%",
+      paddingTop: "calc(56.25%)",
+      position: "relative"
+    },
+    video: {
+      width: "100% !important",
+      height: "100% !important",
+      position: "absolute",
+      top: 0,
+      left: 0
     },
     content: {
       padding: theme.spacing(2, 5),
@@ -38,7 +52,14 @@ export default function Player() {
   return (
     <Box className={classes.root}>
       <FullScreen>
-        <VideoPlayer src="https://player.vimeo.com/external/188421287.sd.mp4?s=bdbf8a61c40502211971571fef384f52fe79dbbe&profile_id=164" />
+        {/* <Image aspectRatio={16 / 9} /> */}
+        <div className={classes.videoRoot}>
+          <ReactPlayer
+            className={classes.video}
+            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            playing
+          />
+        </div>
       </FullScreen>
       <BodyScreen className={classes.body}>
         <ContentScreen className={classes.content}>
