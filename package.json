@@ -24,7 +24,7 @@
     "react-scripts": "3.2.0",
     "react-swipeable-views": "^0.13.3",
     "three": "^0.112.1",
-    "typescript": "3.7.2"
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
