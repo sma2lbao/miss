@@ -89,10 +89,10 @@ export default function Rusume() {
     const parent = document.getElementById("sections");
     if (parent) {
       const children = parent.childNodes;
-      children.forEach(el => io.observe(el as Element));
+      children.forEach(el => io?.observe(el as Element));
     }
-    return () => io.disconnect();
-  }, []);
+    return () => io?.disconnect();
+  }, [io]);
 
   return (
     <div className={classes.root}>
