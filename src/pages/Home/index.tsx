@@ -60,8 +60,8 @@ export default function Home() {
             <Topic />
           </div>
         </div>
-        {/* <Divider /> */}
-        {/* <Recommend /> */}
+        <Divider />
+        <Recommend />
       </div>
       {/* <div className={classes.aider}>
         <Aider />
