@@ -97,10 +97,20 @@ export default function Image(props: ImageProp) {
           {status !== ImageStatus.Success && (
             <div className={classes.container}>
               {status === ImageStatus.Loading && (
-                <Skeleton height="100%" width="100%" />
+                <Skeleton
+                  variant="rect"
+                  animation="wave"
+                  height="100%"
+                  width="100%"
+                />
               )}
               {status === ImageStatus.Failuare && (
-                <Skeleton height="100%" width="100%" />
+                <Skeleton
+                  variant="rect"
+                  animation="wave"
+                  height="100%"
+                  width="100%"
+                />
               )}
             </div>
           )}
@@ -119,10 +129,20 @@ export default function Image(props: ImageProp) {
           {status !== ImageStatus.Success && (
             <div className={classes.container}>
               {status === ImageStatus.Loading && (
-                <Skeleton height="100%" width="100%" />
+                <Skeleton
+                  variant="rect"
+                  animation="wave"
+                  height="100%"
+                  width="100%"
+                />
               )}
               {status === ImageStatus.Failuare && (
-                <Skeleton height="100%" width="100%" />
+                <Skeleton
+                  variant="rect"
+                  animation="wave"
+                  height="100%"
+                  width="100%"
+                />
               )}
             </div>
           )}

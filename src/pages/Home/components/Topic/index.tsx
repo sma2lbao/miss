@@ -3,6 +3,7 @@ import { Box, Typography, Avatar } from "@material-ui/core";
 import Image from "@/components/Image";
 import Duration from "@/components/Duration";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,12 +54,12 @@ function Topic(props: TopicProps) {
           aspectRatio={16 / 9}
           src={props.posters ? props.posters[0] : ""}
         />
-        {props.duration && (
+        {/* {props.duration && (
           <Duration
             classes={{ root: classes.duration }}
             duration={props.duration}
           />
-        )}
+        )} */}
         <Avatar
           className={classes.avatar}
           src={props.author && props.author.avatar}
@@ -66,11 +67,17 @@ function Topic(props: TopicProps) {
       </div>
       <Box p={1}>
         <Typography variant="body1" color="textSecondary">
-          {props.author.username}
+          {/* {props.author.username} */}
+          <Skeleton animation="wave" height="100%" width={60} />
         </Typography>
-        <Typography variant="subtitle1">{props.title}</Typography>
+        <Typography variant="subtitle1">
+          {/* {props.title} */}
+          <Skeleton animation="wave" height="100%" width={100} />
+        </Typography>
         <Typography variant="body2" color="textSecondary">
-          {props.description || "暂无简介"}
+          {/* {props.description || "暂无简介"} */}
+          <Skeleton animation="wave" height="100%" width={400} />
+          <Skeleton animation="wave" height="100%" width={100} />
         </Typography>
       </Box>
     </Box>
@@ -81,7 +88,7 @@ Topic.defaultProps = {
   title: "卜算子·咏梅",
   subtitle: "",
   posters: [
-    "https://p3.ifengimg.com/2019_01/f7138d51-fa84-41d5-9a9b-90d03f69e020_3D28F77295E1A575FA4383C991A08E5B3712CD3D_w5000_h2143.jpg"
+    // "https://p3.ifengimg.com/2019_01/f7138d51-fa84-41d5-9a9b-90d03f69e020_3D28F77295E1A575FA4383C991A08E5B3712CD3D_w5000_h2143.jpg",
   ],
   create_at: new Date(),
   duration: 312312,

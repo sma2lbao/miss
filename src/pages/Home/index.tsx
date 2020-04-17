@@ -56,9 +56,9 @@ export default function Home() {
           <div className={classes.headItem}>
             <Featured />
           </div>
-          {/* <div className={classes.headItem}>
+          <div className={classes.headItem}>
             <Topic />
-          </div> */}
+          </div>
         </div>
         {/* <Divider /> */}
         {/* <Recommend /> */}
