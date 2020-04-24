@@ -64,7 +64,7 @@ export default function Rusume() {
   });
   const io = new IntersectionObserver(
     entries => {
-      entries.map(entry => {
+      entries.forEach(entry => {
         const dom = entry.target as HTMLElement;
         if (entry.isIntersecting && dom.dataset.tab) {
           setCtrl({

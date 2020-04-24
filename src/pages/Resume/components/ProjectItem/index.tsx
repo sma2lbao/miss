@@ -68,7 +68,7 @@ function ProjectItem(props: ProjectItemProps) {
           props.pictures.map((item, i) => {
             return (
               <GridListTile key={i}>
-                <img src={item} />
+                <img src={item} alt="" />
               </GridListTile>
             );
           })}
