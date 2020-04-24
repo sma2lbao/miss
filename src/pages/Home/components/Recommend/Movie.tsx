@@ -54,8 +54,8 @@ export default function MovieRecommend() {
         <GridList cellHeight="auto" cols={4}>
           {movies.map((movie: any, index: number) => {
             return (
-              <Grow in timeout={index * 800}>
-                <GridListTile key={index} cols={movie.cols || 1}>
+              <Grow key={index} in timeout={index * 800}>
+                <GridListTile cols={movie.cols || 1}>
                   <VideoWithAuthor key={index} {...movie} />
                 </GridListTile>
               </Grow>
