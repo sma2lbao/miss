@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid, Typography, Box, Link, Grow, Zoom } from "@material-ui/core";
+import { Typography, Box, Link, Grow } from "@material-ui/core";
 import { VideoWithAuthor } from "@/components/VideoCard";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";

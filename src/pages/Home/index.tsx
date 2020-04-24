@@ -3,9 +3,9 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Recommend from "./components/Recommend";
 import Featured from "./components/Featured";
 import Topic from "./components/Topic";
-import Banner from "./components/Banner";
-import Aider from "./components/Aider";
-import { Divider, Box } from "@material-ui/core";
+// import Banner from "./components/Banner";
+// import Aider from "./components/Aider";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

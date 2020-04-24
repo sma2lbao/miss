@@ -6,9 +6,9 @@ import {
   Typography,
   Avatar,
   GridList,
-  GridListTile,
-  CardActions,
-  Button
+  GridListTile
+  // CardActions,
+  // Button
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 

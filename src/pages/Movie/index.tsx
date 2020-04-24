@@ -6,7 +6,7 @@ import MovieMain from "./components/MovieMain";
 import About from "./components/About";
 import Relative from "./components/Relative";
 import Cast from "./components/Cast";
-import PageLayout, {
+import {
   ContentScreen,
   AiderScreen,
   FullScreen,
@@ -55,7 +55,7 @@ const MOVIE = gql`
 `;
 
 export default function Movie() {
-  const { loading, data, error } = useQuery(MOVIE, {
+  const { data, error } = useQuery(MOVIE, {
     variables: {
       id: 1
     }

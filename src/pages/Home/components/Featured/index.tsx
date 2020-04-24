@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Box, Typography, Grid, IconButton } from "@material-ui/core";
+import { Box, Typography, IconButton } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
-import { mod } from "react-swipeable-views-core";
+// import { mod } from "react-swipeable-views-core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import { VideoWithAuthor } from "@/components/VideoCard";
@@ -68,7 +68,7 @@ export default function Featured() {
               onChangeIndex={index => setIndex(index)}
               enableMouseEvents
               slideRenderer={params => {
-                const { index, key } = params;
+                const { key } = params;
                 // const templateIndex = ((index % 6) + 6) % 6;
                 // console.log(mod(index, 3));
                 return (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, Typography, Avatar } from "@material-ui/core";
 import Image from "@/components/Image";
-import Duration from "@/components/Duration";
+// import Duration from "@/components/Duration";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
 

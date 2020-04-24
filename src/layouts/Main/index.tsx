@@ -2,8 +2,8 @@ import * as React from "react";
 import {
   makeStyles,
   createStyles,
-  Theme,
-  useTheme
+  Theme
+  // useTheme
 } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 import Sidebar from "./components/Sidebar";
@@ -39,7 +39,7 @@ interface MainProps {
 export default function Main(props: MainProps) {
   const { children } = props;
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   // const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const isDesktop = useMediaQuery("(min-width: 1600px)");
   const [openSidebar, setOpenSidebar] = React.useState(false);

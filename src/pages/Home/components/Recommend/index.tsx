@@ -1,6 +1,6 @@
 import * as React from "react";
 import MovieRecommend from "./Movie";
-import TvRecommend from "./Tv";
+// import TvRecommend from "./Tv";
 import { Box } from "@material-ui/core";
 
 export default function Recommend() {

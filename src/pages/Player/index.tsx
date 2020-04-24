@@ -12,7 +12,7 @@ import {
   ContentScreen,
   AiderScreen
 } from "@/layouts/PageLayout";
-import Image from "@/components/Image";
+// import Image from "@/components/Image";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

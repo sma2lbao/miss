@@ -1,18 +1,7 @@
 import * as React from "react";
-import { Chip, Avatar, Typography, Box } from "@material-ui/core";
+import { Chip, Typography, Box } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import {
-  Battery20,
-  Battery30,
-  Battery50,
-  Battery60,
-  Battery80,
-  Battery90,
-  SignalWifi1Bar,
-  SignalWifi2Bar,
-  SignalWifi3Bar,
-  SignalWifi4Bar
-} from "@material-ui/icons";
+import { Battery20, SignalWifi1Bar } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

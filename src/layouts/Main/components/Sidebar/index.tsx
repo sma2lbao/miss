@@ -5,13 +5,11 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
-  IconButton,
-  Icon
+  Divider
 } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { DrawerProps } from "@material-ui/core/Drawer";
-import { Home, Movie, Tv, ChevronLeft } from "@material-ui/icons";
+import { Home, Movie, Tv } from "@material-ui/icons";
 // import clsx from 'clsx';
 
 type CloseSidebarFunc = (...args: any[]) => void;

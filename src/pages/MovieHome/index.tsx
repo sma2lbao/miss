@@ -1,18 +1,18 @@
 import * as React from "react";
 import {
   Box,
-  Typography,
-  Link,
+  // Typography,
+  // Link,
   GridList,
-  GridListTile,
-  Divider
+  GridListTile
+  // Divider
 } from "@material-ui/core";
 import { VideoWithAuthor } from "@/components/VideoCard";
-import PageLayout, {
+import {
   ContentScreen,
-  AiderScreen,
-  FullScreen,
-  BodyScreen
+  // AiderScreen,
+  FullScreen
+  // BodyScreen,
 } from "@/layouts/PageLayout";
 import Sort from "./components/Sort";
 import Filter from "./components/Filter";

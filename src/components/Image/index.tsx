@@ -59,6 +59,7 @@ interface ImageProp {
   classes?: Object;
   width?: number | string;
   height?: number | string;
+  alt?: string;
 }
 
 enum ImageStatus {
@@ -69,7 +70,7 @@ enum ImageStatus {
 
 export default function Image(props: ImageProp) {
   const classes = useStyles(props);
-  const { src } = props;
+  const { src, alt } = props;
 
   // status: 0:加载中 1: 加载成功 -1:加载失败
   const [status, setStatus] = React.useState(ImageStatus.Loading);
@@ -88,6 +89,7 @@ export default function Image(props: ImageProp) {
         <div className={classes.aspect}>
           {src && status !== ImageStatus.Failuare && (
             <img
+              alt={alt}
               className={classes.image}
               src={src}
               onLoad={_loadImage}
@@ -122,6 +124,7 @@ export default function Image(props: ImageProp) {
             <img
               className={classes.image}
               src={src}
+              alt=""
               onLoad={_loadImage}
               onError={_loadImageFail}
             />

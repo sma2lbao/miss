@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Box } from "@material-ui/core";
-import Image from "@/components/Image";
+// import Image from "@/components/Image";
 import About from "./components/About";
 import Cast from "./components/Cast";
 

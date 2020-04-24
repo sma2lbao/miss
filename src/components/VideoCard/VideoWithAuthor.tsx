@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Box, Typography, Grid, Avatar } from "@material-ui/core";
+import { Box, Typography, Avatar } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Image from "@/components/Image";
-import Duration from "@/components/Duration";
+// import Duration from "@/components/Duration";
 import { VideoWithAuthorProps } from "./video";
-import moment from "moment";
+// import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
