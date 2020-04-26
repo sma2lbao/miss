@@ -1,5 +1,15 @@
+export interface LayoutOptions {
+  size: {
+    parent: {
+      width: React.CSSProperties["width"];
+    };
+  };
+}
+
 export default {
   size: {
-    parent: 80
+    parent: {
+      width: 80
+    }
   }
-};
+} as Partial<LayoutOptions>;

@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
-  Box,
+  Box
   // Typography,
   // Link,
-  GridList,
-  GridListTile
+  // GridList,
+  // GridListTile,
   // Divider
 } from "@material-ui/core";
 import { VideoWithAuthor } from "@/components/VideoCard";
@@ -32,6 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       borderBottom: `1px solid ${theme.palette.divider}`
+    },
+    gridRoot: {
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
+      gridGap: theme.spacing(1, 1),
+      gridAutoFlow: "row dense"
+    },
+    gridCardMain: {
+      gridRow: "2 span",
+      gridColumn: "2 span"
     }
   })
 );
@@ -49,7 +59,42 @@ export default function MovieHome() {
       </FullScreen>
 
       <ContentScreen className={classes.content}>
-        <GridList cellHeight="auto" cols={4}>
+        <div className={classes.gridRoot}>
+          <div className={classes.gridCardMain}>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          {/* <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div> */}
+        </div>
+        {/* <GridList cellHeight="auto" cols={4}>
           <GridListTile>
             <VideoWithAuthor />
           </GridListTile>
@@ -86,7 +131,7 @@ export default function MovieHome() {
           <GridListTile>
             <VideoWithAuthor />
           </GridListTile>
-        </GridList>
+        </GridList> */}
       </ContentScreen>
     </Box>
   );
