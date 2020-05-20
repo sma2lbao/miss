@@ -52,7 +52,7 @@ export default function Topbar(props: TopbarProps) {
             <Menu />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Sooin
+            Miss
           </Typography>
         </Box>
         <Box display="flex" alignItems="center">

@@ -9,6 +9,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.32",
     "apollo-boost": "^0.4.4",
+    "firebase": "^7.14.4",
     "graphql": "^14.5.8",
     "hls.js": "^0.12.4",
     "husky": "^3.1.0",
