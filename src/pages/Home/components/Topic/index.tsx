@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography, Avatar } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import Image from "@/components/Image";
 // import Duration from "@/components/Duration";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -60,10 +60,10 @@ function Topic(props: TopicProps) {
             duration={props.duration}
           />
         )} */}
-        <Avatar
+        {/* <Avatar
           className={classes.avatar}
           src={props.author && props.author.avatar}
-        ></Avatar>
+        ></Avatar> */}
       </div>
       <Box p={1}>
         <Typography variant="body1" color="textSecondary">

@@ -4,17 +4,41 @@ import { Route, RouteProps } from "react-router-dom";
 interface IProps extends RouteProps {
   layout?: any;
   component: any;
+  lazy?: boolean;
 }
 
 export default function RouteWithLayout(props: IProps) {
-  const { layout: Layout, component: Component, ...rest } = props;
+  const { layout: Layout, component: Component, lazy, ...rest } = props;
 
   return Layout ? (
     <Route
       {...rest}
-      render={matchProps => <Layout>{<Component {...matchProps} />}</Layout>}
+      render={matchProps => (
+        <Layout>
+          {lazy ? (
+            <React.Suspense fallback={<div>loading</div>}>
+              <Component {...matchProps} />
+            </React.Suspense>
+          ) : (
+            <Component {...matchProps} />
+          )}
+        </Layout>
+      )}
     />
   ) : (
-    <Route {...rest} component={Component} />
+    <Route
+      {...rest}
+      render={matchProps => {
+        if (lazy) {
+          return (
+            <React.Suspense fallback={<div>loading</div>}>
+              <Component {...matchProps} />
+            </React.Suspense>
+          );
+        } else {
+          return <Component {...matchProps} />;
+        }
+      }}
+    />
   );
 }
