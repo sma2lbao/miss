@@ -1,16 +1,10 @@
 import * as React from "react";
 import { TextField, Button, IconButton } from "@material-ui/core";
-import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
 import { GitHub } from "@material-ui/icons";
-
-const ACCESS_TOKEN = gql`
-  mutation($username: String!, $password: String!) {
-    access_token(username: $username, password: $password)
-  }
-`;
+import { ACCESS_TOKEN } from "@/apollo/mutations";
 
 export default function SignIn() {
   const history = useHistory();

@@ -9,8 +9,8 @@ import {
   FullScreen,
   BodyScreen
 } from "@/layouts/PageLayout";
-import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import { MOVIE } from "@/apollo/queries";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,22 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-
-const MOVIE = gql`
-  query($id: Int!) {
-    movie(id: $id) {
-      title
-      cover
-      posters
-      actors
-      description
-      author {
-        nickname
-        avatar
-      }
-    }
-  }
-`;
 
 export default function Movie() {
   const { data, error } = useQuery(MOVIE, {

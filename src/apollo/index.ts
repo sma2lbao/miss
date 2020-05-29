@@ -1,5 +1,5 @@
 import ApolloClient from "apollo-boost";
-import Message from "./Message";
+import Message from "@/components/base/Message";
 import * as Sentry from "@sentry/browser";
 
 export const client = new ApolloClient({

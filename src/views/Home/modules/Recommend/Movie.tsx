@@ -1,31 +1,11 @@
 import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
 import { VideoWithAuthor } from "@/components/app/VideoCard";
-import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import { GridList, GridListTile } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-
-const RECOMMEND_MOVIES = gql`
-  {
-    recommend_movies {
-      id
-      title
-      sub_title
-      posters
-      create_at
-      author {
-        username
-        nickname
-        avatar
-      }
-      sources {
-        duration
-      }
-    }
-  }
-`;
+import { RECOMMEND_MOVIES } from "@/apollo/queries";
 
 export default function MovieRecommend() {
   const { data } = useQuery(RECOMMEND_MOVIES);
