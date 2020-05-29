@@ -6,8 +6,7 @@ import {
   // useTheme
 } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
-import Sidebar from "./components/Sidebar";
-import Topbar from "./components/Topbar";
+import { Sidebar, Topbar } from "./modules";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) =>
