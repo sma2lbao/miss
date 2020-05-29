@@ -3,23 +3,23 @@ import { HashRouter as Router, Switch } from "react-router-dom";
 import { RouteWithLayout as Route, Main as MainLayout } from "../layouts";
 import Home from "@/views/Home";
 
-const MovieHome = React.lazy(() => import("@/views/Movies/MovieHome"));
-const TVHome = React.lazy(() => import("@/views/TVs/TVHome"));
-const Movie = React.lazy(() => import("@/views/Movies/Movie"));
-const MovieUpload = React.lazy(() => import("@/views/Movies/MovieUpload"));
-const TV = React.lazy(() => import("@/views/TVs/TV"));
+const MovieHome = React.lazy(() => import("@/views/movies/MovieHome"));
+const TVHome = React.lazy(() => import("@/views/tvs/TVHome"));
+const Movie = React.lazy(() => import("@/views/movies/Movie"));
+const MovieUpload = React.lazy(() => import("@/views/movies/MovieUpload"));
+const TV = React.lazy(() => import("@/views/tvs/TV"));
 const Player = React.lazy(() => import("@/views/Player"));
-const Profile = React.lazy(() => import("@/views/Users/Profile"));
-const Personal = React.lazy(() => import("@/views/Users/Personal"));
-const Resume = React.lazy(() => import("@/views/Users/Resume"));
-const Login = React.lazy(() => import("@/views/Auth/Login"));
-const NotFound = React.lazy(() => import("@/views/Public/NotFound"));
-const Forbidden = React.lazy(() => import("@/views/Public/Forbidden"));
+const Profile = React.lazy(() => import("@/views/users/Profile"));
+const Personal = React.lazy(() => import("@/views/users/Personal"));
+const Resume = React.lazy(() => import("@/views/users/Resume"));
+const Login = React.lazy(() => import("@/views/auth/Login"));
+const NotFound = React.lazy(() => import("@/views/public/NotFound"));
+const Forbidden = React.lazy(() => import("@/views/public/Forbidden"));
 const InternalServerError = React.lazy(() =>
-  import("@/views/Public/InternalServerError")
+  import("@/views/public/InternalServerError")
 );
 const H5NotSupported = React.lazy(() =>
-  import("@/views/Public/H5NotSupported")
+  import("@/views/public/H5NotSupported")
 );
 
 function AppRoute() {
