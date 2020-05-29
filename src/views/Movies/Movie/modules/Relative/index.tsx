@@ -1,5 +1,5 @@
 import * as React from "react";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { Box, GridListTile, GridList, Typography } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 

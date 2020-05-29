@@ -1,5 +1,5 @@
 import * as React from "react";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { GridList, GridListTile, Typography, Box } from "@material-ui/core";
 
 export default function NextPlay() {

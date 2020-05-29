@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Grid, Typography, Box } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>

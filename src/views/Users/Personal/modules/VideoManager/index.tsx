@@ -9,7 +9,7 @@ import {
   GridListTile,
   GridList
 } from "@material-ui/core";
-import { VideoNormal } from "@/components/VideoCard";
+import { VideoNormal } from "@/components/app/VideoCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

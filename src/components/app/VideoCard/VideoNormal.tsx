@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Box, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Image from "@/components/Image";
-import Duration from "@/components/Duration";
+import Image from "@/components/base/Image";
+import Duration from "@/components/app/Duration";
 // import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>

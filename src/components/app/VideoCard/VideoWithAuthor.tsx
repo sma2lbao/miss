@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Typography } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Image from "@/components/Image";
+import Image from "@/components/base/Image";
 // import Duration from "@/components/Duration";
 import { VideoWithAuthorProps } from "./video";
 // import moment from "moment";

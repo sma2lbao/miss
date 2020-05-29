@@ -1,7 +1,7 @@
 import * as React from "react";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import Image from "@/components/Image";
+import Image from "@/components/base/Image";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);

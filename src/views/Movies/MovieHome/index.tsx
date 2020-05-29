@@ -7,7 +7,7 @@ import {
   // GridListTile,
   // Divider
 } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 import {
   ContentScreen,
   // AiderScreen,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, GridList, GridListTile } from "@material-ui/core";
-import { VideoNormal } from "@/components/VideoCard";
+import { VideoNormal } from "@/components/app/VideoCard";
 
 export default function Videos() {
   return (

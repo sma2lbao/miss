@@ -6,7 +6,7 @@ import {
   GridList,
   GridListTile
 } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 
 export default function TVHome() {
   return (

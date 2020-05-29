@@ -1,7 +1,7 @@
 import * as React from "react";
 import SwipeableViews from "react-swipeable-views";
 // import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Image from "@/components/Image";
+import Image from "@/components/base/Image";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 

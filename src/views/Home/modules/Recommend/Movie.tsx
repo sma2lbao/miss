@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import { GridList, GridListTile } from "@material-ui/core";

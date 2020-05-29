@@ -3,7 +3,7 @@ import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -6,7 +6,7 @@ import { virtualize } from "react-swipeable-views-utils";
 // import { mod } from "react-swipeable-views-core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
-import { VideoWithAuthor } from "@/components/VideoCard";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
 import clsx from "clsx";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
