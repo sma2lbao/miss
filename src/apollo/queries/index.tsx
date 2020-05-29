@@ -9,7 +9,7 @@ export const TOP_MOVIES = gql`
 `;
 
 export const RECOMMEND_MOVIES = gql`
-  {
+  query {
     recommend_movies {
       id
       title
