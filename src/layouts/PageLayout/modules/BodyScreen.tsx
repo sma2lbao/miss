@@ -6,7 +6,9 @@ import { BodyScreenLayoutProps } from "../layout.d";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 1600
+      maxWidth: 1600,
+      display: "flex",
+      margin: "0 auto"
     }
   })
 );

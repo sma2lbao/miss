@@ -1,27 +1,23 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Recommend, Featured, Topic } from "./modules";
-// import Banner from "./components/Banner";
-// import Aider from "./components/Aider";
+import { Recommend, Featured, Topic, Aider } from "./modules";
 import { Divider } from "@material-ui/core";
+import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    view: {
-      height: "100%",
-      display: "flex",
-      justifyContent: "center"
-    },
     main: {
-      maxWidth: 1200,
       flex: 3,
-      width: "100%",
-      height: "100%",
       backgroundColor: "#fff",
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8)
-      // borderRight: theme.palette.divider
-      // display: 'none'
+    },
+    aider: {
+      backgroundColor: "#fff",
+      width: "100%",
+      padding: theme.spacing(2, 2),
+      borderLeft: "1px solid",
+      borderColor: theme.palette.divider
     },
     head: {
       display: "flex",
@@ -34,12 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
       "& + &": {
         marginLeft: theme.spacing(4)
       }
-    },
-    aider: {
-      maxWidth: 430,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "#fff"
     }
   })
 );
@@ -48,8 +38,8 @@ export default function Home() {
   const classes = useStyles();
 
   return (
-    <div className={classes.view}>
-      <div className={classes.main}>
+    <BodyScreen>
+      <ContentScreen className={classes.main}>
         <div className={classes.head}>
           <div className={classes.headItem}>
             <Featured />
@@ -60,10 +50,10 @@ export default function Home() {
         </div>
         <Divider />
         <Recommend />
-      </div>
-      {/* <div className={classes.aider}>
+      </ContentScreen>
+      <AiderScreen className={classes.aider}>
         <Aider />
-      </div> */}
-    </div>
+      </AiderScreen>
+    </BodyScreen>
   );
 }

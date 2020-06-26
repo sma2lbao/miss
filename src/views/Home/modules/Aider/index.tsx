@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MoreVert } from "@material-ui/icons";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,16 +28,25 @@ export default function Aider() {
   return (
     <div className={classes.root}>
       <Typography className={classes.title} variant="h6">
-        Top Recommend
+        <Skeleton animation="wave" height="100%" width={200} />
       </Typography>
       <List>
         {[1, 2, 3, 4].map((_, i) => {
           return (
             <ListItem key={i}>
               <ListItemAvatar>
-                <Avatar src=""></Avatar>
+                <Avatar>
+                  <Skeleton
+                    width="100%"
+                    height="100%"
+                    variant="circle"
+                    animation="wave"
+                  />
+                </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="姓名" secondary="订阅数" />
+              <ListItemText>
+                <Skeleton height="100%" width={100} animation="wave" />
+              </ListItemText>
               <ListItemSecondaryAction>
                 <IconButton>
                   <MoreVert />
