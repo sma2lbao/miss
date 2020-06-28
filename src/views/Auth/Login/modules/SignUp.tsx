@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TextField, Button, Box } from "@material-ui/core";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { SEND_EMAIL_OPT, ADD_USER_WITH_CODE } from "@/apollo/mutations";
 

@@ -1,25 +1,45 @@
-import ApolloClient from "apollo-boost";
 import Message from "@/components/base/Message";
 import * as Sentry from "@sentry/browser";
+import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
+import { setContext } from "@apollo/link-context";
+import { onError } from "@apollo/link-error";
+import { createUploadLink } from "apollo-upload-client";
+
+const httpLink = new HttpLink({
+  uri: "http://localhost:3001/graphql"
+});
+
+const authLink = setContext((_, { headers }) => {
+  const access_token = localStorage.getItem("access_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: access_token ? `Bearer ${access_token}` : ""
+    }
+  };
+});
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) => {
+      Message.error(message || "服务器繁忙");
+      Sentry.captureMessage(message);
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      );
+    });
+  }
+  if (networkError) {
+    Sentry.captureException(networkError);
+    console.log(`[Network error]: ${networkError}`);
+  }
+});
+
+const uploadLink = createUploadLink({
+  uri: "http://localhost:3001/graphql"
+});
 
 export const client = new ApolloClient({
-  uri: "http://localhost:108/graphql",
-  request: operation => {
-    const access_token = localStorage.getItem("access_token");
-    operation.setContext({
-      headers: {
-        authorization: access_token ? `Bearer ${access_token}` : ""
-      }
-    });
-  },
-  onError: errorResponse => {
-    const { graphQLErrors, networkError } = errorResponse;
-    if (graphQLErrors && graphQLErrors.length > 0) {
-      Message.error(graphQLErrors[0].message || "服务器繁忙");
-      graphQLErrors.map(({ message }) => Sentry.captureMessage(message));
-    }
-    if (networkError) {
-      Sentry.captureException(networkError);
-    }
-  }
+  cache: new InMemoryCache(),
+  link: from([errorLink, authLink, uploadLink as any, httpLink])
 });

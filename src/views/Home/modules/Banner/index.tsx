@@ -2,7 +2,7 @@ import * as React from "react";
 import SwipeableViews from "react-swipeable-views";
 // import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Image from "@/components/base/Image";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { TOP_MOVIES } from "@/apollo/queries";
 
 // const useStyles = makeStyles((theme: Theme) => createStyles({}));

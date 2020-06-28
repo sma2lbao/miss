@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider } from "@apollo/client";
 import { SnackbarProvider } from "notistack";
 import theme from "./theme";
 import AppRoute from "./router";
@@ -18,6 +18,6 @@ const App: React.FC = () => {
       </SnackbarProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

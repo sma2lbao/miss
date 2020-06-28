@@ -21,6 +21,7 @@ const InternalServerError = React.lazy(() =>
 const H5NotSupported = React.lazy(() =>
   import("@/views/public/H5NotSupported")
 );
+const Test = React.lazy(() => import("@/views/Test"));
 
 function AppRoute() {
   const isH5 = /Android|webOS|iPhone|iPod|BlackBerry/i.test(
@@ -63,6 +64,7 @@ function AppRoute() {
         <Route lazy path="/400" exact component={NotFound} />
         <Route lazy path="/403" exact component={Forbidden} />
         <Route lazy path="/500" exact component={InternalServerError} />
+        <Route lazy path="/test" exact component={Test} />
         <Route lazy component={NotFound} />
       </Switch>
     </Router>

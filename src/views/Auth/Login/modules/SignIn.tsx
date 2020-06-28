@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TextField, Button, IconButton } from "@material-ui/core";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
 import { GitHub } from "@material-ui/icons";

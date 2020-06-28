@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 export const ACCESS_TOKEN = gql`
   mutation($username: String!, $password: String!) {

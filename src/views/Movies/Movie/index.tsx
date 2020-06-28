@@ -9,7 +9,7 @@ import {
   FullScreen,
   BodyScreen
 } from "@/layouts/PageLayout";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { MOVIE } from "@/apollo/queries";
 
 const useStyles = makeStyles((theme: Theme) =>

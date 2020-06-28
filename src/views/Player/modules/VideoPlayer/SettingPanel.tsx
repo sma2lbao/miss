@@ -35,7 +35,7 @@ export default function SettingPanel() {
           onMouseLeave={() => setOpen(false)}
         >
           <Typography>Normal</Typography>
-          <Typography>></Typography>
+          <Typography>&gt;</Typography>
           <Popper
             placement="left-end"
             open={open}

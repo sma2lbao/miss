@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FullScreen, BodyScreen } from "@/layouts/PageLayout";
+import { FullScreen } from "@/layouts/PageLayout";
 import {
   makeStyles,
   Theme,
