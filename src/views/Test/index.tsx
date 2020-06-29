@@ -3,12 +3,12 @@ import { useMutation, gql } from "@apollo/client";
 
 const UPLOAD_FILE = gql`
   mutation($file: Upload!) {
-    upload_aliyun(file: $file)
+    upload_file_oss(file: $file)
   }
 `;
 
 const Test: React.FC = () => {
-  const [upload_aliyun, res] = useMutation(UPLOAD_FILE, {
+  const [upload_file_oss, res] = useMutation(UPLOAD_FILE, {
     onCompleted(data) {
       console.log(data);
     },
@@ -24,7 +24,7 @@ const Test: React.FC = () => {
       files: [file]
     } = e.currentTarget;
     if (validity) {
-      upload_aliyun({ variables: { file } });
+      upload_file_oss({ variables: { file } });
       console.log(file);
     }
   };
