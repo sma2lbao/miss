@@ -11,10 +11,9 @@ jobs:
 
     steps:
       - name: Clean temp temp directory
-        run: rm -rf *
-
-      - name: Git configuration
-        run: git config core.ignorecase false
+        run: |
+          rm -rf *
+          ls -la
 
       - name: Checkout
         uses: actions/checkout@master
