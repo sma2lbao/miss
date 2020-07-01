@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Clean temp temp directory
+        run: rm -rf *
+
+      - name: Checkout
+        uses: actions/checkout@master
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
           node-version: "12.x"
 
