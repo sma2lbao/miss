@@ -6,7 +6,8 @@ import { AiderScreenLayoutProps } from "../layout.d";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 400
+      maxWidth: 400,
+      flex: 1
     }
   })
 );

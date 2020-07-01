@@ -1,19 +1,12 @@
 import * as React from "react";
-import {
-  Box
-  // Typography,
-  // Link,
-  // GridList,
-  // GridListTile,
-  // Divider
-} from "@material-ui/core";
+import // Typography,
+// Link,
+// GridList,
+// GridListTile,
+// Divider
+"@material-ui/core";
 import { VideoWithAuthor } from "@/components/app/VideoCard";
-import {
-  ContentScreen,
-  // AiderScreen,
-  FullScreen
-  // BodyScreen,
-} from "@/layouts/PageLayout";
+import { ContentScreen, AiderScreen, BodyScreen } from "@/layouts/PageLayout";
 import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -49,17 +42,37 @@ export default function MovieHome() {
   const classes = useStyles();
 
   return (
-    <Box padding={0}>
-      <FullScreen className={classes.filterFull}>
-        <ContentScreen width={1200}>
-          <Sort />
-          <Filter />
-        </ContentScreen>
-      </FullScreen>
-
+    <BodyScreen>
       <ContentScreen className={classes.content}>
         <div className={classes.gridRoot}>
           <div className={classes.gridCardMain}>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
+            <VideoWithAuthor />
+          </div>
+          <div>
             <VideoWithAuthor />
           </div>
           <div>
@@ -132,6 +145,10 @@ export default function MovieHome() {
           </GridListTile>
         </GridList> */}
       </ContentScreen>
-    </Box>
+      <AiderScreen>
+        <Sort />
+        <Filter />
+      </AiderScreen>
+    </BodyScreen>
   );
 }
