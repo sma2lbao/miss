@@ -56,22 +56,24 @@ export const MOVIE_URGES = gql`
 `;
 
 export const MOVIES_PAGINATED = gql`
-  query (first: $first, after: $after) {
-    edges {
-      cursor
-      node {
-        cover
-        author {
-          avatar
-          nickname
-          username
-          uid
+  query($first: Int, $after: Int) {
+    movies_paginated(first: $first, after: $after) {
+      edges {
+        cursor
+        node {
+          cover
+          author {
+            avatar
+            nickname
+            username
+            uid
+          }
+          sub_title
+          title
         }
-        sub_title
-        title
       }
+      hasNextPage
     }
-    hasNextPage
   }
 `;
 
