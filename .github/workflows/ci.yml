@@ -13,6 +13,9 @@ jobs:
       - name: Clean temp temp directory
         run: rm -rf *
 
+      - name: Git configuration
+        run: git config core.ignorecase false
+
       - name: Checkout
         uses: actions/checkout@master
 
