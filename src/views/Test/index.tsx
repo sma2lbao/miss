@@ -8,7 +8,7 @@ const UPLOAD_FILE = gql`
 `;
 
 const Test: React.FC = () => {
-  const [upload_file_oss, res] = useMutation(UPLOAD_FILE, {
+  const [upload_file_oss] = useMutation(UPLOAD_FILE, {
     onCompleted(data) {
       console.log(data);
     },

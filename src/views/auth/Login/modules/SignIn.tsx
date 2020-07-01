@@ -1,15 +1,15 @@
 import * as React from "react";
-import { TextField, Button, IconButton } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
-import { GitHub } from "@material-ui/icons";
-import { ACCESS_TOKEN } from "@/apollo/mutations";
+// import { GitHub } from "@material-ui/icons";
+import { LOGIN } from "@/apollo/mutations";
 
 export default function SignIn() {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
-  const [access_token, res] = useMutation(ACCESS_TOKEN, {
+  const [login, res] = useMutation(LOGIN, {
     onCompleted(data) {
       enqueueSnackbar("登录成功");
       localStorage.setItem("access_token", data.access_token);
@@ -24,45 +24,45 @@ export default function SignIn() {
   const [password, setPassword] = React.useState("");
 
   const _signIn = function() {
-    access_token({ variables: { username: username, password: password } });
+    login({ variables: { username, password } });
   };
 
-  const github_login = function() {
-    const child = window.open(
-      "http://localhost:108/auth/github",
-      "github",
-      `width=450,height=450,toolbar=0,menubar=0,location=0,status=0`
-    );
-    if (child) {
-      const timer = setInterval(() => {
-        child.postMessage(
-          {
-            type: "access_token",
-            signal: "天王盖地虎"
-          },
-          "http://localhost:108"
-        );
-      }, 1000);
+  // const github_login = function() {
+  //   const child = window.open(
+  //     "http://localhost:108/auth/github",
+  //     "github",
+  //     `width=450,height=450,toolbar=0,menubar=0,location=0,status=0`
+  //   );
+  //   if (child) {
+  //     const timer = setInterval(() => {
+  //       child.postMessage(
+  //         {
+  //           type: "access_token",
+  //           signal: "天王盖地虎",
+  //         },
+  //         "http://localhost:108"
+  //       );
+  //     }, 1000);
 
-      window.addEventListener("message", event => {
-        const data = event.data;
-        if (
-          data &&
-          data.type === "access_token_callback" &&
-          data.signal === "宝塔镇河妖"
-        ) {
-          clearInterval(timer);
-          child && child.close();
+  //     window.addEventListener("message", (event) => {
+  //       const data = event.data;
+  //       if (
+  //         data &&
+  //         data.type === "access_token_callback" &&
+  //         data.signal === "宝塔镇河妖"
+  //       ) {
+  //         clearInterval(timer);
+  //         child && child.close();
 
-          enqueueSnackbar(
-            data.data.access_token ? "登录成功" : data.data.error || "登录失败"
-          );
-          localStorage.setItem("access_token", data.data.access_token);
-          history.push("/home");
-        }
-      });
-    }
-  };
+  //         enqueueSnackbar(
+  //           data.data.access_token ? "登录成功" : data.data.error || "登录失败"
+  //         );
+  //         localStorage.setItem("access_token", data.data.access_token);
+  //         history.push("/home");
+  //       }
+  //     });
+  //   }
+  // };
 
   return (
     <div>
@@ -90,9 +90,9 @@ export default function SignIn() {
           {loading ? "登录中" : "登录"}
         </Button>
       </form>
-      <IconButton onClick={github_login}>
+      {/* <IconButton onClick={github_login}>
         <GitHub />
-      </IconButton>
+      </IconButton> */}
     </div>
   );
 }

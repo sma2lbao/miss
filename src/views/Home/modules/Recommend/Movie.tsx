@@ -5,10 +5,10 @@ import { useQuery } from "@apollo/client";
 import { GridList, GridListTile } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { RECOMMEND_MOVIES } from "@/apollo/queries";
+import { MOVIE_URGES } from "@/apollo/queries";
 
 export default function MovieRecommend() {
-  const { data } = useQuery(RECOMMEND_MOVIES);
+  const { data } = useQuery(MOVIE_URGES);
   console.log(data?.recommend_movies);
   const movies = data?.recommend_movies || [1, 2, 3, 4, 5, 6];
 
