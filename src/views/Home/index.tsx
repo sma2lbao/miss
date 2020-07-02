@@ -7,7 +7,6 @@ import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      flex: 3,
       backgroundColor: "#fff",
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8)

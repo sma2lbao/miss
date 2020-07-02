@@ -53,17 +53,17 @@ export default function Player() {
         <div className={classes.videoRoot}>
           <ReactPlayer
             className={classes.video}
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-            playing
+            // url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            // playing
           />
         </div>
       </FullScreen>
       <BodyScreen className={classes.body}>
         <ContentScreen className={classes.content}>
-          <VideoInfo />
+          {/* <VideoInfo /> */}
           <NextPlay />
         </ContentScreen>
-        <AiderScreen className={classes.aider}>
+        <AiderScreen sticky className={classes.aider}>
           <Comment />
         </AiderScreen>
       </BodyScreen>

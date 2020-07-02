@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { Favorite } from "@material-ui/icons";
+// import { Rating } from "@material-ui/lab";
+// import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { VideoWithAuthor } from "@/components/app/VideoCard";
 
@@ -25,7 +25,7 @@ export default function MovieMain() {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.box}>
+      {/* <Box className={classes.box}>
         <Typography variant="subtitle1" gutterBottom>
           平均评分
         </Typography>
@@ -35,7 +35,7 @@ export default function MovieMain() {
           precision={0.5}
           icon={<Favorite fontSize="inherit" />}
         />
-      </Box>
+      </Box> */}
       <Box className={classes.box}>
         <Typography variant="subtitle1" gutterBottom>
           视频图片

@@ -11,4 +11,7 @@ export interface ContentScreenLayoutProps extends LayoutBase {
   width?: any;
 }
 
-export interface AiderScreenLayoutProps extends LayoutBase {}
+export interface AiderScreenLayoutProps extends LayoutBase {
+  sticky?: boolean;
+  top?: number;
+}
