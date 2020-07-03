@@ -60,7 +60,7 @@ export default function Player() {
       </FullScreen>
       <BodyScreen className={classes.body}>
         <ContentScreen className={classes.content}>
-          {/* <VideoInfo /> */}
+          <VideoInfo />
           <NextPlay />
         </ContentScreen>
         <AiderScreen sticky className={classes.aider}>
