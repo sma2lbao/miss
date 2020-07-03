@@ -15,9 +15,30 @@ const useStyles = makeStyles((theme: Theme) =>
         top: props?.top || 0
       };
     },
-    wrap: {
-      marginTop: "-100%"
+    wrap: () => {
+      const keys = Object.keys(theme.mixins.toolbar);
+      const height_normal =
+        theme.mixins.toolbar?.height || theme.mixins.toolbar?.minHeight || 0;
+      const style = {
+        marginTop: -height_normal
+      };
+      keys.forEach(key => {
+        const entity: any = theme.mixins.toolbar[key];
+        if (
+          typeof entity === "object" &&
+          (entity?.height || entity?.minHeight)
+        ) {
+          const height_cur = entity?.height || entity?.minHeight;
+          Object.assign(style, {
+            [key]: {
+              marginTop: -height_cur
+            }
+          });
+        }
+      });
+      return style;
     },
+    clone: {},
     toolbar: theme.mixins.toolbar,
     root: {
       maxWidth: 400,

@@ -50,7 +50,7 @@ export default function Home() {
         <Divider />
         <Recommend />
       </ContentScreen>
-      <AiderScreen className={classes.aider}>
+      <AiderScreen sticky className={classes.aider}>
         <Aider />
       </AiderScreen>
     </BodyScreen>
