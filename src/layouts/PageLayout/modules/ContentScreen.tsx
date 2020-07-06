@@ -6,7 +6,7 @@ import { ContentScreenLayoutProps } from "../layout.d";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // maxWidth: 1200,
+      maxWidth: 1200,
       flex: 3
     }
   })

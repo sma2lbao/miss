@@ -39,10 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       });
       return style;
     },
-    root: {
-      // maxWidth: 400,
-      flex: 1
-    }
+    root: {}
   })
 );
 
