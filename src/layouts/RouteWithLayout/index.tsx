@@ -5,10 +5,17 @@ interface IProps extends RouteProps {
   layout?: any;
   component: any;
   lazy?: boolean;
+  loading?: any;
 }
 
 export default function RouteWithLayout(props: IProps) {
-  const { layout: Layout, component: Component, lazy, ...rest } = props;
+  const {
+    layout: Layout,
+    component: Component,
+    loading: Loading,
+    lazy,
+    ...rest
+  } = props;
 
   return Layout ? (
     <Route
@@ -16,7 +23,9 @@ export default function RouteWithLayout(props: IProps) {
       render={matchProps => (
         <Layout>
           {lazy ? (
-            <React.Suspense fallback={<div>loading</div>}>
+            <React.Suspense
+              fallback={Loading ? <Loading /> : <div>loading</div>}
+            >
               <Component {...matchProps} />
             </React.Suspense>
           ) : (
@@ -31,7 +40,9 @@ export default function RouteWithLayout(props: IProps) {
       render={matchProps => {
         if (lazy) {
           return (
-            <React.Suspense fallback={<div>loading</div>}>
+            <React.Suspense
+              fallback={Loading ? <Loading /> : <div>loading</div>}
+            >
               <Component {...matchProps} />
             </React.Suspense>
           );

@@ -13,6 +13,7 @@ const Profile = React.lazy(() => import("@/views/users/Profile"));
 const Personal = React.lazy(() => import("@/views/users/Personal"));
 const Resume = React.lazy(() => import("@/views/users/Resume"));
 const Login = React.lazy(() => import("@/views/auth/Login"));
+const Completion = React.lazy(() => import("@/views/auth/Completion"));
 const NotFound = React.lazy(() => import("@/views/public/NotFound"));
 const Forbidden = React.lazy(() => import("@/views/public/Forbidden"));
 const InternalServerError = React.lazy(() =>
@@ -61,6 +62,7 @@ function AppRoute() {
         <Route lazy path="/personal" component={Personal} layout={MainLayout} />
         <Route lazy path="/resume" component={Resume} />
         <Route lazy path="/login" component={Login} />
+        <Route lazy path="/completion" component={Completion} />
         <Route lazy path="/400" exact component={NotFound} />
         <Route lazy path="/403" exact component={Forbidden} />
         <Route lazy path="/500" exact component={InternalServerError} />
