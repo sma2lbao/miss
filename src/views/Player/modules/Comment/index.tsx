@@ -25,7 +25,7 @@ export default function Comment() {
     <Box>
       <AddComment />
       <Typography variant="subtitle2" className={classes.commentTitle}>
-        评论
+        {/* 评论 */}
       </Typography>
       <div>
         <div className={classes.item}>

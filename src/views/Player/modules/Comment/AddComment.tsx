@@ -6,7 +6,7 @@ export default function AddComment() {
     <div>
       <Input
         // defaultValue="Hello world"
-        placeholder="请输入评论"
+        placeholder=""
       />
     </div>
   );

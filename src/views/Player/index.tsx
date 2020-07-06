@@ -38,7 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRight: `1px solid ${theme.palette.divider}`
     },
     aider: {
-      padding: theme.spacing(2, 4)
+      padding: theme.spacing(2, 4),
+      height: "100%",
+      overflow: "auto"
     }
   })
 );

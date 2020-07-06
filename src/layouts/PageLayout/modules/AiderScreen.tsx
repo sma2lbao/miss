@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { AiderScreenLayoutProps } from "../layout.d";
+import { CreateCSSProperties } from "@material-ui/core/styles/withStyles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,17 +11,15 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1
     },
     agent: (props: AiderScreenLayoutProps) => {
-      return {
-        position: "sticky",
-        top: props?.top || 0
-      };
-    },
-    wrap: () => {
       const keys = Object.keys(theme.mixins.toolbar);
       const height_normal =
         theme.mixins.toolbar?.height || theme.mixins.toolbar?.minHeight || 0;
-      const style = {
-        marginTop: -height_normal
+      const top_normal = +height_normal + (props?.top || 0);
+      const style: CreateCSSProperties<AiderScreenLayoutProps> = {
+        position: "sticky",
+        top: top_normal,
+        overflow: "auto",
+        maxHeight: `calc(100vh - ${top_normal}px)`
       };
       keys.forEach(key => {
         const entity: any = theme.mixins.toolbar[key];
@@ -28,18 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
           typeof entity === "object" &&
           (entity?.height || entity?.minHeight)
         ) {
-          const height_cur = entity?.height || entity?.minHeight;
+          const height_current = entity?.height || entity?.minHeight;
+          const top_current = +height_current + (props?.top || 0);
           Object.assign(style, {
             [key]: {
-              marginTop: -height_cur
+              top: top_current,
+              maxHeight: `calc(100vh - ${top_current}px)`
             }
           });
         }
       });
       return style;
     },
-    clone: {},
-    toolbar: theme.mixins.toolbar,
     root: {
       maxWidth: 400,
       flex: 1
@@ -54,9 +53,9 @@ export default function AiderScreen(props: AiderScreenLayoutProps) {
     return (
       <div className={clsx(classes.container)}>
         <div className={clsx(classes.agent)}>
-          <div className={clsx(classes.wrap)}>
+          {/* <div className={clsx(classes.wrap)}>
             <div className={clsx(classes.toolbar)}></div>
-          </div>
+          </div> */}
           <div className={clsx(classes.root, props.className)}>
             {props.children}
           </div>
