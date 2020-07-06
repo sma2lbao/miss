@@ -8,9 +8,10 @@ import {
 } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { DrawerProps } from "@material-ui/core/Drawer";
-import { Home, Movie, Tv, Person } from "@material-ui/icons";
+import { Home, Movie, Person, HourglassEmpty } from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
-// import clsx from 'clsx';
+import clsx from "clsx";
+import { useHistory } from "react-router";
 
 type CloseSidebarFunc = (...args: any[]) => void;
 
@@ -19,7 +20,6 @@ interface SidebarProps extends DrawerProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => {
-  console.log(theme);
   return createStyles({
     toolbar: theme.mixins.toolbar,
     root: {
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center"
-      // backgroundColor: theme.palette.secondary.main,
     },
     child: {
       flex: 1,
@@ -45,55 +44,82 @@ const useStyles = makeStyles((theme: Theme) => {
 const menus = [
   {
     icon: <Home />,
-    label: "首页",
+    label: "Home",
     value: "home",
-    path: "/home"
+    path: "",
+    children: [
+      {
+        icon: <HourglassEmpty />,
+        label: "Home",
+        value: "home",
+        path: "/home"
+      },
+      {
+        icon: <HourglassEmpty />,
+        label: "History Topics",
+        value: "topic",
+        path: "/topics",
+        disabled: true
+      }
+    ]
   },
   {
     icon: <Movie />,
-    label: "电影",
+    label: "Movie",
     value: "movie",
-    path: "/movie-home"
-  },
-  {
-    icon: <Tv />,
-    label: "剧集",
-    value: "tv",
-    path: "/tv-home"
+    path: "/movie-home",
+    children: []
   },
   {
     icon: <Person />,
-    label: "我的",
+    label: "My",
     value: "user",
-    path: "/personal"
-  }
-];
-
-const minor_menus = [
-  {
-    icon: <Home />,
-    label: "首页",
-    value: "minor_home",
-    path: "/home"
-  },
-  {
-    icon: <Movie />,
-    label: "电影",
-    value: "minor_movie",
-    path: "/movie-home"
-  },
-  {
-    icon: <Tv />,
-    label: "剧集",
-    value: "minor_tv",
-    path: "/tv-home"
+    path: "",
+    children: [
+      {
+        icon: <HourglassEmpty />,
+        label: "My Homepage",
+        value: "personal",
+        path: "/personal"
+      },
+      {
+        icon: <HourglassEmpty />,
+        label: "Setting",
+        value: "setting",
+        path: "/setting",
+        disabled: true
+      }
+    ]
   }
 ];
 
 export default function Sidebar(props: SidebarProps) {
   const { closeSidebarHandler, ...rest } = props;
   const classes = useStyles();
-  const [selected, setSelected] = React.useState("home");
+  const history = useHistory();
+  const [parentSelected, setParentSelected] = React.useState("home");
+  const childMenus = React.useMemo(() => {
+    const currParentMenu = menus.find(menu => menu.value === parentSelected);
+    const currChildMenu = currParentMenu?.children || [];
+    return currChildMenu;
+  }, [parentSelected]);
+
+  const [childSelected, setChildSelected] = React.useState(() => {
+    return childMenus.length ? childMenus[0].value : "";
+  });
+  React.useEffect(() => {
+    const currParentMenu = menus.find(menu => menu.value === parentSelected);
+    if (currParentMenu && currParentMenu.path) {
+      history.push(currParentMenu.path);
+    } else if (childMenus.length && childSelected) {
+      const currentChildMenu = childMenus.find(
+        child => child.value === childSelected
+      );
+      if (currentChildMenu?.path) {
+        history.push(currentChildMenu.path);
+      }
+    }
+  }, [parentSelected, childSelected, history, childMenus]);
 
   return (
     <Drawer {...rest} onClose={closeSidebarHandler}>
@@ -103,8 +129,8 @@ export default function Sidebar(props: SidebarProps) {
           {menus.map((menu, index) => (
             <div key={index}>
               <IconButton
-                color={selected === menu.value ? "primary" : "default"}
-                onClick={() => setSelected(menu.value)}
+                color={parentSelected === menu.value ? "primary" : "default"}
+                onClick={() => setParentSelected(menu.value)}
               >
                 <Skeleton
                   width="1em"
@@ -118,9 +144,13 @@ export default function Sidebar(props: SidebarProps) {
           ))}
         </div>
         <div className={classes.child}>
-          {minor_menus.map((child, index) => {
+          {childMenus.map((child, index) => {
             return (
-              <div key={index}>
+              <div
+                key={index}
+                onClick={() => setChildSelected(child.value)}
+                className={clsx({ active: child.value === childSelected })}
+              >
                 <Typography variant="subtitle1" gutterBottom>
                   {/* {child.label} */}
                   <Skeleton
@@ -134,34 +164,6 @@ export default function Sidebar(props: SidebarProps) {
           })}
         </div>
       </div>
-
-      {/* <List>
-        {menus.map((menu, index) => (
-          <ListItem
-            onClick={() => setSelected(menu.value)}
-            selected={selected === menu.value}
-            button
-            key={menu.label}
-          >
-            <ListItemIcon>{menu.icon}</ListItemIcon>
-            <ListItemText primary={menu.label} />
-          </ListItem>
-        ))}
-      </List> */}
-      {/* <Divider variant="middle" /> */}
-      {/* <List>
-        {minor_menus.map((menu, index) => (
-          <ListItem
-            onClick={() => setSelected(menu.value)}
-            selected={selected === menu.value}
-            button
-            key={menu.label}
-          >
-            <ListItemIcon>{menu.icon}</ListItemIcon>
-            <ListItemText primary={menu.label} />
-          </ListItem>
-        ))}
-      </List> */}
     </Drawer>
   );
 }
