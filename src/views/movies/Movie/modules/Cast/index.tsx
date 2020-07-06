@@ -11,7 +11,7 @@ import {
   ListSubheader
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MoreVert } from "@material-ui/icons";
+import { MoreVert, AddCircle } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,12 +21,29 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Cast() {
+const Cast: React.FC = () => {
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
-      <List subheader={<ListSubheader>演职表</ListSubheader>}>
+      <List
+        subheader={
+          <ListSubheader>
+            <div>演职表</div>
+            <div>
+              <IconButton>
+                <AddCircle />
+              </IconButton>
+              <IconButton>
+                <AddCircle />
+              </IconButton>
+              <IconButton>
+                <AddCircle />
+              </IconButton>
+            </div>
+          </ListSubheader>
+        }
+      >
         {[1, 2, 3, 4].map((_, i) => {
           return (
             <ListItem key={i}>
@@ -45,4 +62,6 @@ export default function Cast() {
       </List>
     </Box>
   );
-}
+};
+
+export default Cast;
