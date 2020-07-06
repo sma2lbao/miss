@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       // maxWidth: 1200,
-      flex: 1
+      flex: 3
     }
   })
 );

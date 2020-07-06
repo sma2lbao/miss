@@ -1,14 +1,14 @@
 import * as React from "react";
-import // Typography,
-// Link,
-// GridList,
-// GridListTile,
-// Divider
-"@material-ui/core";
 import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { ContentScreen, AiderScreen, BodyScreen } from "@/layouts/PageLayout";
 import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
+import { Box, Fab, useScrollTrigger, Zoom } from "@material-ui/core";
+import { KeyboardArrowUp } from "@material-ui/icons";
+
+interface Props {
+  window?: () => Window;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,17 +34,28 @@ const useStyles = makeStyles((theme: Theme) =>
     gridCardMain: {
       gridRow: "2 span",
       gridColumn: "2 span"
+    },
+    scollButton: {
+      position: "fixed",
+      right: theme.spacing(2),
+      bottom: theme.spacing(2)
     }
   })
 );
 
-export default function MovieHome() {
+export default function MovieHome(props: Props) {
   const classes = useStyles();
+  const { window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 500
+  });
 
   return (
     <BodyScreen>
       <ContentScreen className={classes.content}>
-        <div className={classes.gridRoot}>
+        <Box className={classes.gridRoot}>
           <div className={classes.gridCardMain}>
             <VideoWithAuthor />
           </div>
@@ -105,50 +116,17 @@ export default function MovieHome() {
           <div>
             <VideoWithAuthor />
           </div> */}
-        </div>
-        {/* <GridList cellHeight="auto" cols={4}>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-          <GridListTile>
-            <VideoWithAuthor />
-          </GridListTile>
-        </GridList> */}
+        </Box>
       </ContentScreen>
-      <AiderScreen>
+      <AiderScreen sticky>
         <Sort />
         <Filter />
       </AiderScreen>
+      <Zoom in={trigger}>
+        <Fab size="small" className={classes.scollButton}>
+          <KeyboardArrowUp />
+        </Fab>
+      </Zoom>
     </BodyScreen>
   );
 }

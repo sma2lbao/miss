@@ -13,8 +13,8 @@ import { Face } from "@material-ui/icons";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
-      alignItems: "center"
+      // display: "flex",
+      // alignItems: "center",
     }
   })
 );
