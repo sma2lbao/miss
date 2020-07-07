@@ -1,6 +1,10 @@
 import * as React from "react";
 import { HashRouter as Router, Switch } from "react-router-dom";
-import { RouteWithLayout as Route, Main as MainLayout } from "../layouts";
+import {
+  RouteWithLayout as Route,
+  Main as MainLayout
+  // MainWithoutSidebar as SecondaryLayout,
+} from "../layouts";
 import Home from "@/views/Home";
 
 const MovieHome = React.lazy(() => import("@/views/movies/MovieHome"));

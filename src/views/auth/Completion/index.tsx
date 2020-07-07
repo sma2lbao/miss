@@ -1,10 +1,15 @@
 import * as React from "react";
-import { Paper, Stepper, Step, StepLabel } from "@material-ui/core";
+import { Paper, Stepper, Step, StepLabel, Button } from "@material-ui/core";
 
 const steps = ["Important Email Phone Number", "Basic Info", "Follow "];
 
 const Completion: React.FC = () => {
   const [curStep, setCurStep] = React.useState(0);
+
+  const handleNext = () => {
+    setCurStep(curStep + 1);
+  };
+
   return (
     <Paper>
       <div>
@@ -15,6 +20,9 @@ const Completion: React.FC = () => {
             </Step>
           ))}
         </Stepper>
+      </div>
+      <div>
+        <Button onClick={handleNext}>next</Button>
       </div>
     </Paper>
   );

@@ -32,11 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface MainProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  hideSidebar?: boolean;
 }
 
-export default function Main(props: MainProps) {
-  const { children } = props;
+const Main: React.FC<MainProps> = (props: MainProps) => {
+  const { children, hideSidebar } = props;
   const classes = useStyles();
   // const theme = useTheme();
   // const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -45,14 +46,18 @@ export default function Main(props: MainProps) {
 
   return (
     <div className={classes.root}>
-      <Topbar openSidebarHandler={() => setOpenSidebar(true)} />
+      <Topbar
+        openSidebarHandler={() => setOpenSidebar(hideSidebar ? false : true)}
+      />
       <div>
-        <Sidebar
-          classes={{ paper: classes.drawer }}
-          open={openSidebar}
-          variant={isDesktop ? "persistent" : "temporary"}
-          closeSidebarHandler={() => setOpenSidebar(false)}
-        />
+        {!hideSidebar && (
+          <Sidebar
+            classes={{ paper: classes.drawer }}
+            open={openSidebar}
+            variant={isDesktop ? "persistent" : "temporary"}
+            closeSidebarHandler={() => setOpenSidebar(false)}
+          />
+        )}
         <main
           className={clsx(classes.main, {
             [classes.shiftMain]: openSidebar && isDesktop
@@ -63,4 +68,10 @@ export default function Main(props: MainProps) {
       </div>
     </div>
   );
-}
+};
+
+export const MainWithoutSidebar: React.FC = props => {
+  return <Main hideSidebar>{props.children}</Main>;
+};
+
+export default Main;
