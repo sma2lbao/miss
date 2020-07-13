@@ -675,6 +675,34 @@ export type MovieQuery = {
   };
 };
 
+export type MoviesPaginatedQueryVariables = Exact<{
+  query?: Maybe<PaginatedQuery>;
+}>;
+
+export type MoviesPaginatedQuery = {
+  __typename?: "Query";
+  movies_paginated: {
+    __typename?: "MoviePaginated";
+    totalCount?: Maybe<number>;
+    hasNextPage: boolean;
+    edges?: Maybe<
+      Array<{
+        __typename?: "MovieEdge";
+        cursor: string;
+        node: {
+          __typename?: "Movie";
+          title: string;
+          sub_title?: Maybe<string>;
+          alias_title?: Maybe<string>;
+          cover: string;
+          description?: Maybe<string>;
+          author: { __typename?: "User"; nickname?: Maybe<string> };
+        };
+      }>
+    >;
+  };
+};
+
 export const LoginDocument = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)
@@ -1114,4 +1142,74 @@ export type MovieLazyQueryHookResult = ReturnType<typeof useMovieLazyQuery>;
 export type MovieQueryResult = ApolloReactCommon.QueryResult<
   MovieQuery,
   MovieQueryVariables
+>;
+export const MoviesPaginatedDocument = gql`
+  query moviesPaginated($query: PaginatedQuery) {
+    movies_paginated(query: $query) {
+      totalCount
+      hasNextPage
+      edges {
+        cursor
+        node {
+          title
+          sub_title
+          alias_title
+          cover
+          description
+          author {
+            nickname
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useMoviesPaginatedQuery__
+ *
+ * To run a query within a React component, call `useMoviesPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoviesPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoviesPaginatedQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useMoviesPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    MoviesPaginatedQuery,
+    MoviesPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    MoviesPaginatedQuery,
+    MoviesPaginatedQueryVariables
+  >(MoviesPaginatedDocument, baseOptions);
+}
+export function useMoviesPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    MoviesPaginatedQuery,
+    MoviesPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    MoviesPaginatedQuery,
+    MoviesPaginatedQueryVariables
+  >(MoviesPaginatedDocument, baseOptions);
+}
+export type MoviesPaginatedQueryHookResult = ReturnType<
+  typeof useMoviesPaginatedQuery
+>;
+export type MoviesPaginatedLazyQueryHookResult = ReturnType<
+  typeof useMoviesPaginatedLazyQuery
+>;
+export type MoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  MoviesPaginatedQuery,
+  MoviesPaginatedQueryVariables
 >;

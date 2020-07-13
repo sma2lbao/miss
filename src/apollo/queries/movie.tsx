@@ -47,3 +47,25 @@ export const MOVIE = gql`
     }
   }
 `;
+
+export const MOVIES_PAGINATED = gql`
+  query moviesPaginated($query: PaginatedQuery) {
+    movies_paginated(query: $query) {
+      totalCount
+      hasNextPage
+      edges {
+        cursor
+        node {
+          title
+          sub_title
+          alias_title
+          cover
+          description
+          author {
+            nickname
+          }
+        }
+      }
+    }
+  }
+`;

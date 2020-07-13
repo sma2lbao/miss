@@ -5,6 +5,7 @@ import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
 import { Box, Fab, useScrollTrigger, Zoom } from "@material-ui/core";
 import { KeyboardArrowUp } from "@material-ui/icons";
+import { useMoviesPaginatedQuery } from "@/schema";
 
 interface Props {
   window?: () => Window;
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function MovieHome(props: Props) {
+  const { data } = useMoviesPaginatedQuery();
   const classes = useStyles();
   const { window } = props;
   const trigger = useScrollTrigger({
