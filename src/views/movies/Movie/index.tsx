@@ -63,9 +63,7 @@ export default function Movie() {
           <div className={classes.content}>
             {tab === 0 && <MovieMain />}
             {tab === 1 && <Relative />}
-            {tab === 2 && (
-              <About html={data && data.movie && data.movie.description} />
-            )}
+            {tab === 2 && <About html={data?.movie?.description || ""} />}
           </div>
         </ContentScreen>
         <AiderScreen className={classes.aider}>
