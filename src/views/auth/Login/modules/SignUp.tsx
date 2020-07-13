@@ -1,8 +1,10 @@
 import * as React from "react";
 import { TextField, Button, Box } from "@material-ui/core";
-import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { SEND_REGISTER_EMAIL, CREATE_USER_WITH_CODE } from "@/apollo/mutations";
+import {
+  useSendRegisterEmailMutation,
+  useCreateUserWithCodeMutation
+} from "@/schema";
 
 export default function SignIn() {
   const { enqueueSnackbar } = useSnackbar();
@@ -12,7 +14,7 @@ export default function SignIn() {
   const [code, setCode] = React.useState("");
 
   // 发送验证码
-  const [send_register_email] = useMutation(SEND_REGISTER_EMAIL, {
+  const [send_register_email] = useSendRegisterEmailMutation({
     onCompleted(data) {
       console.log(data);
       enqueueSnackbar("发送成功");
@@ -27,7 +29,7 @@ export default function SignIn() {
   };
 
   // 注册
-  const [create_user_with_code] = useMutation(CREATE_USER_WITH_CODE, {
+  const [create_user_with_code] = useCreateUserWithCodeMutation({
     onError(error) {
       console.error(error);
       enqueueSnackbar("注册失败");
@@ -40,10 +42,12 @@ export default function SignIn() {
   const _signUp = function() {
     create_user_with_code({
       variables: {
-        username,
-        password,
-        email,
-        code
+        user: {
+          username,
+          password,
+          email,
+          code
+        }
       }
     });
   };

@@ -5,7 +5,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
+  ID: number | string;
   String: string;
   Boolean: boolean;
   Int: number;
@@ -559,7 +559,7 @@ export type CurrentTopicQuery = {
           __typename?: "User";
           avatar?: Maybe<string>;
           nickname?: Maybe<string>;
-          uid: string;
+          uid: number | string;
           username: string;
         };
       }>
@@ -577,7 +577,7 @@ export type CurrentTopicQuery = {
         __typename?: "User";
         avatar?: Maybe<string>;
         nickname?: Maybe<string>;
-        uid: string;
+        uid: number | string;
         username: string;
       };
     }>;
@@ -598,7 +598,7 @@ export type MovieUrgesQuery = {
       __typename?: "User";
       avatar?: Maybe<string>;
       nickname?: Maybe<string>;
-      uid: string;
+      uid: number | string;
     };
   }>;
 };
@@ -627,7 +627,7 @@ export type MovieQuery = {
     title: string;
     update_at: any;
     sub_title?: Maybe<string>;
-    id: string;
+    id: number | string;
     description?: Maybe<string>;
     create_at: any;
     alias_title?: Maybe<string>;
@@ -644,7 +644,7 @@ export type MovieQuery = {
     author: {
       __typename?: "User";
       avatar?: Maybe<string>;
-      uid: string;
+      uid: number | string;
       nickname?: Maybe<string>;
     };
     directors?: Maybe<
@@ -664,7 +664,7 @@ export type MovieQuery = {
       name: string;
       medium_quality_url?: Maybe<string>;
       low_quality_url?: Maybe<string>;
-      id: string;
+      id: number | string;
       high_quality_url?: Maybe<string>;
       duration?: Maybe<number>;
       description?: Maybe<string>;

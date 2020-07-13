@@ -9,8 +9,7 @@ import {
   FullScreen,
   BodyScreen
 } from "@/layouts/PageLayout";
-import { useQuery } from "@apollo/client";
-import { MOVIE } from "@/apollo/queries";
+import { useMovieQuery } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Movie() {
-  const { data, error } = useQuery(MOVIE, {
+  const { data, error } = useMovieQuery({
     variables: {
       id: 1
     }

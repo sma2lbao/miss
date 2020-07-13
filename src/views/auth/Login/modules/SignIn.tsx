@@ -1,18 +1,17 @@
 import * as React from "react";
 import { TextField, Button } from "@material-ui/core";
-import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
 // import { GitHub } from "@material-ui/icons";
-import { LOGIN } from "@/apollo/mutations";
+import { useLoginMutation } from "@/schema";
 
 export default function SignIn() {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
-  const [login, res] = useMutation(LOGIN, {
+  const [login, res] = useLoginMutation({
     onCompleted(data) {
       enqueueSnackbar("登录成功");
-      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("access_token", data?.login);
       history.push("/home");
     },
     onError(error) {
@@ -20,6 +19,7 @@ export default function SignIn() {
     }
   });
   const { loading } = res;
+
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 

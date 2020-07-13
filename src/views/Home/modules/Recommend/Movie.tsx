@@ -1,14 +1,13 @@
 import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
 import { VideoWithAuthor } from "@/components/app/VideoCard";
-import { useQuery } from "@apollo/client";
 import { GridList, GridListTile } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { MOVIE_URGES } from "@/apollo/queries";
+import { useMovieUrgesQuery } from "@/schema";
 
 export default function MovieRecommend() {
-  const { data } = useQuery(MOVIE_URGES);
+  const { data } = useMovieUrgesQuery();
   console.log(data?.movie_urges);
   const movies = data?.movie_urges;
 

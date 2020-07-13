@@ -12,8 +12,7 @@ import {
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MoreVert } from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
-import { USER_URGES } from "@/apollo/queries";
-import { useQuery } from "@apollo/client";
+import { useUserUrgesQuery } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Aider() {
   const classes = useStyles();
-  const { data } = useQuery(USER_URGES);
+  const { data } = useUserUrgesQuery();
   const users = data?.user_urges;
   return (
     <div className={classes.root}>

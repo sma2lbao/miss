@@ -8,7 +8,7 @@ hooks:
     - eslint --fix
     - prettier --write
 generates:
-  src/schema.d.tsx:
+  src/schema.tsx:
     plugins:
       # - add: |
       #     // eslint-disable
@@ -23,6 +23,9 @@ generates:
       withComponent: false
       reactApolloVersion: 3
       preResolveTypes: true
+      # type scalars
+      scalars:
+        ID: "number | string"
   # ./graphql.schema.json:
   #   plugins:
   #     - "introspection"

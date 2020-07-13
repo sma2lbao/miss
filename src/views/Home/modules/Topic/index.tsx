@@ -1,7 +1,5 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { CURRENT_TOPIC } from "@/apollo/queries";
-import { useQuery } from "@apollo/client";
 import { Box, Typography, IconButton } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
@@ -9,6 +7,7 @@ import { VideoWithAuthor } from "@/components/app/VideoCard";
 import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
 import clsx from "clsx";
+import { useCurrentTopicQuery } from "@/schema";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
-  const { data } = useQuery(CURRENT_TOPIC);
+  const { data } = useCurrentTopicQuery();
   console.log(data);
 
   return (
