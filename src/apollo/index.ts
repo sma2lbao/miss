@@ -22,7 +22,7 @@ const authLink = setContext((_, { headers }) => {
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) => {
-      Message.error(message || "服务器繁忙");
+      // Message.error(message || "服务器繁忙");
       Sentry.captureMessage(message);
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`

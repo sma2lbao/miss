@@ -1,5 +1,5 @@
 export interface LayoutBase {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: String;
 }
 

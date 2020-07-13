@@ -1,104 +1,112 @@
 import * as React from "react";
-import { Box, Typography } from "@material-ui/core";
-import Image from "@/components/base/Image";
-// import Duration from "@/components/Duration";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { CURRENT_TOPIC } from "@/apollo/queries";
+import { useQuery } from "@apollo/client";
+import { Box, Typography, IconButton } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
+import { VideoWithAuthor } from "@/components/app/VideoCard";
+import SwipeableViews from "react-swipeable-views";
+import { virtualize } from "react-swipeable-views-utils";
+import clsx from "clsx";
+
+const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    wrap: {
-      width: "100%"
+    head: {
+      display: "flex",
+      alignItems: "flex-end",
+      padding: theme.spacing(4, 0)
     },
-    poster: {
-      position: "relative"
+    headItem: {
+      flex: 1,
+      overflow: "hidden",
+      "& + &": {
+        marginLeft: theme.spacing(4)
+      }
     },
-    avatar: {
-      width: 56,
-      height: 56,
-      border: "3px solid #fff",
-      position: "absolute",
-      bottom: -28,
-      right: 10
+    bannerRoot: {
+      flex: 1,
+      overflow: "hidden"
     },
-    duration: {
-      position: "absolute",
-      left: 10,
-      bottom: 10
+    banner: {
+      paddingRight: "50%"
+    },
+    bannerItem: {
+      minHeight: 200,
+      margin: theme.spacing(0, 1),
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden"
     }
   })
 );
 
-interface TopicProps {
-  id: number;
-  title: string;
-  subtitle?: string;
-  posters: string[];
-  create_at: Date;
-  duration?: number;
-  description?: string;
-  author: {
-    username: string;
-    nickname?: string;
-    avatar: string;
-  };
-}
-
-function Topic(props: TopicProps) {
+function Topic() {
+  const [index, setIndex] = React.useState(0);
   const classes = useStyles();
+  const { data } = useQuery(CURRENT_TOPIC);
+  console.log(data);
 
   return (
-    <Box>
-      <div className={classes.poster}>
-        <Image
-          aspectRatio={16 / 9}
-          src={props.posters ? props.posters[0] : ""}
-        />
-        {/* {props.duration && (
-          <Duration
-            classes={{ root: classes.duration }}
-            duration={props.duration}
-          />
-        )} */}
-        {/* <Avatar
-          className={classes.avatar}
-          src={props.author && props.author.avatar}
-        ></Avatar> */}
+    <div className={classes.head}>
+      <div className={classes.headItem}>
+        <Box>
+          <Box mb={3}>
+            <Typography variant="h6" gutterBottom>
+              {/* 每周精选 */}
+              <Skeleton animation="wave" height="100%" width={160} />
+            </Typography>
+            <Typography variant="h5" gutterBottom>
+              {/* 古诗词 */}
+              <Skeleton animation="wave" height="100%" width={40} />
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {/* 东风夜放花千树，更吹落，星如雨。宝马雕车香满路。凤箫声动，玉壶光转，一夜鱼龙舞。
+            蛾儿雪柳黄金缕，笑语盈盈暗香去。众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。 */}
+              <Skeleton animation="wave" height="100%" width={400} />
+              <Skeleton animation="wave" height="100%" width={100} />
+            </Typography>
+          </Box>
+          <Box display="flex" alignItems="center">
+            <Box>
+              <IconButton size="small" onClick={() => setIndex(index - 1)}>
+                <KeyboardArrowLeft />
+              </IconButton>
+            </Box>
+            <div className={classes.bannerRoot}>
+              <VirtualizeSwipeableViews
+                className={classes.banner}
+                index={index}
+                onChangeIndex={index => setIndex(index)}
+                enableMouseEvents
+                slideRenderer={params => {
+                  const { key } = params;
+                  // const templateIndex = ((index % 6) + 6) % 6;
+                  // console.log(mod(index, 3));
+                  return (
+                    <div key={key} className={clsx(classes.bannerItem)}>
+                      <VideoWithAuthor />
+                    </div>
+                  );
+                }}
+              />
+            </div>
+            <Box>
+              <IconButton size="small" onClick={() => setIndex(index + 1)}>
+                <KeyboardArrowRight />
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
       </div>
-      <Box p={1}>
-        <Typography variant="body1" color="textSecondary">
-          {/* {props.author.username} */}
-          <Skeleton animation="wave" height="100%" width={60} />
-        </Typography>
-        <Typography variant="subtitle1">
-          {/* {props.title} */}
-          <Skeleton animation="wave" height="100%" width={100} />
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          {/* {props.description || "暂无简介"} */}
-          <Skeleton animation="wave" height="100%" width={400} />
-          <Skeleton animation="wave" height="100%" width={100} />
-        </Typography>
-      </Box>
-    </Box>
+      <div className={classes.headItem}>
+        <VideoWithAuthor />
+      </div>
+    </div>
   );
 }
-
-Topic.defaultProps = {
-  title: "卜算子·咏梅",
-  subtitle: "",
-  posters: [
-    // "https://p3.ifengimg.com/2019_01/f7138d51-fa84-41d5-9a9b-90d03f69e020_3D28F77295E1A575FA4383C991A08E5B3712CD3D_w5000_h2143.jpg",
-  ],
-  create_at: new Date(),
-  duration: 312312,
-  description:
-    "驿外断桥边，寂寞开无主。已是黄昏独自愁，更著风和雨。无意苦争春，一任群芳妒。零落成泥碾作尘，只有香如故。",
-  author: {
-    username: "sma2lbao",
-    nickname: "nickname",
-    avatar: ""
-  }
-} as Partial<TopicProps>;
 
 export default Topic;

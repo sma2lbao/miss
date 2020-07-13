@@ -1,32 +1,20 @@
 import * as React from "react";
 import Top from "./modules/Top";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+// import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Divider } from "@material-ui/core";
 import { Videos } from "./modules";
+import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    page: {
-      backgroundColor: theme.palette.background.paper,
-      height: "100%"
-    },
-    main: {
-      maxWidth: 1200
-    },
-    aider: {
-      width: "430px"
-    }
-  })
-);
+// const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
 export default function Profile() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [tab, setTab] = React.useState(0);
 
   return (
-    <div className={classes.page}>
-      <div className={classes.aider}></div>
-      <div className={classes.main}>
+    <BodyScreen>
+      <AiderScreen></AiderScreen>
+      <ContentScreen>
         <Top />
         <Divider />
         <div>
@@ -37,7 +25,7 @@ export default function Profile() {
           </Tabs>
           <div>{tab === 0 && <Videos />}</div>
         </div>
-      </div>
-    </div>
+      </ContentScreen>
+    </BodyScreen>
   );
 }

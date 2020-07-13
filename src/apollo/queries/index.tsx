@@ -124,3 +124,14 @@ export const MOVIE = gql`
     }
   }
 `;
+
+// Home Page
+export const USER_URGES = gql`
+  query {
+    user_urges {
+      nickname
+      avatar
+      description
+    }
+  }
+`;

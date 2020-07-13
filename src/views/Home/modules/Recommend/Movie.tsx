@@ -9,8 +9,8 @@ import { MOVIE_URGES } from "@/apollo/queries";
 
 export default function MovieRecommend() {
   const { data } = useQuery(MOVIE_URGES);
-  console.log(data?.recommend_movies);
-  const movies = data?.recommend_movies || [1, 2, 3, 4, 5, 6];
+  console.log(data?.movie_urges);
+  const movies = data?.movie_urges;
 
   return (
     <Box padding={0}>
