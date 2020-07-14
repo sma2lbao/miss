@@ -45,7 +45,42 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function MovieHome(props: Props) {
-  const { data } = useMoviesPaginatedQuery();
+  const { data, fetchMore } = useMoviesPaginatedQuery({
+    variables: {
+      query: {
+        first: 8
+      }
+    }
+  });
+  const loadMore = () => {
+    fetchMore({
+      variables: {
+        query: {
+          last: 8,
+          after: data?.movies_paginated?.pageInfo?.endCursor
+        }
+      },
+      updateQuery: (previousQueryResult, { fetchMoreResult }) => {
+        if (fetchMoreResult?.movies_paginated?.edges) {
+          const {
+            edges,
+            pageInfo,
+            totalCount
+          } = fetchMoreResult.movies_paginated;
+          return {
+            movies_paginated: {
+              pageInfo,
+              totalCount,
+              edges: [...previousQueryResult.movies_paginated.edges, ...edges],
+              __typename: previousQueryResult.movies_paginated.__typename
+            }
+          };
+        }
+        return previousQueryResult;
+      }
+    });
+  };
+
   const classes = useStyles();
   const { window } = props;
   const trigger = useScrollTrigger({
@@ -58,66 +93,16 @@ export default function MovieHome(props: Props) {
     <BodyScreen>
       <ContentScreen className={classes.content}>
         <Box className={classes.gridRoot}>
-          <div className={classes.gridCardMain}>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          {/* <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div>
-          <div>
-            <VideoWithAuthor />
-          </div> */}
+          {data?.movies_paginated?.edges?.map(edge => {
+            return (
+              <div key={edge.cursor} className={classes.gridCardMain}>
+                <VideoWithAuthor />
+              </div>
+            );
+          })}
+          {data?.movies_paginated?.pageInfo?.hasNextPage && (
+            <div onClick={loadMore}>load more</div>
+          )}
         </Box>
       </ContentScreen>
       <AiderScreen sticky>

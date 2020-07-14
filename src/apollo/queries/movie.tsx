@@ -52,7 +52,10 @@ export const MOVIES_PAGINATED = gql`
   query moviesPaginated($query: PaginatedQuery) {
     movies_paginated(query: $query) {
       totalCount
-      hasNextPage
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         cursor
         node {

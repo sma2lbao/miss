@@ -160,12 +160,20 @@ export type FollowEdge = {
   node: Follow;
 };
 
+export type FollowPageInfo = {
+  __typename?: "FollowPageInfo";
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Scalars["String"];
+  endCursor: Scalars["String"];
+};
+
 export type FollowPaginated = {
   __typename?: "FollowPaginated";
   edges?: Maybe<Array<FollowEdge>>;
   nodes?: Maybe<Array<Follow>>;
-  totalCount?: Maybe<Scalars["Int"]>;
-  hasNextPage: Scalars["Boolean"];
+  pageInfo: FollowPageInfo;
+  totalCount: Scalars["Int"];
 };
 
 export type Medium = {
@@ -233,12 +241,20 @@ export type MovieMedium = {
   version: Scalars["Float"];
 };
 
+export type MoviePageInfo = {
+  __typename?: "MoviePageInfo";
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Scalars["String"];
+  endCursor: Scalars["String"];
+};
+
 export type MoviePaginated = {
   __typename?: "MoviePaginated";
   edges?: Maybe<Array<MovieEdge>>;
   nodes?: Maybe<Array<Movie>>;
-  totalCount?: Maybe<Scalars["Int"]>;
-  hasNextPage: Scalars["Boolean"];
+  pageInfo: MoviePageInfo;
+  totalCount: Scalars["Int"];
 };
 
 export type Mutation = {
@@ -500,12 +516,20 @@ export type UserEdge = {
   node: User;
 };
 
+export type UserPageInfo = {
+  __typename?: "UserPageInfo";
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Scalars["String"];
+  endCursor: Scalars["String"];
+};
+
 export type UserPaginated = {
   __typename?: "UserPaginated";
   edges?: Maybe<Array<UserEdge>>;
   nodes?: Maybe<Array<User>>;
-  totalCount?: Maybe<Scalars["Int"]>;
-  hasNextPage: Scalars["Boolean"];
+  pageInfo: UserPageInfo;
+  totalCount: Scalars["Int"];
 };
 
 export type LoginMutationVariables = Exact<{
@@ -683,8 +707,12 @@ export type MoviesPaginatedQuery = {
   __typename?: "Query";
   movies_paginated: {
     __typename?: "MoviePaginated";
-    totalCount?: Maybe<number>;
-    hasNextPage: boolean;
+    totalCount: number;
+    pageInfo: {
+      __typename?: "MoviePageInfo";
+      hasNextPage: boolean;
+      endCursor: string;
+    };
     edges?: Maybe<
       Array<{
         __typename?: "MovieEdge";
@@ -1147,7 +1175,10 @@ export const MoviesPaginatedDocument = gql`
   query moviesPaginated($query: PaginatedQuery) {
     movies_paginated(query: $query) {
       totalCount
-      hasNextPage
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         cursor
         node {
