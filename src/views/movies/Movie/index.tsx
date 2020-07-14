@@ -10,6 +10,7 @@ import {
   BodyScreen
 } from "@/layouts/PageLayout";
 import { useMovieQuery } from "@/schema";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,9 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Movie() {
+  const { id } = useParams();
   const { data, error } = useMovieQuery({
     variables: {
-      id: 1
+      id: id
     }
   });
   console.log(data, error);

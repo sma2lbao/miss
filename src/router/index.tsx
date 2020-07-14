@@ -53,7 +53,7 @@ function AppRoute() {
           layout={MainLayout}
         />
         <Route lazy path="/tv-home" component={TVHome} layout={MainLayout} />
-        <Route lazy path="/movie" component={Movie} layout={MainLayout} />
+        <Route lazy path="/movie/:id" component={Movie} layout={MainLayout} />
         <Route
           lazy
           path="/movie-upload"
