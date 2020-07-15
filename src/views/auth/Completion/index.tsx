@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Paper, Stepper, Step, StepLabel, Button } from "@material-ui/core";
+import Basic from "./modules/Basic";
 
 const steps = ["Important Email Phone Number", "Basic Info", "Follow "];
 
@@ -23,6 +24,9 @@ const Completion: React.FC = () => {
       </div>
       <div>
         <Button onClick={handleNext}>next</Button>
+      </div>
+      <div>
+        <Basic />
       </div>
     </Paper>
   );
