@@ -10,6 +10,8 @@ import {
 } from "@/layouts/PageLayout";
 // import Image from "@/components/Image";
 import { NextPlay, VideoInfo, Comment } from "./modules";
+import { useParams } from "react-router";
+import { useMovieQuery } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,8 +47,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Player() {
+export default function MoviePlay() {
   const classes = useStyles();
+  const { id } = useParams();
+  let { data } = useMovieQuery({
+    variables: {
+      id: id
+    }
+  });
+  console.log(data?.movie);
 
   return (
     <Box className={classes.root}>

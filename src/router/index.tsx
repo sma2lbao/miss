@@ -10,9 +10,9 @@ import Home from "@/views/Home";
 const MovieHome = React.lazy(() => import("@/views/movies/MovieHome"));
 const TVHome = React.lazy(() => import("@/views/tvs/TVHome"));
 const Movie = React.lazy(() => import("@/views/movies/Movie"));
+const MoviePlay = React.lazy(() => import("@/views/movies/MoviePlay"));
 const MovieUpload = React.lazy(() => import("@/views/movies/MovieUpload"));
 const TV = React.lazy(() => import("@/views/tvs/TV"));
-const Player = React.lazy(() => import("@/views/Player"));
 const Profile = React.lazy(() => import("@/views/users/Profile"));
 const Personal = React.lazy(() => import("@/views/users/Personal"));
 const Resume = React.lazy(() => import("@/views/users/Resume"));
@@ -52,16 +52,21 @@ function AppRoute() {
           component={MovieHome}
           layout={MainLayout}
         />
-        <Route lazy path="/tv-home" component={TVHome} layout={MainLayout} />
         <Route lazy path="/movie/:id" component={Movie} layout={MainLayout} />
+        <Route
+          lazy
+          path="/movie-play/:id"
+          component={MoviePlay}
+          layout={MainLayout}
+        />
         <Route
           lazy
           path="/movie-upload"
           component={MovieUpload}
           layout={MainLayout}
         />
+        <Route lazy path="/tv-home" component={TVHome} layout={MainLayout} />
         <Route lazy path="/tv" component={TV} layout={MainLayout} />
-        <Route lazy path="/play" component={Player} layout={MainLayout} />
         <Route lazy path="/profile" component={Profile} layout={MainLayout} />
         <Route lazy path="/personal" component={Personal} layout={MainLayout} />
         <Route lazy path="/resume" component={Resume} />
