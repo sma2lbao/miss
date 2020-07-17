@@ -3,6 +3,7 @@ schema: "http://localhost:3001/graphql"
 documents:
   - "./src/apollo/queries/**/*.{ts,tsx}"
   - "./src/apollo/mutations/**/*.{ts,tsx}"
+  - "./src/apollo/subscriptions/**/*.{ts,tsx}"
 hooks:
   afterOneFileWrite:
     - eslint --fix

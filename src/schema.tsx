@@ -81,8 +81,7 @@ export type CreateMovieInput = {
   region?: Maybe<Scalars["String"]>;
   actors?: Maybe<Array<CreateCharacterInput>>;
   directors?: Maybe<Array<CreateCharacterInput>>;
-  source_ids: Array<Scalars["ID"]>;
-  sources: Array<CreateMovieMediumInput>;
+  sources?: Maybe<Array<CreateMovieMediumInput>>;
 };
 
 export type CreateMovieMediumInput = {
@@ -102,7 +101,9 @@ export type CreatePlaylistInput = {
 
 export type CreateReviewInput = {
   content: Scalars["String"];
-  author_uid: Scalars["ID"];
+  author_uid?: Maybe<Scalars["ID"]>;
+  type: ReviewMedium;
+  medium_id: Scalars["ID"];
 };
 
 export type CreateTagInput = {
@@ -179,8 +180,9 @@ export type FollowPaginated = {
 export type Medium = {
   __typename?: "Medium";
   id: Scalars["ID"];
-  name: Scalars["String"];
-  alias_name: Scalars["String"];
+  name?: Maybe<Scalars["String"]>;
+  alias_name?: Maybe<Scalars["String"]>;
+  cover?: Maybe<Scalars["String"]>;
   posters?: Maybe<Array<Scalars["String"]>>;
   description?: Maybe<Scalars["String"]>;
   duration?: Maybe<Scalars["Float"]>;
@@ -224,8 +226,9 @@ export type MovieEdge = {
 export type MovieMedium = {
   __typename?: "MovieMedium";
   id: Scalars["ID"];
-  name: Scalars["String"];
-  alias_name: Scalars["String"];
+  name?: Maybe<Scalars["String"]>;
+  alias_name?: Maybe<Scalars["String"]>;
+  cover?: Maybe<Scalars["String"]>;
   posters?: Maybe<Array<Scalars["String"]>>;
   description?: Maybe<Scalars["String"]>;
   duration?: Maybe<Scalars["Float"]>;
@@ -261,7 +264,9 @@ export type Mutation = {
   __typename?: "Mutation";
   create_tag: Tag;
   add_movie_to_tag: Scalars["Boolean"];
+  add_category_to_tag: Scalars["Boolean"];
   create_movie: Movie;
+  add_mediums_to_movie: Movie;
   create_category: Category;
   delete_category: Scalars["Boolean"];
   create_bullet: Bullet;
@@ -271,7 +276,7 @@ export type Mutation = {
   /** create user with verif code. */
   create_user_with_code: User;
   send_register_email: Scalars["Boolean"];
-  update_user: Scalars["String"];
+  update_user: User;
   upload_file_oss: Scalars["String"];
   create_topic: Topic;
   create_review: Review;
@@ -290,8 +295,18 @@ export type MutationAdd_Movie_To_TagArgs = {
   movie_id: Scalars["Float"];
 };
 
+export type MutationAdd_Category_To_TagArgs = {
+  tag_id: Scalars["Float"];
+  category_id: Scalars["Float"];
+};
+
 export type MutationCreate_MovieArgs = {
   movie: CreateMovieInput;
+};
+
+export type MutationAdd_Mediums_To_MovieArgs = {
+  movie_medium: CreateMovieMediumInput;
+  movie_id: Scalars["ID"];
 };
 
 export type MutationCreate_CategoryArgs = {
@@ -388,6 +403,7 @@ export type Query = {
   current_topic: Topic;
   movie_urges: Array<Movie>;
   user_urges: Array<User>;
+  reviews_paginated: ReviewPaginated;
   playlist: Playlist;
   follows: Array<Follow>;
   follows_paginated: FollowPaginated;
@@ -412,6 +428,12 @@ export type QueryUserArgs = {
 
 export type QueryUsers_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryReviews_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+  medium_id: Scalars["Float"];
+  type: Scalars["String"];
 };
 
 export type QueryPlaylistArgs = {
@@ -458,9 +480,41 @@ export type Review = {
   delete_at: Scalars["Date"];
 };
 
+export type ReviewEdge = {
+  __typename?: "ReviewEdge";
+  cursor: Scalars["String"];
+  node: Review;
+};
+
+export enum ReviewMedium {
+  Movie = "MOVIE"
+}
+
+export type ReviewPageInfo = {
+  __typename?: "ReviewPageInfo";
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Scalars["String"];
+  endCursor: Scalars["String"];
+};
+
+export type ReviewPaginated = {
+  __typename?: "ReviewPaginated";
+  edges?: Maybe<Array<ReviewEdge>>;
+  nodes?: Maybe<Array<Review>>;
+  pageInfo: ReviewPageInfo;
+  totalCount: Scalars["Int"];
+};
+
 export type Subscription = {
   __typename?: "Subscription";
   user_created: User;
+  review_created: Review;
+};
+
+export type SubscriptionReview_CreatedArgs = {
+  medium_id: Scalars["ID"];
+  type: Scalars["String"];
 };
 
 export type Tag = {
@@ -469,6 +523,7 @@ export type Tag = {
   label: Scalars["String"];
   description?: Maybe<Scalars["String"]>;
   movies?: Maybe<Array<Movie>>;
+  categories?: Maybe<Array<Category>>;
   create_at: Scalars["Date"];
   update_at: Scalars["Date"];
 };
@@ -498,7 +553,6 @@ export type User = {
   __typename?: "User";
   uid: Scalars["ID"];
   username: Scalars["String"];
-  password: Scalars["String"];
   email: Scalars["String"];
   nickname?: Maybe<Scalars["String"]>;
   avatar?: Maybe<Scalars["String"]>;
@@ -685,14 +739,14 @@ export type MovieQuery = {
       super_quality_url?: Maybe<string>;
       preview_url?: Maybe<string>;
       posters?: Maybe<Array<string>>;
-      name: string;
+      name?: Maybe<string>;
       medium_quality_url?: Maybe<string>;
       low_quality_url?: Maybe<string>;
       id: number | string;
       high_quality_url?: Maybe<string>;
       duration?: Maybe<number>;
       description?: Maybe<string>;
-      alias_name: string;
+      alias_name?: Maybe<string>;
       create_at: any;
       update_at: any;
     }>;
@@ -728,6 +782,25 @@ export type MoviesPaginatedQuery = {
         };
       }>
     >;
+  };
+};
+
+export type ReviewCreatedSubscriptionVariables = Exact<{
+  type: Scalars["String"];
+  medium_id: Scalars["ID"];
+}>;
+
+export type ReviewCreatedSubscription = {
+  __typename?: "Subscription";
+  review_created: {
+    __typename?: "Review";
+    content: string;
+    create_at: any;
+    author: {
+      __typename?: "User";
+      nickname?: Maybe<string>;
+      avatar?: Maybe<string>;
+    };
   };
 };
 
@@ -1243,4 +1316,51 @@ export type MoviesPaginatedLazyQueryHookResult = ReturnType<
 export type MoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
   MoviesPaginatedQuery,
   MoviesPaginatedQueryVariables
+>;
+export const ReviewCreatedDocument = gql`
+  subscription reviewCreated($type: String!, $medium_id: ID!) {
+    review_created(type: $type, medium_id: $medium_id) {
+      content
+      create_at
+      author {
+        nickname
+        avatar
+      }
+    }
+  }
+`;
+
+/**
+ * __useReviewCreatedSubscription__
+ *
+ * To run a query within a React component, call `useReviewCreatedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useReviewCreatedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReviewCreatedSubscription({
+ *   variables: {
+ *      type: // value for 'type'
+ *      medium_id: // value for 'medium_id'
+ *   },
+ * });
+ */
+export function useReviewCreatedSubscription(
+  baseOptions?: ApolloReactHooks.SubscriptionHookOptions<
+    ReviewCreatedSubscription,
+    ReviewCreatedSubscriptionVariables
+  >
+) {
+  return ApolloReactHooks.useSubscription<
+    ReviewCreatedSubscription,
+    ReviewCreatedSubscriptionVariables
+  >(ReviewCreatedDocument, baseOptions);
+}
+export type ReviewCreatedSubscriptionHookResult = ReturnType<
+  typeof useReviewCreatedSubscription
+>;
+export type ReviewCreatedSubscriptionResult = ApolloReactCommon.SubscriptionResult<
+  ReviewCreatedSubscription
 >;
