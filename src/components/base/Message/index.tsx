@@ -11,7 +11,7 @@ type SnackbarProps = {
 const mountPoint = document.createElement("div");
 document.body.appendChild(mountPoint);
 
-export default {
+export const Message = {
   success: function(msg: React.ReactNode) {
     this.toast(msg, { variant: "success" });
   },
@@ -39,3 +39,5 @@ export default {
     );
   }
 };
+
+export default Message;
