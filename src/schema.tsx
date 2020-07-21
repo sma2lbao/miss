@@ -23,7 +23,7 @@ export type Bullet = {
   point?: Maybe<Scalars["Float"]>;
   create_at: Scalars["Date"];
   author: User;
-  media: Medium;
+  medium: Medium;
 };
 
 export type Category = {
@@ -391,6 +391,28 @@ export type Playlist = {
   delete_at: Scalars["Date"];
 };
 
+export type PlaylistEdge = {
+  __typename?: "PlaylistEdge";
+  cursor: Scalars["String"];
+  node: Playlist;
+};
+
+export type PlaylistPageInfo = {
+  __typename?: "PlaylistPageInfo";
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Scalars["String"];
+  endCursor: Scalars["String"];
+};
+
+export type PlaylistPaginated = {
+  __typename?: "PlaylistPaginated";
+  edges?: Maybe<Array<PlaylistEdge>>;
+  nodes?: Maybe<Array<Playlist>>;
+  pageInfo: PlaylistPageInfo;
+  totalCount: Scalars["Int"];
+};
+
 export type Query = {
   __typename?: "Query";
   movie: Movie;
@@ -404,6 +426,7 @@ export type Query = {
   movie_urges: Array<Movie>;
   user_urges: Array<User>;
   reviews_paginated: ReviewPaginated;
+  playlists_paginated: PlaylistPaginated;
   playlist: Playlist;
   follows: Array<Follow>;
   follows_paginated: FollowPaginated;
@@ -432,8 +455,13 @@ export type QueryUsers_PaginatedArgs = {
 
 export type QueryReviews_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
-  medium_id: Scalars["Float"];
-  type: Scalars["String"];
+  medium_id?: Maybe<Scalars["ID"]>;
+  type?: Maybe<ReviewMedium>;
+};
+
+export type QueryPlaylists_PaginatedArgs = {
+  author_uid?: Maybe<Scalars["String"]>;
+  query?: Maybe<PaginatedQuery>;
 };
 
 export type QueryPlaylistArgs = {
@@ -514,7 +542,7 @@ export type Subscription = {
 
 export type SubscriptionReview_CreatedArgs = {
   medium_id: Scalars["ID"];
-  type: Scalars["String"];
+  type: ReviewMedium;
 };
 
 export type Tag = {
@@ -785,8 +813,39 @@ export type MoviesPaginatedQuery = {
   };
 };
 
+export type PlaylistsPaginatedQueryVariables = Exact<{
+  query?: Maybe<PaginatedQuery>;
+  author_uid?: Maybe<Scalars["String"]>;
+}>;
+
+export type PlaylistsPaginatedQuery = {
+  __typename?: "Query";
+  playlists_paginated: {
+    __typename?: "PlaylistPaginated";
+    totalCount: number;
+    pageInfo: {
+      __typename?: "PlaylistPageInfo";
+      hasNextPage: boolean;
+      endCursor: string;
+    };
+    edges?: Maybe<
+      Array<{
+        __typename?: "PlaylistEdge";
+        cursor: string;
+        node: {
+          __typename?: "Playlist";
+          title: string;
+          description?: Maybe<string>;
+          cover?: Maybe<string>;
+          create_at: any;
+        };
+      }>
+    >;
+  };
+};
+
 export type ReviewCreatedSubscriptionVariables = Exact<{
-  type: Scalars["String"];
+  type: ReviewMedium;
   medium_id: Scalars["ID"];
 }>;
 
@@ -1317,8 +1376,78 @@ export type MoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
   MoviesPaginatedQuery,
   MoviesPaginatedQueryVariables
 >;
+export const PlaylistsPaginatedDocument = gql`
+  query playlistsPaginated($query: PaginatedQuery, $author_uid: String) {
+    playlists_paginated(query: $query, author_uid: $author_uid) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          title
+          description
+          cover
+          create_at
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __usePlaylistsPaginatedQuery__
+ *
+ * To run a query within a React component, call `usePlaylistsPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlaylistsPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlaylistsPaginatedQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *      author_uid: // value for 'author_uid'
+ *   },
+ * });
+ */
+export function usePlaylistsPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    PlaylistsPaginatedQuery,
+    PlaylistsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    PlaylistsPaginatedQuery,
+    PlaylistsPaginatedQueryVariables
+  >(PlaylistsPaginatedDocument, baseOptions);
+}
+export function usePlaylistsPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    PlaylistsPaginatedQuery,
+    PlaylistsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    PlaylistsPaginatedQuery,
+    PlaylistsPaginatedQueryVariables
+  >(PlaylistsPaginatedDocument, baseOptions);
+}
+export type PlaylistsPaginatedQueryHookResult = ReturnType<
+  typeof usePlaylistsPaginatedQuery
+>;
+export type PlaylistsPaginatedLazyQueryHookResult = ReturnType<
+  typeof usePlaylistsPaginatedLazyQuery
+>;
+export type PlaylistsPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  PlaylistsPaginatedQuery,
+  PlaylistsPaginatedQueryVariables
+>;
 export const ReviewCreatedDocument = gql`
-  subscription reviewCreated($type: String!, $medium_id: ID!) {
+  subscription reviewCreated($type: ReviewMedium!, $medium_id: ID!) {
     review_created(type: $type, medium_id: $medium_id) {
       content
       create_at
