@@ -14,11 +14,11 @@ import { onError } from "@apollo/link-error";
 import { WebSocketLink } from "@apollo/client/link/ws";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:3001/graphql"
+  uri: process.env.REACT_APP_HTTP_URL
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3001/`,
+  uri: process.env.REACT_APP_WEBSOCKET_URL || "",
   options: {
     reconnect: true
   }
@@ -49,7 +49,7 @@ const authLink = setContext((_, { headers }) => {
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) => {
-      // Message.error(message || "服务器繁忙");
+      Message.error(message || "服务器繁忙");
       Sentry.captureMessage(message);
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
@@ -64,7 +64,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 // const uploadLink = createUploadLink({
-//   uri: "http://localhost:3001/graphql"
+//   uri: process.env.REACT_APP_UPLOAD_URL
 // });
 
 export const client = new ApolloClient({
