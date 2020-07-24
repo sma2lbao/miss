@@ -16,10 +16,10 @@ jobs:
           ls -la
 
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: Setup Node
-        uses: actions/setup-node@master
+        uses: actions/setup-node@main
         with:
           node-version: "12.x"
 
