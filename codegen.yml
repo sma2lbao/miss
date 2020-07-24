@@ -4,6 +4,7 @@ documents:
   - "./src/apollo/queries/**/*.{ts,tsx}"
   - "./src/apollo/mutations/**/*.{ts,tsx}"
   - "./src/apollo/subscriptions/**/*.{ts,tsx}"
+  - "./src/apollo/fragments/**/*.{ts,tsx}"
 hooks:
   afterOneFileWrite:
     - eslint --fix
