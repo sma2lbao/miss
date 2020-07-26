@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Paper, Stepper, Step, StepLabel, Button } from "@material-ui/core";
+import { Box, Stepper, Step, StepLabel, Button } from "@material-ui/core";
 import Necessary from "./modules/Necessary";
 import Basic from "./modules/Basic";
 import Recommend from "./modules/Recommend";
@@ -14,7 +14,7 @@ const Completion: React.FC = () => {
   };
 
   return (
-    <Paper>
+    <Box>
       <div>
         <Stepper activeStep={curStep} alternativeLabel>
           {steps.map(label => (
@@ -30,7 +30,7 @@ const Completion: React.FC = () => {
       <div>{curStep === 0 && <Necessary />}</div>
       <div>{curStep === 1 && <Basic />}</div>
       <div>{curStep === 2 && <Recommend />}</div>
-    </Paper>
+    </Box>
   );
 };
 

@@ -18,23 +18,15 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       background: theme.palette.background.paper
     },
-    filterFull: {
-      background: theme.palette.background.paper,
-      display: "flex",
-      justifyContent: "center",
-      flexDirection: "column",
-      alignItems: "center",
-      borderBottom: `1px solid ${theme.palette.divider}`
-    },
     gridRoot: {
       display: "grid",
       gridTemplateColumns: "repeat(4, 1fr)",
       gridGap: theme.spacing(1, 1),
       gridAutoFlow: "row dense"
     },
-    gridCardMain: {
-      gridRow: "2 span",
-      gridColumn: "2 span"
+    gridCard: {
+      gridRow: "1 span",
+      gridColumn: "1 span"
     },
     scollButton: {
       position: "fixed",
@@ -48,7 +40,7 @@ export default function MovieHome(props: Props) {
   const { data, fetchMore } = useMoviesPaginatedQuery({
     variables: {
       query: {
-        first: 8
+        first: 16
       }
     }
   });
@@ -95,7 +87,7 @@ export default function MovieHome(props: Props) {
         <Box className={classes.gridRoot}>
           {data?.movies_paginated?.edges?.map(edge => {
             return (
-              <div key={edge.cursor} className={classes.gridCardMain}>
+              <div key={edge.cursor} className={classes.gridCard}>
                 <VideoWithAuthor />
               </div>
             );

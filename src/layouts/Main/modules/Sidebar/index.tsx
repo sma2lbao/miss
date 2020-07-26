@@ -164,6 +164,7 @@ export default function Sidebar(props: SidebarProps) {
           })}
         </div>
       </div>
+      <div onClick={closeSidebarHandler}>close menu</div>
     </Drawer>
   );
 }
