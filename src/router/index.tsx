@@ -21,7 +21,7 @@ const Completion = React.lazy(() => import("@/views/auth/Completion"));
 const NotFound = React.lazy(() => import("@/views/public/NotFound"));
 const Forbidden = React.lazy(() => import("@/views/public/Forbidden"));
 const InternalServerError = React.lazy(() =>
-  import("@/views/public/InternalServerError")
+  import("@/views/public/InternalServer")
 );
 const H5NotSupported = React.lazy(() =>
   import("@/views/public/H5NotSupported")
@@ -72,9 +72,9 @@ function AppRoute() {
         <Route lazy path="/resume" component={Resume} />
         <Route lazy path="/login" component={Login} />
         <Route lazy path="/completion" component={Completion} />
-        <Route lazy path="/400" exact component={NotFound} />
         <Route lazy path="/403" exact component={Forbidden} />
-        <Route lazy path="/500" exact component={InternalServerError} />
+        <Route lazy path="/404" exact component={NotFound} />
+        <Route lazy path="/50x" exact component={InternalServerError} />
         <Route lazy path="/test" exact component={Test} />
         <Route lazy component={NotFound} />
       </Switch>

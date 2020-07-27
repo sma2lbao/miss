@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const NotFound: React.FC = () => {
+export const InternalServer: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -39,7 +39,7 @@ export const NotFound: React.FC = () => {
       <Box className={classes.box}>
         <i className={clsx("iconfont icon-404", classes.icon)}></i>
         <Typography variant="h4" gutterBottom>
-          页面未找到
+          服务器错误
         </Typography>
         <Button>返回首页</Button>
       </Box>
@@ -47,4 +47,4 @@ export const NotFound: React.FC = () => {
   );
 };
 
-export default NotFound;
+export default InternalServer;
