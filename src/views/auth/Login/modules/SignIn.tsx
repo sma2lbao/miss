@@ -4,6 +4,7 @@ import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
 // import { GitHub } from "@material-ui/icons";
 import { useLoginMutation } from "@/schema";
+import { HOME } from "@/common/constants/route.constant";
 
 export default function SignIn() {
   const history = useHistory();
@@ -12,7 +13,7 @@ export default function SignIn() {
     onCompleted(data) {
       enqueueSnackbar("登录成功");
       localStorage.setItem("access_token", data?.login);
-      history.push("/home");
+      history.push(HOME);
     },
     onError(error) {
       console.log(error);

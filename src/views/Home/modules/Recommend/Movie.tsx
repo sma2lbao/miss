@@ -2,13 +2,15 @@ import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
 import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { GridList, GridListTile } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+// import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useMovieUrgesQuery } from "@/schema";
+import { MOVIE_HOME } from "@/common/constants/route.constant";
+import { useHistory } from "react-router";
 
 export default function MovieRecommend() {
+  const history = useHistory();
   const { data } = useMovieUrgesQuery();
-  console.log(data?.movie_urges);
   const movies = data?.movie_urges;
 
   return (
@@ -20,12 +22,14 @@ export default function MovieRecommend() {
         justifyContent="space-between"
       >
         <Typography component="span" variant="h6">
-          {/* 电影推荐 */}
-          <Skeleton animation="wave" height="100%" width={160} />
+          电影推荐
         </Typography>
-        <Link href="" color="textSecondary" variant="caption">
-          {/* 更多 */}
-          <Skeleton animation="wave" height="100%" width={50} />
+        <Link
+          onClick={() => history.push(MOVIE_HOME)}
+          color="textSecondary"
+          variant="caption"
+        >
+          更多
         </Link>
       </Box>
 

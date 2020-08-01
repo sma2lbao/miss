@@ -1,9 +1,10 @@
 export interface VideoBase {
-  id: number;
-  title: string;
-  subtitle: string;
-  posters: string[];
-  create_at: Date;
+  id?: number;
+  title?: string;
+  subtitle?: string;
+  cover?: string;
+  posters?: string[];
+  create_at?: Date;
   duration?: number;
 }
 
@@ -14,5 +15,5 @@ export interface Author {
 }
 
 export interface VideoWithAuthorProps extends VideoBase {
-  author: Author;
+  author?: Author;
 }

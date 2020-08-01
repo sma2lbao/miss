@@ -28,37 +28,71 @@ export default function Aider() {
   const { data } = useUserUrgesQuery();
   const users = data?.user_urges;
   return (
-    <div className={classes.root}>
-      <Typography className={classes.title} variant="h6">
-        <Skeleton animation="wave" height="100%" width={200} />
-      </Typography>
-      <List>
-        {users &&
-          users.map((_, i) => {
-            return (
-              <ListItem key={i}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <Skeleton
-                      width="100%"
-                      height="100%"
-                      variant="circle"
-                      animation="wave"
-                    />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText>
-                  <Skeleton height="100%" width={100} animation="wave" />
-                </ListItemText>
-                <ListItemSecondaryAction>
-                  <IconButton>
-                    <MoreVert />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-      </List>
-    </div>
+    <>
+      <div className={classes.root}>
+        <Typography className={classes.title} variant="h6">
+          推荐榜
+        </Typography>
+        <List>
+          {users &&
+            users.map((_, i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <Skeleton
+                        width="100%"
+                        height="100%"
+                        variant="circle"
+                        animation="wave"
+                      />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText>
+                    <Skeleton height="100%" width={100} animation="wave" />
+                  </ListItemText>
+                  <ListItemSecondaryAction>
+                    <IconButton>
+                      <MoreVert />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+        </List>
+      </div>
+      <div className={classes.root}>
+        <Typography className={classes.title} variant="h6">
+          贡献榜
+        </Typography>
+        <List>
+          {users &&
+            users.map((_, i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <Skeleton
+                        width="100%"
+                        height="100%"
+                        variant="circle"
+                        animation="wave"
+                      />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText>
+                    <Skeleton height="100%" width={100} animation="wave" />
+                  </ListItemText>
+                  <ListItemSecondaryAction>
+                    <IconButton>
+                      <MoreVert />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+        </List>
+      </div>
+    </>
   );
 }

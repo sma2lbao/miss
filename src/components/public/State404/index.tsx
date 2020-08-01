@@ -8,6 +8,8 @@ import {
   Button
 } from "@material-ui/core";
 import clsx from "clsx";
+import { useHistory } from "react-router";
+import { HOME } from "@/common/constants/route.constant";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const State404: React.FC = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -40,7 +43,7 @@ export const State404: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           页面未找到
         </Typography>
-        <Button>返回首页</Button>
+        <Button onClick={() => history.push(HOME)}>返回首页</Button>
       </Box>
     </div>
   );

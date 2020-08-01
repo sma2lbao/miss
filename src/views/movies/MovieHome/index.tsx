@@ -3,7 +3,14 @@ import { VideoWithAuthor } from "@/components/app/VideoCard";
 import { ContentScreen, AiderScreen, BodyScreen } from "@/layouts/PageLayout";
 import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
-import { Box, Fab, useScrollTrigger, Zoom } from "@material-ui/core";
+import {
+  Box,
+  Fab,
+  useScrollTrigger,
+  Zoom,
+  Button,
+  Typography
+} from "@material-ui/core";
 import { KeyboardArrowUp } from "@material-ui/icons";
 import { useMoviesPaginatedQuery } from "@/schema";
 
@@ -28,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
       gridRow: "1 span",
       gridColumn: "1 span"
     },
+    footer: {
+      padding: theme.spacing(2),
+      textAlign: "center"
+    },
     scollButton: {
       position: "fixed",
       right: theme.spacing(2),
@@ -37,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function MovieHome(props: Props) {
-  const { data, fetchMore } = useMoviesPaginatedQuery({
+  const { data, loading, fetchMore } = useMoviesPaginatedQuery({
     variables: {
       query: {
         first: 16
@@ -85,17 +96,23 @@ export default function MovieHome(props: Props) {
     <BodyScreen>
       <ContentScreen className={classes.content}>
         <Box className={classes.gridRoot}>
-          {data?.movies_paginated?.edges?.map(edge => {
+          {data?.movies_paginated?.edges?.map((edge: any) => {
             return (
               <div key={edge.cursor} className={classes.gridCard}>
-                <VideoWithAuthor />
+                <VideoWithAuthor {...edge.node} />
               </div>
             );
           })}
-          {data?.movies_paginated?.pageInfo?.hasNextPage && (
-            <div onClick={loadMore}>load more</div>
-          )}
         </Box>
+        {data?.movies_paginated?.pageInfo?.hasNextPage && (
+          <Box className={classes.footer}>
+            <Button onClick={loadMore} disabled={loading}>
+              <Typography color="textSecondary" variant="caption">
+                {loading ? "loading" : "load more"}
+              </Typography>
+            </Button>
+          </Box>
+        )}
       </ContentScreen>
       <AiderScreen sticky>
         <Sort />
