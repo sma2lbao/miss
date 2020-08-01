@@ -6,13 +6,12 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Avatar,
-  IconButton,
-  Typography
+  Typography,
+  Button
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MoreVert } from "@material-ui/icons";
-import { Skeleton } from "@material-ui/lab";
 import { useUserUrgesQuery } from "@/schema";
+import { DEFAULT_USER_AVATAR } from "@/common/constants/default.constant";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,62 +30,23 @@ export default function Aider() {
     <>
       <div className={classes.root}>
         <Typography className={classes.title} variant="h6">
-          推荐榜
-        </Typography>
-        <List>
-          {users &&
-            users.map((_, i) => {
-              return (
-                <ListItem key={i}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <Skeleton
-                        width="100%"
-                        height="100%"
-                        variant="circle"
-                        animation="wave"
-                      />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText>
-                    <Skeleton height="100%" width={100} animation="wave" />
-                  </ListItemText>
-                  <ListItemSecondaryAction>
-                    <IconButton>
-                      <MoreVert />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              );
-            })}
-        </List>
-      </div>
-      <div className={classes.root}>
-        <Typography className={classes.title} variant="h6">
           贡献榜
         </Typography>
         <List>
           {users &&
-            users.map((_, i) => {
+            users.map((user, i) => {
               return (
                 <ListItem key={i}>
                   <ListItemAvatar>
-                    <Avatar>
-                      <Skeleton
-                        width="100%"
-                        height="100%"
-                        variant="circle"
-                        animation="wave"
-                      />
-                    </Avatar>
+                    <Avatar src={user?.avatar || DEFAULT_USER_AVATAR}></Avatar>
                   </ListItemAvatar>
                   <ListItemText>
-                    <Skeleton height="100%" width={100} animation="wave" />
+                    <Typography>{user.nickname || "江湖客"}</Typography>
                   </ListItemText>
                   <ListItemSecondaryAction>
-                    <IconButton>
-                      <MoreVert />
-                    </IconButton>
+                    <Button>
+                      <Typography>关注</Typography>
+                    </Button>
                   </ListItemSecondaryAction>
                 </ListItem>
               );

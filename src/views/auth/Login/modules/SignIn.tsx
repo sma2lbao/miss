@@ -1,19 +1,19 @@
 import * as React from "react";
 import { TextField, Button } from "@material-ui/core";
 import { useSnackbar } from "notistack";
-import { useHistory } from "react-router";
 // import { GitHub } from "@material-ui/icons";
 import { useLoginMutation } from "@/schema";
-import { HOME } from "@/common/constants/route.constant";
+import { useRouteHelper } from "@/hooks";
 
 export default function SignIn() {
-  const history = useHistory();
+  const RouterHelper = useRouteHelper();
+
   const { enqueueSnackbar } = useSnackbar();
   const [login, res] = useLoginMutation({
     onCompleted(data) {
       enqueueSnackbar("登录成功");
       localStorage.setItem("access_token", data?.login);
-      history.push(HOME);
+      RouterHelper.gotoHome();
     },
     onError(error) {
       console.log(error);

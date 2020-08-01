@@ -19,6 +19,7 @@ firebase.initializeApp({
 firebase.analytics();
 
 Sentry.init({
+  enabled: process.env.NODE_ENV === "production",
   dsn: process.env.REACT_APP_SENTRY_DSN
 });
 

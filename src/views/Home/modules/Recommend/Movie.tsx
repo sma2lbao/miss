@@ -5,11 +5,10 @@ import { GridList, GridListTile } from "@material-ui/core";
 // import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useMovieUrgesQuery } from "@/schema";
-import { MOVIE_HOME } from "@/common/constants/route.constant";
-import { useHistory } from "react-router";
+import { useRouteHelper } from "@/hooks";
 
 export default function MovieRecommend() {
-  const history = useHistory();
+  const RouterHelper = useRouteHelper();
   const { data } = useMovieUrgesQuery();
   const movies = data?.movie_urges;
 
@@ -25,7 +24,7 @@ export default function MovieRecommend() {
           电影推荐
         </Typography>
         <Link
-          onClick={() => history.push(MOVIE_HOME)}
+          onClick={RouterHelper.gotoMovieHome}
           color="textSecondary"
           variant="caption"
         >

@@ -108,7 +108,7 @@ export default function MovieHome(props: Props) {
           <Box className={classes.footer}>
             <Button onClick={loadMore} disabled={loading}>
               <Typography color="textSecondary" variant="caption">
-                {loading ? "loading" : "load more"}
+                {loading ? "加载中..." : "加载更多"}
               </Typography>
             </Button>
           </Box>

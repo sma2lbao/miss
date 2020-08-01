@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, Typography, Avatar } from "@material-ui/core";
-// import { Skeleton } from "@material-ui/lab";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Image from "@/components/base/Image";
 import { VideoWithAuthorProps } from "./video";
@@ -10,6 +9,7 @@ import {
   DEFAULT_USER_AVATAR
 } from "@/common/constants/default.constant";
 import moment from "moment";
+import { useRouteHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,9 +43,21 @@ const useStyles = makeStyles((theme: Theme) =>
 export const VideoWithAuthor: React.FC<VideoWithAuthorProps> = (
   props: VideoWithAuthorProps
 ) => {
+  const RouterHelper = useRouteHelper();
   const classes = useStyles();
+
+  const goMovie = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    RouterHelper.gotoMovie(props?.id);
+  };
+
+  const goProfile = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    RouterHelper.gotoProfile(props?.author?.username);
+  };
+
   return (
-    <Box className={classes.wrap}>
+    <Box className={classes.wrap} onClick={goMovie}>
       <div className={classes.poster}>
         <Image src={DEFULAT_MOVIE_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (
@@ -55,6 +67,7 @@ export const VideoWithAuthor: React.FC<VideoWithAuthorProps> = (
           />
         )}
         <Avatar
+          onClick={goProfile}
           className={classes.avatar}
           src={(props.author && props.author.avatar) || DEFAULT_USER_AVATAR}
         ></Avatar>
