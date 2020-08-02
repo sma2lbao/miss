@@ -9,11 +9,12 @@ import {
   IconButton,
   Icon
 } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { Menu, AddCircle } from "@material-ui/icons";
 import Search from "./components/Search";
 import Account from "./components/Account";
 import Notice from "./components/Notice";
 import clsx from "clsx";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -21,8 +22,8 @@ const useStyles = makeStyles((theme: Theme) => {
       zIndex: theme.zIndex.drawer + 1,
       boxShadow: theme.shadows[0]
     },
-    menuIcon: {
-      margin: theme.spacing(0, 2)
+    icon: {
+      marginLeft: theme.spacing(2)
     },
     toolbar: {
       display: "flex",
@@ -35,14 +36,15 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-type OpenSidebarFunc = (...args: any[]) => void;
+type ToggleidebarFunc = (...args: any[]) => void;
 
 interface TopbarProps {
-  openSidebarHandler?: OpenSidebarFunc;
+  toggleSidebar?: ToggleidebarFunc;
 }
 
 export default function Topbar(props: TopbarProps) {
   const classes = useStyles();
+  const RouterHelper = useRouterHelper();
   return (
     <>
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
@@ -56,10 +58,17 @@ export default function Topbar(props: TopbarProps) {
             </div>
             <IconButton
               size="small"
-              onClick={props.openSidebarHandler}
-              className={classes.menuIcon}
+              onClick={props.toggleSidebar}
+              className={classes.icon}
             >
               <Menu fontSize="small" />
+            </IconButton>
+            <IconButton
+              onClick={RouterHelper.gotoMovieUpload}
+              size="small"
+              className={classes.icon}
+            >
+              <AddCircle fontSize="small" />
             </IconButton>
           </Box>
           <Box display="flex" alignItems="center">

@@ -5,7 +5,8 @@ import {
   MOVIE_DETAIL,
   HOME,
   MOVIE_HOME,
-  MOVIE_PLAY
+  MOVIE_PLAY,
+  MOVIE_UPLOAD
 } from "@/common/constants/route.constant";
 
 export const useRouterHelper = () => {
@@ -36,6 +37,11 @@ export const useRouterHelper = () => {
     history.push(`${MOVIE_PLAY}/${movie_id}`);
   };
 
+  // go movie upload.
+  const gotoMovieUpload = () => {
+    history.push(`${MOVIE_UPLOAD}`);
+  };
+
   return {
     push: (path: string, state?: any) => {
       // console.log(path, state);
@@ -45,6 +51,7 @@ export const useRouterHelper = () => {
     gotoProfile,
     gotoMovie,
     gotoMovieHome,
-    gotoMoviePlay
+    gotoMoviePlay,
+    gotoMovieUpload
   };
 };

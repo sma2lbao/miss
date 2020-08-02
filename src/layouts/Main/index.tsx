@@ -46,9 +46,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
 
   return (
     <div className={classes.root}>
-      <Topbar
-        openSidebarHandler={() => setOpenSidebar(hideSidebar ? false : true)}
-      />
+      <Topbar toggleSidebar={() => setOpenSidebar(!openSidebar)} />
       <div>
         {!hideSidebar && (
           <Sidebar

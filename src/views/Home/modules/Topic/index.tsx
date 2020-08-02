@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     bannerItem: {
       minHeight: 200,
-      margin: theme.spacing(0, 1),
+      margin: theme.spacing(0, 0.25),
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
