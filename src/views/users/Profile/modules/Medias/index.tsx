@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, GridList, GridListTile } from "@material-ui/core";
 import { MediaNormal } from "@/components/app/MediaCard";
 
-export default function Videos() {
+export const Medias: React.FC = () => {
   return (
     <Box>
       <GridList cellHeight="auto" cols={4}>
@@ -24,4 +24,6 @@ export default function Videos() {
       </GridList>
     </Box>
   );
-}
+};
+
+export default Medias;

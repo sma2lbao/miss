@@ -61,6 +61,8 @@ export default function AiderScreen(props: AiderScreenLayoutProps) {
     );
   }
   return (
-    <div className={clsx(classes.root, props.className)}>{props.children}</div>
+    <div className={clsx(classes.container, props.className)}>
+      {props.children}
+    </div>
   );
 }

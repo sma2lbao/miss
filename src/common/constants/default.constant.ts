@@ -6,3 +6,6 @@ export const DEFAULT_HOLDER =
 
 export const DEFULAT_MOVIE_COVER =
   "https://cdn.dribbble.com/users/185738/screenshots/3515176/growthandstrategy.jpg";
+
+export const DEFAULT_PROFILE_COVER =
+  "https://cdn.dribbble.com/users/185738/screenshots/3515176/growthandstrategy.jpg";
