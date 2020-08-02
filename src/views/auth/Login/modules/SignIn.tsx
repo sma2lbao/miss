@@ -3,10 +3,10 @@ import { TextField, Button } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 // import { GitHub } from "@material-ui/icons";
 import { useLoginMutation } from "@/schema";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 export default function SignIn() {
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
 
   const { enqueueSnackbar } = useSnackbar();
   const [login, res] = useLoginMutation({

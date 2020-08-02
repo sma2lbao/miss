@@ -4,10 +4,11 @@ import {
   PROFILE,
   MOVIE_DETAIL,
   HOME,
-  MOVIE_HOME
+  MOVIE_HOME,
+  MOVIE_PLAY
 } from "@/common/constants/route.constant";
 
-export const useRouteHelper = () => {
+export const useRouterHelper = () => {
   const history = useHistory();
 
   // go home page.
@@ -30,6 +31,11 @@ export const useRouteHelper = () => {
     history.push(MOVIE_HOME);
   };
 
+  // go movie play page.
+  const gotoMoviePlay = (movie_id: number | undefined | string) => {
+    history.push(`${MOVIE_PLAY}/${movie_id}`);
+  };
+
   return {
     push: (path: string, state?: any) => {
       // console.log(path, state);
@@ -38,6 +44,7 @@ export const useRouteHelper = () => {
     gotoHome,
     gotoProfile,
     gotoMovie,
-    gotoMovieHome
+    gotoMovieHome,
+    gotoMoviePlay
   };
 };

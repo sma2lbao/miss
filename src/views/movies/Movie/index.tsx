@@ -1,23 +1,18 @@
 import * as React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Box } from "@material-ui/core";
-import Image from "@/components/base/Image";
-import { MovieMain, Relative, Cast, About } from "./modules";
+import { MovieMain, Relative, Cast, About, Top } from "./modules";
 import {
   ContentScreen,
   AiderScreen,
   FullScreen,
   BodyScreen
 } from "@/layouts/PageLayout";
-import { useMovieQuery } from "@/schema";
+import { useMovieQuery, MovieQuery } from "@/schema";
 import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    body: {
-      display: "flex",
-      margin: "0 auto"
-    },
     main: {
       display: "flex",
       flexDirection: "column",
@@ -35,6 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export const MovieContext = React.createContext<MovieQuery | undefined>(
+  undefined
+);
+
 export default function Movie() {
   const { id } = useParams();
   const { data, error } = useMovieQuery({
@@ -42,36 +41,37 @@ export default function Movie() {
       id: id
     }
   });
-  console.log(data, error);
 
+  console.log(error);
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
 
   return (
     <Box>
-      <FullScreen>
-        <Image
-          aspectRatio={16 / 9}
-          src={data && data.movie && data.movie.cover}
-        />
-      </FullScreen>
-      <BodyScreen className={classes.body}>
-        <ContentScreen className={classes.main}>
-          <Tabs value={tab} onChange={(e, val) => setTab(val)}>
-            <Tab label="信息"></Tab>
-            <Tab label="相关推荐"></Tab>
-            <Tab label="关于"></Tab>
-          </Tabs>
-          <div className={classes.content}>
-            {tab === 0 && <MovieMain />}
-            {tab === 1 && <Relative />}
-            {tab === 2 && <About html={data?.movie?.description || ""} />}
-          </div>
-        </ContentScreen>
-        <AiderScreen className={classes.aider}>
-          <Cast />
-        </AiderScreen>
-      </BodyScreen>
+      <MovieContext.Provider value={data}>
+        <FullScreen>
+          <BodyScreen>
+            <Top />
+          </BodyScreen>
+        </FullScreen>
+        <BodyScreen>
+          <ContentScreen className={classes.main}>
+            <Tabs value={tab} onChange={(e, val) => setTab(val)}>
+              <Tab label="信息"></Tab>
+              <Tab label="相关推荐"></Tab>
+              <Tab label="关于"></Tab>
+            </Tabs>
+            <div className={classes.content}>
+              {tab === 0 && <MovieMain />}
+              {tab === 1 && <Relative />}
+              {tab === 2 && <About html={data?.movie?.description || ""} />}
+            </div>
+          </ContentScreen>
+          <AiderScreen className={classes.aider}>
+            <Cast />
+          </AiderScreen>
+        </BodyScreen>
+      </MovieContext.Provider>
     </Box>
   );
 }

@@ -5,7 +5,7 @@ import Image from "@/components/base/Image";
 import { MediaPlainProps } from "./media";
 import Duration from "../Duration";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MediaPlain: React.FC<MediaPlainProps> = (
   props: MediaPlainProps
 ) => {
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
   const goMovie = (e: React.MouseEvent) => {

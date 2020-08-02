@@ -9,7 +9,7 @@ import {
   DEFAULT_USER_AVATAR
 } from "@/common/constants/default.constant";
 import moment from "moment";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MediaNormal: React.FC<MediaNormalProps> = (
   props: MediaNormalProps
 ) => {
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
   const goMovie = (e: React.MouseEvent) => {

@@ -5,10 +5,10 @@ import { GridList, GridListTile } from "@material-ui/core";
 // import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useMovieUrgesQuery } from "@/schema";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 export default function MovieRecommend() {
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
   const { data } = useMovieUrgesQuery();
   const movies = data?.movie_urges;
 

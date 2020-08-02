@@ -8,7 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 import clsx from "clsx";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const State404: React.FC = () => {
   const classes = useStyles();
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
 
   return (
     <div className={classes.root}>

@@ -9,3 +9,5 @@ export const MOVIE_DETAIL = "/movie";
 
 // profile page
 export const PROFILE = "/profile";
+
+export const MOVIE_PLAY = "/movie-play";

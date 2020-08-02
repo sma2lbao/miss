@@ -6,7 +6,7 @@ import { MediaOwnProps } from "./media";
 import Duration from "../Duration";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import moment from "moment";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
   const goMovie = (e: React.MouseEvent) => {

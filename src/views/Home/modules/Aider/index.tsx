@@ -12,7 +12,7 @@ import {
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useUserUrgesQuery } from "@/schema";
 import { DEFAULT_USER_AVATAR } from "@/common/constants/default.constant";
-import { useRouteHelper } from "@/hooks";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Aider() {
   const classes = useStyles();
-  const RouterHelper = useRouteHelper();
+  const RouterHelper = useRouterHelper();
   const { data } = useUserUrgesQuery();
   const users = data?.user_urges;
   return (

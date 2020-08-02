@@ -68,7 +68,7 @@ enum ImageStatus {
   Failuare = -1
 }
 
-export default function Image(props: ImageProp) {
+export const Image: React.FC<ImageProp> = (props: ImageProp) => {
   const classes = useStyles(props);
   const { src, alt } = props;
 
@@ -153,4 +153,6 @@ export default function Image(props: ImageProp) {
       )}
     </div>
   );
-}
+};
+
+export default Image;
