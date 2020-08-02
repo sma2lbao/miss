@@ -3,7 +3,7 @@ import { Image } from "@/components/base/Image";
 import { MovieContext } from "../..";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Box } from "@material-ui/core";
 import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
       right: 0,
       width: "50%",
       padding: theme.spacing(0, 8),
-      transform: "translate(0, -50%)"
+      transform: "translate(0, -50%)",
+      color: "#fff"
     }
   })
 );
@@ -42,19 +43,29 @@ export const Top: React.FC = () => {
         }
       />
       <div className={classes.main}>
-        <Typography variant="h4" component="div">
+        <Typography gutterBottom variant="h4" component="div">
           电影名
         </Typography>
-        <div></div>
-        <Typography variant="caption" component="div">
+        <Typography gutterBottom variant="subtitle1" component="div">
+          电影信息补充
+        </Typography>
+        {/* <div></div> */}
+        <Typography variant="body2" component="div">
           电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
           电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
           电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
           电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
         </Typography>
-        <div>
-          <Button onClick={goMoviePlay}>播放</Button>
-        </div>
+        <Box mt={3}>
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={goMoviePlay}
+          >
+            播放
+          </Button>
+        </Box>
       </div>
     </div>
   );
