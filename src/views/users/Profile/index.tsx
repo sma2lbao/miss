@@ -1,7 +1,7 @@
 import * as React from "react";
 import Top from "./modules/Top";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Tabs, Tab, Divider } from "@material-ui/core";
+import { Tabs, Tab, Divider, Box } from "@material-ui/core";
 import { Medias, Basic } from "./modules";
 import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
 
@@ -34,7 +34,7 @@ export default function Profile() {
             <Tab label="列表"></Tab>
             <Tab label="社区"></Tab>
           </Tabs>
-          <div>{tab === 0 && <Medias />}</div>
+          <Box py={2}>{tab === 0 && <Medias />}</Box>
         </div>
       </ContentScreen>
     </BodyScreen>

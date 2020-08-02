@@ -13,6 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     info: {
       padding: theme.spacing(3, 4)
+    },
+    pirmaryColor: {
+      color: "#fff"
+    },
+    secondColor: {
+      color: "#aaa"
     }
   })
 );
@@ -29,21 +35,41 @@ export const Basic: React.FC = () => {
         />
       </div>
       <div className={classes.info}>
-        <div>
-          <Typography variant="h4">Sma2lBao</Typography>
+        <div className={classes.pirmaryColor}>
+          <Typography gutterBottom variant="h4">
+            Sma2lBao
+          </Typography>
         </div>
+        <Typography gutterBottom className={classes.pirmaryColor}>
+          135k Subscribers
+        </Typography>
+        <Typography
+          component="div"
+          variant="caption"
+          className={classes.secondColor}
+          gutterBottom
+        >
+          个人简介balabala 个人简介balabala 个人简介balabala 个人简介balabala
+          个人简介balabala 个人简介balabala 个人简介balabala 个人简介balabala
+          个人简介balabala 个人简介balabala 个人简介balabala 个人简介balabala
+          个人简介balabala 个人简介balabala 个人简介balabala
+        </Typography>
         <div>
-          <Typography>68 Videos</Typography>
-          <Typography>135k Subscribers</Typography>
-        </div>
-        <div>
-          <Typography>个人简介balabala</Typography>
-        </div>
-        <div>
-          <div>Born</div>
-          <div>
-            <Typography>个人简介balabala</Typography>
-          </div>
+          <Typography
+            variant="subtitle2"
+            component="div"
+            gutterBottom
+            className={classes.pirmaryColor}
+          >
+            Born
+          </Typography>
+          <Typography
+            className={classes.secondColor}
+            component="div"
+            variant="caption"
+          >
+            出生日期
+          </Typography>
         </div>
       </div>
     </div>

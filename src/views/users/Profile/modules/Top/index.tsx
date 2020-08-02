@@ -8,30 +8,32 @@ import {
   createStyles,
   makeStyles
 } from "@material-ui/core";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaPlain } from "@/components/app/MediaCard";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex"
+      display: "flex",
+      paddingBottom: theme.spacing(2)
     },
     item: {
       flex: 1,
       overflow: "hidden",
       "& + &": {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(2)
       }
     },
     wrap: {
       display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between"
+      flexDirection: "column"
+      // justifyContent: "space-between",
     },
     main: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      marginBottom: theme.spacing(6)
     },
     mainButton: {
       marginLeft: theme.spacing(1),
@@ -54,7 +56,13 @@ export const Top: React.FC = () => {
               <Typography variant="caption">ShengZhen</Typography>
             </Box>
           </Box>
-          <Button className={classes.mainButton}>订阅</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.mainButton}
+          >
+            关注
+          </Button>
         </Box>
         <Box className={classes.content}>
           <Typography gutterBottom variant="subtitle2" component="div">
@@ -78,7 +86,7 @@ export const Top: React.FC = () => {
         </Box>
       </div>
       <div className={classes.item}>
-        <MediaNormal />
+        <MediaPlain />
       </div>
     </Box>
   );
