@@ -1,5 +1,5 @@
 import * as React from "react";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 import { Box, GridListTile, GridList, Typography } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
@@ -21,22 +21,22 @@ export default function Relative() {
       </Typography>
       <GridList cellHeight="auto" cols={4}>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
       </GridList>
     </Box>

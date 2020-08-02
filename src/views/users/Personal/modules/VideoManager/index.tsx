@@ -9,7 +9,7 @@ import {
   GridListTile,
   GridList
 } from "@material-ui/core";
-import { VideoNormal } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,16 +38,16 @@ export default function VideoManager() {
       <Box className={classes.content}>
         <GridList cols={3}>
           <GridListTile>
-            <VideoNormal />
+            <MediaNormal />
           </GridListTile>
           <GridListTile>
-            <VideoNormal />
+            <MediaNormal />
           </GridListTile>
           <GridListTile>
-            <VideoNormal />
+            <MediaNormal />
           </GridListTile>
           <GridListTile>
-            <VideoNormal />
+            <MediaNormal />
           </GridListTile>
         </GridList>
       </Box>

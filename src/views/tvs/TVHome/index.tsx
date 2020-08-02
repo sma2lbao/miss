@@ -6,7 +6,7 @@ import {
   GridList,
   GridListTile
 } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 
 export default function TVHome() {
   return (
@@ -26,40 +26,40 @@ export default function TVHome() {
       </Box>
       <GridList cellHeight="auto" cols={5}>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
       </GridList>
     </Box>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Grid, Typography, Box } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,12 +26,12 @@ export default function TvRecommend() {
         </Typography>
       </div>
       <Grid container justify="space-between">
-        {/* <VideoWithAuthor />
-        <VideoWithAuthor />
-        <VideoWithAuthor />
-        <VideoWithAuthor />
-        <VideoWithAuthor />
-        <VideoWithAuthor /> */}
+        {/* <MediaNormal />
+        <MediaNormal />
+        <MediaNormal />
+        <MediaNormal />
+        <MediaNormal />
+        <MediaNormal /> */}
       </Grid>
     </Box>
   );

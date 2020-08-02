@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 import { GridList, GridListTile } from "@material-ui/core";
 // import { Skeleton } from "@material-ui/lab";
 // import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -38,7 +38,7 @@ export default function MovieRecommend() {
             return (
               <Grow key={index} in timeout={index * 800}>
                 <GridListTile cols={movie.cols || 1}>
-                  <VideoWithAuthor key={index} {...movie} />
+                  <MediaNormal key={index} {...movie} />
                 </GridListTile>
               </Grow>
             );

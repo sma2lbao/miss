@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Box, Typography, IconButton } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
 import clsx from "clsx";
@@ -87,7 +87,7 @@ function Topic() {
                   // console.log(mod(index, 3));
                   return (
                     <div key={key} className={clsx(classes.bannerItem)}>
-                      <VideoWithAuthor />
+                      <MediaNormal />
                     </div>
                   );
                 }}
@@ -102,7 +102,7 @@ function Topic() {
         </Box>
       </div>
       <div className={classes.headItem}>
-        <VideoWithAuthor />
+        <MediaNormal />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 import { ContentScreen, AiderScreen, BodyScreen } from "@/layouts/PageLayout";
 import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
@@ -99,7 +99,7 @@ export default function MovieHome(props: Props) {
           {data?.movies_paginated?.edges?.map((edge: any) => {
             return (
               <div key={edge.cursor} className={classes.gridCard}>
-                <VideoWithAuthor {...edge.node} />
+                <MediaNormal {...edge.node} />
               </div>
             );
           })}

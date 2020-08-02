@@ -3,7 +3,7 @@ import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
 // import { Rating } from "@material-ui/lab";
 // import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,19 +42,19 @@ export default function MovieMain() {
         </Typography>
         <GridList cellHeight="auto" cols={4}>
           <GridListTile cols={1}>
-            <VideoWithAuthor />
+            <MediaNormal />
           </GridListTile>
           <GridListTile cols={1}>
-            <VideoWithAuthor />
+            <MediaNormal />
           </GridListTile>
           <GridListTile cols={1}>
-            <VideoWithAuthor />
+            <MediaNormal />
           </GridListTile>
           <GridListTile cols={1}>
-            <VideoWithAuthor />
+            <MediaNormal />
           </GridListTile>
           <GridListTile cols={1}>
-            <VideoWithAuthor />
+            <MediaNormal />
           </GridListTile>
         </GridList>
       </Box>

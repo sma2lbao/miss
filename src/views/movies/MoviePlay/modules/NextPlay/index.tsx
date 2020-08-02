@@ -1,5 +1,5 @@
 import * as React from "react";
-import { VideoWithAuthor } from "@/components/app/VideoCard";
+import { MediaNormal } from "@/components/app/MediaCard";
 import { GridList, GridListTile, Typography, Box } from "@material-ui/core";
 
 export default function NextPlay() {
@@ -10,19 +10,19 @@ export default function NextPlay() {
       </Typography>
       <GridList cellHeight="auto" cols={4}>
         <GridListTile cols={1}>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile cols={1}>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile cols={1}>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile cols={1}>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
         <GridListTile cols={1}>
-          <VideoWithAuthor />
+          <MediaNormal />
         </GridListTile>
       </GridList>
     </Box>

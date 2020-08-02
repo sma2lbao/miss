@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Typography, Avatar } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Image from "@/components/base/Image";
-import { VideoWithAuthorProps } from "./video";
+import { MediaNormalProps } from "./media";
 import Duration from "../Duration";
 import {
   DEFULAT_MOVIE_COVER,
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     wrap: {
       width: "100%"
     },
-    poster: {
+    cover: {
       position: "relative"
     },
     avatar: {
@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-export const VideoWithAuthor: React.FC<VideoWithAuthorProps> = (
-  props: VideoWithAuthorProps
+export const MediaNormal: React.FC<MediaNormalProps> = (
+  props: MediaNormalProps
 ) => {
   const RouterHelper = useRouteHelper();
   const classes = useStyles();
@@ -58,7 +58,7 @@ export const VideoWithAuthor: React.FC<VideoWithAuthorProps> = (
 
   return (
     <Box className={classes.wrap} onClick={goMovie}>
-      <div className={classes.poster}>
+      <div className={classes.cover}>
         <Image src={DEFULAT_MOVIE_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (
           <Duration
@@ -92,7 +92,7 @@ export const VideoWithAuthor: React.FC<VideoWithAuthorProps> = (
   );
 };
 
-VideoWithAuthor.defaultProps = {
+MediaNormal.defaultProps = {
   title: "视频标题",
   subtitle: "视频副标题",
   create_at: new Date(),
@@ -102,6 +102,6 @@ VideoWithAuthor.defaultProps = {
     nickname: "昵称",
     avatar: ""
   }
-} as Partial<VideoWithAuthorProps>;
+} as Partial<MediaNormalProps>;
 
-export default VideoWithAuthor;
+export default MediaNormal;
