@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://localhost:3001/graphql"
+schema: "https://sma2lbao.cn/api/graphql"
 documents:
   - "./src/apollo/queries/**/*.{ts,tsx}"
   - "./src/apollo/mutations/**/*.{ts,tsx}"

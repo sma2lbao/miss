@@ -385,6 +385,7 @@ export type Playlist = {
   description?: Maybe<Scalars["String"]>;
   cover?: Maybe<Scalars["String"]>;
   movies?: Maybe<Array<Movie>>;
+  movies_count?: Maybe<Scalars["Float"]>;
   author: User;
   create_at: Scalars["Date"];
   update_at: Scalars["Date"];
@@ -424,6 +425,7 @@ export type Query = {
   users_paginated: UserPaginated;
   current_topic: Topic;
   movie_urges: Array<Movie>;
+  movie_urges_by_movie: Array<Movie>;
   user_urges: Array<User>;
   reviews_paginated: ReviewPaginated;
   playlists_paginated: PlaylistPaginated;
@@ -451,6 +453,10 @@ export type QueryUserArgs = {
 
 export type QueryUsers_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryMovie_Urges_By_MovieArgs = {
+  movie_id: Scalars["Float"];
 };
 
 export type QueryReviews_PaginatedArgs = {
@@ -614,6 +620,13 @@ export type UserPaginated = {
   totalCount: Scalars["Int"];
 };
 
+export type MeFragment = {
+  __typename?: "User";
+  uid: number | string;
+  nickname?: Maybe<string>;
+  email: string;
+};
+
 export type LoginMutationVariables = Exact<{
   username: Scalars["String"];
   password: Scalars["String"];
@@ -705,6 +718,7 @@ export type MovieUrgesQuery = {
       avatar?: Maybe<string>;
       nickname?: Maybe<string>;
       uid: number | string;
+      username: string;
     };
   }>;
 };
@@ -717,6 +731,8 @@ export type UserUrgesQuery = {
     __typename?: "User";
     nickname?: Maybe<string>;
     avatar?: Maybe<string>;
+    username: string;
+    uid: number | string;
     description?: Maybe<string>;
   }>;
 };
@@ -751,6 +767,7 @@ export type MovieQuery = {
       __typename?: "User";
       avatar?: Maybe<string>;
       uid: number | string;
+      username: string;
       nickname?: Maybe<string>;
     };
     directors?: Maybe<
@@ -806,7 +823,12 @@ export type MoviesPaginatedQuery = {
           alias_title?: Maybe<string>;
           cover: string;
           description?: Maybe<string>;
-          author: { __typename?: "User"; nickname?: Maybe<string> };
+          author: {
+            __typename?: "User";
+            avatar?: Maybe<string>;
+            username: string;
+            nickname?: Maybe<string>;
+          };
         };
       }>
     >;
@@ -863,6 +885,13 @@ export type ReviewCreatedSubscription = {
   };
 };
 
+export const MeFragmentDoc = gql`
+  fragment me on User {
+    uid
+    nickname
+    email
+  }
+`;
 export const LoginDocument = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)
@@ -1106,6 +1135,7 @@ export const MovieUrgesDocument = gql`
         avatar
         nickname
         uid
+        username
       }
     }
   }
@@ -1161,6 +1191,8 @@ export const UserUrgesDocument = gql`
     user_urges {
       nickname
       avatar
+      username
+      uid
       description
     }
   }
@@ -1222,6 +1254,7 @@ export const MovieDocument = gql`
       author {
         avatar
         uid
+        username
         nickname
       }
       cover
@@ -1320,6 +1353,8 @@ export const MoviesPaginatedDocument = gql`
           cover
           description
           author {
+            avatar
+            username
             nickname
           }
         }

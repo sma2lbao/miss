@@ -12,6 +12,7 @@ import {
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useUserUrgesQuery } from "@/schema";
 import { DEFAULT_USER_AVATAR } from "@/common/constants/default.constant";
+import { useRouteHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Aider() {
   const classes = useStyles();
+  const RouterHelper = useRouteHelper();
   const { data } = useUserUrgesQuery();
   const users = data?.user_urges;
   return (
@@ -36,7 +38,10 @@ export default function Aider() {
           {users &&
             users.map((user, i) => {
               return (
-                <ListItem key={i}>
+                <ListItem
+                  key={i}
+                  onClick={() => RouterHelper.gotoProfile(user?.username)}
+                >
                   <ListItemAvatar>
                     <Avatar src={user?.avatar || DEFAULT_USER_AVATAR}></Avatar>
                   </ListItemAvatar>

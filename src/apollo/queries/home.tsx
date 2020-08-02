@@ -50,6 +50,7 @@ export const MOVIE_URGES = gql`
         avatar
         nickname
         uid
+        username
       }
     }
   }
@@ -60,6 +61,8 @@ export const USER_URGES = gql`
     user_urges {
       nickname
       avatar
+      username
+      uid
       description
     }
   }

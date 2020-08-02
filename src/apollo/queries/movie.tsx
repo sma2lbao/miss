@@ -11,6 +11,7 @@ export const MOVIE = gql`
       author {
         avatar
         uid
+        username
         nickname
       }
       cover
@@ -65,6 +66,8 @@ export const MOVIES_PAGINATED = gql`
           cover
           description
           author {
+            avatar
+            username
             nickname
           }
         }
