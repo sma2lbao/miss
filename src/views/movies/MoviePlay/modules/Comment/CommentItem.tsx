@@ -7,7 +7,6 @@ import {
   createStyles,
   Theme
 } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,25 +40,21 @@ function CommentItem() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography>
-              <Skeleton animation="wave" height="100%" width={90} />
-            </Typography>
-            <Typography variant="caption">
-              <Skeleton animation="wave" height="100%" width={200} />
-            </Typography>
+            <Typography>昵称</Typography>
+            <Typography variant="caption">2020年10月01日</Typography>
           </Box>
           <Box display="flex">
             <Typography variant="caption" className={classes.infoItem}>
-              {/* like 2 */}
+              like 2
             </Typography>
             <Typography variant="caption" className={classes.infoItem}>
-              {/* dislike 0 */}
+              dislike 0
             </Typography>
           </Box>
         </div>
       </Box>
       <Typography variant="body2" className={classes.commentText}>
-        <Skeleton animation="wave" height="100%" />
+        你的评论内容。你的评论内容。你的评论内容。你的评论内容。你的评论内容。你的评论内容。
       </Typography>
     </Box>
   );

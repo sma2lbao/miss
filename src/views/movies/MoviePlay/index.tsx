@@ -60,14 +60,15 @@ export default function MoviePlay() {
   return (
     <Box className={classes.root}>
       <FullScreen>
-        {/* <Image aspectRatio={16 / 9} /> */}
-        <div className={classes.videoRoot}>
-          <ReactPlayer
-            className={classes.video}
-            // url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-            // playing
-          />
-        </div>
+        <BodyScreen>
+          <div className={classes.videoRoot}>
+            <ReactPlayer
+              className={classes.video}
+              url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+              // playing
+            />
+          </div>
+        </BodyScreen>
       </FullScreen>
       <BodyScreen className={classes.body}>
         <ContentScreen className={classes.content}>
