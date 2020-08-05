@@ -5,7 +5,7 @@ import { ApolloProvider } from "@apollo/client";
 import { SnackbarProvider } from "notistack";
 import theme from "./theme";
 import AppRoute from "./router";
-import { client } from "./apollo";
+import { client } from "./graphql";
 
 const App: React.FC = () => {
   return (
