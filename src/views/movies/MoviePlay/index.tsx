@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import ReactPlayer from "react-player";
+import { MoviePlayer } from "@/components/app/Player";
 import { Box } from "@material-ui/core";
 import {
   FullScreen,
@@ -22,18 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       display: "flex",
       margin: "0 auto"
-    },
-    videoRoot: {
-      width: "100%",
-      paddingTop: "calc(56.25%)",
-      position: "relative"
-    },
-    video: {
-      width: "100% !important",
-      height: "100% !important",
-      position: "absolute",
-      top: 0,
-      left: 0
     },
     content: {
       padding: theme.spacing(2, 5),
@@ -61,13 +49,7 @@ export default function MoviePlay() {
     <Box className={classes.root}>
       <FullScreen>
         <BodyScreen>
-          <div className={classes.videoRoot}>
-            <ReactPlayer
-              className={classes.video}
-              url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-              // playing
-            />
-          </div>
+          <MoviePlayer />
         </BodyScreen>
       </FullScreen>
       <BodyScreen className={classes.body}>
