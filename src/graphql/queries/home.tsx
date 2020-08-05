@@ -47,10 +47,7 @@ export const MOVIE_URGES = gql`
       cover
       description
       author {
-        avatar
-        nickname
-        uid
-        username
+        ...Author
       }
     }
   }

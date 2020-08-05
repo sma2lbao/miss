@@ -36,7 +36,7 @@ function AppRoute() {
     return (
       <Router>
         <Switch>
-          <Route component={H5NotSupported} />
+          <Route lazy component={H5NotSupported} />
         </Switch>
       </Router>
     );

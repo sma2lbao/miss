@@ -627,6 +627,14 @@ export type MeFragment = {
   email: string;
 };
 
+export type AuthorFragment = {
+  __typename?: "User";
+  uid: number | string;
+  avatar?: Maybe<string>;
+  nickname?: Maybe<string>;
+  username: string;
+};
+
 export type LoginMutationVariables = Exact<{
   username: Scalars["String"];
   password: Scalars["String"];
@@ -713,13 +721,7 @@ export type MovieUrgesQuery = {
     sub_title?: Maybe<string>;
     cover: string;
     description?: Maybe<string>;
-    author: {
-      __typename?: "User";
-      avatar?: Maybe<string>;
-      nickname?: Maybe<string>;
-      uid: number | string;
-      username: string;
-    };
+    author: { __typename?: "User" } & AuthorFragment;
   }>;
 };
 
@@ -886,10 +888,18 @@ export type ReviewCreatedSubscription = {
 };
 
 export const MeFragmentDoc = gql`
-  fragment me on User {
+  fragment Me on User {
     uid
     nickname
     email
+  }
+`;
+export const AuthorFragmentDoc = gql`
+  fragment Author on User {
+    uid
+    avatar
+    nickname
+    username
   }
 `;
 export const LoginDocument = gql`
@@ -1132,13 +1142,11 @@ export const MovieUrgesDocument = gql`
       cover
       description
       author {
-        avatar
-        nickname
-        uid
-        username
+        ...Author
       }
     }
   }
+  ${AuthorFragmentDoc}
 `;
 
 /**
