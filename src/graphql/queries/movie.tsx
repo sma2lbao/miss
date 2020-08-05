@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const MOVIE = gql`
   query movie($id: ID!) {
     movie(id: $id) {
-      actors {
+      credits {
         avatar
         name
         description
@@ -19,11 +19,6 @@ export const MOVIE = gql`
       update_at
       sub_title
       id
-      directors {
-        avatar
-        description
-        name
-      }
       description
       create_at
       alias_title

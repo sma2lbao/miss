@@ -18,12 +18,12 @@ export const useRouterHelper = () => {
   };
 
   // go profile page.
-  const gotoProfile = (username: string | undefined) => {
+  const gotoProfile = (username: string | undefined | null) => {
     history.push(`${PROFILE}/${username}`);
   };
 
   // go movie detail page.
-  const gotoMovie = (movie_id: number | undefined) => {
+  const gotoMovie = (movie_id: number | undefined | null) => {
     history.push(`${MOVIE_DETAIL}/${movie_id}`);
   };
 

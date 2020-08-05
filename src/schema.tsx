@@ -44,6 +44,7 @@ export type Character = {
   name: Scalars["String"];
   avatar?: Maybe<Scalars["String"]>;
   description?: Maybe<Scalars["String"]>;
+  tags?: Maybe<Array<Scalars["String"]>>;
 };
 
 export type CreateBulletInput = {
@@ -64,6 +65,7 @@ export type CreateCharacterInput = {
   name: Scalars["String"];
   avatar?: Maybe<Scalars["String"]>;
   description?: Maybe<Scalars["String"]>;
+  tags?: Maybe<Array<Scalars["String"]>>;
 };
 
 export type CreateFollowInput = {
@@ -79,8 +81,7 @@ export type CreateMovieInput = {
   posters?: Maybe<Array<Scalars["String"]>>;
   description?: Maybe<Scalars["String"]>;
   region?: Maybe<Scalars["String"]>;
-  actors?: Maybe<Array<CreateCharacterInput>>;
-  directors?: Maybe<Array<CreateCharacterInput>>;
+  credits?: Maybe<Array<CreateCharacterInput>>;
   sources?: Maybe<Array<CreateMovieMediumInput>>;
 };
 
@@ -139,6 +140,25 @@ export type CreateUserWithCodeInput = {
   address?: Maybe<Scalars["String"]>;
   description?: Maybe<Scalars["String"]>;
   code: Scalars["String"];
+};
+
+export type CreateVideoInput = {
+  title: Scalars["String"];
+  sub_title?: Maybe<Scalars["String"]>;
+  alias_title?: Maybe<Scalars["String"]>;
+  cover: Scalars["String"];
+  posters?: Maybe<Array<Scalars["String"]>>;
+  description?: Maybe<Scalars["String"]>;
+  sources?: Maybe<Array<CreateVideoMediumInput>>;
+};
+
+export type CreateVideoMediumInput = {
+  name: Scalars["String"];
+  url: Scalars["String"];
+  alias_name?: Maybe<Scalars["String"]>;
+  posters?: Maybe<Array<Scalars["String"]>>;
+  description?: Maybe<Scalars["String"]>;
+  video_id?: Maybe<Scalars["ID"]>;
 };
 
 export type DeleteFollowInput = {
@@ -208,8 +228,7 @@ export type Movie = {
   posters?: Maybe<Array<Scalars["String"]>>;
   description?: Maybe<Scalars["String"]>;
   region: Region;
-  actors?: Maybe<Array<Character>>;
-  directors?: Maybe<Array<Character>>;
+  credits?: Maybe<Array<Character>>;
   sources: Array<MovieMedium>;
   author: User;
   create_at: Scalars["Date"];
@@ -284,6 +303,8 @@ export type Mutation = {
   add_movie_to_playlist: Scalars["Boolean"];
   create_follow: Follow;
   remove_follow: Follow;
+  create_video: Video;
+  add_mediums_to_video: Video;
 };
 
 export type MutationCreate_TagArgs = {
@@ -371,11 +392,26 @@ export type MutationRemove_FollowArgs = {
   follow: DeleteFollowInput;
 };
 
+export type MutationCreate_VideoArgs = {
+  video: CreateVideoInput;
+};
+
+export type MutationAdd_Mediums_To_VideoArgs = {
+  video_medium: CreateVideoMediumInput;
+  video_id: Scalars["ID"];
+};
+
 export type PaginatedQuery = {
   first?: Maybe<Scalars["Int"]>;
   after?: Maybe<Scalars["String"]>;
   last?: Maybe<Scalars["Int"]>;
   before?: Maybe<Scalars["String"]>;
+};
+
+export type PlatformAuthWay = {
+  __typename?: "PlatformAuthWay";
+  platform: Scalars["String"];
+  url: Scalars["String"];
 };
 
 export type Playlist = {
@@ -419,6 +455,7 @@ export type Query = {
   movie: Movie;
   movies_paginated: MoviePaginated;
   me: User;
+  platform_auth_way: Array<PlatformAuthWay>;
   /** find user by uid. */
   user: User;
   /** all user with paginated. */
@@ -437,6 +474,8 @@ export type Query = {
   fans_paginated: FollowPaginated;
   fans_total: Scalars["Int"];
   is_following: Scalars["Boolean"];
+  video: Video;
+  videos_paginated: VideoPaginated;
 };
 
 export type QueryMovieArgs = {
@@ -493,6 +532,14 @@ export type QueryFans_TotalArgs = {
 export type QueryIs_FollowingArgs = {
   follower_uid?: Maybe<Scalars["String"]>;
   owner_uid: Scalars["String"];
+};
+
+export type QueryVideoArgs = {
+  id: Scalars["ID"];
+};
+
+export type QueryVideos_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
 };
 
 export enum Region {
@@ -586,8 +633,8 @@ export type UpdateUserInput = {
 export type User = {
   __typename?: "User";
   uid: Scalars["ID"];
-  username: Scalars["String"];
-  email: Scalars["String"];
+  username?: Maybe<Scalars["String"]>;
+  email?: Maybe<Scalars["String"]>;
   nickname?: Maybe<Scalars["String"]>;
   avatar?: Maybe<Scalars["String"]>;
   mobile?: Maybe<Scalars["String"]>;
@@ -620,11 +667,70 @@ export type UserPaginated = {
   totalCount: Scalars["Int"];
 };
 
+export type Video = {
+  __typename?: "Video";
+  id: Scalars["ID"];
+  title: Scalars["String"];
+  sub_title?: Maybe<Scalars["String"]>;
+  alias_title?: Maybe<Scalars["String"]>;
+  cover: Scalars["String"];
+  posters?: Maybe<Array<Scalars["String"]>>;
+  description?: Maybe<Scalars["String"]>;
+  sources: Array<VideoMedium>;
+  author: User;
+  create_at: Scalars["Date"];
+  update_at: Scalars["Date"];
+  delete_at: Scalars["Date"];
+};
+
+export type VideoEdge = {
+  __typename?: "VideoEdge";
+  cursor: Scalars["String"];
+  node: Video;
+};
+
+export type VideoMedium = {
+  __typename?: "VideoMedium";
+  id: Scalars["ID"];
+  name?: Maybe<Scalars["String"]>;
+  alias_name?: Maybe<Scalars["String"]>;
+  cover?: Maybe<Scalars["String"]>;
+  posters?: Maybe<Array<Scalars["String"]>>;
+  description?: Maybe<Scalars["String"]>;
+  duration?: Maybe<Scalars["Float"]>;
+  preview_url?: Maybe<Scalars["String"]>;
+  url: Scalars["String"];
+  low_quality_url?: Maybe<Scalars["String"]>;
+  medium_quality_url?: Maybe<Scalars["String"]>;
+  high_quality_url?: Maybe<Scalars["String"]>;
+  super_quality_url?: Maybe<Scalars["String"]>;
+  create_at: Scalars["Date"];
+  update_at: Scalars["Date"];
+  delete_at: Scalars["Date"];
+  version: Scalars["Float"];
+};
+
+export type VideoPageInfo = {
+  __typename?: "VideoPageInfo";
+  hasNextPage: Scalars["Boolean"];
+  hasPreviousPage: Scalars["Boolean"];
+  startCursor: Scalars["String"];
+  endCursor: Scalars["String"];
+};
+
+export type VideoPaginated = {
+  __typename?: "VideoPaginated";
+  edges?: Maybe<Array<VideoEdge>>;
+  nodes?: Maybe<Array<Video>>;
+  pageInfo: VideoPageInfo;
+  totalCount: Scalars["Int"];
+};
+
 export type MeFragment = {
   __typename?: "User";
   uid: number | string;
   nickname?: Maybe<string>;
-  email: string;
+  email?: Maybe<string>;
 };
 
 export type AuthorFragment = {
@@ -632,7 +738,7 @@ export type AuthorFragment = {
   uid: number | string;
   avatar?: Maybe<string>;
   nickname?: Maybe<string>;
-  username: string;
+  username?: Maybe<string>;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -659,9 +765,20 @@ export type CreateUserWithCodeMutation = {
   __typename?: "Mutation";
   create_user_with_code: {
     __typename?: "User";
-    username: string;
+    username?: Maybe<string>;
     avatar?: Maybe<string>;
   };
+};
+
+export type PlatformAuthWayQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PlatformAuthWayQuery = {
+  __typename?: "Query";
+  platform_auth_way: Array<{
+    __typename?: "PlatformAuthWay";
+    platform: string;
+    url: string;
+  }>;
 };
 
 export type CurrentTopicQueryVariables = Exact<{ [key: string]: never }>;
@@ -687,7 +804,7 @@ export type CurrentTopicQuery = {
           avatar?: Maybe<string>;
           nickname?: Maybe<string>;
           uid: number | string;
-          username: string;
+          username?: Maybe<string>;
         };
       }>
     >;
@@ -705,7 +822,7 @@ export type CurrentTopicQuery = {
         avatar?: Maybe<string>;
         nickname?: Maybe<string>;
         uid: number | string;
-        username: string;
+        username?: Maybe<string>;
       };
     }>;
   };
@@ -733,7 +850,7 @@ export type UserUrgesQuery = {
     __typename?: "User";
     nickname?: Maybe<string>;
     avatar?: Maybe<string>;
-    username: string;
+    username?: Maybe<string>;
     uid: number | string;
     description?: Maybe<string>;
   }>;
@@ -757,7 +874,7 @@ export type MovieQuery = {
     alias_title?: Maybe<string>;
     posters?: Maybe<Array<string>>;
     region: Region;
-    actors?: Maybe<
+    credits?: Maybe<
       Array<{
         __typename?: "Character";
         avatar?: Maybe<string>;
@@ -769,17 +886,9 @@ export type MovieQuery = {
       __typename?: "User";
       avatar?: Maybe<string>;
       uid: number | string;
-      username: string;
+      username?: Maybe<string>;
       nickname?: Maybe<string>;
     };
-    directors?: Maybe<
-      Array<{
-        __typename?: "Character";
-        avatar?: Maybe<string>;
-        description?: Maybe<string>;
-        name: string;
-      }>
-    >;
     sources: Array<{
       __typename?: "MovieMedium";
       url: string;
@@ -828,7 +937,7 @@ export type MoviesPaginatedQuery = {
           author: {
             __typename?: "User";
             avatar?: Maybe<string>;
-            username: string;
+            username?: Maybe<string>;
             nickname?: Maybe<string>;
           };
         };
@@ -1048,6 +1157,62 @@ export type CreateUserWithCodeMutationOptions = ApolloReactCommon.BaseMutationOp
   CreateUserWithCodeMutation,
   CreateUserWithCodeMutationVariables
 >;
+export const PlatformAuthWayDocument = gql`
+  query platformAuthWay {
+    platform_auth_way {
+      platform
+      url
+    }
+  }
+`;
+
+/**
+ * __usePlatformAuthWayQuery__
+ *
+ * To run a query within a React component, call `usePlatformAuthWayQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlatformAuthWayQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlatformAuthWayQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePlatformAuthWayQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    PlatformAuthWayQuery,
+    PlatformAuthWayQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    PlatformAuthWayQuery,
+    PlatformAuthWayQueryVariables
+  >(PlatformAuthWayDocument, baseOptions);
+}
+export function usePlatformAuthWayLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    PlatformAuthWayQuery,
+    PlatformAuthWayQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    PlatformAuthWayQuery,
+    PlatformAuthWayQueryVariables
+  >(PlatformAuthWayDocument, baseOptions);
+}
+export type PlatformAuthWayQueryHookResult = ReturnType<
+  typeof usePlatformAuthWayQuery
+>;
+export type PlatformAuthWayLazyQueryHookResult = ReturnType<
+  typeof usePlatformAuthWayLazyQuery
+>;
+export type PlatformAuthWayQueryResult = ApolloReactCommon.QueryResult<
+  PlatformAuthWayQuery,
+  PlatformAuthWayQueryVariables
+>;
 export const CurrentTopicDocument = gql`
   query currentTopic {
     current_topic {
@@ -1254,7 +1419,7 @@ export type UserUrgesQueryResult = ApolloReactCommon.QueryResult<
 export const MovieDocument = gql`
   query movie($id: ID!) {
     movie(id: $id) {
-      actors {
+      credits {
         avatar
         name
         description
@@ -1270,11 +1435,6 @@ export const MovieDocument = gql`
       update_at
       sub_title
       id
-      directors {
-        avatar
-        description
-        name
-      }
       description
       create_at
       alias_title
