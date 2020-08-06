@@ -31,10 +31,11 @@ export default function SignIn() {
     login({ variables: { username, password } });
   };
 
-  const thirdLogin = function() {
+  const thirdLogin = function(platform: string, url: string) {
+    const targetOrigin = process.env.REACT_APP_HTTP_DOMAIN_URL || "";
     const child = window.open(
-      "http://localhost:108/auth/github",
-      "github",
+      targetOrigin + url,
+      platform,
       `width=450,height=450,toolbar=0,menubar=0,location=0,status=0`
     );
     if (child) {
@@ -43,7 +44,7 @@ export default function SignIn() {
           {
             type: "access_token"
           },
-          "http://localhost:108"
+          targetOrigin
         );
       }, 1000);
 
@@ -58,6 +59,7 @@ export default function SignIn() {
           );
           localStorage.setItem("access_token", data.data.access_token);
           // history.push("/home");
+          RouterHelper.gotoHome();
         }
       });
     }
@@ -92,7 +94,7 @@ export default function SignIn() {
       {queryData?.platform_auth_way.map((item, idx) => {
         return (
           <div key={idx}>
-            <IconButton onClick={thirdLogin}>
+            <IconButton onClick={() => thirdLogin(item.platform, item.url)}>
               <GitHub />
             </IconButton>
           </div>
