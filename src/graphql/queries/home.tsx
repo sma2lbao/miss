@@ -14,10 +14,7 @@ export const CURRENT_TOPIC = gql`
         cover
         posters
         author {
-          avatar
-          nickname
-          uid
-          username
+          ...Author
         }
       }
       top_movie {
@@ -29,10 +26,7 @@ export const CURRENT_TOPIC = gql`
         cover
         posters
         author {
-          avatar
-          nickname
-          uid
-          username
+          ...Author
         }
       }
     }
