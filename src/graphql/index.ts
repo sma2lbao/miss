@@ -1,17 +1,12 @@
 import Message from "@/components/base/Message";
 import * as Sentry from "@sentry/browser";
-import {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-  from,
-  split
-} from "@apollo/client";
+import { ApolloClient, HttpLink, from, split } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/link-context";
 import { onError } from "@apollo/link-error";
 // import { createUploadLink } from "apollo-upload-client";
 import { WebSocketLink } from "@apollo/client/link/ws";
+import { cache } from "./cache";
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_HTTP_URL
@@ -68,6 +63,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 // });
 
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: from([errorLink, authLink, splitLink])
+  cache,
+  link: from([errorLink, authLink, splitLink]),
+  connectToDevTools: true
 });

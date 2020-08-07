@@ -2,10 +2,7 @@ overwrite: true
 # schema: "https://sma2lbao.cn/api/graphql"
 schema: "http://localhost:3001/graphql"
 documents:
-  - "./src/graphql/queries/**/*.{ts,tsx}"
-  - "./src/graphql/mutations/**/*.{ts,tsx}"
-  - "./src/graphql/subscriptions/**/*.{ts,tsx}"
-  - "./src/graphql/fragments/**/*.{ts,tsx}"
+  - "./src/graphql/**/*.{ts,tsx}"
 hooks:
   afterOneFileWrite:
     - eslint --fix
