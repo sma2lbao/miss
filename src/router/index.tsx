@@ -61,7 +61,7 @@ function AppRoute() {
         />
         <Route
           lazy
-          path="/movie-upload"
+          path="/movie-upload/*"
           component={MovieUpload}
           layout={MainLayout}
         />

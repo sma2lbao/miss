@@ -456,6 +456,8 @@ export type Query = {
   movies_paginated: MoviePaginated;
   me: User;
   platform_auth_way: Array<PlatformAuthWay>;
+  /** find username exit. */
+  has_username: Scalars["Boolean"];
   /** find user by uid. */
   user: User;
   /** all user with paginated. */
@@ -484,6 +486,10 @@ export type QueryMovieArgs = {
 
 export type QueryMovies_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryHas_UsernameArgs = {
+  username: Scalars["String"];
 };
 
 export type QueryUserArgs = {
@@ -633,7 +639,7 @@ export type UpdateUserInput = {
 export type User = {
   __typename?: "User";
   uid: Scalars["ID"];
-  username?: Maybe<Scalars["String"]>;
+  username: Scalars["String"];
   email?: Maybe<Scalars["String"]>;
   nickname?: Maybe<Scalars["String"]>;
   avatar?: Maybe<Scalars["String"]>;
@@ -738,7 +744,7 @@ export type AuthorFragment = {
   uid: number | string;
   avatar?: Maybe<string>;
   nickname?: Maybe<string>;
-  username?: Maybe<string>;
+  username: string;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -765,7 +771,7 @@ export type CreateUserWithCodeMutation = {
   __typename?: "Mutation";
   create_user_with_code: {
     __typename?: "User";
-    username?: Maybe<string>;
+    username: string;
     avatar?: Maybe<string>;
   };
 };
@@ -780,6 +786,12 @@ export type PlatformAuthWayQuery = {
     url: string;
   }>;
 };
+
+export type HasUsernameQueryVariables = Exact<{
+  username: Scalars["String"];
+}>;
+
+export type HasUsernameQuery = { __typename?: "Query"; has_username: boolean };
 
 export type CurrentTopicQueryVariables = Exact<{ [key: string]: never }>;
 
@@ -799,13 +811,7 @@ export type CurrentTopicQuery = {
         update_at: any;
         cover: string;
         posters?: Maybe<Array<string>>;
-        author: {
-          __typename?: "User";
-          avatar?: Maybe<string>;
-          nickname?: Maybe<string>;
-          uid: number | string;
-          username?: Maybe<string>;
-        };
+        author: { __typename?: "User" } & AuthorFragment;
       }>
     >;
     top_movie?: Maybe<{
@@ -817,13 +823,7 @@ export type CurrentTopicQuery = {
       update_at: any;
       cover: string;
       posters?: Maybe<Array<string>>;
-      author: {
-        __typename?: "User";
-        avatar?: Maybe<string>;
-        nickname?: Maybe<string>;
-        uid: number | string;
-        username?: Maybe<string>;
-      };
+      author: { __typename?: "User" } & AuthorFragment;
     }>;
   };
 };
@@ -850,7 +850,7 @@ export type UserUrgesQuery = {
     __typename?: "User";
     nickname?: Maybe<string>;
     avatar?: Maybe<string>;
-    username?: Maybe<string>;
+    username: string;
     uid: number | string;
     description?: Maybe<string>;
   }>;
@@ -882,13 +882,7 @@ export type MovieQuery = {
         description?: Maybe<string>;
       }>
     >;
-    author: {
-      __typename?: "User";
-      avatar?: Maybe<string>;
-      uid: number | string;
-      username?: Maybe<string>;
-      nickname?: Maybe<string>;
-    };
+    author: { __typename?: "User" } & AuthorFragment;
     sources: Array<{
       __typename?: "MovieMedium";
       url: string;
@@ -934,12 +928,7 @@ export type MoviesPaginatedQuery = {
           alias_title?: Maybe<string>;
           cover: string;
           description?: Maybe<string>;
-          author: {
-            __typename?: "User";
-            avatar?: Maybe<string>;
-            username?: Maybe<string>;
-            nickname?: Maybe<string>;
-          };
+          author: { __typename?: "User" } & AuthorFragment;
         };
       }>
     >;
@@ -1213,6 +1202,58 @@ export type PlatformAuthWayQueryResult = ApolloReactCommon.QueryResult<
   PlatformAuthWayQuery,
   PlatformAuthWayQueryVariables
 >;
+export const HasUsernameDocument = gql`
+  query hasUsername($username: String!) {
+    has_username(username: $username)
+  }
+`;
+
+/**
+ * __useHasUsernameQuery__
+ *
+ * To run a query within a React component, call `useHasUsernameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHasUsernameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHasUsernameQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *   },
+ * });
+ */
+export function useHasUsernameQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    HasUsernameQuery,
+    HasUsernameQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<HasUsernameQuery, HasUsernameQueryVariables>(
+    HasUsernameDocument,
+    baseOptions
+  );
+}
+export function useHasUsernameLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    HasUsernameQuery,
+    HasUsernameQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    HasUsernameQuery,
+    HasUsernameQueryVariables
+  >(HasUsernameDocument, baseOptions);
+}
+export type HasUsernameQueryHookResult = ReturnType<typeof useHasUsernameQuery>;
+export type HasUsernameLazyQueryHookResult = ReturnType<
+  typeof useHasUsernameLazyQuery
+>;
+export type HasUsernameQueryResult = ApolloReactCommon.QueryResult<
+  HasUsernameQuery,
+  HasUsernameQueryVariables
+>;
 export const CurrentTopicDocument = gql`
   query currentTopic {
     current_topic {
@@ -1227,10 +1268,7 @@ export const CurrentTopicDocument = gql`
         cover
         posters
         author {
-          avatar
-          nickname
-          uid
-          username
+          ...Author
         }
       }
       top_movie {
@@ -1242,14 +1280,12 @@ export const CurrentTopicDocument = gql`
         cover
         posters
         author {
-          avatar
-          nickname
-          uid
-          username
+          ...Author
         }
       }
     }
   }
+  ${AuthorFragmentDoc}
 `;
 
 /**
@@ -1425,10 +1461,7 @@ export const MovieDocument = gql`
         description
       }
       author {
-        avatar
-        uid
-        username
-        nickname
+        ...Author
       }
       cover
       title
@@ -1458,6 +1491,7 @@ export const MovieDocument = gql`
       }
     }
   }
+  ${AuthorFragmentDoc}
 `;
 
 /**
@@ -1521,14 +1555,13 @@ export const MoviesPaginatedDocument = gql`
           cover
           description
           author {
-            avatar
-            username
-            nickname
+            ...Author
           }
         }
       }
     }
   }
+  ${AuthorFragmentDoc}
 `;
 
 /**

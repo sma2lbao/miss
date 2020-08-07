@@ -2,6 +2,7 @@ import * as React from "react";
 import { TextField, Button, Box } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import {
+  useHasUsernameQuery,
   useSendRegisterEmailMutation,
   useCreateUserWithCodeMutation
 } from "@/schema";
@@ -12,6 +13,13 @@ export default function SignIn() {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [code, setCode] = React.useState("");
+
+  const { data, loading } = useHasUsernameQuery({
+    variables: {
+      username: username
+    }
+  });
+  console.log("_changeUsername: ", username, data, loading);
 
   // 发送验证码
   const [send_register_email] = useSendRegisterEmailMutation({
@@ -52,6 +60,12 @@ export default function SignIn() {
     });
   };
 
+  const _changeUsername = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setUsername(e.target.value);
+  };
+
   return (
     <div>
       <form>
@@ -60,7 +74,7 @@ export default function SignIn() {
           label="用户名"
           required
           value={username}
-          onChange={e => setUsername(e.target.value)}
+          onChange={_changeUsername}
           placeholder="请输入用户名"
           fullWidth
           margin="normal"

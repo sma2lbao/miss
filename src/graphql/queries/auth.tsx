@@ -8,3 +8,9 @@ export const PLATFORM_AUTH_WAY = gql`
     }
   }
 `;
+
+export const has_username = gql`
+  query hasUsername($username: String!) {
+    has_username(username: $username)
+  }
+`;
