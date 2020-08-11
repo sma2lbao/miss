@@ -45,7 +45,7 @@ export default function Aider() {
                     <Avatar src={user.avatar}></Avatar>
                   </ListItemAvatar>
                   <ListItemText>
-                    <Typography>{user.nickname || "江湖客"}</Typography>
+                    <Typography>{user.nickname}</Typography>
                   </ListItemText>
                   <ListItemSecondaryAction>
                     <Button>
