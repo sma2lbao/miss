@@ -15,3 +15,6 @@ export const MOVIE_PLAY = "/movie-play";
 
 // movie upload page
 export const MOVIE_UPLOAD = "/movie-upload";
+
+// auth completion page
+export const AUTH_COMPLETION = "/completion";

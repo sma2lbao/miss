@@ -16,3 +16,11 @@ export const has_username = gql`
     has_username(username: $username)
   }
 `;
+
+export const me = gql`
+  query me {
+    me {
+      ...Me
+    }
+  }
+`;

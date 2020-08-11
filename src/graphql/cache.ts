@@ -20,15 +20,6 @@ export const cache: InMemoryCache = new InMemoryCache({
           }
         }
       }
-    },
-    Query: {
-      fields: {
-        http_domain_url: {
-          read() {
-            return httpDomainVar();
-          }
-        }
-      }
     }
   }
 });

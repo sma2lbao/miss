@@ -3,8 +3,15 @@ import { gql } from "@apollo/client";
 export const ME = gql`
   fragment Me on User {
     uid
-    nickname
+    username
     email
+    nickname
+    avatar
+    mobile
+    address
+    description
+    create_at
+    update_at
   }
 `;
 

@@ -6,7 +6,8 @@ import {
   HOME,
   MOVIE_HOME,
   MOVIE_PLAY,
-  MOVIE_UPLOAD
+  MOVIE_UPLOAD,
+  AUTH_COMPLETION
 } from "@/common/constants/route.constant";
 
 export const useRouterHelper = () => {
@@ -42,6 +43,11 @@ export const useRouterHelper = () => {
     history.push(`${MOVIE_UPLOAD}`);
   };
 
+  // go info completion page.
+  const gotoAuthCompletion = () => {
+    history.push(`${AUTH_COMPLETION}`);
+  };
+
   return {
     push: (path: string, state?: any) => {
       // console.log(path, state);
@@ -52,6 +58,7 @@ export const useRouterHelper = () => {
     gotoMovie,
     gotoMovieHome,
     gotoMoviePlay,
-    gotoMovieUpload
+    gotoMovieUpload,
+    gotoAuthCompletion
   };
 };

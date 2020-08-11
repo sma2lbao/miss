@@ -410,7 +410,7 @@ export type PaginatedQuery = {
 
 export type PlatformAuthWay = {
   readonly __typename?: "PlatformAuthWay";
-  readonly http_domain?: Maybe<Scalars["String"]>;
+  readonly http_domain: Scalars["String"];
   readonly platform: Scalars["String"];
   readonly url: Scalars["String"];
 };
@@ -453,41 +453,71 @@ export type PlaylistPaginated = {
 
 export type Query = {
   readonly __typename?: "Query";
+  readonly movie: Movie;
+  readonly movies_paginated: MoviePaginated;
+  readonly me: User;
+  readonly platform_auth_way: ReadonlyArray<PlatformAuthWay>;
+  /** find username exit. */
+  readonly has_username: Scalars["Boolean"];
+  /** find user by uid. */
+  readonly user: User;
+  /** all user with paginated. */
+  readonly users_paginated: UserPaginated;
   readonly current_topic: Topic;
-  readonly fans: ReadonlyArray<Follow>;
-  readonly fans_paginated: FollowPaginated;
-  readonly fans_total: Scalars["Int"];
+  readonly movie_urges: ReadonlyArray<Movie>;
+  readonly movie_urges_by_movie: ReadonlyArray<Movie>;
+  readonly user_urges: ReadonlyArray<User>;
+  readonly reviews_paginated: ReviewPaginated;
+  readonly playlists_paginated: PlaylistPaginated;
+  readonly playlist: Playlist;
   readonly follows: ReadonlyArray<Follow>;
   readonly follows_paginated: FollowPaginated;
   readonly follows_total: Scalars["Int"];
-  /** find username exit. */
-  readonly has_username: Scalars["Boolean"];
-  readonly http_domain_url: Scalars["String"];
+  readonly fans: ReadonlyArray<Follow>;
+  readonly fans_paginated: FollowPaginated;
+  readonly fans_total: Scalars["Int"];
   readonly is_following: Scalars["Boolean"];
-  readonly me: User;
-  readonly movie: Movie;
-  readonly movie_urges: ReadonlyArray<Movie>;
-  readonly movie_urges_by_movie: ReadonlyArray<Movie>;
-  readonly movies_paginated: MoviePaginated;
-  readonly platform_auth_way: ReadonlyArray<PlatformAuthWay>;
-  readonly playlist: Playlist;
-  readonly playlists_paginated: PlaylistPaginated;
-  readonly reviews_paginated: ReviewPaginated;
-  /** find user by uid. */
-  readonly user: User;
-  readonly user_urges: ReadonlyArray<User>;
-  /** all user with paginated. */
-  readonly users_paginated: UserPaginated;
   readonly video: Video;
   readonly videos_paginated: VideoPaginated;
 };
 
-export type QueryFans_PaginatedArgs = {
+export type QueryMovieArgs = {
+  id: Scalars["ID"];
+};
+
+export type QueryMovies_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
 };
 
-export type QueryFans_TotalArgs = {
-  owner_uid?: Maybe<Scalars["String"]>;
+export type QueryHas_UsernameArgs = {
+  username: Scalars["String"];
+};
+
+export type QueryUserArgs = {
+  uid: Scalars["String"];
+};
+
+export type QueryUsers_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryMovie_Urges_By_MovieArgs = {
+  movie_id: Scalars["Float"];
+};
+
+export type QueryReviews_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+  medium_id?: Maybe<Scalars["ID"]>;
+  type?: Maybe<ReviewMedium>;
+};
+
+export type QueryPlaylists_PaginatedArgs = {
+  author_uid?: Maybe<Scalars["String"]>;
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryPlaylistArgs = {
+  playlist_id: Scalars["Float"];
 };
 
 export type QueryFollows_PaginatedArgs = {
@@ -498,48 +528,17 @@ export type QueryFollows_TotalArgs = {
   follower_uid?: Maybe<Scalars["String"]>;
 };
 
-export type QueryHas_UsernameArgs = {
-  username: Scalars["String"];
+export type QueryFans_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryFans_TotalArgs = {
+  owner_uid?: Maybe<Scalars["String"]>;
 };
 
 export type QueryIs_FollowingArgs = {
   follower_uid?: Maybe<Scalars["String"]>;
   owner_uid: Scalars["String"];
-};
-
-export type QueryMovieArgs = {
-  id: Scalars["ID"];
-};
-
-export type QueryMovie_Urges_By_MovieArgs = {
-  movie_id: Scalars["Float"];
-};
-
-export type QueryMovies_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryPlaylistArgs = {
-  playlist_id: Scalars["Float"];
-};
-
-export type QueryPlaylists_PaginatedArgs = {
-  author_uid?: Maybe<Scalars["String"]>;
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryReviews_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-  medium_id?: Maybe<Scalars["ID"]>;
-  type?: Maybe<ReviewMedium>;
-};
-
-export type QueryUserArgs = {
-  uid: Scalars["String"];
-};
-
-export type QueryUsers_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
 };
 
 export type QueryVideoArgs = {
@@ -734,13 +733,6 @@ export type VideoPaginated = {
   readonly totalCount: Scalars["Int"];
 };
 
-export type HttpDomainQueryVariables = Exact<{ [key: string]: never }>;
-
-export type HttpDomainQuery = {
-  readonly __typename?: "Query";
-  readonly http_domain_url: string;
-};
-
 export type LoginMutationVariables = Exact<{
   username: Scalars["String"];
   password: Scalars["String"];
@@ -781,7 +773,7 @@ export type PlatformAuthWayQuery = {
     readonly __typename?: "PlatformAuthWay";
     readonly platform: string;
     readonly url: string;
-    readonly http_domain?: Maybe<string>;
+    readonly http_domain: string;
   }>;
 };
 
@@ -792,6 +784,25 @@ export type HasUsernameQueryVariables = Exact<{
 export type HasUsernameQuery = {
   readonly __typename?: "Query";
   readonly has_username: boolean;
+};
+
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MeQuery = {
+  readonly __typename?: "Query";
+  readonly me: {
+    readonly __typename?: "User";
+    readonly uid: number | string;
+    readonly username: string;
+    readonly email?: Maybe<string>;
+    readonly nickname?: Maybe<string>;
+    readonly avatar: string;
+    readonly mobile?: Maybe<string>;
+    readonly address?: Maybe<string>;
+    readonly description?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
+  };
 };
 
 export type CurrentTopicQueryVariables = Exact<{ [key: string]: never }>;
@@ -1019,8 +1030,15 @@ export type ReviewCreatedSubscription = {
 export const MeFragmentDoc = gql`
   fragment Me on User {
     uid
-    nickname
+    username
     email
+    nickname
+    avatar
+    mobile
+    address
+    description
+    create_at
+    update_at
   }
 `;
 export const AuthorFragmentDoc = gql`
@@ -1031,57 +1049,6 @@ export const AuthorFragmentDoc = gql`
     username
   }
 `;
-export const HttpDomainDocument = gql`
-  query httpDomain {
-    http_domain_url @client
-  }
-`;
-
-/**
- * __useHttpDomainQuery__
- *
- * To run a query within a React component, call `useHttpDomainQuery` and pass it any options that fit your needs.
- * When your component renders, `useHttpDomainQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useHttpDomainQuery({
- *   variables: {
- *   },
- * });
- */
-export function useHttpDomainQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    HttpDomainQuery,
-    HttpDomainQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<HttpDomainQuery, HttpDomainQueryVariables>(
-    HttpDomainDocument,
-    baseOptions
-  );
-}
-export function useHttpDomainLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    HttpDomainQuery,
-    HttpDomainQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    HttpDomainQuery,
-    HttpDomainQueryVariables
-  >(HttpDomainDocument, baseOptions);
-}
-export type HttpDomainQueryHookResult = ReturnType<typeof useHttpDomainQuery>;
-export type HttpDomainLazyQueryHookResult = ReturnType<
-  typeof useHttpDomainLazyQuery
->;
-export type HttpDomainQueryResult = ApolloReactCommon.QueryResult<
-  HttpDomainQuery,
-  HttpDomainQueryVariables
->;
 export const LoginDocument = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)
@@ -1336,6 +1303,52 @@ export type HasUsernameLazyQueryHookResult = ReturnType<
 export type HasUsernameQueryResult = ApolloReactCommon.QueryResult<
   HasUsernameQuery,
   HasUsernameQueryVariables
+>;
+export const MeDocument = gql`
+  query me {
+    me {
+      ...Me
+    }
+  }
+  ${MeFragmentDoc}
+`;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<MeQuery, MeQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<MeQuery, MeQueryVariables>(
+    MeDocument,
+    baseOptions
+  );
+}
+export function useMeLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MeQuery, MeQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<MeQuery, MeQueryVariables>(
+    MeDocument,
+    baseOptions
+  );
+}
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = ApolloReactCommon.QueryResult<
+  MeQuery,
+  MeQueryVariables
 >;
 export const CurrentTopicDocument = gql`
   query currentTopic {
