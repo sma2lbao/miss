@@ -512,6 +512,7 @@ export type QueryReviews_PaginatedArgs = {
 };
 
 export type QueryPlaylists_PaginatedArgs = {
+  author_username?: Maybe<Scalars["String"]>;
   author_uid?: Maybe<Scalars["String"]>;
   query?: Maybe<PaginatedQuery>;
 };
@@ -1001,6 +1002,7 @@ export type MoviesPaginatedQuery = {
 export type PlaylistsPaginatedQueryVariables = Exact<{
   query?: Maybe<PaginatedQuery>;
   author_uid?: Maybe<Scalars["String"]>;
+  author_username?: Maybe<Scalars["String"]>;
 }>;
 
 export type PlaylistsPaginatedQuery = {
@@ -1781,8 +1783,16 @@ export type MoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
   MoviesPaginatedQueryVariables
 >;
 export const PlaylistsPaginatedDocument = gql`
-  query playlistsPaginated($query: PaginatedQuery, $author_uid: String) {
-    playlists_paginated(query: $query, author_uid: $author_uid) {
+  query playlistsPaginated(
+    $query: PaginatedQuery
+    $author_uid: String
+    $author_username: String
+  ) {
+    playlists_paginated(
+      query: $query
+      author_uid: $author_uid
+      author_username: $author_username
+    ) {
       totalCount
       pageInfo {
         hasNextPage
@@ -1815,6 +1825,7 @@ export const PlaylistsPaginatedDocument = gql`
  *   variables: {
  *      query: // value for 'query'
  *      author_uid: // value for 'author_uid'
+ *      author_username: // value for 'author_username'
  *   },
  * });
  */

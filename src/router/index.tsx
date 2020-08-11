@@ -67,7 +67,12 @@ function AppRoute() {
         />
         <Route lazy path="/tv-home" component={TVHome} layout={MainLayout} />
         <Route lazy path="/tv" component={TV} layout={MainLayout} />
-        <Route lazy path="/profile" component={Profile} layout={MainLayout} />
+        <Route
+          lazy
+          path="/profile/:username"
+          component={Profile}
+          layout={MainLayout}
+        />
         <Route lazy path="/personal" component={Personal} layout={MainLayout} />
         <Route lazy path="/resume" component={Resume} />
         <Route lazy path="/login" component={Login} />
