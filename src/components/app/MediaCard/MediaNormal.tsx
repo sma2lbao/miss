@@ -4,10 +4,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Image from "@/components/base/Image";
 import { MediaNormalProps } from "./media";
 import Duration from "../Duration";
-import {
-  DEFULAT_MOVIE_COVER,
-  DEFAULT_USER_AVATAR
-} from "@/common/constants/default.constant";
+import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import moment from "moment";
 import { useRouterHelper } from "@/hooks";
 
@@ -69,7 +66,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
         <Avatar
           onClick={goProfile}
           className={classes.avatar}
-          src={(props.author && props.author.avatar) || DEFAULT_USER_AVATAR}
+          src={props.author && props.author.avatar}
         ></Avatar>
       </div>
       <Box padding={1}>

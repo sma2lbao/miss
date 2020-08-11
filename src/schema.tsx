@@ -17,294 +17,294 @@ export type Scalars = {
 };
 
 export type Bullet = {
-  __typename?: "Bullet";
-  id: Scalars["ID"];
-  content: Scalars["String"];
-  point?: Maybe<Scalars["Float"]>;
-  create_at: Scalars["Date"];
-  author: User;
-  medium: Medium;
+  readonly __typename?: "Bullet";
+  readonly id: Scalars["ID"];
+  readonly content: Scalars["String"];
+  readonly point?: Maybe<Scalars["Float"]>;
+  readonly create_at: Scalars["Date"];
+  readonly author: User;
+  readonly medium: Medium;
 };
 
 export type Category = {
-  __typename?: "Category";
-  id: Scalars["ID"];
-  label: Scalars["String"];
-  alias?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
-  children?: Maybe<Array<Category>>;
-  parent?: Maybe<Category>;
+  readonly __typename?: "Category";
+  readonly id: Scalars["ID"];
+  readonly label: Scalars["String"];
+  readonly alias?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
+  readonly children?: Maybe<ReadonlyArray<Category>>;
+  readonly parent?: Maybe<Category>;
 };
 
 export type Character = {
-  __typename?: "Character";
-  name: Scalars["String"];
-  avatar?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  tags?: Maybe<Array<Scalars["String"]>>;
+  readonly __typename?: "Character";
+  readonly name: Scalars["String"];
+  readonly avatar?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars["String"]>>;
 };
 
 export type CreateBulletInput = {
-  content: Scalars["String"];
-  point?: Maybe<Scalars["Float"]>;
-  medium_id: Scalars["Int"];
+  readonly content: Scalars["String"];
+  readonly point?: Maybe<Scalars["Float"]>;
+  readonly medium_id: Scalars["Int"];
 };
 
 export type CreateCategoryInput = {
-  label: Scalars["String"];
-  alias?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  parent_id?: Maybe<Scalars["Float"]>;
-  children?: Maybe<Array<CreateCategoryInput>>;
+  readonly label: Scalars["String"];
+  readonly alias?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly parent_id?: Maybe<Scalars["Float"]>;
+  readonly children?: Maybe<ReadonlyArray<CreateCategoryInput>>;
 };
 
 export type CreateCharacterInput = {
-  name: Scalars["String"];
-  avatar?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  tags?: Maybe<Array<Scalars["String"]>>;
+  readonly name: Scalars["String"];
+  readonly avatar?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars["String"]>>;
 };
 
 export type CreateFollowInput = {
-  follower_uid?: Maybe<Scalars["ID"]>;
-  owner_uid: Scalars["ID"];
+  readonly follower_uid?: Maybe<Scalars["ID"]>;
+  readonly owner_uid: Scalars["ID"];
 };
 
 export type CreateMovieInput = {
-  title: Scalars["String"];
-  sub_title?: Maybe<Scalars["String"]>;
-  alias_title?: Maybe<Scalars["String"]>;
-  cover: Scalars["String"];
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  region?: Maybe<Scalars["String"]>;
-  credits?: Maybe<Array<CreateCharacterInput>>;
-  sources?: Maybe<Array<CreateMovieMediumInput>>;
+  readonly title: Scalars["String"];
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly cover: Scalars["String"];
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly region?: Maybe<Scalars["String"]>;
+  readonly credits?: Maybe<ReadonlyArray<CreateCharacterInput>>;
+  readonly sources?: Maybe<ReadonlyArray<CreateMovieMediumInput>>;
 };
 
 export type CreateMovieMediumInput = {
-  name: Scalars["String"];
-  url: Scalars["String"];
-  alias_name?: Maybe<Scalars["String"]>;
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  movie_id?: Maybe<Scalars["ID"]>;
+  readonly name: Scalars["String"];
+  readonly url: Scalars["String"];
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly movie_id?: Maybe<Scalars["ID"]>;
 };
 
 export type CreatePlaylistInput = {
-  title: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  cover?: Maybe<Scalars["String"]>;
+  readonly title: Scalars["String"];
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
 };
 
 export type CreateReviewInput = {
-  content: Scalars["String"];
-  author_uid?: Maybe<Scalars["ID"]>;
-  type: ReviewMedium;
-  medium_id: Scalars["ID"];
+  readonly content: Scalars["String"];
+  readonly author_uid?: Maybe<Scalars["ID"]>;
+  readonly type: ReviewMedium;
+  readonly medium_id: Scalars["ID"];
 };
 
 export type CreateTagInput = {
-  label: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
+  readonly label: Scalars["String"];
+  readonly description?: Maybe<Scalars["String"]>;
 };
 
 export type CreateTopicInput = {
-  title: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  top_movie_id?: Maybe<Scalars["ID"]>;
-  top_movies_ids?: Maybe<Array<Scalars["ID"]>>;
+  readonly title: Scalars["String"];
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly top_movie_id?: Maybe<Scalars["ID"]>;
+  readonly top_movies_ids?: Maybe<ReadonlyArray<Scalars["ID"]>>;
 };
 
 export type CreateUserInput = {
-  username: Scalars["String"];
-  password: Scalars["String"];
-  email: Scalars["String"];
-  nickname?: Maybe<Scalars["String"]>;
-  avatar?: Maybe<Scalars["String"]>;
-  mobile?: Maybe<Scalars["String"]>;
-  address?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
+  readonly username: Scalars["String"];
+  readonly password: Scalars["String"];
+  readonly email: Scalars["String"];
+  readonly nickname?: Maybe<Scalars["String"]>;
+  readonly avatar?: Maybe<Scalars["String"]>;
+  readonly mobile?: Maybe<Scalars["String"]>;
+  readonly address?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
 };
 
 export type CreateUserWithCodeInput = {
-  username: Scalars["String"];
-  password: Scalars["String"];
-  email: Scalars["String"];
-  nickname?: Maybe<Scalars["String"]>;
-  avatar?: Maybe<Scalars["String"]>;
-  mobile?: Maybe<Scalars["String"]>;
-  address?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  code: Scalars["String"];
+  readonly username: Scalars["String"];
+  readonly password: Scalars["String"];
+  readonly email: Scalars["String"];
+  readonly nickname?: Maybe<Scalars["String"]>;
+  readonly avatar?: Maybe<Scalars["String"]>;
+  readonly mobile?: Maybe<Scalars["String"]>;
+  readonly address?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly code: Scalars["String"];
 };
 
 export type CreateVideoInput = {
-  title: Scalars["String"];
-  sub_title?: Maybe<Scalars["String"]>;
-  alias_title?: Maybe<Scalars["String"]>;
-  cover: Scalars["String"];
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  sources?: Maybe<Array<CreateVideoMediumInput>>;
+  readonly title: Scalars["String"];
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly cover: Scalars["String"];
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly sources?: Maybe<ReadonlyArray<CreateVideoMediumInput>>;
 };
 
 export type CreateVideoMediumInput = {
-  name: Scalars["String"];
-  url: Scalars["String"];
-  alias_name?: Maybe<Scalars["String"]>;
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  video_id?: Maybe<Scalars["ID"]>;
+  readonly name: Scalars["String"];
+  readonly url: Scalars["String"];
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly video_id?: Maybe<Scalars["ID"]>;
 };
 
 export type DeleteFollowInput = {
-  follower_uid?: Maybe<Scalars["ID"]>;
-  owner_uid: Scalars["ID"];
+  readonly follower_uid?: Maybe<Scalars["ID"]>;
+  readonly owner_uid: Scalars["ID"];
 };
 
 export type Follow = {
-  __typename?: "Follow";
-  follower: User;
-  owner: User;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "Follow";
+  readonly follower: User;
+  readonly owner: User;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
 };
 
 export type FollowEdge = {
-  __typename?: "FollowEdge";
-  cursor: Scalars["String"];
-  node: Follow;
+  readonly __typename?: "FollowEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: Follow;
 };
 
 export type FollowPageInfo = {
-  __typename?: "FollowPageInfo";
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
-  endCursor: Scalars["String"];
+  readonly __typename?: "FollowPageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
 };
 
 export type FollowPaginated = {
-  __typename?: "FollowPaginated";
-  edges?: Maybe<Array<FollowEdge>>;
-  nodes?: Maybe<Array<Follow>>;
-  pageInfo: FollowPageInfo;
-  totalCount: Scalars["Int"];
+  readonly __typename?: "FollowPaginated";
+  readonly edges?: Maybe<ReadonlyArray<FollowEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<Follow>>;
+  readonly pageInfo: FollowPageInfo;
+  readonly totalCount: Scalars["Int"];
 };
 
 export type Medium = {
-  __typename?: "Medium";
-  id: Scalars["ID"];
-  name?: Maybe<Scalars["String"]>;
-  alias_name?: Maybe<Scalars["String"]>;
-  cover?: Maybe<Scalars["String"]>;
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  duration?: Maybe<Scalars["Float"]>;
-  preview_url?: Maybe<Scalars["String"]>;
-  url: Scalars["String"];
-  low_quality_url?: Maybe<Scalars["String"]>;
-  medium_quality_url?: Maybe<Scalars["String"]>;
-  high_quality_url?: Maybe<Scalars["String"]>;
-  super_quality_url?: Maybe<Scalars["String"]>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
-  version: Scalars["Float"];
+  readonly __typename?: "Medium";
+  readonly id: Scalars["ID"];
+  readonly name?: Maybe<Scalars["String"]>;
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly duration?: Maybe<Scalars["Float"]>;
+  readonly preview_url?: Maybe<Scalars["String"]>;
+  readonly url: Scalars["String"];
+  readonly low_quality_url?: Maybe<Scalars["String"]>;
+  readonly medium_quality_url?: Maybe<Scalars["String"]>;
+  readonly high_quality_url?: Maybe<Scalars["String"]>;
+  readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
+  readonly version: Scalars["Float"];
 };
 
 export type Movie = {
-  __typename?: "Movie";
-  id: Scalars["ID"];
-  title: Scalars["String"];
-  sub_title?: Maybe<Scalars["String"]>;
-  alias_title?: Maybe<Scalars["String"]>;
-  cover: Scalars["String"];
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  region: Region;
-  credits?: Maybe<Array<Character>>;
-  sources: Array<MovieMedium>;
-  author: User;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "Movie";
+  readonly id: Scalars["ID"];
+  readonly title: Scalars["String"];
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly cover: Scalars["String"];
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly region: Region;
+  readonly credits?: Maybe<ReadonlyArray<Character>>;
+  readonly sources: ReadonlyArray<MovieMedium>;
+  readonly author: User;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
 };
 
 export type MovieEdge = {
-  __typename?: "MovieEdge";
-  cursor: Scalars["String"];
-  node: Movie;
+  readonly __typename?: "MovieEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: Movie;
 };
 
 export type MovieMedium = {
-  __typename?: "MovieMedium";
-  id: Scalars["ID"];
-  name?: Maybe<Scalars["String"]>;
-  alias_name?: Maybe<Scalars["String"]>;
-  cover?: Maybe<Scalars["String"]>;
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  duration?: Maybe<Scalars["Float"]>;
-  preview_url?: Maybe<Scalars["String"]>;
-  url: Scalars["String"];
-  low_quality_url?: Maybe<Scalars["String"]>;
-  medium_quality_url?: Maybe<Scalars["String"]>;
-  high_quality_url?: Maybe<Scalars["String"]>;
-  super_quality_url?: Maybe<Scalars["String"]>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
-  version: Scalars["Float"];
+  readonly __typename?: "MovieMedium";
+  readonly id: Scalars["ID"];
+  readonly name?: Maybe<Scalars["String"]>;
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly duration?: Maybe<Scalars["Float"]>;
+  readonly preview_url?: Maybe<Scalars["String"]>;
+  readonly url: Scalars["String"];
+  readonly low_quality_url?: Maybe<Scalars["String"]>;
+  readonly medium_quality_url?: Maybe<Scalars["String"]>;
+  readonly high_quality_url?: Maybe<Scalars["String"]>;
+  readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
+  readonly version: Scalars["Float"];
 };
 
 export type MoviePageInfo = {
-  __typename?: "MoviePageInfo";
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
-  endCursor: Scalars["String"];
+  readonly __typename?: "MoviePageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
 };
 
 export type MoviePaginated = {
-  __typename?: "MoviePaginated";
-  edges?: Maybe<Array<MovieEdge>>;
-  nodes?: Maybe<Array<Movie>>;
-  pageInfo: MoviePageInfo;
-  totalCount: Scalars["Int"];
+  readonly __typename?: "MoviePaginated";
+  readonly edges?: Maybe<ReadonlyArray<MovieEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<Movie>>;
+  readonly pageInfo: MoviePageInfo;
+  readonly totalCount: Scalars["Int"];
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
-  create_tag: Tag;
-  add_movie_to_tag: Scalars["Boolean"];
-  add_category_to_tag: Scalars["Boolean"];
-  create_movie: Movie;
-  add_mediums_to_movie: Movie;
-  create_category: Category;
-  delete_category: Scalars["Boolean"];
-  create_bullet: Bullet;
-  login: Scalars["String"];
+  readonly __typename?: "Mutation";
+  readonly create_tag: Tag;
+  readonly add_movie_to_tag: Scalars["Boolean"];
+  readonly add_category_to_tag: Scalars["Boolean"];
+  readonly create_movie: Movie;
+  readonly add_mediums_to_movie: Movie;
+  readonly create_category: Category;
+  readonly delete_category: Scalars["Boolean"];
+  readonly create_bullet: Bullet;
+  readonly login: Scalars["String"];
   /** create user. */
-  create_user: User;
+  readonly create_user: User;
   /** create user with verif code. */
-  create_user_with_code: User;
-  send_register_email: Scalars["Boolean"];
-  update_user: User;
-  upload_file_oss: Scalars["String"];
-  create_topic: Topic;
-  create_review: Review;
-  create_playlist: Playlist;
-  add_movie_to_playlist: Scalars["Boolean"];
-  create_follow: Follow;
-  remove_follow: Follow;
-  create_video: Video;
-  add_mediums_to_video: Video;
+  readonly create_user_with_code: User;
+  readonly send_register_email: Scalars["Boolean"];
+  readonly update_user: User;
+  readonly upload_file_oss: Scalars["String"];
+  readonly create_topic: Topic;
+  readonly create_review: Review;
+  readonly create_playlist: Playlist;
+  readonly add_movie_to_playlist: Scalars["Boolean"];
+  readonly create_follow: Follow;
+  readonly remove_follow: Follow;
+  readonly create_video: Video;
+  readonly add_mediums_to_video: Video;
 };
 
 export type MutationCreate_TagArgs = {
@@ -402,129 +402,84 @@ export type MutationAdd_Mediums_To_VideoArgs = {
 };
 
 export type PaginatedQuery = {
-  first?: Maybe<Scalars["Int"]>;
-  after?: Maybe<Scalars["String"]>;
-  last?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["String"]>;
+  readonly first?: Maybe<Scalars["Int"]>;
+  readonly after?: Maybe<Scalars["String"]>;
+  readonly last?: Maybe<Scalars["Int"]>;
+  readonly before?: Maybe<Scalars["String"]>;
 };
 
 export type PlatformAuthWay = {
-  __typename?: "PlatformAuthWay";
-  platform: Scalars["String"];
-  url: Scalars["String"];
+  readonly __typename?: "PlatformAuthWay";
+  readonly http_domain?: Maybe<Scalars["String"]>;
+  readonly platform: Scalars["String"];
+  readonly url: Scalars["String"];
 };
 
 export type Playlist = {
-  __typename?: "Playlist";
-  id: Scalars["ID"];
-  title: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  cover?: Maybe<Scalars["String"]>;
-  movies?: Maybe<Array<Movie>>;
-  movies_count?: Maybe<Scalars["Float"]>;
-  author: User;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "Playlist";
+  readonly id: Scalars["ID"];
+  readonly title: Scalars["String"];
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+  readonly movies?: Maybe<ReadonlyArray<Movie>>;
+  readonly movies_count?: Maybe<Scalars["Float"]>;
+  readonly author: User;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
 };
 
 export type PlaylistEdge = {
-  __typename?: "PlaylistEdge";
-  cursor: Scalars["String"];
-  node: Playlist;
+  readonly __typename?: "PlaylistEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: Playlist;
 };
 
 export type PlaylistPageInfo = {
-  __typename?: "PlaylistPageInfo";
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
-  endCursor: Scalars["String"];
+  readonly __typename?: "PlaylistPageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
 };
 
 export type PlaylistPaginated = {
-  __typename?: "PlaylistPaginated";
-  edges?: Maybe<Array<PlaylistEdge>>;
-  nodes?: Maybe<Array<Playlist>>;
-  pageInfo: PlaylistPageInfo;
-  totalCount: Scalars["Int"];
+  readonly __typename?: "PlaylistPaginated";
+  readonly edges?: Maybe<ReadonlyArray<PlaylistEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<Playlist>>;
+  readonly pageInfo: PlaylistPageInfo;
+  readonly totalCount: Scalars["Int"];
 };
 
 export type Query = {
-  __typename?: "Query";
-  movie: Movie;
-  movies_paginated: MoviePaginated;
-  me: User;
-  platform_auth_way: Array<PlatformAuthWay>;
+  readonly __typename?: "Query";
+  readonly current_topic: Topic;
+  readonly fans: ReadonlyArray<Follow>;
+  readonly fans_paginated: FollowPaginated;
+  readonly fans_total: Scalars["Int"];
+  readonly follows: ReadonlyArray<Follow>;
+  readonly follows_paginated: FollowPaginated;
+  readonly follows_total: Scalars["Int"];
   /** find username exit. */
-  has_username: Scalars["Boolean"];
+  readonly has_username: Scalars["Boolean"];
+  readonly http_domain_url: Scalars["String"];
+  readonly is_following: Scalars["Boolean"];
+  readonly me: User;
+  readonly movie: Movie;
+  readonly movie_urges: ReadonlyArray<Movie>;
+  readonly movie_urges_by_movie: ReadonlyArray<Movie>;
+  readonly movies_paginated: MoviePaginated;
+  readonly platform_auth_way: ReadonlyArray<PlatformAuthWay>;
+  readonly playlist: Playlist;
+  readonly playlists_paginated: PlaylistPaginated;
+  readonly reviews_paginated: ReviewPaginated;
   /** find user by uid. */
-  user: User;
+  readonly user: User;
+  readonly user_urges: ReadonlyArray<User>;
   /** all user with paginated. */
-  users_paginated: UserPaginated;
-  current_topic: Topic;
-  movie_urges: Array<Movie>;
-  movie_urges_by_movie: Array<Movie>;
-  user_urges: Array<User>;
-  reviews_paginated: ReviewPaginated;
-  playlists_paginated: PlaylistPaginated;
-  playlist: Playlist;
-  follows: Array<Follow>;
-  follows_paginated: FollowPaginated;
-  follows_total: Scalars["Int"];
-  fans: Array<Follow>;
-  fans_paginated: FollowPaginated;
-  fans_total: Scalars["Int"];
-  is_following: Scalars["Boolean"];
-  video: Video;
-  videos_paginated: VideoPaginated;
-};
-
-export type QueryMovieArgs = {
-  id: Scalars["ID"];
-};
-
-export type QueryMovies_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryHas_UsernameArgs = {
-  username: Scalars["String"];
-};
-
-export type QueryUserArgs = {
-  uid: Scalars["String"];
-};
-
-export type QueryUsers_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryMovie_Urges_By_MovieArgs = {
-  movie_id: Scalars["Float"];
-};
-
-export type QueryReviews_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-  medium_id?: Maybe<Scalars["ID"]>;
-  type?: Maybe<ReviewMedium>;
-};
-
-export type QueryPlaylists_PaginatedArgs = {
-  author_uid?: Maybe<Scalars["String"]>;
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryPlaylistArgs = {
-  playlist_id: Scalars["Float"];
-};
-
-export type QueryFollows_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryFollows_TotalArgs = {
-  follower_uid?: Maybe<Scalars["String"]>;
+  readonly users_paginated: UserPaginated;
+  readonly video: Video;
+  readonly videos_paginated: VideoPaginated;
 };
 
 export type QueryFans_PaginatedArgs = {
@@ -535,9 +490,56 @@ export type QueryFans_TotalArgs = {
   owner_uid?: Maybe<Scalars["String"]>;
 };
 
+export type QueryFollows_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryFollows_TotalArgs = {
+  follower_uid?: Maybe<Scalars["String"]>;
+};
+
+export type QueryHas_UsernameArgs = {
+  username: Scalars["String"];
+};
+
 export type QueryIs_FollowingArgs = {
   follower_uid?: Maybe<Scalars["String"]>;
   owner_uid: Scalars["String"];
+};
+
+export type QueryMovieArgs = {
+  id: Scalars["ID"];
+};
+
+export type QueryMovie_Urges_By_MovieArgs = {
+  movie_id: Scalars["Float"];
+};
+
+export type QueryMovies_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryPlaylistArgs = {
+  playlist_id: Scalars["Float"];
+};
+
+export type QueryPlaylists_PaginatedArgs = {
+  author_uid?: Maybe<Scalars["String"]>;
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryReviews_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+  medium_id?: Maybe<Scalars["ID"]>;
+  type?: Maybe<ReviewMedium>;
+};
+
+export type QueryUserArgs = {
+  uid: Scalars["String"];
+};
+
+export type QueryUsers_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
 };
 
 export type QueryVideoArgs = {
@@ -558,19 +560,19 @@ export enum Region {
 }
 
 export type Review = {
-  __typename?: "Review";
-  id: Scalars["ID"];
-  content: Scalars["String"];
-  author: User;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "Review";
+  readonly id: Scalars["ID"];
+  readonly content: Scalars["String"];
+  readonly author: User;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
 };
 
 export type ReviewEdge = {
-  __typename?: "ReviewEdge";
-  cursor: Scalars["String"];
-  node: Review;
+  readonly __typename?: "ReviewEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: Review;
 };
 
 export enum ReviewMedium {
@@ -578,25 +580,25 @@ export enum ReviewMedium {
 }
 
 export type ReviewPageInfo = {
-  __typename?: "ReviewPageInfo";
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
-  endCursor: Scalars["String"];
+  readonly __typename?: "ReviewPageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
 };
 
 export type ReviewPaginated = {
-  __typename?: "ReviewPaginated";
-  edges?: Maybe<Array<ReviewEdge>>;
-  nodes?: Maybe<Array<Review>>;
-  pageInfo: ReviewPageInfo;
-  totalCount: Scalars["Int"];
+  readonly __typename?: "ReviewPaginated";
+  readonly edges?: Maybe<ReadonlyArray<ReviewEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<Review>>;
+  readonly pageInfo: ReviewPageInfo;
+  readonly totalCount: Scalars["Int"];
 };
 
 export type Subscription = {
-  __typename?: "Subscription";
-  user_created: User;
-  review_created: Review;
+  readonly __typename?: "Subscription";
+  readonly user_created: User;
+  readonly review_created: Review;
 };
 
 export type SubscriptionReview_CreatedArgs = {
@@ -605,146 +607,138 @@ export type SubscriptionReview_CreatedArgs = {
 };
 
 export type Tag = {
-  __typename?: "Tag";
-  id: Scalars["ID"];
-  label: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  movies?: Maybe<Array<Movie>>;
-  categories?: Maybe<Array<Category>>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
+  readonly __typename?: "Tag";
+  readonly id: Scalars["ID"];
+  readonly label: Scalars["String"];
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly movies?: Maybe<ReadonlyArray<Movie>>;
+  readonly categories?: Maybe<ReadonlyArray<Category>>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
 };
 
 export type Topic = {
-  __typename?: "Topic";
-  id: Scalars["ID"];
-  title: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  top_movie?: Maybe<Movie>;
-  top_movies?: Maybe<Array<Movie>>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "Topic";
+  readonly id: Scalars["ID"];
+  readonly title: Scalars["String"];
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly top_movie?: Maybe<Movie>;
+  readonly top_movies?: Maybe<ReadonlyArray<Movie>>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
 };
 
 export type UpdateUserInput = {
-  nickname?: Maybe<Scalars["String"]>;
-  avatar?: Maybe<Scalars["String"]>;
-  mobile?: Maybe<Scalars["String"]>;
-  address?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  password?: Maybe<Scalars["String"]>;
+  readonly nickname?: Maybe<Scalars["String"]>;
+  readonly avatar?: Maybe<Scalars["String"]>;
+  readonly mobile?: Maybe<Scalars["String"]>;
+  readonly address?: Maybe<Scalars["String"]>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly password?: Maybe<Scalars["String"]>;
 };
 
 export type User = {
-  __typename?: "User";
-  uid: Scalars["ID"];
-  username: Scalars["String"];
-  email?: Maybe<Scalars["String"]>;
-  nickname?: Maybe<Scalars["String"]>;
-  avatar?: Maybe<Scalars["String"]>;
-  mobile?: Maybe<Scalars["String"]>;
-  address?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "User";
+  readonly address?: Maybe<Scalars["String"]>;
+  readonly avatar: Scalars["String"];
+  readonly create_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly email?: Maybe<Scalars["String"]>;
+  readonly mobile?: Maybe<Scalars["String"]>;
+  readonly nickname?: Maybe<Scalars["String"]>;
+  readonly uid: Scalars["ID"];
+  readonly update_at: Scalars["Date"];
+  readonly username: Scalars["String"];
 };
 
 export type UserEdge = {
-  __typename?: "UserEdge";
-  cursor: Scalars["String"];
-  node: User;
+  readonly __typename?: "UserEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: User;
 };
 
 export type UserPageInfo = {
-  __typename?: "UserPageInfo";
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
-  endCursor: Scalars["String"];
+  readonly __typename?: "UserPageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
 };
 
 export type UserPaginated = {
-  __typename?: "UserPaginated";
-  edges?: Maybe<Array<UserEdge>>;
-  nodes?: Maybe<Array<User>>;
-  pageInfo: UserPageInfo;
-  totalCount: Scalars["Int"];
+  readonly __typename?: "UserPaginated";
+  readonly edges?: Maybe<ReadonlyArray<UserEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<User>>;
+  readonly pageInfo: UserPageInfo;
+  readonly totalCount: Scalars["Int"];
 };
 
 export type Video = {
-  __typename?: "Video";
-  id: Scalars["ID"];
-  title: Scalars["String"];
-  sub_title?: Maybe<Scalars["String"]>;
-  alias_title?: Maybe<Scalars["String"]>;
-  cover: Scalars["String"];
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  sources: Array<VideoMedium>;
-  author: User;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
+  readonly __typename?: "Video";
+  readonly id: Scalars["ID"];
+  readonly title: Scalars["String"];
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly cover: Scalars["String"];
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly sources: ReadonlyArray<VideoMedium>;
+  readonly author: User;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
 };
 
 export type VideoEdge = {
-  __typename?: "VideoEdge";
-  cursor: Scalars["String"];
-  node: Video;
+  readonly __typename?: "VideoEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: Video;
 };
 
 export type VideoMedium = {
-  __typename?: "VideoMedium";
-  id: Scalars["ID"];
-  name?: Maybe<Scalars["String"]>;
-  alias_name?: Maybe<Scalars["String"]>;
-  cover?: Maybe<Scalars["String"]>;
-  posters?: Maybe<Array<Scalars["String"]>>;
-  description?: Maybe<Scalars["String"]>;
-  duration?: Maybe<Scalars["Float"]>;
-  preview_url?: Maybe<Scalars["String"]>;
-  url: Scalars["String"];
-  low_quality_url?: Maybe<Scalars["String"]>;
-  medium_quality_url?: Maybe<Scalars["String"]>;
-  high_quality_url?: Maybe<Scalars["String"]>;
-  super_quality_url?: Maybe<Scalars["String"]>;
-  create_at: Scalars["Date"];
-  update_at: Scalars["Date"];
-  delete_at: Scalars["Date"];
-  version: Scalars["Float"];
+  readonly __typename?: "VideoMedium";
+  readonly id: Scalars["ID"];
+  readonly name?: Maybe<Scalars["String"]>;
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly duration?: Maybe<Scalars["Float"]>;
+  readonly preview_url?: Maybe<Scalars["String"]>;
+  readonly url: Scalars["String"];
+  readonly low_quality_url?: Maybe<Scalars["String"]>;
+  readonly medium_quality_url?: Maybe<Scalars["String"]>;
+  readonly high_quality_url?: Maybe<Scalars["String"]>;
+  readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
+  readonly version: Scalars["Float"];
 };
 
 export type VideoPageInfo = {
-  __typename?: "VideoPageInfo";
-  hasNextPage: Scalars["Boolean"];
-  hasPreviousPage: Scalars["Boolean"];
-  startCursor: Scalars["String"];
-  endCursor: Scalars["String"];
+  readonly __typename?: "VideoPageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
 };
 
 export type VideoPaginated = {
-  __typename?: "VideoPaginated";
-  edges?: Maybe<Array<VideoEdge>>;
-  nodes?: Maybe<Array<Video>>;
-  pageInfo: VideoPageInfo;
-  totalCount: Scalars["Int"];
+  readonly __typename?: "VideoPaginated";
+  readonly edges?: Maybe<ReadonlyArray<VideoEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<Video>>;
+  readonly pageInfo: VideoPageInfo;
+  readonly totalCount: Scalars["Int"];
 };
 
-export type MeFragment = {
-  __typename?: "User";
-  uid: number | string;
-  nickname?: Maybe<string>;
-  email?: Maybe<string>;
-};
+export type HttpDomainQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AuthorFragment = {
-  __typename?: "User";
-  uid: number | string;
-  avatar?: Maybe<string>;
-  nickname?: Maybe<string>;
-  username: string;
+export type HttpDomainQuery = {
+  readonly __typename?: "Query";
+  readonly http_domain_url: string;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -752,15 +746,18 @@ export type LoginMutationVariables = Exact<{
   password: Scalars["String"];
 }>;
 
-export type LoginMutation = { __typename?: "Mutation"; login: string };
+export type LoginMutation = {
+  readonly __typename?: "Mutation";
+  readonly login: string;
+};
 
 export type SendRegisterEmailMutationVariables = Exact<{
   email: Scalars["String"];
 }>;
 
 export type SendRegisterEmailMutation = {
-  __typename?: "Mutation";
-  send_register_email: boolean;
+  readonly __typename?: "Mutation";
+  readonly send_register_email: boolean;
 };
 
 export type CreateUserWithCodeMutationVariables = Exact<{
@@ -768,22 +765,23 @@ export type CreateUserWithCodeMutationVariables = Exact<{
 }>;
 
 export type CreateUserWithCodeMutation = {
-  __typename?: "Mutation";
-  create_user_with_code: {
-    __typename?: "User";
-    username: string;
-    avatar?: Maybe<string>;
+  readonly __typename?: "Mutation";
+  readonly create_user_with_code: {
+    readonly __typename?: "User";
+    readonly username: string;
+    readonly avatar: string;
   };
 };
 
 export type PlatformAuthWayQueryVariables = Exact<{ [key: string]: never }>;
 
 export type PlatformAuthWayQuery = {
-  __typename?: "Query";
-  platform_auth_way: Array<{
-    __typename?: "PlatformAuthWay";
-    platform: string;
-    url: string;
+  readonly __typename?: "Query";
+  readonly platform_auth_way: ReadonlyArray<{
+    readonly __typename?: "PlatformAuthWay";
+    readonly platform: string;
+    readonly url: string;
+    readonly http_domain?: Maybe<string>;
   }>;
 };
 
@@ -791,39 +789,54 @@ export type HasUsernameQueryVariables = Exact<{
   username: Scalars["String"];
 }>;
 
-export type HasUsernameQuery = { __typename?: "Query"; has_username: boolean };
+export type HasUsernameQuery = {
+  readonly __typename?: "Query";
+  readonly has_username: boolean;
+};
 
 export type CurrentTopicQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CurrentTopicQuery = {
-  __typename?: "Query";
-  current_topic: {
-    __typename?: "Topic";
-    title: string;
-    description?: Maybe<string>;
-    top_movies?: Maybe<
-      Array<{
-        __typename?: "Movie";
-        description?: Maybe<string>;
-        title: string;
-        sub_title?: Maybe<string>;
-        create_at: any;
-        update_at: any;
-        cover: string;
-        posters?: Maybe<Array<string>>;
-        author: { __typename?: "User" } & AuthorFragment;
+  readonly __typename?: "Query";
+  readonly current_topic: {
+    readonly __typename?: "Topic";
+    readonly title: string;
+    readonly description?: Maybe<string>;
+    readonly top_movies?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "Movie";
+        readonly description?: Maybe<string>;
+        readonly title: string;
+        readonly sub_title?: Maybe<string>;
+        readonly create_at: any;
+        readonly update_at: any;
+        readonly cover: string;
+        readonly posters?: Maybe<ReadonlyArray<string>>;
+        readonly author: {
+          readonly __typename?: "User";
+          readonly uid: number | string;
+          readonly avatar: string;
+          readonly nickname?: Maybe<string>;
+          readonly username: string;
+        };
       }>
     >;
-    top_movie?: Maybe<{
-      __typename?: "Movie";
-      description?: Maybe<string>;
-      title: string;
-      sub_title?: Maybe<string>;
-      create_at: any;
-      update_at: any;
-      cover: string;
-      posters?: Maybe<Array<string>>;
-      author: { __typename?: "User" } & AuthorFragment;
+    readonly top_movie?: Maybe<{
+      readonly __typename?: "Movie";
+      readonly description?: Maybe<string>;
+      readonly title: string;
+      readonly sub_title?: Maybe<string>;
+      readonly create_at: any;
+      readonly update_at: any;
+      readonly cover: string;
+      readonly posters?: Maybe<ReadonlyArray<string>>;
+      readonly author: {
+        readonly __typename?: "User";
+        readonly uid: number | string;
+        readonly avatar: string;
+        readonly nickname?: Maybe<string>;
+        readonly username: string;
+      };
     }>;
   };
 };
@@ -831,28 +844,34 @@ export type CurrentTopicQuery = {
 export type MovieUrgesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MovieUrgesQuery = {
-  __typename?: "Query";
-  movie_urges: Array<{
-    __typename?: "Movie";
-    title: string;
-    sub_title?: Maybe<string>;
-    cover: string;
-    description?: Maybe<string>;
-    author: { __typename?: "User" } & AuthorFragment;
+  readonly __typename?: "Query";
+  readonly movie_urges: ReadonlyArray<{
+    readonly __typename?: "Movie";
+    readonly title: string;
+    readonly sub_title?: Maybe<string>;
+    readonly cover: string;
+    readonly description?: Maybe<string>;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly uid: number | string;
+      readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+    };
   }>;
 };
 
 export type UserUrgesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UserUrgesQuery = {
-  __typename?: "Query";
-  user_urges: Array<{
-    __typename?: "User";
-    nickname?: Maybe<string>;
-    avatar?: Maybe<string>;
-    username: string;
-    uid: number | string;
-    description?: Maybe<string>;
+  readonly __typename?: "Query";
+  readonly user_urges: ReadonlyArray<{
+    readonly __typename?: "User";
+    readonly nickname?: Maybe<string>;
+    readonly avatar: string;
+    readonly username: string;
+    readonly uid: number | string;
+    readonly description?: Maybe<string>;
   }>;
 };
 
@@ -861,44 +880,50 @@ export type MovieQueryVariables = Exact<{
 }>;
 
 export type MovieQuery = {
-  __typename?: "Query";
-  movie: {
-    __typename?: "Movie";
-    cover: string;
-    title: string;
-    update_at: any;
-    sub_title?: Maybe<string>;
-    id: number | string;
-    description?: Maybe<string>;
-    create_at: any;
-    alias_title?: Maybe<string>;
-    posters?: Maybe<Array<string>>;
-    region: Region;
-    credits?: Maybe<
-      Array<{
-        __typename?: "Character";
-        avatar?: Maybe<string>;
-        name: string;
-        description?: Maybe<string>;
+  readonly __typename?: "Query";
+  readonly movie: {
+    readonly __typename?: "Movie";
+    readonly cover: string;
+    readonly title: string;
+    readonly update_at: any;
+    readonly sub_title?: Maybe<string>;
+    readonly id: number | string;
+    readonly description?: Maybe<string>;
+    readonly create_at: any;
+    readonly alias_title?: Maybe<string>;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly region: Region;
+    readonly credits?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "Character";
+        readonly avatar?: Maybe<string>;
+        readonly name: string;
+        readonly description?: Maybe<string>;
       }>
     >;
-    author: { __typename?: "User" } & AuthorFragment;
-    sources: Array<{
-      __typename?: "MovieMedium";
-      url: string;
-      super_quality_url?: Maybe<string>;
-      preview_url?: Maybe<string>;
-      posters?: Maybe<Array<string>>;
-      name?: Maybe<string>;
-      medium_quality_url?: Maybe<string>;
-      low_quality_url?: Maybe<string>;
-      id: number | string;
-      high_quality_url?: Maybe<string>;
-      duration?: Maybe<number>;
-      description?: Maybe<string>;
-      alias_name?: Maybe<string>;
-      create_at: any;
-      update_at: any;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly uid: number | string;
+      readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+    };
+    readonly sources: ReadonlyArray<{
+      readonly __typename?: "MovieMedium";
+      readonly url: string;
+      readonly super_quality_url?: Maybe<string>;
+      readonly preview_url?: Maybe<string>;
+      readonly posters?: Maybe<ReadonlyArray<string>>;
+      readonly name?: Maybe<string>;
+      readonly medium_quality_url?: Maybe<string>;
+      readonly low_quality_url?: Maybe<string>;
+      readonly id: number | string;
+      readonly high_quality_url?: Maybe<string>;
+      readonly duration?: Maybe<number>;
+      readonly description?: Maybe<string>;
+      readonly alias_name?: Maybe<string>;
+      readonly create_at: any;
+      readonly update_at: any;
     }>;
   };
 };
@@ -908,27 +933,33 @@ export type MoviesPaginatedQueryVariables = Exact<{
 }>;
 
 export type MoviesPaginatedQuery = {
-  __typename?: "Query";
-  movies_paginated: {
-    __typename?: "MoviePaginated";
-    totalCount: number;
-    pageInfo: {
-      __typename?: "MoviePageInfo";
-      hasNextPage: boolean;
-      endCursor: string;
+  readonly __typename?: "Query";
+  readonly movies_paginated: {
+    readonly __typename?: "MoviePaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "MoviePageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
     };
-    edges?: Maybe<
-      Array<{
-        __typename?: "MovieEdge";
-        cursor: string;
-        node: {
-          __typename?: "Movie";
-          title: string;
-          sub_title?: Maybe<string>;
-          alias_title?: Maybe<string>;
-          cover: string;
-          description?: Maybe<string>;
-          author: { __typename?: "User" } & AuthorFragment;
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "MovieEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Movie";
+          readonly title: string;
+          readonly sub_title?: Maybe<string>;
+          readonly alias_title?: Maybe<string>;
+          readonly cover: string;
+          readonly description?: Maybe<string>;
+          readonly author: {
+            readonly __typename?: "User";
+            readonly uid: number | string;
+            readonly avatar: string;
+            readonly nickname?: Maybe<string>;
+            readonly username: string;
+          };
         };
       }>
     >;
@@ -941,25 +972,25 @@ export type PlaylistsPaginatedQueryVariables = Exact<{
 }>;
 
 export type PlaylistsPaginatedQuery = {
-  __typename?: "Query";
-  playlists_paginated: {
-    __typename?: "PlaylistPaginated";
-    totalCount: number;
-    pageInfo: {
-      __typename?: "PlaylistPageInfo";
-      hasNextPage: boolean;
-      endCursor: string;
+  readonly __typename?: "Query";
+  readonly playlists_paginated: {
+    readonly __typename?: "PlaylistPaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "PlaylistPageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
     };
-    edges?: Maybe<
-      Array<{
-        __typename?: "PlaylistEdge";
-        cursor: string;
-        node: {
-          __typename?: "Playlist";
-          title: string;
-          description?: Maybe<string>;
-          cover?: Maybe<string>;
-          create_at: any;
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "PlaylistEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Playlist";
+          readonly title: string;
+          readonly description?: Maybe<string>;
+          readonly cover?: Maybe<string>;
+          readonly create_at: any;
         };
       }>
     >;
@@ -972,15 +1003,15 @@ export type ReviewCreatedSubscriptionVariables = Exact<{
 }>;
 
 export type ReviewCreatedSubscription = {
-  __typename?: "Subscription";
-  review_created: {
-    __typename?: "Review";
-    content: string;
-    create_at: any;
-    author: {
-      __typename?: "User";
-      nickname?: Maybe<string>;
-      avatar?: Maybe<string>;
+  readonly __typename?: "Subscription";
+  readonly review_created: {
+    readonly __typename?: "Review";
+    readonly content: string;
+    readonly create_at: any;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly nickname?: Maybe<string>;
+      readonly avatar: string;
     };
   };
 };
@@ -1000,6 +1031,57 @@ export const AuthorFragmentDoc = gql`
     username
   }
 `;
+export const HttpDomainDocument = gql`
+  query httpDomain {
+    http_domain_url @client
+  }
+`;
+
+/**
+ * __useHttpDomainQuery__
+ *
+ * To run a query within a React component, call `useHttpDomainQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHttpDomainQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHttpDomainQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useHttpDomainQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    HttpDomainQuery,
+    HttpDomainQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<HttpDomainQuery, HttpDomainQueryVariables>(
+    HttpDomainDocument,
+    baseOptions
+  );
+}
+export function useHttpDomainLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    HttpDomainQuery,
+    HttpDomainQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    HttpDomainQuery,
+    HttpDomainQueryVariables
+  >(HttpDomainDocument, baseOptions);
+}
+export type HttpDomainQueryHookResult = ReturnType<typeof useHttpDomainQuery>;
+export type HttpDomainLazyQueryHookResult = ReturnType<
+  typeof useHttpDomainLazyQuery
+>;
+export type HttpDomainQueryResult = ApolloReactCommon.QueryResult<
+  HttpDomainQuery,
+  HttpDomainQueryVariables
+>;
 export const LoginDocument = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)
@@ -1151,6 +1233,7 @@ export const PlatformAuthWayDocument = gql`
     platform_auth_way {
       platform
       url
+      http_domain @client
     }
   }
 `;

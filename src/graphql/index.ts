@@ -7,6 +7,7 @@ import { onError } from "@apollo/link-error";
 // import { createUploadLink } from "apollo-upload-client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { cache } from "./cache";
+import { typeDefs } from "./local/schema";
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_HTTP_URL
@@ -63,6 +64,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 // });
 
 export const client = new ApolloClient({
+  typeDefs,
   cache,
   link: from([errorLink, authLink, splitLink]),
   connectToDevTools: true

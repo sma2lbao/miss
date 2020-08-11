@@ -1,8 +1,12 @@
 overwrite: true
-# schema: "https://sma2lbao.cn/api/graphql"
-schema: "http://localhost:3001/graphql"
+schema:
+  - "http://localhost:3001/graphql"
+  # - "https://sma2lbao.cn/api/graphql"
+  - "./src/graphql/local/schema.ts"
 documents:
-  - "./src/graphql/**/*.{ts,tsx}"
+  - "./src/graphql/remote/**/*.{ts,tsx}"
+  - "./src/graphql/local/**/*.{ts,tsx}"
+  - "!./src/graphql/local/schema.ts"
 hooks:
   afterOneFileWrite:
     - eslint --fix
@@ -18,14 +22,23 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
     config:
+      immutableTypes: true
       withHOC: false
       withHooks: true
       withComponent: false
       reactApolloVersion: 3
       preResolveTypes: true
-      # type scalars
+      flattenGeneratedTypes: true
       scalars:
         ID: "number | string"
-  # ./graphql.schema.json:
+  # src/schema.d.ts:
   #   plugins:
-  #     - "introspection"
+  #     - typescript-graphql-files-modules
+  # src/fragment-matcher.ts:
+  #   plugins:
+  #     - fragment-matcher
+  #   config:
+  #     apolloClientVersion: 3
+  # src/graphql.schema.json:
+  #   plugins:
+  #     - introspection

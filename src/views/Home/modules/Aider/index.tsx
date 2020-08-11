@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useUserUrgesQuery } from "@/schema";
-import { DEFAULT_USER_AVATAR } from "@/common/constants/default.constant";
 import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,7 +42,7 @@ export default function Aider() {
                   onClick={() => RouterHelper.gotoProfile(user?.username)}
                 >
                   <ListItemAvatar>
-                    <Avatar src={user?.avatar || DEFAULT_USER_AVATAR}></Avatar>
+                    <Avatar src={user.avatar}></Avatar>
                   </ListItemAvatar>
                   <ListItemText>
                     <Typography>{user.nickname || "江湖客"}</Typography>

@@ -1,8 +1,7 @@
 import { gql } from "@apollo/client";
 
-// export const HTTP_DOMAIN = gql`
-//   directive @client on FIELD
-//   query httpDomain {
-//     http_domain @client
-//   }
-// `;
+export const HTTP_DOMAIN = gql`
+  query httpDomain {
+    http_domain_url @client
+  }
+`;

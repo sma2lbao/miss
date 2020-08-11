@@ -7,14 +7,23 @@ export const cache: InMemoryCache = new InMemoryCache({
       fields: {
         avatar: {
           read(avatar = DEFAULT_USER_AVATAR) {
-            return avatar;
+            return avatar ? avatar : DEFAULT_USER_AVATAR;
+          }
+        }
+      }
+    },
+    PlatformAuthWay: {
+      fields: {
+        http_domain: {
+          read() {
+            return httpDomainVar();
           }
         }
       }
     },
     Query: {
       fields: {
-        http_domain: {
+        http_domain_url: {
           read() {
             return httpDomainVar();
           }
