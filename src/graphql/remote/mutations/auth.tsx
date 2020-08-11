@@ -20,3 +20,11 @@ export const CREATE_USER_WITH_CODE = gql`
     }
   }
 `;
+
+export const update_user = gql`
+  mutation updateUser($user: UpdateUserInput!) {
+    update_user(user: $user) {
+      ...Me
+    }
+  }
+`;
