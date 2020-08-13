@@ -2,6 +2,14 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Box, IconButton, Avatar, Button } from "@material-ui/core";
 import { ThumbUpAlt, ThumbDownAlt, MoreVert } from "@material-ui/icons";
+import { MoviePlayContext } from "../..";
+import moment from "moment";
+import {
+  useIsFollowingLazyQuery,
+  useCreateFollowMutation,
+  useRemoveFollowMutation
+} from "@/schema";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,18 +40,76 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function VideoInfo() {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+  const moviePlayQuery = React.useContext(MoviePlayContext);
+
+  const [following, setFollowing] = React.useState(false);
+
+  const [isFollowing] = useIsFollowingLazyQuery({
+    onCompleted(data) {
+      setFollowing(data.is_following);
+    }
+  });
+
+  React.useEffect(() => {
+    if (moviePlayQuery?.movie.author.uid) {
+      isFollowing({
+        variables: {
+          owner_uid: moviePlayQuery.movie.author.uid as string
+        }
+      });
+    }
+  }, [isFollowing, moviePlayQuery]);
+
+  const [createFollow] = useCreateFollowMutation({
+    onCompleted() {
+      enqueueSnackbar("关注成功");
+    }
+  });
+  const [removeFollow] = useRemoveFollowMutation({
+    onCompleted() {
+      enqueueSnackbar("取消成功");
+    }
+  });
+
+  const toggleFollow = () => {
+    if (moviePlayQuery?.movie.author.uid) {
+      if (following) {
+        removeFollow({
+          variables: {
+            follow: {
+              owner_uid: moviePlayQuery?.movie.author.uid
+            }
+          }
+        });
+      } else {
+        createFollow({
+          variables: {
+            follow: {
+              owner_uid: moviePlayQuery?.movie.author.uid
+            }
+          }
+        });
+      }
+    }
+  };
 
   return (
     <div>
       <Box className={classes.header}>
         <div>
-          <Typography variant="subtitle1">白雪歌送武判官归京</Typography>
+          <Typography variant="subtitle1">
+            {moviePlayQuery?.movie.title}
+          </Typography>
           <Box display="flex">
             <Typography variant="caption" className={classes.infoItem}>
-              观看: 22
+              观看: TODO
             </Typography>
             <Typography variant="caption" className={classes.infoItem}>
-              发布时间: 2019/10/10
+              发布时间:{" "}
+              {moment(moviePlayQuery?.movie.create_at).format(
+                "YYYY-MM-DD HH:mm"
+              )}
             </Typography>
           </Box>
         </div>
@@ -52,13 +118,13 @@ export default function VideoInfo() {
             <IconButton size="small">
               <ThumbDownAlt />
             </IconButton>
-            <Typography className={classes.toolText}>26.8k</Typography>
+            <Typography className={classes.toolText}>TODO</Typography>
           </Box>
           <Box className={classes.toolBox}>
             <IconButton size="small">
               <ThumbUpAlt />
             </IconButton>
-            <Typography className={classes.toolText}>26.8k</Typography>
+            <Typography className={classes.toolText}>TODO</Typography>
           </Box>
           <IconButton size="small">
             <MoreVert />
@@ -66,22 +132,26 @@ export default function VideoInfo() {
         </Box>
       </Box>
       <Typography className={classes.description} variant="body2">
-        北风卷地白草折，胡天八月即飞雪。 忽如一夜春风来，千树万树梨花开。
-        散入珠帘湿罗幕，狐裘不暖锦衾薄。 将军角弓不得控，都护铁衣冷难着。(难着
-        一作：犹著) 瀚海阑干百丈冰，愁云惨淡万里凝。
-        中军置酒饮归客，胡琴琵琶与羌笛。 纷纷暮雪下辕门，风掣红旗冻不翻。
-        轮台东门送君去，去时雪满天山路。 山回路转不见君，雪上空留马行处。
+        {moviePlayQuery?.movie.description}
       </Typography>
 
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" alignItems="center">
-          <Avatar>岑</Avatar>
+          <Avatar src={moviePlayQuery?.movie.author.avatar}></Avatar>
           <Box ml={1}>
-            <Typography variant="subtitle2">岑参</Typography>
-            <Typography variant="caption">唐代</Typography>
+            <Typography variant="subtitle2">
+              {moviePlayQuery?.movie.author.nickname}
+            </Typography>
+            <Typography variant="caption">
+              {moviePlayQuery?.movie.author.description}
+            </Typography>
           </Box>
         </Box>
-        <Button>订阅</Button>
+        {following ? (
+          <Button onClick={toggleFollow}>已关注</Button>
+        ) : (
+          <Button onClick={toggleFollow}>关注</Button>
+        )}
       </Box>
     </div>
   );

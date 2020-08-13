@@ -80,6 +80,7 @@ export type CreateMovieInput = {
   readonly cover: Scalars["String"];
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
   readonly description?: Maybe<Scalars["String"]>;
+  readonly about?: Maybe<Scalars["String"]>;
   readonly region?: Maybe<Scalars["String"]>;
   readonly credits?: Maybe<ReadonlyArray<CreateCharacterInput>>;
   readonly sources?: Maybe<ReadonlyArray<CreateMovieMediumInput>>;
@@ -227,6 +228,7 @@ export type Movie = {
   readonly cover: Scalars["String"];
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
   readonly description?: Maybe<Scalars["String"]>;
+  readonly about?: Maybe<Scalars["String"]>;
   readonly region: Region;
   readonly credits?: Maybe<ReadonlyArray<Character>>;
   readonly sources: ReadonlyArray<MovieMedium>;
@@ -467,6 +469,7 @@ export type Query = {
   readonly movie_urges: ReadonlyArray<Movie>;
   readonly movie_urges_by_movie: ReadonlyArray<Movie>;
   readonly user_urges: ReadonlyArray<User>;
+  readonly movie_next_urges_by_movie: ReadonlyArray<Movie>;
   readonly reviews_paginated: ReviewPaginated;
   readonly playlists_paginated: PlaylistPaginated;
   readonly playlist: Playlist;
@@ -502,6 +505,10 @@ export type QueryUsers_PaginatedArgs = {
 };
 
 export type QueryMovie_Urges_By_MovieArgs = {
+  movie_id: Scalars["ID"];
+};
+
+export type QueryMovie_Next_Urges_By_MovieArgs = {
   movie_id: Scalars["ID"];
 };
 
@@ -787,6 +794,30 @@ export type UpdateUserMutation = {
   };
 };
 
+export type CreateFollowMutationVariables = Exact<{
+  follow: CreateFollowInput;
+}>;
+
+export type CreateFollowMutation = {
+  readonly __typename?: "Mutation";
+  readonly create_follow: {
+    readonly __typename?: "Follow";
+    readonly create_at: any;
+  };
+};
+
+export type RemoveFollowMutationVariables = Exact<{
+  follow: DeleteFollowInput;
+}>;
+
+export type RemoveFollowMutation = {
+  readonly __typename?: "Mutation";
+  readonly remove_follow: {
+    readonly __typename?: "Follow";
+    readonly create_at: any;
+  };
+};
+
 export type PlatformAuthWayQueryVariables = Exact<{ [key: string]: never }>;
 
 export type PlatformAuthWayQuery = {
@@ -851,6 +882,7 @@ export type CurrentTopicQuery = {
           readonly avatar: string;
           readonly nickname?: Maybe<string>;
           readonly username: string;
+          readonly description?: Maybe<string>;
         };
       }>
     >;
@@ -869,6 +901,7 @@ export type CurrentTopicQuery = {
         readonly avatar: string;
         readonly nickname?: Maybe<string>;
         readonly username: string;
+        readonly description?: Maybe<string>;
       };
     }>;
   };
@@ -890,6 +923,7 @@ export type MovieUrgesQuery = {
       readonly avatar: string;
       readonly nickname?: Maybe<string>;
       readonly username: string;
+      readonly description?: Maybe<string>;
     };
   }>;
 };
@@ -940,6 +974,7 @@ export type MovieQuery = {
       readonly avatar: string;
       readonly nickname?: Maybe<string>;
       readonly username: string;
+      readonly description?: Maybe<string>;
     };
     readonly sources: ReadonlyArray<{
       readonly __typename?: "MovieMedium";
@@ -992,6 +1027,7 @@ export type MoviesPaginatedQuery = {
             readonly avatar: string;
             readonly nickname?: Maybe<string>;
             readonly username: string;
+            readonly description?: Maybe<string>;
           };
         };
       }>
@@ -1017,6 +1053,30 @@ export type MovieUrgesByMovieQuery = {
       readonly avatar: string;
       readonly nickname?: Maybe<string>;
       readonly username: string;
+      readonly description?: Maybe<string>;
+    };
+  }>;
+};
+
+export type MovieNextUrgesByMovieQueryVariables = Exact<{
+  movie_id: Scalars["ID"];
+}>;
+
+export type MovieNextUrgesByMovieQuery = {
+  readonly __typename?: "Query";
+  readonly movie_next_urges_by_movie: ReadonlyArray<{
+    readonly __typename?: "Movie";
+    readonly title: string;
+    readonly sub_title?: Maybe<string>;
+    readonly cover: string;
+    readonly description?: Maybe<string>;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly uid: number | string;
+      readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+      readonly description?: Maybe<string>;
     };
   }>;
 };
@@ -1051,6 +1111,16 @@ export type PlaylistsPaginatedQuery = {
       }>
     >;
   };
+};
+
+export type IsFollowingQueryVariables = Exact<{
+  owner_uid: Scalars["String"];
+  follower_uid?: Maybe<Scalars["String"]>;
+}>;
+
+export type IsFollowingQuery = {
+  readonly __typename?: "Query";
+  readonly is_following: boolean;
 };
 
 export type ReviewCreatedSubscriptionVariables = Exact<{
@@ -1092,6 +1162,7 @@ export const AuthorFragmentDoc = gql`
     avatar
     nickname
     username
+    description
   }
 `;
 export const LoginDocument = gql`
@@ -1290,6 +1361,106 @@ export type UpdateUserMutationResult = ApolloReactCommon.MutationResult<
 export type UpdateUserMutationOptions = ApolloReactCommon.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
+>;
+export const CreateFollowDocument = gql`
+  mutation createFollow($follow: CreateFollowInput!) {
+    create_follow(follow: $follow) {
+      create_at
+    }
+  }
+`;
+export type CreateFollowMutationFn = ApolloReactCommon.MutationFunction<
+  CreateFollowMutation,
+  CreateFollowMutationVariables
+>;
+
+/**
+ * __useCreateFollowMutation__
+ *
+ * To run a mutation, you first call `useCreateFollowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateFollowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createFollowMutation, { data, loading, error }] = useCreateFollowMutation({
+ *   variables: {
+ *      follow: // value for 'follow'
+ *   },
+ * });
+ */
+export function useCreateFollowMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    CreateFollowMutation,
+    CreateFollowMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    CreateFollowMutation,
+    CreateFollowMutationVariables
+  >(CreateFollowDocument, baseOptions);
+}
+export type CreateFollowMutationHookResult = ReturnType<
+  typeof useCreateFollowMutation
+>;
+export type CreateFollowMutationResult = ApolloReactCommon.MutationResult<
+  CreateFollowMutation
+>;
+export type CreateFollowMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateFollowMutation,
+  CreateFollowMutationVariables
+>;
+export const RemoveFollowDocument = gql`
+  mutation removeFollow($follow: DeleteFollowInput!) {
+    remove_follow(follow: $follow) {
+      create_at
+    }
+  }
+`;
+export type RemoveFollowMutationFn = ApolloReactCommon.MutationFunction<
+  RemoveFollowMutation,
+  RemoveFollowMutationVariables
+>;
+
+/**
+ * __useRemoveFollowMutation__
+ *
+ * To run a mutation, you first call `useRemoveFollowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveFollowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeFollowMutation, { data, loading, error }] = useRemoveFollowMutation({
+ *   variables: {
+ *      follow: // value for 'follow'
+ *   },
+ * });
+ */
+export function useRemoveFollowMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    RemoveFollowMutation,
+    RemoveFollowMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    RemoveFollowMutation,
+    RemoveFollowMutationVariables
+  >(RemoveFollowDocument, baseOptions);
+}
+export type RemoveFollowMutationHookResult = ReturnType<
+  typeof useRemoveFollowMutation
+>;
+export type RemoveFollowMutationResult = ApolloReactCommon.MutationResult<
+  RemoveFollowMutation
+>;
+export type RemoveFollowMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  RemoveFollowMutation,
+  RemoveFollowMutationVariables
 >;
 export const PlatformAuthWayDocument = gql`
   query platformAuthWay {
@@ -1867,6 +2038,69 @@ export type MovieUrgesByMovieQueryResult = ApolloReactCommon.QueryResult<
   MovieUrgesByMovieQuery,
   MovieUrgesByMovieQueryVariables
 >;
+export const MovieNextUrgesByMovieDocument = gql`
+  query movieNextUrgesByMovie($movie_id: ID!) {
+    movie_next_urges_by_movie(movie_id: $movie_id) {
+      title
+      sub_title
+      cover
+      description
+      author {
+        ...Author
+      }
+    }
+  }
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useMovieNextUrgesByMovieQuery__
+ *
+ * To run a query within a React component, call `useMovieNextUrgesByMovieQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMovieNextUrgesByMovieQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMovieNextUrgesByMovieQuery({
+ *   variables: {
+ *      movie_id: // value for 'movie_id'
+ *   },
+ * });
+ */
+export function useMovieNextUrgesByMovieQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    MovieNextUrgesByMovieQuery,
+    MovieNextUrgesByMovieQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    MovieNextUrgesByMovieQuery,
+    MovieNextUrgesByMovieQueryVariables
+  >(MovieNextUrgesByMovieDocument, baseOptions);
+}
+export function useMovieNextUrgesByMovieLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    MovieNextUrgesByMovieQuery,
+    MovieNextUrgesByMovieQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    MovieNextUrgesByMovieQuery,
+    MovieNextUrgesByMovieQueryVariables
+  >(MovieNextUrgesByMovieDocument, baseOptions);
+}
+export type MovieNextUrgesByMovieQueryHookResult = ReturnType<
+  typeof useMovieNextUrgesByMovieQuery
+>;
+export type MovieNextUrgesByMovieLazyQueryHookResult = ReturnType<
+  typeof useMovieNextUrgesByMovieLazyQuery
+>;
+export type MovieNextUrgesByMovieQueryResult = ApolloReactCommon.QueryResult<
+  MovieNextUrgesByMovieQuery,
+  MovieNextUrgesByMovieQueryVariables
+>;
 export const PlaylistsPaginatedDocument = gql`
   query playlistsPaginated(
     $query: PaginatedQuery
@@ -1945,6 +2179,59 @@ export type PlaylistsPaginatedLazyQueryHookResult = ReturnType<
 export type PlaylistsPaginatedQueryResult = ApolloReactCommon.QueryResult<
   PlaylistsPaginatedQuery,
   PlaylistsPaginatedQueryVariables
+>;
+export const IsFollowingDocument = gql`
+  query isFollowing($owner_uid: String!, $follower_uid: String) {
+    is_following(owner_uid: $owner_uid, follower_uid: $follower_uid)
+  }
+`;
+
+/**
+ * __useIsFollowingQuery__
+ *
+ * To run a query within a React component, call `useIsFollowingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsFollowingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsFollowingQuery({
+ *   variables: {
+ *      owner_uid: // value for 'owner_uid'
+ *      follower_uid: // value for 'follower_uid'
+ *   },
+ * });
+ */
+export function useIsFollowingQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    IsFollowingQuery,
+    IsFollowingQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<IsFollowingQuery, IsFollowingQueryVariables>(
+    IsFollowingDocument,
+    baseOptions
+  );
+}
+export function useIsFollowingLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    IsFollowingQuery,
+    IsFollowingQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    IsFollowingQuery,
+    IsFollowingQueryVariables
+  >(IsFollowingDocument, baseOptions);
+}
+export type IsFollowingQueryHookResult = ReturnType<typeof useIsFollowingQuery>;
+export type IsFollowingLazyQueryHookResult = ReturnType<
+  typeof useIsFollowingLazyQuery
+>;
+export type IsFollowingQueryResult = ApolloReactCommon.QueryResult<
+  IsFollowingQuery,
+  IsFollowingQueryVariables
 >;
 export const ReviewCreatedDocument = gql`
   subscription reviewCreated($type: ReviewMedium!, $medium_id: ID!) {

@@ -21,5 +21,6 @@ export const AUTHOR = gql`
     avatar
     nickname
     username
+    description
   }
 `;

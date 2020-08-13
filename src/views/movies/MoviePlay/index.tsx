@@ -11,7 +11,7 @@ import {
 // import Image from "@/components/Image";
 import { NextPlay, VideoInfo, Comment } from "./modules";
 import { useParams } from "react-router";
-import { useMovieQuery } from "@/schema";
+import { useMovieQuery, MovieQuery } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export const MoviePlayContext = React.createContext<MovieQuery | undefined>(
+  undefined
+);
+
 export default function MoviePlay() {
   const classes = useStyles();
   const { id } = useParams();
@@ -47,20 +51,22 @@ export default function MoviePlay() {
 
   return (
     <Box className={classes.root}>
-      <FullScreen>
-        <BodyScreen>
-          <MoviePlayer />
+      <MoviePlayContext.Provider value={data}>
+        <FullScreen>
+          <BodyScreen>
+            <MoviePlayer />
+          </BodyScreen>
+        </FullScreen>
+        <BodyScreen className={classes.body}>
+          <ContentScreen className={classes.content}>
+            <VideoInfo />
+            <NextPlay />
+          </ContentScreen>
+          <AiderScreen sticky className={classes.aider}>
+            <Comment />
+          </AiderScreen>
         </BodyScreen>
-      </FullScreen>
-      <BodyScreen className={classes.body}>
-        <ContentScreen className={classes.content}>
-          <VideoInfo />
-          <NextPlay />
-        </ContentScreen>
-        <AiderScreen sticky className={classes.aider}>
-          <Comment />
-        </AiderScreen>
-      </BodyScreen>
+      </MoviePlayContext.Provider>
     </Box>
   );
 }
