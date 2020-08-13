@@ -65,3 +65,17 @@ export const MOVIES_PAGINATED = gql`
     }
   }
 `;
+
+export const movie_urges_by_movie = gql`
+  query movieUrgesByMovie($movie_id: ID!) {
+    movie_urges_by_movie(movie_id: $movie_id) {
+      title
+      sub_title
+      cover
+      description
+      author {
+        ...Author
+      }
+    }
+  }
+`;

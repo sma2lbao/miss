@@ -4,6 +4,8 @@ import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
 // import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MediaNormal } from "@/components/app/MediaCard";
+import { MovieContext } from "../..";
+import Placeholder from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MovieMain() {
   const classes = useStyles();
+  const movieQuery = React.useContext(MovieContext);
 
   return (
     <Box className={classes.root}>
@@ -38,25 +41,23 @@ export default function MovieMain() {
       </Box> */}
       <Box className={classes.box}>
         <Typography variant="subtitle1" gutterBottom>
-          视频图片
+          相关资源
         </Typography>
-        <GridList cellHeight="auto" cols={4}>
-          <GridListTile cols={1}>
-            <MediaNormal />
-          </GridListTile>
-          <GridListTile cols={1}>
-            <MediaNormal />
-          </GridListTile>
-          <GridListTile cols={1}>
-            <MediaNormal />
-          </GridListTile>
-          <GridListTile cols={1}>
-            <MediaNormal />
-          </GridListTile>
-          <GridListTile cols={1}>
-            <MediaNormal />
-          </GridListTile>
-        </GridList>
+        {movieQuery?.movie.sources.length ? (
+          <GridList cellHeight="auto" cols={4}>
+            {movieQuery.movie.sources.map((source, idx) => {
+              return (
+                <GridListTile cols={1}>
+                  <MediaNormal />
+                </GridListTile>
+              );
+            })}
+          </GridList>
+        ) : (
+          <div>
+            <Placeholder title="暂无相关资源" />
+          </div>
+        )}
       </Box>
       <Box className={classes.box}>
         <Typography variant="subtitle1">精彩点评</Typography>

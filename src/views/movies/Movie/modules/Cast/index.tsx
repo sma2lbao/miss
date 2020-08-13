@@ -8,10 +8,13 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Box,
-  ListSubheader
+  ListSubheader,
+  Typography
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MoreVert } from "@material-ui/icons";
+import { MovieContext } from "../..";
+import { Placeholder } from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,42 +26,40 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Cast: React.FC = () => {
   const classes = useStyles();
+  const movieQuery = React.useContext(MovieContext);
 
   return (
     <Box className={classes.root}>
       <List
         subheader={
           <ListSubheader>
-            <div>演职表</div>
-            {/* <div>
-              <IconButton>
-                <AddCircle />
-              </IconButton>
-              <IconButton>
-                <AddCircle />
-              </IconButton>
-              <IconButton>
-                <AddCircle />
-              </IconButton>
-            </div> */}
+            <Typography>演职表</Typography>
           </ListSubheader>
         }
       >
-        {[1, 2, 3, 4].map((_, i) => {
-          return (
-            <ListItem key={i}>
-              <ListItemAvatar>
-                <Avatar src=""></Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="姓名" secondary="介绍" />
-              <ListItemSecondaryAction>
-                <IconButton>
-                  <MoreVert />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          );
-        })}
+        {movieQuery?.movie?.credits?.length ? (
+          <>
+            {movieQuery.movie.credits.map((item, i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemAvatar>
+                    <Avatar src={item.avatar}></Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="" secondary="" />
+                  <ListItemSecondaryAction>
+                    <IconButton>
+                      <MoreVert />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+          </>
+        ) : (
+          <div>
+            <Placeholder title="暂无演职员信息" />
+          </div>
+        )}
       </List>
     </Box>
   );

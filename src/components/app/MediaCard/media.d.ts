@@ -1,6 +1,6 @@
 export interface Author {
   username: string;
-  nickname?: string;
+  nickname?: string | null;
   avatar: string;
 }
 

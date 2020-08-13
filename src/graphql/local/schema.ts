@@ -10,6 +10,10 @@ export const typeDefs = gql`
   extend type User {
     avatar: String!
   }
+
+  extend type Character {
+    avatar: String!
+  }
 `;
 
 export default typeDefs;

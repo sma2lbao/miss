@@ -12,6 +12,15 @@ export const cache: InMemoryCache = new InMemoryCache({
         }
       }
     },
+    Character: {
+      fields: {
+        avatar: {
+          read(avatar = DEFAULT_USER_AVATAR) {
+            return avatar ? avatar : DEFAULT_USER_AVATAR;
+          }
+        }
+      }
+    },
     PlatformAuthWay: {
       fields: {
         http_domain: {

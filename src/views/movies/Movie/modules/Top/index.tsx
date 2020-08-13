@@ -44,17 +44,14 @@ export const Top: React.FC = () => {
       />
       <div className={classes.main}>
         <Typography gutterBottom variant="h4" component="div">
-          电影名
+          {movieQuery?.movie.title}
         </Typography>
         <Typography gutterBottom variant="subtitle1" component="div">
-          电影信息补充
+          {movieQuery?.movie.sub_title}
         </Typography>
         {/* <div></div> */}
         <Typography variant="body2" component="div">
-          电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
-          电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
-          电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
-          电影介绍一定要长，这样才能撑开布局，这样才好看，一般是三行最佳。
+          {movieQuery?.movie.description}
         </Typography>
         <Box mt={3}>
           <Button
