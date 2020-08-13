@@ -9,10 +9,15 @@ import {
   IconButton,
   Box,
   ListSubheader,
-  Typography
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MoreVert } from "@material-ui/icons";
+import { MoreVert, AddCircle } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
 
@@ -24,9 +29,40 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const EditCast: React.FC = () => {
+interface ICreditDialogProps {
+  children?: React.ReactNode;
+  open: boolean;
+}
+
+const CreditDialog: React.FC<ICreditDialogProps> = (
+  props: ICreditDialogProps
+) => {
+  const [open, setOpen] = React.useState(props.open);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  return (
+    <Dialog open={open}>
+      <DialogTitle>Create</DialogTitle>
+      <DialogContent dividers></DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+export const EditCast: React.FC = () => {
   const classes = useStyles();
   const [credits] = React.useState<Character[]>([]);
+
+  const handleAddCredit = () => {
+    CreditDialog({
+      open: true
+    });
+  };
 
   return (
     <Box className={classes.root}>
@@ -34,6 +70,9 @@ const EditCast: React.FC = () => {
         subheader={
           <ListSubheader>
             <Typography>演职表</Typography>
+            <IconButton onClick={handleAddCredit} size="small">
+              <AddCircle fontSize="small" />
+            </IconButton>
           </ListSubheader>
         }
       >
