@@ -1,22 +1,23 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { LoadingBaseProps } from "./loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    wrap: {
-      // textAlign: "center"
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center"
-    },
+    // wrap: {
+    //   // textAlign: "center"
+    //   position: "fixed",
+    //   top: 0,
+    //   left: 0,
+    //   right: 0,
+    //   bottom: 0,
+    //   width: "100%",
+    //   height: "100%",
+    //   display: "flex",
+    //   justifyContent: "center",
+    //   alignItems: "center",
+    // },
     root: {
       "-webkit-background-clip": "text",
       backgroundClip: "text",
@@ -37,8 +38,11 @@ const useStyles = makeStyles((theme: Theme) =>
     logo: {
       fontSize: 90
     },
-    content: {
+    title: {
       fontSize: 16
+    },
+    subtitle: {
+      fontSize: 12
     },
     "@keyframes skeleton-busy-animate": {
       "0%": {
@@ -51,15 +55,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Loading() {
+export const LoadingDefault: React.FC<LoadingBaseProps> = (
+  props: LoadingBaseProps
+) => {
   const classes = useStyles();
+  const { title, subtitle } = props;
 
   return (
-    <div className={classes.wrap}>
-      <div className={classes.root}>
-        <i className={clsx("iconfont icon-google", classes.logo)}></i>
-        <div className={classes.content}>Loading</div>
-      </div>
+    <div className={classes.root}>
+      <i className={clsx("iconfont icon-google", classes.logo)}></i>
+      {title && <div className={classes.title}>{title}</div>}
+      {subtitle && <div className={classes.subtitle}>{subtitle}</div>}
     </div>
   );
-}
+};

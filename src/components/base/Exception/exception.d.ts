@@ -1,4 +1,4 @@
-export interface IPlaceholderProps {
+export interface BaseExceptionProps {
   title?: string;
 
   subtitle?: string;

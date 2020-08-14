@@ -1,4 +1,4 @@
-export interface IPlaceholderProps {
+export interface LoadingBaseProps {
   title?: string;
 
   subtitle?: string;
