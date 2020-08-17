@@ -36,13 +36,12 @@ export const MovieContext = React.createContext<MovieQuery | undefined>(
 
 export default function Movie() {
   const { id } = useParams();
-  const { data, error } = useMovieQuery({
+  const { data } = useMovieQuery({
     variables: {
       id: id
     }
   });
 
-  console.log(error);
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
 
