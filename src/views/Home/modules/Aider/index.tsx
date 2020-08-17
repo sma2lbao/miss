@@ -12,6 +12,7 @@ import {
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useUserUrgesQuery } from "@/schema";
 import { useRouterHelper } from "@/hooks";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,8 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Aider() {
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
-  const { data } = useUserUrgesQuery();
-  const users = data?.user_urges;
+  const { data, loading, error } = useUserUrgesQuery();
   return (
     <>
       <div className={classes.root}>
@@ -34,8 +34,8 @@ export default function Aider() {
           贡献榜
         </Typography>
         <List>
-          {users &&
-            users.map((user, i) => {
+          {data?.user_urges.length ? (
+            data.user_urges.map((user, i) => {
               return (
                 <ListItem
                   key={i}
@@ -54,7 +54,10 @@ export default function Aider() {
                   </ListItemSecondaryAction>
                 </ListItem>
               );
-            })}
+            })
+          ) : (
+            <SpecialBox loading={loading} error={!!error} />
+          )}
         </List>
       </div>
     </>

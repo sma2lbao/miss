@@ -1,13 +1,13 @@
 export interface BaseSpecialBoxProps {
   status?: SpecialBoxStatus;
 
-  empty?: boolean;
+  placeholder?: boolean;
 
-  emptyTitle?: string;
+  placeholderTitle?: string;
 
-  emptySubtitle?: string;
+  placeholderSubtitle?: string;
 
-  emptyNode?: any;
+  placeholderNode?: any;
 
   loading?: boolean;
 

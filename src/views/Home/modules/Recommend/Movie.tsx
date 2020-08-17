@@ -2,15 +2,13 @@ import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
 import { MediaNormal } from "@/components/app/MediaCard";
 import { GridList, GridListTile } from "@material-ui/core";
-// import { Skeleton } from "@material-ui/lab";
-// import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useMovieUrgesQuery } from "@/schema";
 import { useRouterHelper } from "@/hooks";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 export default function MovieRecommend() {
   const RouterHelper = useRouterHelper();
-  const { data } = useMovieUrgesQuery();
-  const movies = data?.movie_urges;
+  const { data, loading, error } = useMovieUrgesQuery();
 
   return (
     <Box padding={0}>
@@ -32,9 +30,9 @@ export default function MovieRecommend() {
         </Link>
       </Box>
 
-      {movies && (
+      {data?.movie_urges.length ? (
         <GridList cellHeight="auto" cols={4}>
-          {movies.map((movie: any, index: number) => {
+          {data.movie_urges.map((movie: any, index: number) => {
             return (
               <Grow key={index} in timeout={index * 800}>
                 <GridListTile cols={movie.cols || 1}>
@@ -44,6 +42,8 @@ export default function MovieRecommend() {
             );
           })}
         </GridList>
+      ) : (
+        <SpecialBox loading={loading} error={!!error} />
       )}
     </Box>
   );

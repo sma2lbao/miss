@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Tabs, Tab, Box } from "@material-ui/core";
+import { Tab, Box } from "@material-ui/core";
 import { MovieMain, Relative, Cast, About, Top } from "./modules";
 import {
   ContentScreen,
@@ -10,6 +10,7 @@ import {
 } from "@/layouts/PageLayout";
 import { useMovieQuery, MovieQuery } from "@/schema";
 import { useParams } from "react-router";
+import { TabPanel, TabContext, TabList } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +35,12 @@ export const MovieContext = React.createContext<MovieQuery | undefined>(
   undefined
 );
 
+enum TabStatus {
+  INFO = "info",
+  RELATIVE = "relative",
+  ABOUT = "about"
+}
+
 export default function Movie() {
   const { id } = useParams();
   const { data } = useMovieQuery({
@@ -43,7 +50,7 @@ export default function Movie() {
   });
 
   const classes = useStyles();
-  const [tab, setTab] = React.useState(0);
+  const [tab, setTab] = React.useState(TabStatus.INFO);
 
   return (
     <Box>
@@ -55,15 +62,23 @@ export default function Movie() {
         </FullScreen>
         <BodyScreen>
           <ContentScreen className={classes.main}>
-            <Tabs value={tab} onChange={(e, val) => setTab(val)}>
-              <Tab label="信息"></Tab>
-              <Tab label="相关推荐"></Tab>
-              <Tab label="关于"></Tab>
-            </Tabs>
+            <TabList onChange={(_, val) => setTab(val)}>
+              <Tab value={TabStatus.INFO} label="信息"></Tab>
+              <Tab value={TabStatus.RELATIVE} label="相关推荐"></Tab>
+              <Tab value={TabStatus.ABOUT} label="关于"></Tab>
+            </TabList>
             <div className={classes.content}>
-              {tab === 0 && <MovieMain />}
-              {tab === 1 && <Relative />}
-              {tab === 2 && <About html={data?.movie?.description || ""} />}
+              <TabContext value={tab}>
+                <TabPanel value={TabStatus.INFO}>
+                  <MovieMain />
+                </TabPanel>
+                <TabPanel value={TabStatus.RELATIVE}>
+                  <Relative />
+                </TabPanel>
+                <TabPanel value={TabStatus.ABOUT}>
+                  <About html={data?.movie?.description || ""} />
+                </TabPanel>
+              </TabContext>
             </div>
           </ContentScreen>
           <AiderScreen className={classes.aider}>

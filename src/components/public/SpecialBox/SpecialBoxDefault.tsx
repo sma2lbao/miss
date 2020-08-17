@@ -16,10 +16,10 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
 ) => {
   const classes = useStyles();
   const {
-    empty,
-    emptyTitle,
-    emptySubtitle,
-    emptyNode: EmptyNode,
+    placeholder,
+    placeholderTitle,
+    placeholderSubtitle,
+    placeholderNode: PlaceholderNode,
     loading,
     loadingTitle,
     loadingSubtitle,
@@ -43,11 +43,14 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
         ) : (
           <Exception title={errorTitle} subtitle={errorSubtitle} />
         ))}
-      {empty &&
-        (EmptyNode ? (
-          <EmptyNode />
+      {placeholder &&
+        (PlaceholderNode ? (
+          <PlaceholderNode />
         ) : (
-          <Placeholder title={emptyTitle} subtitle={emptySubtitle} />
+          <Placeholder
+            title={placeholderTitle}
+            subtitle={placeholderSubtitle}
+          />
         ))}
     </div>
   );

@@ -4,7 +4,7 @@ import { Box, GridListTile, GridList, Typography } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useMovieUrgesByMovieQuery } from "@/schema";
 import { useParams } from "react-router-dom";
-import Placeholder from "@/components/base/Placeholder";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,13 +23,6 @@ export default function Relative() {
     }
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-  if (error) {
-    return <div>error</div>;
-  }
-
   return (
     <Box className={classes.root}>
       <Typography variant="subtitle1" gutterBottom>
@@ -47,7 +40,11 @@ export default function Relative() {
         </GridList>
       ) : (
         <div>
-          <Placeholder title="暂无相关推荐" />
+          <SpecialBox
+            loading={loading}
+            error={!!error}
+            placeholderTitle="暂无相关推荐"
+          />
         </div>
       )}
     </Box>
