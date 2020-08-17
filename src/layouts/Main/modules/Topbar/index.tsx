@@ -79,7 +79,7 @@ export default function Topbar(props: TopbarProps) {
         </Toolbar>
         <Divider />
       </AppBar>
-      <Toolbar></Toolbar>
+      {/* <Toolbar></Toolbar> */}
     </>
   );
 }

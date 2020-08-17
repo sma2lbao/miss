@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route, RouteProps } from "react-router-dom";
+import { LoadingDefault } from "@/components/base/Loading";
 
 interface IProps extends RouteProps {
   layout?: any;
@@ -24,7 +25,7 @@ export default function RouteWithLayout(props: IProps) {
         <Layout>
           {lazy ? (
             <React.Suspense
-              fallback={Loading ? <Loading /> : <div>loading</div>}
+              fallback={Loading ? <Loading /> : <LoadingDefault />}
             >
               <Component {...matchProps} />
             </React.Suspense>
@@ -41,7 +42,7 @@ export default function RouteWithLayout(props: IProps) {
         if (lazy) {
           return (
             <React.Suspense
-              fallback={Loading ? <Loading /> : <div>loading</div>}
+              fallback={Loading ? <Loading /> : <LoadingDefault />}
             >
               <Component {...matchProps} />
             </React.Suspense>

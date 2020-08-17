@@ -5,7 +5,7 @@ import {
   Theme
   // useTheme
 } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery, Toolbar } from "@material-ui/core";
 import { Sidebar, Topbar } from "./modules";
 import clsx from "clsx";
 
@@ -13,8 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: "100%",
-      backgroundColor: "#f5f5f5",
-      minHeight: "100vh"
+      backgroundColor: "#f5f5f5"
     },
     drawer: {
       width: 290
@@ -26,7 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
-      })
+      }),
+      // minHeight: "100%",
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column"
     }
   })
 );
@@ -61,6 +64,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
             [classes.shiftMain]: openSidebar && isDesktop
           })}
         >
+          <Toolbar />
           {children}
         </main>
       </div>
