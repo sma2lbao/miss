@@ -10,16 +10,16 @@ import {
   Box,
   ListSubheader,
   Typography,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button
+  Input
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MoreVert, AddCircle } from "@material-ui/icons";
+import { AddCircle, Delete, Done, Edit } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
+
+interface CharacterEdit extends Character {
+  // status:
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,39 +29,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ICreditDialogProps {
-  children?: React.ReactNode;
-  open: boolean;
-}
-
-const CreditDialog: React.FC<ICreditDialogProps> = (
-  props: ICreditDialogProps
-) => {
-  const [open, setOpen] = React.useState(props.open);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  return (
-    <Dialog open={open}>
-      <DialogTitle>Create</DialogTitle>
-      <DialogContent dividers></DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Save
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
-
 export const EditCast: React.FC = () => {
   const classes = useStyles();
-  const [credits] = React.useState<Character[]>([]);
+  const [credits, setCredits] = React.useState<CharacterEdit[]>([]);
 
   const handleAddCredit = () => {
-    CreditDialog({
-      open: true
-    });
+    setCredits([
+      ...credits,
+      {
+        avatar: "",
+        name: "",
+        description: "",
+        tags: []
+      }
+    ]);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const { dataset, value } = e.target;
+    if (dataset.idx && dataset.key) {
+      const cur = credits[dataset.idx];
+      cur[dataset.key] = value;
+      setCredits([...credits, cur]);
+    }
   };
 
   return (
@@ -81,16 +73,45 @@ export const EditCast: React.FC = () => {
             {credits.map((item, idx) => {
               return (
                 <ListItem key={idx}>
-                  <ListItemAvatar>
-                    <Avatar src={item.avatar}></Avatar>
-                  </ListItemAvatar>
+                  {
+                    <div>
+                      <ListItemAvatar>
+                        <Avatar src={item.avatar}></Avatar>
+                      </ListItemAvatar>
+                    </div>
+                  }
                   <ListItemText
-                    primary={item.name}
-                    secondary={item.description}
+                    primary={
+                      <div>
+                        <Input
+                          data-idx={idx}
+                          data-key="name"
+                          onChange={handleChange}
+                          value={item.name}
+                          placeholder="请输入名字"
+                        />
+                      </div>
+                    }
+                    secondary={
+                      <div>
+                        <Input
+                          data-idx={idx}
+                          data-key="description"
+                          value={item.description}
+                          placeholder="请输入描述"
+                        />
+                      </div>
+                    }
                   />
                   <ListItemSecondaryAction>
                     <IconButton>
-                      <MoreVert />
+                      <Edit />
+                    </IconButton>
+                    <IconButton>
+                      <Done />
+                    </IconButton>
+                    <IconButton>
+                      <Delete />
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
