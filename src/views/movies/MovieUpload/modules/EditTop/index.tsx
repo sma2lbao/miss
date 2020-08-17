@@ -2,7 +2,7 @@ import * as React from "react";
 import { Image } from "@/components/base/Image";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography, Button, Box } from "@material-ui/core";
+import { Typography, Button, Box, Input } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,28 +24,56 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const EditTop: React.FC = () => {
   const classes = useStyles();
-  const [movie] = React.useState({
+  const [movie, setMovie] = React.useState({
     title: "",
     sub_title: "",
     description: ""
   });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const { dataset, value } = e.target;
+    if (dataset.key) {
+      setMovie({
+        ...movie,
+        [dataset.key]: value
+      });
+    }
+  };
 
   return (
     <div className={classes.root}>
       <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
       <div className={classes.main}>
         <Typography gutterBottom variant="h4" component="div">
-          {movie.title}
+          <Input
+            data-key="title"
+            value={movie.title}
+            onChange={handleChange}
+            // placeholder="请输入名字"
+          />
         </Typography>
         <Typography gutterBottom variant="subtitle1" component="div">
-          {movie.sub_title}
+          <Input
+            data-key="sub_title"
+            value={movie.sub_title}
+            onChange={handleChange}
+            // placeholder="请输入名字"
+          />
         </Typography>
         {/* <div></div> */}
         <Typography variant="body2" component="div">
-          {movie.description}
+          <Input
+            rows={4}
+            data-key="description"
+            value={movie.description}
+            onChange={handleChange}
+            // placeholder="请输入名字"
+          />
         </Typography>
         <Box mt={3}>
-          <Button size="large" variant="contained" color="primary">
+          <Button disabled size="large" variant="contained" color="primary">
             播放
           </Button>
         </Box>
