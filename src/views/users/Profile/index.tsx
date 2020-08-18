@@ -4,6 +4,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Divider, Box } from "@material-ui/core";
 import { Medias, Basic } from "./modules";
 import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Profile() {
   const classes = useStyles();
+  const { username } = useParams();
+  console.log(username);
   const [tab, setTab] = React.useState(0);
 
   return (

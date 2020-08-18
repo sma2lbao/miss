@@ -11,6 +11,7 @@ import {
 import { useMovieQuery, MovieQuery } from "@/schema";
 import { useParams } from "react-router";
 import { TabPanel, TabContext, TabList } from "@material-ui/lab";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +44,7 @@ enum TabStatus {
 
 export default function Movie() {
   const { id } = useParams();
-  const { data } = useMovieQuery({
+  const { data, error, loading } = useMovieQuery({
     variables: {
       id: id
     }
@@ -54,38 +55,42 @@ export default function Movie() {
 
   return (
     <Box>
-      <MovieContext.Provider value={data}>
-        <FullScreen>
+      {data?.movie ? (
+        <MovieContext.Provider value={data}>
+          <FullScreen>
+            <BodyScreen>
+              <Top />
+            </BodyScreen>
+          </FullScreen>
           <BodyScreen>
-            <Top />
+            <ContentScreen className={classes.main}>
+              <TabList onChange={(_, val) => setTab(val)}>
+                <Tab value={TabStatus.INFO} label="信息"></Tab>
+                <Tab value={TabStatus.RELATIVE} label="相关推荐"></Tab>
+                <Tab value={TabStatus.ABOUT} label="关于"></Tab>
+              </TabList>
+              <div className={classes.content}>
+                <TabContext value={tab}>
+                  <TabPanel value={TabStatus.INFO}>
+                    <MovieMain />
+                  </TabPanel>
+                  <TabPanel value={TabStatus.RELATIVE}>
+                    <Relative />
+                  </TabPanel>
+                  <TabPanel value={TabStatus.ABOUT}>
+                    <About html={data?.movie?.description || ""} />
+                  </TabPanel>
+                </TabContext>
+              </div>
+            </ContentScreen>
+            <AiderScreen className={classes.aider}>
+              <Cast />
+            </AiderScreen>
           </BodyScreen>
-        </FullScreen>
-        <BodyScreen>
-          <ContentScreen className={classes.main}>
-            <TabList onChange={(_, val) => setTab(val)}>
-              <Tab value={TabStatus.INFO} label="信息"></Tab>
-              <Tab value={TabStatus.RELATIVE} label="相关推荐"></Tab>
-              <Tab value={TabStatus.ABOUT} label="关于"></Tab>
-            </TabList>
-            <div className={classes.content}>
-              <TabContext value={tab}>
-                <TabPanel value={TabStatus.INFO}>
-                  <MovieMain />
-                </TabPanel>
-                <TabPanel value={TabStatus.RELATIVE}>
-                  <Relative />
-                </TabPanel>
-                <TabPanel value={TabStatus.ABOUT}>
-                  <About html={data?.movie?.description || ""} />
-                </TabPanel>
-              </TabContext>
-            </div>
-          </ContentScreen>
-          <AiderScreen className={classes.aider}>
-            <Cast />
-          </AiderScreen>
-        </BodyScreen>
-      </MovieContext.Provider>
+        </MovieContext.Provider>
+      ) : (
+        <SpecialBox error={!!error} loading={loading} />
+      )}
     </Box>
   );
 }

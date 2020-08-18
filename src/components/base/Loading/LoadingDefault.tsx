@@ -61,3 +61,7 @@ export const LoadingDefault: React.FC<LoadingBaseProps> = (
     </div>
   );
 };
+
+LoadingDefault.defaultProps = {
+  title: "Loading"
+};
