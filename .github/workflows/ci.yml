@@ -26,6 +26,7 @@ jobs:
       - name: build
         run: |
           npm install
+          npm list --depth=0
           npm run build
         env:
           REACT_APP_HTTP_URL: ${{ secrets.REACT_APP_HTTP_URL }}
