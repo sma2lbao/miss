@@ -287,6 +287,7 @@ export type Mutation = {
   readonly add_movie_to_tag: Scalars["Boolean"];
   readonly add_category_to_tag: Scalars["Boolean"];
   readonly create_movie: Movie;
+  readonly update_movie: Movie;
   readonly add_mediums_to_movie: Movie;
   readonly create_category: Category;
   readonly delete_category: Scalars["Boolean"];
@@ -325,6 +326,11 @@ export type MutationAdd_Category_To_TagArgs = {
 
 export type MutationCreate_MovieArgs = {
   movie: CreateMovieInput;
+};
+
+export type MutationUpdate_MovieArgs = {
+  movie: UpdateMovieInput;
+  movie_id: Scalars["ID"];
 };
 
 export type MutationAdd_Mediums_To_MovieArgs = {
@@ -643,6 +649,19 @@ export type Topic = {
   readonly delete_at: Scalars["Date"];
 };
 
+export type UpdateMovieInput = {
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly about?: Maybe<Scalars["String"]>;
+  readonly region?: Maybe<Scalars["String"]>;
+  readonly credits?: Maybe<ReadonlyArray<CreateCharacterInput>>;
+  readonly sources?: Maybe<ReadonlyArray<CreateMovieMediumInput>>;
+  readonly title?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+};
+
 export type UpdateUserInput = {
   readonly nickname?: Maybe<Scalars["String"]>;
   readonly avatar?: Maybe<Scalars["String"]>;
@@ -798,6 +817,47 @@ export type UpdateUserMutation = {
     readonly description?: Maybe<string>;
     readonly create_at: any;
     readonly update_at: any;
+  };
+};
+
+export type CreateMovieMutationVariables = Exact<{
+  movie: CreateMovieInput;
+}>;
+
+export type CreateMovieMutation = {
+  readonly __typename?: "Mutation";
+  readonly create_movie: {
+    readonly __typename?: "Movie";
+    readonly create_at: any;
+  };
+};
+
+export type UpdateMovieMutationVariables = Exact<{
+  movie: UpdateMovieInput;
+  movie_id: Scalars["ID"];
+}>;
+
+export type UpdateMovieMutation = {
+  readonly __typename?: "Mutation";
+  readonly update_movie: {
+    readonly __typename?: "Movie";
+    readonly create_at: any;
+  };
+};
+
+export type AddMediumsToMovieMutationVariables = Exact<{
+  movie_id: Scalars["ID"];
+  movie_medium: CreateMovieMediumInput;
+}>;
+
+export type AddMediumsToMovieMutation = {
+  readonly __typename?: "Mutation";
+  readonly add_mediums_to_movie: {
+    readonly __typename?: "Movie";
+    readonly sources: ReadonlyArray<{
+      readonly __typename?: "MovieMedium";
+      readonly name?: Maybe<string>;
+    }>;
   };
 };
 
@@ -1431,6 +1491,163 @@ export type UpdateUserMutationResult = ApolloReactCommon.MutationResult<
 export type UpdateUserMutationOptions = ApolloReactCommon.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
+>;
+export const CreateMovieDocument = gql`
+  mutation createMovie($movie: CreateMovieInput!) {
+    create_movie(movie: $movie) {
+      create_at
+    }
+  }
+`;
+export type CreateMovieMutationFn = ApolloReactCommon.MutationFunction<
+  CreateMovieMutation,
+  CreateMovieMutationVariables
+>;
+
+/**
+ * __useCreateMovieMutation__
+ *
+ * To run a mutation, you first call `useCreateMovieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMovieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMovieMutation, { data, loading, error }] = useCreateMovieMutation({
+ *   variables: {
+ *      movie: // value for 'movie'
+ *   },
+ * });
+ */
+export function useCreateMovieMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    CreateMovieMutation,
+    CreateMovieMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    CreateMovieMutation,
+    CreateMovieMutationVariables
+  >(CreateMovieDocument, baseOptions);
+}
+export type CreateMovieMutationHookResult = ReturnType<
+  typeof useCreateMovieMutation
+>;
+export type CreateMovieMutationResult = ApolloReactCommon.MutationResult<
+  CreateMovieMutation
+>;
+export type CreateMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateMovieMutation,
+  CreateMovieMutationVariables
+>;
+export const UpdateMovieDocument = gql`
+  mutation updateMovie($movie: UpdateMovieInput!, $movie_id: ID!) {
+    update_movie(movie_id: $movie_id, movie: $movie) {
+      create_at
+    }
+  }
+`;
+export type UpdateMovieMutationFn = ApolloReactCommon.MutationFunction<
+  UpdateMovieMutation,
+  UpdateMovieMutationVariables
+>;
+
+/**
+ * __useUpdateMovieMutation__
+ *
+ * To run a mutation, you first call `useUpdateMovieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMovieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMovieMutation, { data, loading, error }] = useUpdateMovieMutation({
+ *   variables: {
+ *      movie: // value for 'movie'
+ *      movie_id: // value for 'movie_id'
+ *   },
+ * });
+ */
+export function useUpdateMovieMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    UpdateMovieMutation,
+    UpdateMovieMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    UpdateMovieMutation,
+    UpdateMovieMutationVariables
+  >(UpdateMovieDocument, baseOptions);
+}
+export type UpdateMovieMutationHookResult = ReturnType<
+  typeof useUpdateMovieMutation
+>;
+export type UpdateMovieMutationResult = ApolloReactCommon.MutationResult<
+  UpdateMovieMutation
+>;
+export type UpdateMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  UpdateMovieMutation,
+  UpdateMovieMutationVariables
+>;
+export const AddMediumsToMovieDocument = gql`
+  mutation addMediumsToMovie(
+    $movie_id: ID!
+    $movie_medium: CreateMovieMediumInput!
+  ) {
+    add_mediums_to_movie(movie_id: $movie_id, movie_medium: $movie_medium) {
+      sources {
+        name
+      }
+    }
+  }
+`;
+export type AddMediumsToMovieMutationFn = ApolloReactCommon.MutationFunction<
+  AddMediumsToMovieMutation,
+  AddMediumsToMovieMutationVariables
+>;
+
+/**
+ * __useAddMediumsToMovieMutation__
+ *
+ * To run a mutation, you first call `useAddMediumsToMovieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddMediumsToMovieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addMediumsToMovieMutation, { data, loading, error }] = useAddMediumsToMovieMutation({
+ *   variables: {
+ *      movie_id: // value for 'movie_id'
+ *      movie_medium: // value for 'movie_medium'
+ *   },
+ * });
+ */
+export function useAddMediumsToMovieMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    AddMediumsToMovieMutation,
+    AddMediumsToMovieMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    AddMediumsToMovieMutation,
+    AddMediumsToMovieMutationVariables
+  >(AddMediumsToMovieDocument, baseOptions);
+}
+export type AddMediumsToMovieMutationHookResult = ReturnType<
+  typeof useAddMediumsToMovieMutation
+>;
+export type AddMediumsToMovieMutationResult = ApolloReactCommon.MutationResult<
+  AddMediumsToMovieMutation
+>;
+export type AddMediumsToMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  AddMediumsToMovieMutation,
+  AddMediumsToMovieMutationVariables
 >;
 export const CreateFollowDocument = gql`
   mutation createFollow($follow: CreateFollowInput!) {

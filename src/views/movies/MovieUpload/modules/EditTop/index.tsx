@@ -22,13 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const EditTop: React.FC = () => {
+export const EditTop = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const [movie, setMovie] = React.useState({
     title: "",
     sub_title: "",
     description: ""
   });
+
+  React.useImperativeHandle(ref, () => ({
+    movie
+  }));
 
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -80,6 +84,6 @@ export const EditTop: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default EditTop;

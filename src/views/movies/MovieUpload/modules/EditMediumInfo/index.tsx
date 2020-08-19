@@ -38,9 +38,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const EditMediumInfo: React.FC = () => {
+export interface EditMediumInfoProp {
+  open: boolean;
+}
+
+export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
+  props: EditMediumInfoProp
+) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(props.open);
   const handleClose = () => {
     setOpen(false);
   };

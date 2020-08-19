@@ -28,12 +28,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MovieUpload: React.FC = () => {
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
+  const topRef = React.createRef();
+  const mainRef = React.createRef();
+  const aboutRef = React.createRef();
+  const castRef = React.createRef();
 
   return (
     <Box>
       <FullScreen>
         <BodyScreen>
-          <EditTop />
+          <EditTop ref={topRef} />
         </BodyScreen>
       </FullScreen>
       <BodyScreen>
@@ -44,13 +48,17 @@ export const MovieUpload: React.FC = () => {
             <Tab label="关于"></Tab>
           </Tabs>
           <div>
-            {tab === 0 && <EditMovieMain />}
+            <div hidden={tab !== 0}>
+              <EditMovieMain ref={mainRef} />
+            </div>
             {/* {tab === 1 && <Relative />} */}
-            {tab === 2 && <EditAbout />}
+            <div hidden={tab !== 2}>
+              <EditAbout ref={aboutRef} />
+            </div>
           </div>
         </ContentScreen>
         <AiderScreen>
-          <EditCast />
+          <EditCast ref={castRef} />
         </AiderScreen>
       </BodyScreen>
     </Box>

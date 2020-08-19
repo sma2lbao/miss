@@ -13,7 +13,7 @@ import {
   Input
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { AddCircle, Delete, Done, Edit } from "@material-ui/icons";
+import { AddCircle, Delete } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
 
@@ -29,9 +29,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const EditCast: React.FC = () => {
+export const EditCast = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const [credits, setCredits] = React.useState<CharacterEdit[]>([]);
+
+  React.useImperativeHandle(ref, () => ({
+    credits
+  }));
 
   const handleAddCredit = () => {
     setCredits([
@@ -53,6 +57,14 @@ export const EditCast: React.FC = () => {
       const cur = credits[dataset.idx];
       cur[dataset.key] = value;
       setCredits([...credits, cur]);
+    }
+  };
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { dataset } = e.currentTarget;
+    if (dataset.idx) {
+      const newCredits = credits.splice(+dataset.idx, 1);
+      setCredits([...newCredits]);
     }
   };
 
@@ -104,13 +116,13 @@ export const EditCast: React.FC = () => {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <IconButton>
+                    {/* <IconButton>
                       <Edit />
-                    </IconButton>
-                    <IconButton>
+                    </IconButton> */}
+                    {/* <IconButton>
                       <Done />
-                    </IconButton>
-                    <IconButton>
+                    </IconButton> */}
+                    <IconButton data-idx={idx} onClick={handleDelete}>
                       <Delete />
                     </IconButton>
                   </ListItemSecondaryAction>
@@ -126,6 +138,6 @@ export const EditCast: React.FC = () => {
       </List>
     </Box>
   );
-};
+});
 
 export default EditCast;
