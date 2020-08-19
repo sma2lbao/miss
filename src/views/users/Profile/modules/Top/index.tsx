@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { MediaPlain } from "@/components/app/MediaCard";
 import clsx from "clsx";
+import { ProfileContext } from "../..";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,14 +46,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Top: React.FC = () => {
   const classes = useStyles();
+  const userQuery = React.useContext(ProfileContext);
+
   return (
     <Box className={classes.root}>
       <div className={clsx(classes.item, classes.wrap)}>
         <Box className={classes.main}>
           <Box display="flex" alignItems="center">
-            <Avatar>S</Avatar>
+            <Avatar src={userQuery?.user.avatar}></Avatar>
             <Box ml={1}>
-              <Typography variant="subtitle1">Sma2lBao</Typography>
+              <Typography variant="subtitle1">
+                {userQuery?.user.nickname}
+              </Typography>
               <Typography variant="caption">ShengZhen</Typography>
             </Box>
           </Box>

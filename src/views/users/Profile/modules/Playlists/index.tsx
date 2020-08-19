@@ -1,10 +1,11 @@
 import React from "react";
 import { useParams } from "react-router";
 import { usePlaylistsPaginatedQuery } from "@/schema";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 export default function Playlists() {
   const { username } = useParams();
-  const { data } = usePlaylistsPaginatedQuery({
+  const { data, loading, error } = usePlaylistsPaginatedQuery({
     variables: {
       query: {
         last: 10
@@ -12,6 +13,13 @@ export default function Playlists() {
       author_username: username
     }
   });
-  console.log(data);
-  return <div></div>;
+  return (
+    <div>
+      {data?.playlists_paginated?.edges?.length ? (
+        <div></div>
+      ) : (
+        <SpecialBox loading={loading} error={!!error} />
+      )}
+    </div>
+  );
 }

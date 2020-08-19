@@ -5,3 +5,21 @@ export const IS_FOLLOWING = gql`
     is_following(owner_uid: $owner_uid, follower_uid: $follower_uid)
   }
 `;
+
+export const USER = gql`
+  query user($uid: String, $username: String) {
+    user(uid: $uid, username: $username) {
+      uid
+      username
+      email
+      nickname
+      avatar
+      mobile
+      address
+      description
+      create_at
+      update_at
+      delete_at
+    }
+  }
+`;

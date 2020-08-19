@@ -66,6 +66,31 @@ export const MOVIES_PAGINATED = gql`
   }
 `;
 
+export const user_movies_paginated = gql`
+  query userMoviesPaginated($author_username: String!, $query: PaginatedQuery) {
+    user_movies_paginated(author_username: $author_username, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          title
+          sub_title
+          alias_title
+          cover
+          description
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const MOVIE_URGES_BY_MOVIE = gql`
   query movieUrgesByMovie($movie_id: ID!) {
     movie_urges_by_movie(movie_id: $movie_id) {

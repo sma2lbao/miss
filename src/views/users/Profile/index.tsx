@@ -5,6 +5,8 @@ import { Tabs, Tab, Divider, Box } from "@material-ui/core";
 import { Medias, Basic } from "./modules";
 import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
 import { useParams } from "react-router-dom";
+import { useUserQuery, UserQuery } from "@/schema";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,29 +19,45 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export const ProfileContext = React.createContext<UserQuery | undefined>(
+  undefined
+);
+
 export default function Profile() {
   const classes = useStyles();
   const { username } = useParams();
-  console.log(username);
+  const { data, loading, error } = useUserQuery({
+    variables: {
+      username
+    }
+  });
   const [tab, setTab] = React.useState(0);
 
   return (
-    <BodyScreen>
-      <AiderScreen className={classes.aider}>
-        <Basic />
-      </AiderScreen>
-      <ContentScreen className={classes.content}>
-        <Top />
-        <Divider />
-        <div>
-          <Tabs value={tab} onChange={(e, value) => setTab(value)}>
-            <Tab label="视频"></Tab>
-            <Tab label="列表"></Tab>
-            <Tab label="社区"></Tab>
-          </Tabs>
-          <Box py={2}>{tab === 0 && <Medias />}</Box>
-        </div>
-      </ContentScreen>
-    </BodyScreen>
+    <>
+      {data?.user ? (
+        <BodyScreen>
+          <ProfileContext.Provider value={data}>
+            <AiderScreen className={classes.aider}>
+              <Basic />
+            </AiderScreen>
+            <ContentScreen className={classes.content}>
+              <Top />
+              <Divider />
+              <div>
+                <Tabs value={tab} onChange={(e, value) => setTab(value)}>
+                  <Tab label="视频"></Tab>
+                  <Tab label="列表"></Tab>
+                  <Tab label="社区"></Tab>
+                </Tabs>
+                <Box py={2}>{tab === 0 && <Medias />}</Box>
+              </div>
+            </ContentScreen>
+          </ProfileContext.Provider>
+        </BodyScreen>
+      ) : (
+        <SpecialBox loading={loading} error={!!error} />
+      )}
+    </>
   );
 }

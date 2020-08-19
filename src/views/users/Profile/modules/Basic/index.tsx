@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { DEFAULT_PROFILE_COVER } from "@/common/constants/default.constant";
 import { Typography } from "@material-ui/core";
+import { ProfileContext } from "../..";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Basic: React.FC = () => {
   const classes = useStyles();
+  const userQuery = React.useContext(ProfileContext);
+
   return (
     <div className={classes.root}>
       <div className={classes.cover}>
@@ -37,7 +40,7 @@ export const Basic: React.FC = () => {
       <div className={classes.info}>
         <div className={classes.pirmaryColor}>
           <Typography gutterBottom variant="h4">
-            Sma2lBao
+            {userQuery?.user.nickname}
           </Typography>
         </div>
         <Typography gutterBottom className={classes.pirmaryColor}>
@@ -49,10 +52,7 @@ export const Basic: React.FC = () => {
           className={classes.secondColor}
           gutterBottom
         >
-          个人简介balabala 个人简介balabala 个人简介balabala 个人简介balabala
-          个人简介balabala 个人简介balabala 个人简介balabala 个人简介balabala
-          个人简介balabala 个人简介balabala 个人简介balabala 个人简介balabala
-          个人简介balabala 个人简介balabala 个人简介balabala
+          {userQuery?.user.description}
         </Typography>
         <div>
           <Typography

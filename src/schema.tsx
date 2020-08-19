@@ -457,11 +457,12 @@ export type Query = {
   readonly __typename?: "Query";
   readonly movie: Movie;
   readonly movies_paginated: MoviePaginated;
+  readonly user_movies_paginated: MoviePaginated;
   readonly me: User;
   readonly platform_auth_way: ReadonlyArray<PlatformAuthWay>;
   /** find username exit. */
   readonly has_username: Scalars["Boolean"];
-  /** find user by uid. */
+  /** find user by uid or username. */
   readonly user: User;
   /** all user with paginated. */
   readonly users_paginated: UserPaginated;
@@ -492,12 +493,18 @@ export type QueryMovies_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
 };
 
+export type QueryUser_Movies_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+  author_username: Scalars["String"];
+};
+
 export type QueryHas_UsernameArgs = {
   username: Scalars["String"];
 };
 
 export type QueryUserArgs = {
-  uid: Scalars["String"];
+  username?: Maybe<Scalars["String"]>;
+  uid?: Maybe<Scalars["String"]>;
 };
 
 export type QueryUsers_PaginatedArgs = {
@@ -1035,6 +1042,46 @@ export type MoviesPaginatedQuery = {
   };
 };
 
+export type UserMoviesPaginatedQueryVariables = Exact<{
+  author_username: Scalars["String"];
+  query?: Maybe<PaginatedQuery>;
+}>;
+
+export type UserMoviesPaginatedQuery = {
+  readonly __typename?: "Query";
+  readonly user_movies_paginated: {
+    readonly __typename?: "MoviePaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "MoviePageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
+    };
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "MovieEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Movie";
+          readonly title: string;
+          readonly sub_title?: Maybe<string>;
+          readonly alias_title?: Maybe<string>;
+          readonly cover: string;
+          readonly description?: Maybe<string>;
+          readonly author: {
+            readonly __typename?: "User";
+            readonly uid: number | string;
+            readonly avatar: string;
+            readonly nickname?: Maybe<string>;
+            readonly username: string;
+            readonly description?: Maybe<string>;
+          };
+        };
+      }>
+    >;
+  };
+};
+
 export type MovieUrgesByMovieQueryVariables = Exact<{
   movie_id: Scalars["ID"];
 }>;
@@ -1121,6 +1168,29 @@ export type IsFollowingQueryVariables = Exact<{
 export type IsFollowingQuery = {
   readonly __typename?: "Query";
   readonly is_following: boolean;
+};
+
+export type UserQueryVariables = Exact<{
+  uid?: Maybe<Scalars["String"]>;
+  username?: Maybe<Scalars["String"]>;
+}>;
+
+export type UserQuery = {
+  readonly __typename?: "Query";
+  readonly user: {
+    readonly __typename?: "User";
+    readonly uid: number | string;
+    readonly username: string;
+    readonly email?: Maybe<string>;
+    readonly nickname?: Maybe<string>;
+    readonly avatar: string;
+    readonly mobile?: Maybe<string>;
+    readonly address?: Maybe<string>;
+    readonly description?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
+    readonly delete_at: any;
+  };
 };
 
 export type ReviewCreatedSubscriptionVariables = Exact<{
@@ -1975,6 +2045,81 @@ export type MoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
   MoviesPaginatedQuery,
   MoviesPaginatedQueryVariables
 >;
+export const UserMoviesPaginatedDocument = gql`
+  query userMoviesPaginated($author_username: String!, $query: PaginatedQuery) {
+    user_movies_paginated(author_username: $author_username, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          title
+          sub_title
+          alias_title
+          cover
+          description
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useUserMoviesPaginatedQuery__
+ *
+ * To run a query within a React component, call `useUserMoviesPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserMoviesPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserMoviesPaginatedQuery({
+ *   variables: {
+ *      author_username: // value for 'author_username'
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useUserMoviesPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    UserMoviesPaginatedQuery,
+    UserMoviesPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    UserMoviesPaginatedQuery,
+    UserMoviesPaginatedQueryVariables
+  >(UserMoviesPaginatedDocument, baseOptions);
+}
+export function useUserMoviesPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    UserMoviesPaginatedQuery,
+    UserMoviesPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    UserMoviesPaginatedQuery,
+    UserMoviesPaginatedQueryVariables
+  >(UserMoviesPaginatedDocument, baseOptions);
+}
+export type UserMoviesPaginatedQueryHookResult = ReturnType<
+  typeof useUserMoviesPaginatedQuery
+>;
+export type UserMoviesPaginatedLazyQueryHookResult = ReturnType<
+  typeof useUserMoviesPaginatedLazyQuery
+>;
+export type UserMoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  UserMoviesPaginatedQuery,
+  UserMoviesPaginatedQueryVariables
+>;
 export const MovieUrgesByMovieDocument = gql`
   query movieUrgesByMovie($movie_id: ID!) {
     movie_urges_by_movie(movie_id: $movie_id) {
@@ -2232,6 +2377,66 @@ export type IsFollowingLazyQueryHookResult = ReturnType<
 export type IsFollowingQueryResult = ApolloReactCommon.QueryResult<
   IsFollowingQuery,
   IsFollowingQueryVariables
+>;
+export const UserDocument = gql`
+  query user($uid: String, $username: String) {
+    user(uid: $uid, username: $username) {
+      uid
+      username
+      email
+      nickname
+      avatar
+      mobile
+      address
+      description
+      create_at
+      update_at
+      delete_at
+    }
+  }
+`;
+
+/**
+ * __useUserQuery__
+ *
+ * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserQuery({
+ *   variables: {
+ *      uid: // value for 'uid'
+ *      username: // value for 'username'
+ *   },
+ * });
+ */
+export function useUserQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<UserQuery, UserQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
+    baseOptions
+  );
+}
+export function useUserLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    UserQuery,
+    UserQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
+    baseOptions
+  );
+}
+export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
+export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
+export type UserQueryResult = ApolloReactCommon.QueryResult<
+  UserQuery,
+  UserQueryVariables
 >;
 export const ReviewCreatedDocument = gql`
   subscription reviewCreated($type: ReviewMedium!, $medium_id: ID!) {
