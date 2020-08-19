@@ -15,6 +15,7 @@ import {
   ContentScreen,
   AiderScreen
 } from "@/layouts/PageLayout";
+import { EditMediumSource } from "./EditMediumSource";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,7 +64,9 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
         </AppBar>
         <Box className={classes.root}>
           <FullScreen>
-            <BodyScreen>{/* <MoviePlayer /> */}</BodyScreen>
+            <BodyScreen>
+              <EditMediumSource />
+            </BodyScreen>
           </FullScreen>
           <BodyScreen className={classes.body}>
             <ContentScreen className={classes.content}>
