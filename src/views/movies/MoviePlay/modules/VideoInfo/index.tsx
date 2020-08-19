@@ -4,12 +4,7 @@ import { Typography, Box, IconButton, Avatar, Button } from "@material-ui/core";
 import { ThumbUpAlt, ThumbDownAlt, MoreVert } from "@material-ui/icons";
 import { MoviePlayContext } from "../..";
 import moment from "moment";
-import {
-  useIsFollowingLazyQuery,
-  useCreateFollowMutation,
-  useRemoveFollowMutation
-} from "@/schema";
-import { useSnackbar } from "notistack";
+import { useFollowHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,59 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function VideoInfo() {
   const classes = useStyles();
-  const { enqueueSnackbar } = useSnackbar();
   const moviePlayQuery = React.useContext(MoviePlayContext);
-
-  const [following, setFollowing] = React.useState(false);
-
-  const [isFollowing] = useIsFollowingLazyQuery({
-    onCompleted(data) {
-      setFollowing(data.is_following);
-    }
+  const { following, toggleFollow } = useFollowHelper({
+    owner_uid: moviePlayQuery?.movie.author.uid as string
   });
-
-  React.useEffect(() => {
-    if (moviePlayQuery?.movie.author.uid) {
-      isFollowing({
-        variables: {
-          owner_uid: moviePlayQuery.movie.author.uid as string
-        }
-      });
-    }
-  }, [isFollowing, moviePlayQuery]);
-
-  const [createFollow] = useCreateFollowMutation({
-    onCompleted() {
-      enqueueSnackbar("关注成功");
-    }
-  });
-  const [removeFollow] = useRemoveFollowMutation({
-    onCompleted() {
-      enqueueSnackbar("取消成功");
-    }
-  });
-
-  const toggleFollow = () => {
-    if (moviePlayQuery?.movie.author.uid) {
-      if (following) {
-        removeFollow({
-          variables: {
-            follow: {
-              owner_uid: moviePlayQuery?.movie.author.uid
-            }
-          }
-        });
-      } else {
-        createFollow({
-          variables: {
-            follow: {
-              owner_uid: moviePlayQuery?.movie.author.uid
-            }
-          }
-        });
-      }
-    }
-  };
 
   return (
     <div>
