@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "12.x"
 
-      - name: build
+      - name: Build
         run: |
           npm install
           npm run build
@@ -41,7 +41,7 @@ jobs:
           REACT_APP_FIREBASE_APPID: ${{ secrets.REACT_APP_FIREBASE_APPID }}
           REACT_APP_FIREBASE_MEASUREMENTID: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENTID }}
 
-      - name: GitHub Pages action
+      - name: GitHub Pages Action
         uses: peaceiris/actions-gh-pages@v2.5.1
         env:
           # ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
@@ -50,3 +50,14 @@ jobs:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: master
           PUBLISH_DIR: ./build
+
+      - name: Copy build
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          # key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "./build"
+          target: "~/miss"
