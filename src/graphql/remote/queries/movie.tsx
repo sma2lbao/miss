@@ -66,7 +66,7 @@ export const MOVIES_PAGINATED = gql`
   }
 `;
 
-export const user_movies_paginated = gql`
+export const USER_MOVIES_PAGINATED = gql`
   query userMoviesPaginated($author_username: String!, $query: PaginatedQuery) {
     user_movies_paginated(author_username: $author_username, query: $query) {
       totalCount

@@ -22,7 +22,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const EditTop = React.forwardRef((props, ref) => {
+export interface EditTopHandles {
+  title: string;
+
+  sub_title?: string;
+
+  description?: string;
+}
+
+export const EditTop: React.RefForwardingComponent<
+  EditTopHandles,
+  any
+> = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const [movie, setMovie] = React.useState({
     title: "",

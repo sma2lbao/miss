@@ -1,7 +1,12 @@
 import * as React from "react";
 import { NormalEditor } from "@/components/base/Editor";
 
-export const EditAbout = React.forwardRef((props, ref) => {
+export interface EditAboutHandles {}
+
+export const EditAbout: React.RefForwardingComponent<
+  EditAboutHandles,
+  any
+> = React.forwardRef((props, ref) => {
   React.useImperativeHandle(ref, () => ({}));
 
   return (
@@ -10,3 +15,5 @@ export const EditAbout = React.forwardRef((props, ref) => {
     </div>
   );
 });
+
+export default EditAbout;

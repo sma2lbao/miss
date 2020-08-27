@@ -26,7 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const EditMovieMain = React.forwardRef((props, ref) => {
+export interface EditMainHandles {}
+
+export const EditMain: React.RefForwardingComponent<
+  EditMainHandles,
+  any
+> = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const [openMedium, setOpenMedium] = React.useState(false);
 
@@ -54,3 +59,5 @@ export const EditMovieMain = React.forwardRef((props, ref) => {
     </>
   );
 });
+
+export default EditMain;

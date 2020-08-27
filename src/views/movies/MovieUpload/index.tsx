@@ -1,5 +1,14 @@
 import * as React from "react";
-import { EditAbout, EditCast, EditMovieMain, EditTop } from "./modules";
+import {
+  EditAbout,
+  EditCast,
+  EditMain,
+  EditTop,
+  EditCastHandles,
+  EditTopHandles,
+  EditMainHandles,
+  EditAboutHandles
+} from "./modules";
 import {
   ContentScreen,
   AiderScreen,
@@ -14,6 +23,7 @@ import {
   Tabs,
   Tab
 } from "@material-ui/core";
+import { useCreateMovieMutation } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,10 +38,30 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MovieUpload: React.FC = () => {
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
-  const topRef = React.createRef();
-  const mainRef = React.createRef();
-  const aboutRef = React.createRef();
-  const castRef = React.createRef();
+  const topRef = React.createRef<EditTopHandles>();
+  const mainRef = React.createRef<EditMainHandles>();
+  const aboutRef = React.createRef<EditAboutHandles>();
+  const castRef = React.createRef<EditCastHandles>();
+
+  const [create_movie] = useCreateMovieMutation();
+
+  const handleCreateMovie = () => {
+    const topFields = topRef.current;
+    // const mainFields = mainRef.current;
+    // const aboutFields = aboutRef.current;
+    const castFields = castRef.current;
+
+    create_movie({
+      variables: {
+        movie: {
+          title: topFields?.title || "",
+          cover: "",
+          description: topFields?.description,
+          credits: castFields?.credits
+        }
+      }
+    });
+  };
 
   return (
     <Box>
@@ -49,11 +79,14 @@ export const MovieUpload: React.FC = () => {
           </Tabs>
           <div>
             <div hidden={tab !== 0}>
-              <EditMovieMain ref={mainRef} />
+              <EditMain ref={mainRef} />
             </div>
             {/* {tab === 1 && <Relative />} */}
             <div hidden={tab !== 2}>
               <EditAbout ref={aboutRef} />
+            </div>
+            <div>
+              <div onClick={handleCreateMovie}>create</div>
             </div>
           </div>
         </ContentScreen>

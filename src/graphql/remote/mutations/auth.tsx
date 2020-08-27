@@ -21,7 +21,7 @@ export const CREATE_USER_WITH_CODE = gql`
   }
 `;
 
-export const update_user = gql`
+export const UPDATE_USER = gql`
   mutation updateUser($user: UpdateUserInput!) {
     update_user(user: $user) {
       ...Me

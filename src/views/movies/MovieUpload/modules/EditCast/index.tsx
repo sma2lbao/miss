@@ -17,7 +17,7 @@ import { AddCircle, Delete } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
 
-interface CharacterEdit extends Character {
+export interface CharacterEdit extends Character {
   // status:
 }
 
@@ -29,7 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const EditCast = React.forwardRef((props, ref) => {
+export interface EditCastHandles {
+  credits: CharacterEdit[];
+}
+
+export const EditCast: React.RefForwardingComponent<
+  EditCastHandles,
+  any
+> = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const [credits, setCredits] = React.useState<CharacterEdit[]>([]);
 

@@ -11,13 +11,13 @@ export const PLATFORM_AUTH_WAY = gql`
   }
 `;
 
-export const has_username = gql`
+export const HAS_USERNAME = gql`
   query hasUsername($username: String!) {
     has_username(username: $username)
   }
 `;
 
-export const me = gql`
+export const ME = gql`
   query me {
     me {
       ...Me
