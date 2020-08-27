@@ -1,6 +1,6 @@
 {
   "files.exclude": {
-    "**/*.test.*": true,
+    "**/*.test.*": false,
     "**/__snapshots__/**": true
   },
   "eslint.validate": [

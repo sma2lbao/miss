@@ -38,6 +38,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "start:test": "set NODE_ENV=test && react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
@@ -99,6 +100,7 @@
     "@types/draft-js": "^0.10.43",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/faker": "^4.1.12",
     "@types/hls.js": "^0.12.5",
     "@types/jest": "24.0.23",
     "@types/lodash": "^4.14.149",
@@ -110,6 +112,7 @@
     "@types/react-swipeable-views": "^0.13.0",
     "@types/react-test-renderer": "^16.9.2",
     "apollo": "^2.30.1",
+    "faker": "^5.1.0",
     "react-app-rewired": "^2.1.5",
     "react-snap": "^1.23.0"
   },

@@ -8,6 +8,7 @@ import { onError } from "@apollo/link-error";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { cache } from "./cache";
 import { typeDefs } from "./local/schema";
+import { resolvers } from "./__mock__/resolvers";
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_HTTP_URL
@@ -62,6 +63,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 // const uploadLink = createUploadLink({
 //   uri: process.env.REACT_APP_UPLOAD_URL
 // });
+
+console.log(process.env.NODE_ENV);
 
 export const client = new ApolloClient({
   typeDefs,
