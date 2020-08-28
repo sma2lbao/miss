@@ -8,7 +8,7 @@ import { onError } from "@apollo/link-error";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { cache } from "./cache";
 import { typeDefs } from "./local/schema";
-import { resolvers } from "./__mock__/resolvers";
+import { resolvers as mockResolvers } from "./__mock__/resolvers";
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_HTTP_URL
@@ -66,7 +66,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 console.log(process.env.NODE_ENV);
 
+const resolvers = process.env.NODE_ENV ? (mockResolvers as any) : {};
+console.log(resolvers);
+
 export const client = new ApolloClient({
+  resolvers: resolvers,
   typeDefs,
   cache,
   link: from([errorLink, authLink, splitLink]),
