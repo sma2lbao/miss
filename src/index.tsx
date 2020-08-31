@@ -6,6 +6,8 @@ import * as serviceWorker from "./serviceWorker";
 import * as firebase from "firebase/app";
 import "firebase/analytics";
 
+console.log(process.env.NODE_ENV);
+
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
