@@ -1,6 +1,6 @@
 import Message from "@/components/base/Message";
 import * as Sentry from "@sentry/browser";
-import { ApolloClient, HttpLink, from, split } from "@apollo/client";
+import { ApolloClient, HttpLink, from, split, Resolvers } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/link-context";
 import { onError } from "@apollo/link-error";
@@ -64,12 +64,17 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 //   uri: process.env.REACT_APP_UPLOAD_URL
 // });
 
-const resolvers = process.env.NODE_ENV === "mock" ? (mockResolvers as any) : {};
+console.log(process.env);
+
+const resolvers = process.env.NODE_ENV === "mock" ? mockResolvers : {};
+
+console.log(resolvers);
 
 export const client = new ApolloClient({
-  resolvers: resolvers,
+  resolvers: resolvers as Resolvers,
   typeDefs,
   cache,
   link: from([errorLink, authLink, splitLink]),
   connectToDevTools: true
 });
+console.log(client);
