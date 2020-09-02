@@ -11,6 +11,13 @@ type SnackbarProps = {
 const mountPoint = document.createElement("div");
 document.body.appendChild(mountPoint);
 
+const ShowSnackbar = (props: SnackbarProps) => {
+  const { enqueueSnackbar } = useSnackbar();
+  const { message, options } = props;
+  enqueueSnackbar(message, options);
+  return <div></div>;
+};
+
 export const Message = {
   success: function(msg: React.ReactNode) {
     this.toast(msg, { variant: "success" });
@@ -25,16 +32,13 @@ export const Message = {
     this.toast(msg, { variant: "error" });
   },
   toast: function(msg: React.ReactNode, opts?: OptionsObject | undefined) {
-    const ShowSnackbar = (props: SnackbarProps) => {
-      const { enqueueSnackbar } = useSnackbar();
-      const { message, options } = props;
-      enqueueSnackbar(message, options);
-      return null;
-    };
+    console.log("msg: ", msg, opts, mountPoint);
     ReactDOM.render(
-      <SnackbarProvider maxSnack={3}>
-        <ShowSnackbar message={msg} options={opts} />
-      </SnackbarProvider>,
+      <div>
+        <SnackbarProvider maxSnack={3}>
+          <ShowSnackbar message={msg} options={opts} />
+        </SnackbarProvider>
+      </div>,
       mountPoint
     );
   }

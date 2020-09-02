@@ -45,6 +45,7 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
+    console.log("graphQLErrors", graphQLErrors);
     graphQLErrors.forEach(({ message, locations, path }) => {
       Message.error(message || "服务器繁忙");
       Sentry.captureMessage(message);
@@ -64,9 +65,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 //   uri: process.env.REACT_APP_UPLOAD_URL
 // });
 
-console.log(process.env);
+console.log(process.env.REACT_APP_ENV);
 
-const resolvers = process.env.NODE_ENV === "mock" ? mockResolvers : {};
+const resolvers = process.env.REACT_APP_ENV === "mock" ? mockResolvers : {};
 
 console.log(resolvers);
 

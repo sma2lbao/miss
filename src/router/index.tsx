@@ -6,6 +6,7 @@ import {
   // MainWithoutSidebar as SecondaryLayout,
 } from "../layouts";
 import Home from "@/views/Home";
+import H5NotSupported from "@/views/public/H5NotSupported";
 
 const MovieHome = React.lazy(() => import("@/views/movies/MovieHome"));
 const TVHome = React.lazy(() => import("@/views/tvs/TVHome"));
@@ -23,9 +24,6 @@ const Forbidden = React.lazy(() => import("@/views/public/Forbidden"));
 const InternalServerError = React.lazy(() =>
   import("@/views/public/InternalServer")
 );
-const H5NotSupported = React.lazy(() =>
-  import("@/views/public/H5NotSupported")
-);
 const Test = React.lazy(() => import("@/views/Test"));
 
 function AppRoute() {
@@ -36,7 +34,7 @@ function AppRoute() {
     return (
       <Router>
         <Switch>
-          <Route lazy component={H5NotSupported} />
+          <Route component={H5NotSupported} />
         </Switch>
       </Router>
     );
