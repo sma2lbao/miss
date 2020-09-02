@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Tab, Box } from "@material-ui/core";
+import { Tab, Box, Tabs } from "@material-ui/core";
 import { MovieMain, Relative, Cast, About, Top } from "./modules";
 import {
   ContentScreen,
@@ -10,7 +10,6 @@ import {
 } from "@/layouts/PageLayout";
 import { useMovieQuery, MovieQuery } from "@/schema";
 import { useParams } from "react-router";
-import { TabPanel, TabContext, TabList } from "@material-ui/lab";
 import { SpecialBox } from "@/components/public/SpecialBox";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,9 +36,9 @@ export const MovieContext = React.createContext<MovieQuery | undefined>(
 );
 
 enum TabStatus {
-  INFO = "info",
-  RELATIVE = "relative",
-  ABOUT = "about"
+  INFO = 0,
+  RELATIVE = 1,
+  ABOUT = 2
 }
 
 export default function Movie() {
@@ -64,13 +63,22 @@ export default function Movie() {
           </FullScreen>
           <BodyScreen>
             <ContentScreen className={classes.main}>
-              <TabList onChange={(_, val) => setTab(val)}>
-                <Tab value={TabStatus.INFO} label="信息"></Tab>
-                <Tab value={TabStatus.RELATIVE} label="相关推荐"></Tab>
-                <Tab value={TabStatus.ABOUT} label="关于"></Tab>
-              </TabList>
+              <Tabs value={tab} onChange={(_, val) => setTab(val)}>
+                <Tab label="信息"></Tab>
+                <Tab label="相关推荐"></Tab>
+                <Tab label="关于"></Tab>
+              </Tabs>
               <div className={classes.content}>
-                <TabContext value={tab}>
+                <div hidden={tab !== TabStatus.INFO}>
+                  <MovieMain />
+                </div>
+                <div hidden={tab !== TabStatus.RELATIVE}>
+                  <Relative />
+                </div>
+                <div hidden={tab !== TabStatus.ABOUT}>
+                  <About html={data?.movie?.description || ""} />
+                </div>
+                {/* <TabContext value={tab}>
                   <TabPanel value={TabStatus.INFO}>
                     <MovieMain />
                   </TabPanel>
@@ -80,7 +88,7 @@ export default function Movie() {
                   <TabPanel value={TabStatus.ABOUT}>
                     <About html={data?.movie?.description || ""} />
                   </TabPanel>
-                </TabContext>
+                </TabContext> */}
               </div>
             </ContentScreen>
             <AiderScreen className={classes.aider}>

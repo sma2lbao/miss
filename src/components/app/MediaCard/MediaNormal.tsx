@@ -45,6 +45,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
 
   const goMovie = (e: React.MouseEvent) => {
     e.stopPropagation();
+    console.log(props);
     RouterHelper.gotoMovie(props?.id);
   };
 
@@ -90,14 +91,14 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
 };
 
 MediaNormal.defaultProps = {
-  title: "视频标题",
-  subtitle: "视频副标题",
-  create_at: new Date(),
-  duration: 3242341,
+  // title: "视频标题",
+  // subtitle: "视频副标题",
+  // create_at: new Date(),
+  // duration: 3242341,
   author: {
-    username: "sma2lbao",
-    nickname: "昵称",
-    avatar: ""
+    // username: "sma2lbao",
+    nickname: "昵称"
+    // avatar: "",
   }
 } as Partial<MediaNormalProps>;
 

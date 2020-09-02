@@ -36,6 +36,7 @@ export const CURRENT_TOPIC = gql`
 export const MOVIE_URGES = gql`
   query movieUrges {
     movie_urges {
+      id
       title
       sub_title
       cover

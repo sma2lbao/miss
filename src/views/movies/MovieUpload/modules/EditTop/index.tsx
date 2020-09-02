@@ -49,6 +49,7 @@ export const EditTop: React.RefForwardingComponent<
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const { dataset, value } = e.target;
+    console.log(e.target.dataset);
     if (dataset.key) {
       setMovie({
         ...movie,

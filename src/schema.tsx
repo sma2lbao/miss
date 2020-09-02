@@ -980,6 +980,7 @@ export type MovieUrgesQuery = {
   readonly __typename?: "Query";
   readonly movie_urges: ReadonlyArray<{
     readonly __typename?: "Movie";
+    readonly id: number | string;
     readonly title: string;
     readonly sub_title?: Maybe<string>;
     readonly cover: string;
@@ -1988,6 +1989,7 @@ export type CurrentTopicQueryResult = ApolloReactCommon.QueryResult<
 export const MovieUrgesDocument = gql`
   query movieUrges {
     movie_urges {
+      id
       title
       sub_title
       cover
