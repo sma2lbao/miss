@@ -64,7 +64,7 @@ export const EditTop: React.RefForwardingComponent<
       <div className={classes.main}>
         <Typography gutterBottom variant="h4" component="div">
           <Input
-            data-key="title"
+            inputProps={{ "data-key": "title" }}
             value={movie.title}
             onChange={handleChange}
             // placeholder="请输入名字"
@@ -72,7 +72,7 @@ export const EditTop: React.RefForwardingComponent<
         </Typography>
         <Typography gutterBottom variant="subtitle1" component="div">
           <Input
-            data-key="sub_title"
+            inputProps={{ "data-key": "sub_title" }}
             value={movie.sub_title}
             onChange={handleChange}
             // placeholder="请输入名字"
@@ -82,7 +82,7 @@ export const EditTop: React.RefForwardingComponent<
         <Typography variant="body2" component="div">
           <Input
             rows={4}
-            data-key="description"
+            inputProps={{ "data-key": "description" }}
             value={movie.description}
             onChange={handleChange}
             // placeholder="请输入名字"
