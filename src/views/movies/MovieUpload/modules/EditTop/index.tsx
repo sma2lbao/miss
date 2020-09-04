@@ -2,13 +2,27 @@ import * as React from "react";
 import { Image } from "@/components/base/Image";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography, Button, Box, Input } from "@material-ui/core";
+import {
+  Typography,
+  Button,
+  Box,
+  Input,
+  GridList,
+  GridListTile
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: "relative",
       width: "100%"
+    },
+    aider: {
+      position: "absolute",
+      left: 0,
+      top: 0,
+      bottom: 0,
+      width: "50%"
     },
     main: {
       position: "absolute",
@@ -17,8 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "50%",
       padding: theme.spacing(0, 8),
       transform: "translate(0, -50%)",
-      color: "#fff"
-    }
+      color: "#fff",
+      display: "flex",
+      flexDirection: "column"
+    },
+    posters: {}
   })
 );
 
@@ -40,6 +57,7 @@ export const EditTop: React.RefForwardingComponent<
     sub_title: "",
     description: ""
   });
+  const [posters, setPosters] = React.useState([]);
 
   React.useImperativeHandle(ref, () => ({
     movie
@@ -61,6 +79,18 @@ export const EditTop: React.RefForwardingComponent<
   return (
     <div className={classes.root}>
       <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
+      <div className={classes.aider}>
+        <GridList className={classes.posters} cols={1}>
+          {posters.map((poster, idx) => (
+            <GridListTile key={poster} cols={1}>
+              <img src={poster} alt={"poster" + idx} />
+            </GridListTile>
+          ))}
+          <GridListTile cols={1}>
+            <img alt="add poster" />
+          </GridListTile>
+        </GridList>
+      </div>
       <div className={classes.main}>
         <Typography gutterBottom variant="h4" component="div">
           <Input
