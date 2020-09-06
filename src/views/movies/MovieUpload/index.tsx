@@ -50,6 +50,7 @@ export const MovieUpload: React.FC = () => {
     // const mainFields = mainRef.current;
     // const aboutFields = aboutRef.current;
     const castFields = castRef.current;
+    console.log(topFields, castFields);
 
     create_movie({
       variables: {

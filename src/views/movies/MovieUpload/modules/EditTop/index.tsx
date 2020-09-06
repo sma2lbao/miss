@@ -57,7 +57,7 @@ export const EditTop: React.RefForwardingComponent<
     sub_title: "",
     description: ""
   });
-  const [posters, setPosters] = React.useState([]);
+  const [posters, setPosters] = React.useState<string[]>([]);
 
   React.useImperativeHandle(ref, () => ({
     movie
@@ -76,6 +76,13 @@ export const EditTop: React.RefForwardingComponent<
     }
   };
 
+  const handleAddPoster = () => {
+    const imageUrl = prompt("请输入图片地址");
+    if (imageUrl) {
+      setPosters([...posters, imageUrl]);
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
@@ -86,7 +93,7 @@ export const EditTop: React.RefForwardingComponent<
               <img src={poster} alt={"poster" + idx} />
             </GridListTile>
           ))}
-          <GridListTile cols={1}>
+          <GridListTile cols={1} onClick={handleAddPoster}>
             <img alt="add poster" />
           </GridListTile>
         </GridList>
@@ -97,7 +104,7 @@ export const EditTop: React.RefForwardingComponent<
             inputProps={{ "data-key": "title" }}
             value={movie.title}
             onChange={handleChange}
-            // placeholder="请输入名字"
+            placeholder="请输入电影名"
           />
         </Typography>
         <Typography gutterBottom variant="subtitle1" component="div">
@@ -105,7 +112,7 @@ export const EditTop: React.RefForwardingComponent<
             inputProps={{ "data-key": "sub_title" }}
             value={movie.sub_title}
             onChange={handleChange}
-            // placeholder="请输入名字"
+            placeholder="请输入副标题"
           />
         </Typography>
         {/* <div></div> */}
@@ -115,7 +122,7 @@ export const EditTop: React.RefForwardingComponent<
             inputProps={{ "data-key": "description" }}
             value={movie.description}
             onChange={handleChange}
-            // placeholder="请输入名字"
+            placeholder="请输入电影描述..."
           />
         </Typography>
         <Box mt={3}>
