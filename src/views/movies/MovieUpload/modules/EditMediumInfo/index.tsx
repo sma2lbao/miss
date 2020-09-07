@@ -56,7 +56,7 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
   const { onSave, onCancel } = props;
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(props.open);
+  const [open, setOpen] = React.useState(false);
   const [medium, setMedium] = React.useState({
     name: "",
     url: "",
@@ -64,6 +64,21 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
     description: "",
     cover: ""
   });
+
+  React.useEffect(() => {
+    setOpen(props.open);
+  }, [props.open]);
+
+  const reset = () => {
+    setOpen(false);
+    setMedium({
+      name: "",
+      url: "",
+      alias_name: "",
+      description: "",
+      cover: ""
+    });
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -99,20 +114,25 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
 
   const handleSave = () => {
     onSave && onSave(medium);
+    handleCancle();
   };
 
   const handleCancle = () => {
     setOpen(false);
     onCancel && onCancel();
+    reset();
   };
 
   return (
     <div>
       <Dialog open={open} fullScreen onClose={handleCancle}>
-        <AppBar>
+        <AppBar position="relative">
           <Toolbar>
             <Button onClick={handleSave} color="inherit">
               save
+            </Button>
+            <Button onClick={handleCancle} color="inherit">
+              cancle
             </Button>
           </Toolbar>
         </AppBar>

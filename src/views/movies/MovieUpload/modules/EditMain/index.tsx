@@ -67,7 +67,11 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
         <Typography variant="subtitle1">精彩点评</Typography>
       </Box> */}
         </Box>
-        <EditMediumInfo open={openMedium} onSave={handleSave} />
+        <EditMediumInfo
+          open={openMedium}
+          onSave={handleSave}
+          onCancel={() => setOpenMedium(false)}
+        />
       </>
     );
   }

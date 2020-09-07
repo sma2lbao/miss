@@ -16,7 +16,7 @@ export const NormalEditor = React.forwardRef<
 
   React.useImperativeHandle(ref, () => ({
     getRawString: () => {
-      return convertToRaw(editorState.getCurrentContent());
+      return JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     }
   }));
 
