@@ -1,19 +1,24 @@
 import * as React from "react";
-import { Editor, EditorState } from "draft-js";
+import { Editor, EditorState, convertFromRaw, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
-import { BaseEditorProps } from "./editor";
+import { BaseEditorProps, BaseEditorHandles } from "./editor";
 
-export const NormalEditor: React.FC<BaseEditorProps> = (
-  props: BaseEditorProps
-) => {
-  //   const { value, onChange } = props;
+export const NormalEditor = React.forwardRef<
+  BaseEditorHandles,
+  BaseEditorProps
+>((props, ref) => {
+  const { raw } = props;
   const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty()
+    raw
+      ? EditorState.createWithContent(convertFromRaw(JSON.parse(raw)))
+      : EditorState.createEmpty()
   );
 
-  const handleChange = (editorState: EditorState) => {
-    setEditorState(editorState);
-  };
+  React.useImperativeHandle(ref, () => ({
+    getRawString: () => {
+      return convertToRaw(editorState.getCurrentContent());
+    }
+  }));
 
-  return <Editor editorState={editorState} onChange={handleChange} />;
-};
+  return <Editor editorState={editorState} onChange={setEditorState} />;
+});

@@ -28,36 +28,35 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface EditMainHandles {}
 
-export const EditMain: React.RefForwardingComponent<
-  EditMainHandles,
-  any
-> = React.forwardRef((props, ref) => {
-  const classes = useStyles();
-  const [openMedium, setOpenMedium] = React.useState(false);
+export const EditMain = React.forwardRef<EditMainHandles, unknown>(
+  (props, ref) => {
+    const classes = useStyles();
+    const [openMedium, setOpenMedium] = React.useState(false);
 
-  React.useImperativeHandle(ref, () => ({}));
+    React.useImperativeHandle(ref, () => ({}));
 
-  return (
-    <>
-      <Box className={classes.root}>
-        <Box className={classes.box}>
-          <Typography variant="subtitle1" gutterBottom>
-            相关资源
-          </Typography>
-          <GridList cellHeight="auto" cols={4}>
-            <GridListTile cols={1}>
-              <MediaNormal />
-            </GridListTile>
-            <Button onClick={() => setOpenMedium(true)}>添加</Button>
-          </GridList>
-        </Box>
-        {/* <Box className={classes.box}>
+    return (
+      <>
+        <Box className={classes.root}>
+          <Box className={classes.box}>
+            <Typography variant="subtitle1" gutterBottom>
+              相关资源
+            </Typography>
+            <GridList cellHeight="auto" cols={4}>
+              <GridListTile cols={1}>
+                <MediaNormal />
+              </GridListTile>
+              <Button onClick={() => setOpenMedium(true)}>添加</Button>
+            </GridList>
+          </Box>
+          {/* <Box className={classes.box}>
         <Typography variant="subtitle1">精彩点评</Typography>
       </Box> */}
-      </Box>
-      <EditMediumInfo open={openMedium} />
-    </>
-  );
-});
+        </Box>
+        <EditMediumInfo open={openMedium} />
+      </>
+    );
+  }
+);
 
 export default EditMain;

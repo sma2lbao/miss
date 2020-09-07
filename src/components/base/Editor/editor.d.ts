@@ -1,5 +1,11 @@
 export interface BaseEditorProps {
-  value?: string;
+  raw?: string;
 
   onChange?: Function;
 }
+
+export interface BaseEditorHandles {
+  getRawString: Function;
+}
+
+export interface EditorHandles extends BaseEditorHandles {}
