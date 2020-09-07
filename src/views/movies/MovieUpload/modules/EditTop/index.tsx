@@ -56,9 +56,20 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
       description: ""
     });
     const [posters, setPosters] = React.useState<string[]>([]);
+    const [cover, setCover] = React.useState<string>("");
+
+    React.useEffect(() => {
+      if (posters && posters.length > 0) {
+        if (!cover || !posters.includes(cover)) setCover(posters[0]);
+      } else {
+        setCover("");
+      }
+    }, [cover, posters]);
 
     React.useImperativeHandle(ref, () => ({
-      ...movie
+      ...movie,
+      posters,
+      cover
     }));
 
     const handleChange = (
@@ -74,9 +85,31 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
     };
 
     const handleAddPoster = () => {
-      const imageUrl = prompt("请输入图片地址");
-      if (imageUrl) {
+      const imageUrl = prompt("image url.");
+      if (imageUrl && !posters.includes(imageUrl)) {
         setPosters([...posters, imageUrl]);
+      }
+    };
+
+    const handleRemovePoster = (
+      e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+      const result = window.confirm("delete?");
+      if (result) {
+        const { dataset } = e.currentTarget;
+        if (dataset.idx) {
+          posters.splice(+dataset.idx, 1);
+          setPosters([...posters]);
+        }
+      }
+    };
+
+    const handleChangeCover = (
+      e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+      const { dataset } = e.currentTarget;
+      if (dataset.idx) {
+        setCover(posters[dataset.idx]);
       }
     };
 
@@ -88,6 +121,12 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
             {posters.map((poster, idx) => (
               <GridListTile key={poster} cols={1}>
                 <img src={poster} alt={"poster" + idx} />
+                <div data-idx={idx} onClick={handleRemovePoster}>
+                  remove poster
+                </div>
+                <div data-idx={idx} onClick={handleChangeCover}>
+                  {cover === poster ? "is cover" : "isn't cover"}
+                </div>
               </GridListTile>
             ))}
             <GridListTile cols={1} onClick={handleAddPoster}>
