@@ -7,7 +7,8 @@ import {
   Box,
   Theme,
   makeStyles,
-  createStyles
+  createStyles,
+  Input
 } from "@material-ui/core";
 import {
   FullScreen,
@@ -15,7 +16,8 @@ import {
   ContentScreen,
   AiderScreen
 } from "@/layouts/PageLayout";
-import { EditMediumSource } from "./EditMediumSource";
+import { Image } from "@/components/base/Image";
+import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,29 +37,81 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2, 4),
       height: "100%",
       overflow: "auto"
-    }
+    },
+    sourceWrap: {}
   })
 );
 
 export interface EditMediumInfoProp {
   open: boolean;
+
+  onSave?(medium: unknown): void;
+
+  onCancel?(): void;
 }
 
 export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
   props: EditMediumInfoProp
 ) => {
+  const { onSave, onCancel } = props;
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(props.open);
-  const handleClose = () => {
+  const [medium, setMedium] = React.useState({
+    name: "",
+    url: "",
+    alias_name: "",
+    description: "",
+    cover: ""
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const { dataset, value } = e.target;
+    if (dataset.key) {
+      setMedium({
+        ...medium,
+        [dataset.key]: value
+      });
+    }
+  };
+
+  const handleChangeCover = () => {
+    const imageUrl = prompt("image url.");
+    if (imageUrl) {
+      setMedium({
+        ...medium,
+        cover: imageUrl
+      });
+    }
+  };
+
+  const handleChangeSource = () => {
+    const sourceUrl = prompt("source url.");
+    if (sourceUrl) {
+      setMedium({
+        ...medium,
+        cover: sourceUrl
+      });
+    }
+  };
+
+  const handleSave = () => {
+    onSave && onSave(medium);
+  };
+
+  const handleCancle = () => {
     setOpen(false);
+    onCancel && onCancel();
   };
 
   return (
     <div>
-      <Dialog open={open} fullScreen onClose={handleClose}>
+      <Dialog open={open} fullScreen onClose={handleCancle}>
         <AppBar>
           <Toolbar>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button onClick={handleSave} color="inherit">
               save
             </Button>
           </Toolbar>
@@ -65,13 +119,36 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
         <Box className={classes.root}>
           <FullScreen>
             <BodyScreen>
-              <EditMediumSource />
+              <div className={classes.sourceWrap}>
+                <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
+                <div onClick={handleChangeCover}>add cover</div>
+                <div onClick={handleChangeSource}>add source</div>
+              </div>
             </BodyScreen>
           </FullScreen>
           <BodyScreen className={classes.body}>
             <ContentScreen className={classes.content}>
               {/* <VideoInfo /> */}
               {/* <NextPlay /> */}
+              <Input
+                inputProps={{ "data-key": "name" }}
+                value={medium.name}
+                onChange={handleChange}
+                placeholder="name"
+              />
+              <Input
+                inputProps={{ "data-key": "alias_name" }}
+                value={medium.alias_name}
+                onChange={handleChange}
+                placeholder="alias_name"
+              />
+              <Input
+                rows={4}
+                inputProps={{ "data-key": "description" }}
+                value={medium.description}
+                onChange={handleChange}
+                placeholder="description..."
+              />
             </ContentScreen>
             <AiderScreen sticky className={classes.aider}>
               {/* <Comment /> */}

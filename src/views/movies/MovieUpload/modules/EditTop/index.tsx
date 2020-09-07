@@ -45,6 +45,10 @@ export interface EditTopHandles {
   sub_title?: string;
 
   description?: string;
+
+  posters?: string[];
+
+  cover: string;
 }
 
 export const EditTop = React.forwardRef<EditTopHandles, unknown>(

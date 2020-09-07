@@ -1,7 +1,9 @@
 export interface BaseEditorProps {
   raw?: string;
 
-  onChange?: Function;
+  placeholder?: string;
+
+  onBlur?(e: SyntheticEvent): void;
 }
 
 export interface BaseEditorHandles {

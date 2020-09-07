@@ -7,7 +7,7 @@ export const NormalEditor = React.forwardRef<
   BaseEditorHandles,
   BaseEditorProps
 >((props, ref) => {
-  const { raw } = props;
+  const { raw, onBlur, placeholder } = props;
   const [editorState, setEditorState] = React.useState(() =>
     raw
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(raw)))
@@ -20,5 +20,12 @@ export const NormalEditor = React.forwardRef<
     }
   }));
 
-  return <Editor editorState={editorState} onChange={setEditorState} />;
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      onBlur={onBlur}
+      placeholder={placeholder}
+    />
+  );
 });

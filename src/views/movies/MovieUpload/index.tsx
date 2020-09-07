@@ -47,8 +47,8 @@ export const MovieUpload: React.FC = () => {
 
   const handleCreateMovie = () => {
     const topFields = topRef.current;
-    // const mainFields = mainRef.current;
-    // const aboutFields = aboutRef.current;
+    const mainFields = mainRef.current;
+    const aboutFields = aboutRef.current;
     const castFields = castRef.current;
     console.log(topFields, castFields);
 
@@ -56,9 +56,12 @@ export const MovieUpload: React.FC = () => {
       variables: {
         movie: {
           title: topFields?.title || "",
-          cover: "",
+          cover: topFields?.cover || "",
+          posters: topFields?.posters,
           description: topFields?.description,
-          credits: castFields?.credits
+          credits: castFields?.credits,
+          about: aboutFields?.about,
+          sources: mainFields?.mediums
         }
       }
     });

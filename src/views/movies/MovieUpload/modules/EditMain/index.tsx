@@ -26,14 +26,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface EditMainHandles {}
+export interface EditMainHandles {
+  mediums: any[];
+}
 
 export const EditMain = React.forwardRef<EditMainHandles, unknown>(
   (props, ref) => {
     const classes = useStyles();
     const [openMedium, setOpenMedium] = React.useState(false);
+    const [mediums, setMediums] = React.useState<any>([]);
 
-    React.useImperativeHandle(ref, () => ({}));
+    React.useImperativeHandle(ref, () => ({
+      mediums: mediums
+    }));
+
+    const handleSave = medium => {
+      setMediums([...mediums, medium]);
+    };
 
     return (
       <>
@@ -43,9 +52,14 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
               相关资源
             </Typography>
             <GridList cellHeight="auto" cols={4}>
-              <GridListTile cols={1}>
-                <MediaNormal />
-              </GridListTile>
+              {mediums.map((item, idx) => {
+                return (
+                  <GridListTile cols={1} key={idx}>
+                    <MediaNormal {...item} />
+                  </GridListTile>
+                );
+              })}
+
               <Button onClick={() => setOpenMedium(true)}>添加</Button>
             </GridList>
           </Box>
@@ -53,7 +67,7 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
         <Typography variant="subtitle1">精彩点评</Typography>
       </Box> */}
         </Box>
-        <EditMediumInfo open={openMedium} />
+        <EditMediumInfo open={openMedium} onSave={handleSave} />
       </>
     );
   }
