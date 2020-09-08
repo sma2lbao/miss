@@ -37,7 +37,6 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "prestart": "nvm use 12.14.0",
     "start": "react-app-rewired start",
     "start:mock": "env-cmd -f .env.mock.local react-app-rewired start",
     "build": "react-app-rewired build",

@@ -10,7 +10,7 @@ import {
   GridListTile
 } from "@material-ui/core";
 
-import { useEditableInput } from "@/components/app/Input";
+import { useEditableInput, EditableInput } from "@/components/app/Input";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,17 @@ const useStyles = makeStyles((theme: Theme) =>
       left: 0,
       top: 0,
       bottom: 0,
-      width: "50%"
+      width: "45%",
+      padding: theme.spacing(8)
+    },
+    aiderContent: {
+      width: "50%",
+      padding: theme.spacing(2),
+      borderRadius: theme.shape.borderRadius,
+      height: "100%",
+      background: "rgba(0, 0, 0, .1)",
+      backdropFilter: "blur(8px)",
+      overflow: "auto"
     },
     main: {
       position: "absolute",
@@ -36,7 +46,16 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column"
     },
-    posters: {}
+    mainContent: {
+      background: "rgba(0, 0, 0, .1)",
+      backdropFilter: "blur(8px)",
+      padding: theme.spacing(4),
+      borderRadius: theme.shape.borderRadius
+    },
+    posters: {},
+    posterTool: {
+      display: "none"
+    }
   })
 );
 
@@ -55,9 +74,9 @@ export interface EditTopHandles {
 export const EditTop = React.forwardRef<EditTopHandles, unknown>(
   (props, ref) => {
     const classes = useStyles();
-    const [title, TitleInput] = useEditableInput("");
-    const [sub_title, SubTitleInput] = useEditableInput("");
-    const [description, DescriptionInput] = useEditableInput("");
+    const [title, setTitle] = useEditableInput("");
+    const [sub_title, setSubTitle] = useEditableInput("");
+    const [description, setDescription] = useEditableInput("");
     const [posters, setPosters] = React.useState<string[]>([]);
     const [cover, setCover] = React.useState<string>("");
 
@@ -110,39 +129,60 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
       <div className={classes.root}>
         <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
         <div className={classes.aider}>
-          <GridList className={classes.posters} cols={1}>
-            {posters.map((poster, idx) => (
-              <GridListTile key={poster} cols={1}>
-                <img src={poster} alt={"poster" + idx} />
-                <div data-idx={idx} onClick={handleRemovePoster}>
-                  remove poster
-                </div>
-                <div data-idx={idx} onClick={handleChangeCover}>
-                  {cover === poster ? "is cover" : "isn't cover"}
-                </div>
+          <div className={classes.aiderContent}>
+            <GridList cellHeight="auto" className={classes.posters} cols={1}>
+              {posters.map((poster, idx) => (
+                <GridListTile key={poster} cols={1}>
+                  <Image
+                    aspectRatio={16 / 9}
+                    src={poster}
+                    alt={"poster" + idx}
+                  />
+                  <div className={classes.posterTool}>
+                    <div data-idx={idx} onClick={handleRemovePoster}>
+                      remove poster
+                    </div>
+                    <div data-idx={idx} onClick={handleChangeCover}>
+                      {cover === poster ? "is cover" : "isn't cover"}
+                    </div>
+                  </div>
+                </GridListTile>
+              ))}
+              <GridListTile cols={1} onClick={handleAddPoster}>
+                <img alt="add poster" />
               </GridListTile>
-            ))}
-            <GridListTile cols={1} onClick={handleAddPoster}>
-              <img alt="add poster" />
-            </GridListTile>
-          </GridList>
+            </GridList>
+          </div>
         </div>
         <div className={classes.main}>
-          <Typography gutterBottom variant="h4" component="div">
-            <TitleInput placeholder="movie title" />
-          </Typography>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            <SubTitleInput placeholder="请输入副标题" />
-          </Typography>
-          {/* <div></div> */}
-          <Typography variant="body2" component="div">
-            <DescriptionInput placeholder="请输入电影描述..." />
-          </Typography>
-          <Box mt={3}>
-            <Button disabled size="large" variant="contained" color="primary">
-              播放
-            </Button>
-          </Box>
+          <div className={classes.mainContent}>
+            <Typography gutterBottom variant="h4" component="div">
+              <EditableInput
+                value={title}
+                onChange={setTitle}
+                placeholder="movie title"
+              />
+            </Typography>
+            <Typography gutterBottom variant="subtitle1" component="div">
+              <EditableInput
+                value={sub_title}
+                onChange={setSubTitle}
+                placeholder="请输入副标题"
+              />
+            </Typography>
+            <Typography variant="body2" component="div">
+              <EditableInput
+                value={description}
+                onChange={setDescription}
+                placeholder="请输入电影描述..."
+              />
+            </Typography>
+            <Box mt={3}>
+              <Button disabled size="large" variant="contained" color="primary">
+                播放
+              </Button>
+            </Box>
+          </div>
         </div>
       </div>
     );

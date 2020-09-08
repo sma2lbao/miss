@@ -1,10 +1,6 @@
 import * as React from "react";
-import { BaseInputAttributes } from "./input";
-import { EditableInput } from "./EditableInput";
 
-export const useEditableInput = (
-  initValue: any
-): [any, React.FC<BaseInputAttributes>] => {
+export const useEditableInput = (initValue: any): [any, any] => {
   const [value, setValue] = React.useState(initValue);
 
   const onChange = (
@@ -12,9 +8,6 @@ export const useEditableInput = (
   ) => {
     setValue(e.target.value);
   };
-  const node = (attrs: BaseInputAttributes) => {
-    return <EditableInput value={value} onChange={onChange} {...attrs} />;
-  };
 
-  return [value, node];
+  return [value, onChange];
 };
