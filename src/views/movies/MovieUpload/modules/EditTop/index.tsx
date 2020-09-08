@@ -6,10 +6,11 @@ import {
   Typography,
   Button,
   Box,
-  Input,
   GridList,
   GridListTile
 } from "@material-ui/core";
+
+import { useEditableInput } from "@/components/app/Input";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,11 +55,9 @@ export interface EditTopHandles {
 export const EditTop = React.forwardRef<EditTopHandles, unknown>(
   (props, ref) => {
     const classes = useStyles();
-    const [movie, setMovie] = React.useState({
-      title: "",
-      sub_title: "",
-      description: ""
-    });
+    const [title, TitleInput] = useEditableInput("");
+    const [sub_title, SubTitleInput] = useEditableInput("");
+    const [description, DescriptionInput] = useEditableInput("");
     const [posters, setPosters] = React.useState<string[]>([]);
     const [cover, setCover] = React.useState<string>("");
 
@@ -71,22 +70,12 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
     }, [cover, posters]);
 
     React.useImperativeHandle(ref, () => ({
-      ...movie,
+      title,
+      sub_title,
+      description,
       posters,
       cover
     }));
-
-    const handleChange = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-      const { dataset, value } = e.target;
-      if (dataset.key) {
-        setMovie({
-          ...movie,
-          [dataset.key]: value
-        });
-      }
-    };
 
     const handleAddPoster = () => {
       const imageUrl = prompt("image url.");
@@ -140,30 +129,14 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
         </div>
         <div className={classes.main}>
           <Typography gutterBottom variant="h4" component="div">
-            <Input
-              inputProps={{ "data-key": "title" }}
-              value={movie.title}
-              onChange={handleChange}
-              placeholder="请输入电影名"
-            />
+            <TitleInput placeholder="movie title" />
           </Typography>
           <Typography gutterBottom variant="subtitle1" component="div">
-            <Input
-              inputProps={{ "data-key": "sub_title" }}
-              value={movie.sub_title}
-              onChange={handleChange}
-              placeholder="请输入副标题"
-            />
+            <SubTitleInput placeholder="请输入副标题" />
           </Typography>
           {/* <div></div> */}
           <Typography variant="body2" component="div">
-            <Input
-              rows={4}
-              inputProps={{ "data-key": "description" }}
-              value={movie.description}
-              onChange={handleChange}
-              placeholder="请输入电影描述..."
-            />
+            <DescriptionInput placeholder="请输入电影描述..." />
           </Typography>
           <Box mt={3}>
             <Button disabled size="large" variant="contained" color="primary">
