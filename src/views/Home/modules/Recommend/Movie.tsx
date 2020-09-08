@@ -34,7 +34,7 @@ export default function MovieRecommend() {
         <GridList cellHeight="auto" cols={4}>
           {data.movie_urges.map((movie: any, index: number) => {
             return (
-              <Grow key={index} in timeout={index * 800}>
+              <Grow key={index} in timeout={index * 500}>
                 <GridListTile cols={movie.cols || 1}>
                   <MediaNormal key={index} {...movie} />
                 </GridListTile>
@@ -43,7 +43,21 @@ export default function MovieRecommend() {
           })}
         </GridList>
       ) : (
-        <SpecialBox loading={loading} error={!!error} />
+        <SpecialBox
+          loading={loading}
+          error={!!error}
+          loadingNode={
+            <GridList cellHeight="auto" cols={4}>
+              {new Array(8).map((_, index: number) => {
+                return (
+                  <GridListTile key={index} cols={1}>
+                    <MediaNormal loading />
+                  </GridListTile>
+                );
+              })}
+            </GridList>
+          }
+        />
       )}
     </Box>
   );

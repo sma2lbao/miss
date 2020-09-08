@@ -7,6 +7,7 @@ import Duration from "../Duration";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import moment from "moment";
 import { useRouterHelper } from "@/hooks";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +46,6 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
 
   const goMovie = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log(props);
     RouterHelper.gotoMovie(props?.id);
   };
 
@@ -53,6 +53,10 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
     e.stopPropagation();
     RouterHelper.gotoProfile(props?.author?.username);
   };
+
+  if (props.loading) {
+    return <MediaNormalLoading classes />;
+  }
 
   return (
     <Box className={classes.wrap} onClick={goMovie}>
@@ -90,16 +94,31 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   );
 };
 
-MediaNormal.defaultProps = {
-  // title: "视频标题",
-  // subtitle: "视频副标题",
-  // create_at: new Date(),
-  // duration: 3242341,
-  author: {
-    // username: "sma2lbao",
-    nickname: "昵称"
-    // avatar: "",
-  }
-} as Partial<MediaNormalProps>;
+const MediaNormalLoading = classes => {
+  return (
+    <Box className={classes.wrap}>
+      <div className={classes.cover}>
+        <Image aspectRatio={16 / 9} />
+        <Avatar className={classes.avatar}></Avatar>
+      </div>
+      <Box padding={1}>
+        <Typography variant="body2" color="textSecondary">
+          <Skeleton width="20%" />
+        </Typography>
+        <Typography variant="subtitle1" noWrap>
+          <Skeleton width="40%" />
+        </Typography>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Typography variant="caption" color="textSecondary">
+            <Skeleton width="30%" />
+          </Typography>
+          <Typography variant="caption" color="textSecondary">
+            <Skeleton width="40%" />
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
 export default MediaNormal;

@@ -16,6 +16,7 @@ export interface MediaBase {
 
 export interface MediaNormalProps extends MediaBase {
   author?: Author;
+  loading?: boolean;
 }
 
 export interface MediaOwnProps extends MediaBase {}
