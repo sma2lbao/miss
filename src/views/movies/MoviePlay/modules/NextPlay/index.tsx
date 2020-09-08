@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile, Typography, Box } from "@material-ui/core";
 import { useMovieNextUrgesByMovieQuery } from "@/schema";
 import { useParams } from "react-router-dom";

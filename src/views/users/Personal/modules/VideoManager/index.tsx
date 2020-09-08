@@ -9,7 +9,7 @@ import {
   GridListTile,
   GridList
 } from "@material-ui/core";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

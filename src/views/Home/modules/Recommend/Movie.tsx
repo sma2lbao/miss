@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile } from "@material-ui/core";
 import { useMovieUrgesQuery } from "@/schema";
 import { useRouterHelper } from "@/hooks";

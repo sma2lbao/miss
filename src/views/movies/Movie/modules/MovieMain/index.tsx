@@ -3,7 +3,7 @@ import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
 // import { Rating } from "@material-ui/lab";
 // import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 import { MovieContext } from "../..";
 import Placeholder from "@/components/base/Placeholder";
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, GridList, GridListTile } from "@material-ui/core";
-import { MediaOwn } from "@/components/app/MediaCard";
+import { MediaOwn } from "@/components/app/Media";
 import { useUserMoviesPaginatedQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import { SpecialBox } from "@/components/public/SpecialBox";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Grid, Typography, Box } from "@material-ui/core";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>

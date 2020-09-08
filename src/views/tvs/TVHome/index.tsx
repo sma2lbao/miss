@@ -6,7 +6,7 @@ import {
   GridList,
   GridListTile
 } from "@material-ui/core";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 
 export default function TVHome() {
   return (

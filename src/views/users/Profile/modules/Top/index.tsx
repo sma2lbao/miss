@@ -8,7 +8,7 @@ import {
   createStyles,
   makeStyles
 } from "@material-ui/core";
-import { MediaPlain } from "@/components/app/MediaCard";
+import { MediaPlain } from "@/components/app/Media";
 import clsx from "clsx";
 import { ProfileContext } from "../..";
 

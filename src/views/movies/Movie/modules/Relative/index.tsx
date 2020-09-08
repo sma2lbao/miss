@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 import { Box, GridListTile, GridList, Typography } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useMovieUrgesByMovieQuery } from "@/schema";

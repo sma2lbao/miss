@@ -7,7 +7,7 @@ import {
   Button
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MediaNormal } from "@/components/app/MediaCard";
+import { MediaNormal } from "@/components/app/Media";
 import { EditMediumInfo } from "../EditMediumInfo";
 // import Placeholder from "@/components/base/Placeholder";
 
