@@ -8,7 +8,8 @@ import {
   Theme,
   makeStyles,
   createStyles,
-  Input
+  Input,
+  Typography
 } from "@material-ui/core";
 import {
   FullScreen,
@@ -18,6 +19,7 @@ import {
 } from "@/layouts/PageLayout";
 import { Image } from "@/components/base/Image";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
+import { Placeholder } from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,7 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
       overflow: "auto"
     },
-    sourceWrap: {}
+    sourceWrap: {
+      width: "100%",
+      position: "relative"
+    }
   })
 );
 
@@ -150,28 +155,35 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
             <ContentScreen className={classes.content}>
               {/* <VideoInfo /> */}
               {/* <NextPlay /> */}
-              <Input
-                inputProps={{ "data-key": "name" }}
-                value={medium.name}
-                onChange={handleChange}
-                placeholder="name"
-              />
-              <Input
-                inputProps={{ "data-key": "alias_name" }}
-                value={medium.alias_name}
-                onChange={handleChange}
-                placeholder="alias_name"
-              />
-              <Input
-                rows={4}
-                inputProps={{ "data-key": "description" }}
-                value={medium.description}
-                onChange={handleChange}
-                placeholder="description..."
-              />
+              <Typography>
+                <Input
+                  inputProps={{ "data-key": "name" }}
+                  value={medium.name}
+                  onChange={handleChange}
+                  placeholder="name"
+                />
+              </Typography>
+              <Typography>
+                <Input
+                  inputProps={{ "data-key": "alias_name" }}
+                  value={medium.alias_name}
+                  onChange={handleChange}
+                  placeholder="alias_name"
+                />
+              </Typography>
+              <Typography>
+                <Input
+                  rows={4}
+                  inputProps={{ "data-key": "description" }}
+                  value={medium.description}
+                  onChange={handleChange}
+                  placeholder="description..."
+                />
+              </Typography>
             </ContentScreen>
             <AiderScreen sticky className={classes.aider}>
               {/* <Comment /> */}
+              <Placeholder title="评论区" />
             </AiderScreen>
           </BodyScreen>
         </Box>
