@@ -32,7 +32,6 @@ export const Message = {
     this.toast(msg, { variant: "error" });
   },
   toast: function(msg: React.ReactNode, opts?: OptionsObject | undefined) {
-    console.log("msg: ", msg, opts, mountPoint);
     ReactDOM.render(
       <div>
         <SnackbarProvider maxSnack={3}>

@@ -43,7 +43,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "generate": "graphql-codegen --config codegen.yml",
-    "postbuild": "react-snap"
+    "///postbuild": "react-snap"
   },
   "husky": {
     "hooks": {

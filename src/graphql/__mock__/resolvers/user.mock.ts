@@ -14,7 +14,6 @@ export default {
   // },
   Query: {
     current_topic: () => {
-      console.log("current_topic");
       return {
         title: "title",
         description: "description",

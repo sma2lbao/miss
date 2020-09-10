@@ -31,7 +31,6 @@ export default function SignIn() {
 
   const [meQuery] = useMeLazyQuery({
     onCompleted(data) {
-      console.log(data.me);
       if (!data.me.email || !data.me.uid || !data.me.username) {
         RouterHelper.gotoAuthCompletion();
       } else {

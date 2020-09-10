@@ -6,8 +6,6 @@ import * as serviceWorker from "./serviceWorker";
 import * as firebase from "firebase/app";
 import "firebase/analytics";
 
-console.log(process.env.NODE_ENV);
-
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
@@ -27,7 +25,6 @@ Sentry.init({
 
 // ReactDOM.render(<App />, document.getElementById("root"));
 const rootElement = document.getElementById("root");
-console.log("rootElement:", rootElement?.hasChildNodes());
 if (rootElement?.hasChildNodes()) {
   ReactDOM.hydrate(<App />, rootElement);
 } else {

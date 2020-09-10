@@ -23,8 +23,7 @@ export default function SignIn() {
 
   // 发送验证码
   const [send_register_email] = useSendRegisterEmailMutation({
-    onCompleted(data) {
-      console.log(data);
+    onCompleted() {
       enqueueSnackbar("发送成功");
     },
     onError(error) {

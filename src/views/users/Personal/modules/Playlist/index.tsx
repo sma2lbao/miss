@@ -71,8 +71,6 @@ export default function Playlist() {
 
   const classes = useStyles();
 
-  console.log(loadMore);
-
   return (
     <Box className={classes.root}>
       <Typography variant="h6" className={classes.title}>

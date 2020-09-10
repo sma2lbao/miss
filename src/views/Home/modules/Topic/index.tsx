@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme: Theme) =>
 function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
-  const { data } = useCurrentTopicQuery();
-  console.log(data);
+  useCurrentTopicQuery();
+  // console.log(data);
 
   return (
     <div className={classes.head}>

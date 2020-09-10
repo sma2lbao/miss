@@ -47,7 +47,6 @@ export default function MoviePlay() {
       id: id
     }
   });
-  console.log(data?.movie);
 
   return (
     <Box className={classes.root}>

@@ -13,7 +13,6 @@ jobs:
       - name: Clean temp temp directory
         run: |
           rm -rf *
-          ls -la
 
       - name: Checkout
         uses: actions/checkout@main

@@ -65,11 +65,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 //   uri: process.env.REACT_APP_UPLOAD_URL
 // });
 
-console.log(process.env.REACT_APP_ENV);
-
 const resolvers = process.env.REACT_APP_ENV === "mock" ? mockResolvers : {};
-
-console.log(resolvers);
 
 export const client = new ApolloClient({
   resolvers: resolvers as Resolvers,
