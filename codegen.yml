@@ -1,7 +1,7 @@
 overwrite: true
 schema:
-  - "http://localhost:3001/graphql"
-  # - "https://sma2lbao.cn/api/graphql"
+  # - "http://localhost:3001/graphql"
+  - "https://sma2lbao.cn/api/graphql"
   - "./src/graphql/local/schema.ts"
 documents:
   - "./src/graphql/remote/**/*.{ts,tsx}"

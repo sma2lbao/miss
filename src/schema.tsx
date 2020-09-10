@@ -90,6 +90,7 @@ export type CreateMovieMediumInput = {
   readonly name: Scalars["String"];
   readonly url: Scalars["String"];
   readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
   readonly description?: Maybe<Scalars["String"]>;
   readonly movie_id?: Maybe<Scalars["ID"]>;
@@ -105,7 +106,7 @@ export type CreateReviewInput = {
   readonly content: Scalars["String"];
   readonly author_uid?: Maybe<Scalars["ID"]>;
   readonly type: ReviewMedium;
-  readonly medium_id: Scalars["ID"];
+  readonly type_id: Scalars["ID"];
 };
 
 export type CreateTagInput = {
@@ -157,9 +158,16 @@ export type CreateVideoMediumInput = {
   readonly name: Scalars["String"];
   readonly url: Scalars["String"];
   readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
   readonly description?: Maybe<Scalars["String"]>;
   readonly video_id?: Maybe<Scalars["ID"]>;
+};
+
+export type CreateVoteInput = {
+  readonly medium_id: Scalars["Float"];
+  readonly status: VoteStatus;
+  readonly owner_uid?: Maybe<Scalars["String"]>;
 };
 
 export type DeleteFollowInput = {
@@ -308,6 +316,7 @@ export type Mutation = {
   readonly remove_follow: Follow;
   readonly create_video: Video;
   readonly add_mediums_to_video: Video;
+  readonly create_or_update_vote: Vote;
 };
 
 export type MutationCreate_TagArgs = {
@@ -409,6 +418,10 @@ export type MutationAdd_Mediums_To_VideoArgs = {
   video_id: Scalars["ID"];
 };
 
+export type MutationCreate_Or_Update_VoteArgs = {
+  vote: CreateVoteInput;
+};
+
 export type PaginatedQuery = {
   readonly first?: Maybe<Scalars["Int"]>;
   readonly after?: Maybe<Scalars["String"]>;
@@ -489,6 +502,8 @@ export type Query = {
   readonly is_following: Scalars["Boolean"];
   readonly video: Video;
   readonly videos_paginated: VideoPaginated;
+  readonly vote: Vote;
+  readonly medium_vote_count: Scalars["Int"];
 };
 
 export type QueryMovieArgs = {
@@ -527,7 +542,7 @@ export type QueryMovie_Next_Urges_By_MovieArgs = {
 
 export type QueryReviews_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
-  medium_id?: Maybe<Scalars["ID"]>;
+  type_id?: Maybe<Scalars["ID"]>;
   type?: Maybe<ReviewMedium>;
 };
 
@@ -570,6 +585,15 @@ export type QueryVideos_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
 };
 
+export type QueryVoteArgs = {
+  medium_id: Scalars["Float"];
+};
+
+export type QueryMedium_Vote_CountArgs = {
+  status: Scalars["String"];
+  medium_id: Scalars["Float"];
+};
+
 export enum Region {
   Mainland = "Mainland",
   America = "America",
@@ -596,6 +620,7 @@ export type ReviewEdge = {
 };
 
 export enum ReviewMedium {
+  Medium = "MEDIUM",
   Movie = "MOVIE"
 }
 
@@ -622,7 +647,7 @@ export type Subscription = {
 };
 
 export type SubscriptionReview_CreatedArgs = {
-  medium_id: Scalars["ID"];
+  type_id: Scalars["ID"];
   type: ReviewMedium;
 };
 
@@ -767,6 +792,23 @@ export type VideoPaginated = {
   readonly totalCount: Scalars["Int"];
 };
 
+export type Vote = {
+  readonly __typename?: "Vote";
+  readonly id: Scalars["ID"];
+  readonly status: VoteStatus;
+  readonly owner: User;
+  readonly medium: Medium;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at: Scalars["Date"];
+};
+
+export enum VoteStatus {
+  Likd = "LIKD",
+  Dislike = "DISLIKE",
+  Default = "DEFAULT"
+}
+
 export type LoginMutationVariables = Exact<{
   username: Scalars["String"];
   password: Scalars["String"];
@@ -859,6 +901,15 @@ export type AddMediumsToMovieMutation = {
       readonly name?: Maybe<string>;
     }>;
   };
+};
+
+export type Upload_File_OssMutationVariables = Exact<{
+  file: Scalars["Upload"];
+}>;
+
+export type Upload_File_OssMutation = {
+  readonly __typename?: "Mutation";
+  readonly upload_file_oss: string;
 };
 
 export type CreateFollowMutationVariables = Exact<{
@@ -1256,7 +1307,7 @@ export type UserQuery = {
 
 export type ReviewCreatedSubscriptionVariables = Exact<{
   type: ReviewMedium;
-  medium_id: Scalars["ID"];
+  type_id: Scalars["ID"];
 }>;
 
 export type ReviewCreatedSubscription = {
@@ -1649,6 +1700,54 @@ export type AddMediumsToMovieMutationResult = ApolloReactCommon.MutationResult<
 export type AddMediumsToMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
   AddMediumsToMovieMutation,
   AddMediumsToMovieMutationVariables
+>;
+export const Upload_File_OssDocument = gql`
+  mutation upload_file_oss($file: Upload!) {
+    upload_file_oss(file: $file)
+  }
+`;
+export type Upload_File_OssMutationFn = ApolloReactCommon.MutationFunction<
+  Upload_File_OssMutation,
+  Upload_File_OssMutationVariables
+>;
+
+/**
+ * __useUpload_File_OssMutation__
+ *
+ * To run a mutation, you first call `useUpload_File_OssMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpload_File_OssMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadFileOssMutation, { data, loading, error }] = useUpload_File_OssMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useUpload_File_OssMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    Upload_File_OssMutation,
+    Upload_File_OssMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    Upload_File_OssMutation,
+    Upload_File_OssMutationVariables
+  >(Upload_File_OssDocument, baseOptions);
+}
+export type Upload_File_OssMutationHookResult = ReturnType<
+  typeof useUpload_File_OssMutation
+>;
+export type Upload_File_OssMutationResult = ApolloReactCommon.MutationResult<
+  Upload_File_OssMutation
+>;
+export type Upload_File_OssMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  Upload_File_OssMutation,
+  Upload_File_OssMutationVariables
 >;
 export const CreateFollowDocument = gql`
   mutation createFollow($follow: CreateFollowInput!) {
@@ -2658,8 +2757,8 @@ export type UserQueryResult = ApolloReactCommon.QueryResult<
   UserQueryVariables
 >;
 export const ReviewCreatedDocument = gql`
-  subscription reviewCreated($type: ReviewMedium!, $medium_id: ID!) {
-    review_created(type: $type, medium_id: $medium_id) {
+  subscription reviewCreated($type: ReviewMedium!, $type_id: ID!) {
+    review_created(type: $type, type_id: $type_id) {
       content
       create_at
       author {
@@ -2683,7 +2782,7 @@ export const ReviewCreatedDocument = gql`
  * const { data, loading, error } = useReviewCreatedSubscription({
  *   variables: {
  *      type: // value for 'type'
- *      medium_id: // value for 'medium_id'
+ *      type_id: // value for 'type_id'
  *   },
  * });
  */
