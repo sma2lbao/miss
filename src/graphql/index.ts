@@ -4,7 +4,7 @@ import { ApolloClient, HttpLink, from, split, Resolvers } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/link-context";
 import { onError } from "@apollo/link-error";
-// import { createUploadLink } from "apollo-upload-client";
+import { createUploadLink } from "apollo-upload-client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { cache } from "./cache";
 import { typeDefs } from "./local/schema";
@@ -61,9 +61,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
-// const uploadLink = createUploadLink({
-//   uri: process.env.REACT_APP_UPLOAD_URL
-// });
+const uploadLink = createUploadLink({
+  uri: process.env.REACT_APP_UPLOAD_URL
+});
 
 const resolvers = process.env.REACT_APP_ENV === "mock" ? mockResolvers : {};
 
@@ -71,7 +71,6 @@ export const client = new ApolloClient({
   resolvers: resolvers as Resolvers,
   typeDefs,
   cache,
-  link: from([errorLink, authLink, splitLink]),
+  link: from([errorLink, uploadLink, authLink, splitLink]),
   connectToDevTools: true
 });
-console.log(client);

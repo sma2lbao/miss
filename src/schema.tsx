@@ -903,11 +903,11 @@ export type AddMediumsToMovieMutation = {
   };
 };
 
-export type Upload_File_OssMutationVariables = Exact<{
+export type UploadFileOssMutationVariables = Exact<{
   file: Scalars["Upload"];
 }>;
 
-export type Upload_File_OssMutation = {
+export type UploadFileOssMutation = {
   readonly __typename?: "Mutation";
   readonly upload_file_oss: string;
 };
@@ -1701,53 +1701,53 @@ export type AddMediumsToMovieMutationOptions = ApolloReactCommon.BaseMutationOpt
   AddMediumsToMovieMutation,
   AddMediumsToMovieMutationVariables
 >;
-export const Upload_File_OssDocument = gql`
-  mutation upload_file_oss($file: Upload!) {
+export const UploadFileOssDocument = gql`
+  mutation uploadFileOss($file: Upload!) {
     upload_file_oss(file: $file)
   }
 `;
-export type Upload_File_OssMutationFn = ApolloReactCommon.MutationFunction<
-  Upload_File_OssMutation,
-  Upload_File_OssMutationVariables
+export type UploadFileOssMutationFn = ApolloReactCommon.MutationFunction<
+  UploadFileOssMutation,
+  UploadFileOssMutationVariables
 >;
 
 /**
- * __useUpload_File_OssMutation__
+ * __useUploadFileOssMutation__
  *
- * To run a mutation, you first call `useUpload_File_OssMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpload_File_OssMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUploadFileOssMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadFileOssMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [uploadFileOssMutation, { data, loading, error }] = useUpload_File_OssMutation({
+ * const [uploadFileOssMutation, { data, loading, error }] = useUploadFileOssMutation({
  *   variables: {
  *      file: // value for 'file'
  *   },
  * });
  */
-export function useUpload_File_OssMutation(
+export function useUploadFileOssMutation(
   baseOptions?: ApolloReactHooks.MutationHookOptions<
-    Upload_File_OssMutation,
-    Upload_File_OssMutationVariables
+    UploadFileOssMutation,
+    UploadFileOssMutationVariables
   >
 ) {
   return ApolloReactHooks.useMutation<
-    Upload_File_OssMutation,
-    Upload_File_OssMutationVariables
-  >(Upload_File_OssDocument, baseOptions);
+    UploadFileOssMutation,
+    UploadFileOssMutationVariables
+  >(UploadFileOssDocument, baseOptions);
 }
-export type Upload_File_OssMutationHookResult = ReturnType<
-  typeof useUpload_File_OssMutation
+export type UploadFileOssMutationHookResult = ReturnType<
+  typeof useUploadFileOssMutation
 >;
-export type Upload_File_OssMutationResult = ApolloReactCommon.MutationResult<
-  Upload_File_OssMutation
+export type UploadFileOssMutationResult = ApolloReactCommon.MutationResult<
+  UploadFileOssMutation
 >;
-export type Upload_File_OssMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  Upload_File_OssMutation,
-  Upload_File_OssMutationVariables
+export type UploadFileOssMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  UploadFileOssMutation,
+  UploadFileOssMutationVariables
 >;
 export const CreateFollowDocument = gql`
   mutation createFollow($follow: CreateFollowInput!) {
