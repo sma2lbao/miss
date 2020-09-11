@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const useEditableInput = (initValue: any): [any, any] => {
+export const useEditableInput = (initValue?: any): [any, any] => {
   const [value, setValue] = React.useState(initValue);
 
   const onChange = (

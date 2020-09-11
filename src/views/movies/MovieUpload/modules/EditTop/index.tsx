@@ -158,6 +158,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
           <div className={classes.mainContent}>
             <Typography gutterBottom variant="h4" component="div">
               <EditableInput
+                variant="h4"
                 value={title}
                 onChange={setTitle}
                 placeholder="movie title"
