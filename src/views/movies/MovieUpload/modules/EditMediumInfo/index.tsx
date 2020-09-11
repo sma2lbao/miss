@@ -20,6 +20,8 @@ import {
 import { Image } from "@/components/base/Image";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { Placeholder } from "@/components/base/Placeholder";
+import { useEditableInput, EditableInput } from "@/components/app/Input";
+import { FileUpload } from "@/components/app/FileUpload";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,13 +64,11 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [medium, setMedium] = React.useState({
-    name: "",
-    url: "",
-    alias_name: "",
-    description: "",
-    cover: ""
-  });
+  const [url, setUrl] = React.useState("");
+  const [cover, setCover] = React.useState("");
+  const [name, setName] = useEditableInput("");
+  const [alias_name, setAliasName] = useEditableInput("");
+  const [description, setDescription] = useEditableInput("");
 
   React.useEffect(() => {
     setOpen(props.open);
@@ -76,49 +76,34 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
 
   const reset = () => {
     setOpen(false);
-    setMedium({
-      name: "",
-      url: "",
-      alias_name: "",
-      description: "",
-      cover: ""
-    });
+    setUrl("");
+    setCover("");
+    setName("");
+    setAliasName("");
+    setDescription("");
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    const { dataset, value } = e.target;
-    if (dataset.key) {
-      setMedium({
-        ...medium,
-        [dataset.key]: value
-      });
-    }
-  };
-
-  const handleChangeCover = () => {
-    const imageUrl = prompt("image url.");
+  const handleChangeCover = imageUrl => {
     if (imageUrl) {
-      setMedium({
-        ...medium,
-        cover: imageUrl
-      });
+      setCover(imageUrl);
     }
   };
 
-  const handleChangeSource = () => {
-    const sourceUrl = prompt("source url.");
+  const handleChangeSource = sourceUrl => {
     if (sourceUrl) {
-      setMedium({
-        ...medium,
-        cover: sourceUrl
-      });
+      setUrl(sourceUrl);
     }
   };
 
   const handleSave = () => {
-    onSave && onSave(medium);
+    onSave &&
+      onSave({
+        url,
+        cover,
+        name,
+        alias_name,
+        description
+      });
     handleCancle();
   };
 
@@ -146,8 +131,12 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
             <BodyScreen>
               <div className={classes.sourceWrap}>
                 <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
-                <div onClick={handleChangeCover}>add cover</div>
-                <div onClick={handleChangeSource}>add source</div>
+                <FileUpload onComplete={handleChangeCover}>
+                  add cover
+                </FileUpload>
+                <FileUpload onComplete={handleChangeSource}>
+                  add source
+                </FileUpload>
               </div>
             </BodyScreen>
           </FullScreen>
@@ -156,27 +145,19 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
               {/* <VideoInfo /> */}
               {/* <NextPlay /> */}
               <Typography>
-                <Input
-                  inputProps={{ "data-key": "name" }}
-                  value={medium.name}
-                  onChange={handleChange}
-                  placeholder="name"
-                />
+                <EditableInput value={name} onChange={setName} />
               </Typography>
               <Typography>
-                <Input
-                  inputProps={{ "data-key": "alias_name" }}
-                  value={medium.alias_name}
-                  onChange={handleChange}
+                <EditableInput
+                  value={alias_name}
+                  onChange={setAliasName}
                   placeholder="alias_name"
                 />
               </Typography>
               <Typography>
-                <Input
-                  rows={4}
-                  inputProps={{ "data-key": "description" }}
-                  value={medium.description}
-                  onChange={handleChange}
+                <EditableInput
+                  value={description}
+                  onChange={setDescription}
                   placeholder="description..."
                 />
               </Typography>

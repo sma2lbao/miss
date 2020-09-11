@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 import { useEditableInput, EditableInput } from "@/components/app/Input";
+import { FileUpload } from "@/components/app/FileUpload";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -96,8 +97,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
       cover
     }));
 
-    const handleAddPoster = () => {
-      const imageUrl = prompt("image url.");
+    const handleAddPoster = imageUrl => {
       if (imageUrl && !posters.includes(imageUrl)) {
         setPosters([...posters, imageUrl]);
       }
@@ -148,8 +148,8 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
                   </div>
                 </GridListTile>
               ))}
-              <GridListTile cols={1} onClick={handleAddPoster}>
-                <img alt="add poster" />
+              <GridListTile cols={1}>
+                <FileUpload onComplete={handleAddPoster}>add poster</FileUpload>
               </GridListTile>
             </GridList>
           </div>

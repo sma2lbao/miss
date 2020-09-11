@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Box, Typography, IconButton } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+// import { Skeleton } from "@material-ui/lab";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import { MediaNormal } from "@/components/app/Media";
 import SwipeableViews from "react-swipeable-views";
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
-  useCurrentTopicQuery();
+  const { data } = useCurrentTopicQuery();
   // console.log(data);
 
   return (
@@ -54,17 +54,14 @@ function Topic() {
       <div className={classes.headItem}>
         <Box>
           <Box mb={3}>
-            <Typography variant="h6" gutterBottom>
+            {/* <Typography variant="h6" gutterBottom>
               每周精选
-              {/* <Skeleton animation="wave" height="100%" width={160} /> */}
-            </Typography>
+            </Typography> */}
             <Typography variant="h5" gutterBottom>
-              古诗词
-              {/* <Skeleton animation="wave" height="100%" width={40} /> */}
+              {data?.current_topic.title}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              <Skeleton animation="wave" height="100%" width={400} />
-              <Skeleton animation="wave" height="100%" width={100} />
+              {data?.current_topic.description}
             </Typography>
           </Box>
           <Box display="flex" alignItems="center">

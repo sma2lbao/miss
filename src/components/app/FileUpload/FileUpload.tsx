@@ -3,7 +3,7 @@ import { useUploadFileOssMutation } from "@/schema";
 import { BaseFileUploadProps } from "./file-upload";
 
 export const FileUpload: React.FC<BaseFileUploadProps> = props => {
-  const { onComplete, onError, children } = props;
+  const { onComplete, onError, children, component } = props;
 
   const inputRef = React.createRef<HTMLInputElement>();
 
@@ -32,18 +32,18 @@ export const FileUpload: React.FC<BaseFileUploadProps> = props => {
     }
   };
 
+  const Tag = component || "div";
+
   return (
-    <div>
-      <div role="button" onClick={handleClick}>
-        <input
-          ref={inputRef}
-          style={{ display: "none" }}
-          type="file"
-          accept="*"
-          onChange={handleChange}
-        />
-        {children}
-      </div>
-    </div>
+    <Tag role="button" onClick={handleClick}>
+      <input
+        ref={inputRef}
+        style={{ display: "none" }}
+        type="file"
+        accept="*"
+        onChange={handleChange}
+      />
+      {children}
+    </Tag>
   );
 };
