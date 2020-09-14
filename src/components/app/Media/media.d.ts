@@ -26,3 +26,9 @@ export interface MediaPlainProps {
   cover?: string;
   duration?: number;
 }
+
+export interface WithToolProps {
+  children?: React.ReactNode;
+
+  onDelete?(): void;
+}

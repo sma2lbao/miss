@@ -24,6 +24,7 @@ import {
   Tab
 } from "@material-ui/core";
 import { useCreateMovieMutation } from "@/schema";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,13 +38,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const MovieUpload: React.FC = () => {
   const classes = useStyles();
+  const RouterHelper = useRouterHelper();
   const [tab, setTab] = React.useState(0);
   const topRef = React.createRef<EditTopHandles>();
   const mainRef = React.createRef<EditMainHandles>();
   const aboutRef = React.createRef<EditAboutHandles>();
   const castRef = React.createRef<EditCastHandles>();
 
-  const [create_movie] = useCreateMovieMutation();
+  const [create_movie] = useCreateMovieMutation({
+    onCompleted(data) {
+      window.alert("success");
+      RouterHelper.gotoHome();
+    }
+  });
 
   const handleCreateMovie = () => {
     const topFields = topRef.current;
