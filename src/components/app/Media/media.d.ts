@@ -17,9 +17,12 @@ export interface MediaBase {
 export interface MediaNormalProps extends MediaBase {
   author?: Author;
   loading?: boolean;
+  disabled?: boolean;
 }
 
-export interface MediaOwnProps extends MediaBase {}
+export interface MediaOwnProps extends MediaBase {
+  disabled?: boolean;
+}
 
 export interface MediaPlainProps {
   id?: number;
@@ -28,7 +31,5 @@ export interface MediaPlainProps {
 }
 
 export interface WithToolProps {
-  children?: React.ReactNode;
-
   onDelete?(): void;
 }

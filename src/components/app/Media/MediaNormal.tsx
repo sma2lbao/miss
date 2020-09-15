@@ -12,7 +12,10 @@ import { Skeleton } from "@material-ui/lab";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrap: {
-      width: "100%"
+      width: "100%",
+      pointerEvents: (props: MediaNormalProps) => {
+        return props.disabled || props.loading ? "none" : "auto";
+      }
     },
     cover: {
       position: "relative"
@@ -42,7 +45,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   props: MediaNormalProps
 ) => {
   const RouterHelper = useRouterHelper();
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   const goMovie = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -1,35 +1,33 @@
 import * as React from "react";
 import { WithToolProps } from "./media";
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-} from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core";
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    wrap: {
       position: "relative"
     },
-    toolbar: {
+    tool: {
       position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%"
+      left: 10,
+      top: 10
     }
-  });
+  })
+);
 
-const withTool: React.FC<WithToolProps & WithStyles<typeof styles>> = props => {
-  const { children, classes } = props;
-  return (
-    <div className={classes.root}>
-      <div>{children}</div>
-      <div className={classes.toolbar}>
-        <div>delete</div>
+export function withTool<P>(Component: React.FC<P & WithToolProps>) {
+  return (props: P & WithToolProps) => {
+    const classes = useStyles();
+    const { onDelete, ...rest } = props;
+
+    return (
+      <div className={classes.wrap}>
+        <Component {...(rest as P)} />
+        <div className={classes.tool}>
+          <div onClick={onDelete}>delete</div>
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default withStyles(styles)(withTool);
+    );
+  };
+}
+export default withTool;
