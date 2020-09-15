@@ -6,4 +6,6 @@ export interface LoadingBaseProps {
   width?: any;
 
   height?: any;
+
+  children?: React.ReactNode;
 }

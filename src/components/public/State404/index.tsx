@@ -1,14 +1,7 @@
 import * as React from "react";
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  Box,
-  Typography,
-  Button
-} from "@material-ui/core";
-import clsx from "clsx";
+import { makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 import { useRouterHelper } from "@/hooks";
+import { Exception } from "@/components/base/Exception";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,15 +11,6 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       height: "100vh",
       overflowY: "auto"
-    },
-    box: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    icon: {
-      fontSize: 120
     }
   })
 );
@@ -37,13 +21,9 @@ export const State404: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <Box className={classes.box}>
-        <i className={clsx("iconfont icon-404", classes.icon)}></i>
-        <Typography variant="h4" gutterBottom>
-          页面未找到
-        </Typography>
+      <Exception title="页面未找到">
         <Button onClick={RouterHelper.gotoHome}>返回首页</Button>
-      </Box>
+      </Exception>
     </div>
   );
 };

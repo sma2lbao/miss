@@ -1,30 +1,40 @@
 import * as React from "react";
 import { IPlaceholderProps } from "./placeholder.d";
 import clsx from "clsx";
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    icon: {
-      fontSize: 120
-    }
+    root: {
+      display: "inline-flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: (props: IPlaceholderProps) => {
+        return props.width ?? "100%";
+      },
+      height: (props: IPlaceholderProps) => {
+        return props.height ?? "100%";
+      },
+      flex: 1
+    },
+    icon: theme.custom.base.icon.large
   })
 );
 
 export const PlaceholderDefault: React.FC<IPlaceholderProps> = (
   props: IPlaceholderProps
 ) => {
-  const classes = useStyles();
-  const { title, subtitle } = props;
+  const classes = useStyles(props);
+  const { title, subtitle, children } = props;
   return (
-    <div>
+    <div className={classes.root}>
       <div>
-        <div>
-          <i className={clsx("iconfont icon-404", classes.icon)}></i>
-        </div>
-        {title && <div>{title}</div>}
-        {subtitle && <div>{subtitle}</div>}
+        <i className={clsx("iconfont icon-404", classes.icon)}></i>
       </div>
+      {title && <Typography variant="h4">{title}</Typography>}
+      {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
+      {children}
     </div>
   );
 };

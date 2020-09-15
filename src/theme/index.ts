@@ -7,7 +7,7 @@ import custom, { customOption } from "./custom";
 
 declare module "@material-ui/core/styles/createMuiTheme" {
   interface Theme {
-    custom?: customOption;
+    custom: customOption;
   }
 }
 
