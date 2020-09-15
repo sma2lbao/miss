@@ -8,6 +8,7 @@ import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
 import clsx from "clsx";
 import { useCurrentTopicQuery } from "@/schema";
+import { SpecialBox } from "@/components/public/SpecialBox";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -46,60 +47,76 @@ const useStyles = makeStyles((theme: Theme) =>
 function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
-  const { data } = useCurrentTopicQuery();
+  const { data, loading, error } = useCurrentTopicQuery();
   // console.log(data);
 
   return (
-    <div className={classes.head}>
-      <div className={classes.headItem}>
-        <Box>
-          <Box mb={3}>
-            {/* <Typography variant="h6" gutterBottom>
-              每周精选
-            </Typography> */}
-            <Typography variant="h5" gutterBottom>
-              {data?.current_topic.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {data?.current_topic.description}
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center">
+    <>
+      {data ? (
+        <div className={classes.head}>
+          <div className={classes.headItem}>
             <Box>
-              <IconButton size="small" onClick={() => setIndex(index - 1)}>
-                <KeyboardArrowLeft />
-              </IconButton>
+              <Box mb={3}>
+                {/* <Typography variant="h6" gutterBottom>
+            每周精选
+          </Typography> */}
+                <Typography variant="h5" gutterBottom>
+                  {data?.current_topic.title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {data?.current_topic.description}
+                </Typography>
+              </Box>
+              <Box display="flex" alignItems="center">
+                <Box>
+                  <IconButton size="small" onClick={() => setIndex(index - 1)}>
+                    <KeyboardArrowLeft />
+                  </IconButton>
+                </Box>
+                <div className={classes.bannerRoot}>
+                  <VirtualizeSwipeableViews
+                    className={classes.banner}
+                    index={index}
+                    onChangeIndex={index => setIndex(index)}
+                    enableMouseEvents
+                    slideRenderer={params => {
+                      // const { key } = params;
+                      // const templateIndex = ((index % 6) + 6) % 6;
+                      // console.log(mod(index, 3));
+                      const items = data?.current_topic.top_movies || [];
+                      return (
+                        <>
+                          {items.map((item, idx) => {
+                            return (
+                              <div
+                                key={idx}
+                                className={clsx(classes.bannerItem)}
+                              >
+                                <MediaNormal />
+                              </div>
+                            );
+                          })}
+                        </>
+                      );
+                    }}
+                  />
+                </div>
+                <Box>
+                  <IconButton size="small" onClick={() => setIndex(index + 1)}>
+                    <KeyboardArrowRight />
+                  </IconButton>
+                </Box>
+              </Box>
             </Box>
-            <div className={classes.bannerRoot}>
-              <VirtualizeSwipeableViews
-                className={classes.banner}
-                index={index}
-                onChangeIndex={index => setIndex(index)}
-                enableMouseEvents
-                slideRenderer={params => {
-                  const { key } = params;
-                  // const templateIndex = ((index % 6) + 6) % 6;
-                  // console.log(mod(index, 3));
-                  return (
-                    <div key={key} className={clsx(classes.bannerItem)}>
-                      <MediaNormal />
-                    </div>
-                  );
-                }}
-              />
-            </div>
-            <Box>
-              <IconButton size="small" onClick={() => setIndex(index + 1)}>
-                <KeyboardArrowRight />
-              </IconButton>
-            </Box>
-          </Box>
-        </Box>
-      </div>
-      <div className={classes.headItem}>
-        <MediaNormal />
-      </div>
-    </div>
+          </div>
+          <div className={classes.headItem}>
+            <MediaNormal />
+          </div>
+        </div>
+      ) : (
+        <SpecialBox loading={loading} error={!!error} />
+      )}
+    </>
   );
 }
 

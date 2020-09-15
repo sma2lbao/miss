@@ -51,10 +51,14 @@ export default function SignIn() {
     url: string,
     http_domain: string
   ) {
+    const width = 450;
+    const height = 450;
+    const top = (window.screen.availHeight - height) / 2;
+    const left = (window.screen.availWidth - width) / 2;
     const child = window.open(
       http_domain + url,
       platform,
-      `width=450,height=450,toolbar=0,menubar=0,location=0,status=0`
+      `width=${width},height=${height},top=${top},left=${left},toolbar=0,menubar=0,location=0,status=0`
     );
     if (child) {
       const timer = setInterval(() => {

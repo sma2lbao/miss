@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Aider() {
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
+
   const { data, loading, error } = useUserUrgesQuery();
   return (
     <>
