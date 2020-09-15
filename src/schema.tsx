@@ -982,11 +982,13 @@ export type CurrentTopicQuery = {
   readonly __typename?: "Query";
   readonly current_topic: {
     readonly __typename?: "Topic";
+    readonly id: number | string;
     readonly title: string;
     readonly description?: Maybe<string>;
     readonly top_movies?: Maybe<
       ReadonlyArray<{
         readonly __typename?: "Movie";
+        readonly id: number | string;
         readonly description?: Maybe<string>;
         readonly title: string;
         readonly sub_title?: Maybe<string>;
@@ -1006,6 +1008,7 @@ export type CurrentTopicQuery = {
     >;
     readonly top_movie?: Maybe<{
       readonly __typename?: "Movie";
+      readonly id: number | string;
       readonly description?: Maybe<string>;
       readonly title: string;
       readonly sub_title?: Maybe<string>;
@@ -2007,9 +2010,11 @@ export type MeQueryResult = ApolloReactCommon.QueryResult<
 export const CurrentTopicDocument = gql`
   query currentTopic {
     current_topic {
+      id
       title
       description
       top_movies {
+        id
         description
         title
         sub_title
@@ -2022,6 +2027,7 @@ export const CurrentTopicDocument = gql`
         }
       }
       top_movie {
+        id
         description
         title
         sub_title

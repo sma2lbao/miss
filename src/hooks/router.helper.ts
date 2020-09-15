@@ -24,7 +24,7 @@ export const useRouterHelper = () => {
   };
 
   // go movie detail page.
-  const gotoMovie = (movie_id: number | undefined | null) => {
+  const gotoMovie = (movie_id: number | undefined | null | string) => {
     history.push(`${MOVIE_DETAIL}/${movie_id}`);
   };
 
@@ -34,7 +34,7 @@ export const useRouterHelper = () => {
   };
 
   // go movie play page.
-  const gotoMoviePlay = (movie_id: number | undefined | string) => {
+  const gotoMoviePlay = (movie_id: number | undefined | string | null) => {
     history.push(`${MOVIE_PLAY}/${movie_id}`);
   };
 

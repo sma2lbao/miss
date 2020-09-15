@@ -6,6 +6,7 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import { MediaNormal } from "@/components/app/Media";
 import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
+import { mod } from "react-swipeable-views-core";
 import clsx from "clsx";
 import { useCurrentTopicQuery } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
@@ -48,7 +49,6 @@ function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
   const { data, loading, error } = useCurrentTopicQuery();
-  // console.log(data);
 
   return (
     <>
@@ -57,9 +57,9 @@ function Topic() {
           <div className={classes.headItem}>
             <Box>
               <Box mb={3}>
-                {/* <Typography variant="h6" gutterBottom>
-            每周精选
-          </Typography> */}
+                <Typography variant="h6" gutterBottom>
+                  每月精选
+                </Typography>
                 <Typography variant="h5" gutterBottom>
                   {data?.current_topic.title}
                 </Typography>
@@ -80,24 +80,17 @@ function Topic() {
                     onChangeIndex={index => setIndex(index)}
                     enableMouseEvents
                     slideRenderer={params => {
-                      // const { key } = params;
-                      // const templateIndex = ((index % 6) + 6) % 6;
-                      // console.log(mod(index, 3));
+                      const { key, index } = params;
                       const items = data?.current_topic.top_movies || [];
-                      return (
-                        <>
-                          {items.map((item, idx) => {
-                            return (
-                              <div
-                                key={idx}
-                                className={clsx(classes.bannerItem)}
-                              >
-                                <MediaNormal />
-                              </div>
-                            );
-                          })}
-                        </>
-                      );
+                      const idx = mod(index, items.length);
+
+                      if (items[idx]) {
+                        return (
+                          <div key={key} className={clsx(classes.bannerItem)}>
+                            <MediaNormal {...items[idx]} />
+                          </div>
+                        );
+                      }
                     }}
                   />
                 </div>
@@ -110,7 +103,7 @@ function Topic() {
             </Box>
           </div>
           <div className={classes.headItem}>
-            <MediaNormal />
+            <MediaNormal {...data?.current_topic.top_movie} />
           </div>
         </div>
       ) : (

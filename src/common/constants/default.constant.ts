@@ -1,5 +1,7 @@
 export const DEFAULT_USER_NICKNAME = "今天我们都是代号";
 
+export const DEFAULT_USER_DESCRIPTION = "这个人很神秘，什么也没有留下！";
+
 export const DEFAULT_USER_AVATAR =
   "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3888102971,552433212&fm=26&gp=0.jpg";
 

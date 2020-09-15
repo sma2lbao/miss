@@ -1,7 +1,8 @@
 import { InMemoryCache, ReactiveVar, makeVar } from "@apollo/client";
 import {
   DEFAULT_USER_AVATAR,
-  DEFAULT_USER_NICKNAME
+  DEFAULT_USER_NICKNAME,
+  DEFAULT_USER_DESCRIPTION
 } from "@/common/constants/default.constant";
 
 export const cache: InMemoryCache = new InMemoryCache({
@@ -16,6 +17,11 @@ export const cache: InMemoryCache = new InMemoryCache({
         nickname: {
           read(_) {
             return _ ? _ : DEFAULT_USER_NICKNAME;
+          }
+        },
+        description: {
+          read(_) {
+            return _ ? _ : DEFAULT_USER_DESCRIPTION;
           }
         }
       }

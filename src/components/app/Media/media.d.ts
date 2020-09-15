@@ -5,11 +5,11 @@ export interface Author {
 }
 
 export interface MediaBase {
-  id?: number;
+  id?: number | string;
   title?: string;
   subtitle?: string;
   cover?: string;
-  posters?: string[];
+  posters?: readonly string[] | null;
   create_at?: Date;
   duration?: number;
 }

@@ -3,9 +3,11 @@ import { gql } from "@apollo/client";
 export const CURRENT_TOPIC = gql`
   query currentTopic {
     current_topic {
+      id
       title
       description
       top_movies {
+        id
         description
         title
         sub_title
@@ -18,6 +20,7 @@ export const CURRENT_TOPIC = gql`
         }
       }
       top_movie {
+        id
         description
         title
         sub_title

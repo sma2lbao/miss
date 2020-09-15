@@ -23,14 +23,12 @@ export const MoviePlayer: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <div>
-      <div className={classes.root}>
-        <ReactPlayer
-          className={classes.player}
-          url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-          // playing
-        />
-      </div>
+    <div className={classes.root}>
+      <ReactPlayer
+        className={classes.player}
+        url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+        playing
+      />
     </div>
   );
 };

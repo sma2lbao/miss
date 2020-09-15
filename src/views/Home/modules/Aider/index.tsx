@@ -6,8 +6,8 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Avatar,
-  Typography,
-  Button
+  Typography
+  // Button,
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useUserUrgesQuery } from "@/schema";
@@ -47,11 +47,14 @@ export default function Aider() {
                   </ListItemAvatar>
                   <ListItemText>
                     <Typography>{user.nickname}</Typography>
+                    <Typography variant="caption">
+                      {user.description}
+                    </Typography>
                   </ListItemText>
                   <ListItemSecondaryAction>
-                    <Button>
+                    {/* <Button>
                       <Typography>关注</Typography>
-                    </Button>
+                    </Button> */}
                   </ListItemSecondaryAction>
                 </ListItem>
               );
