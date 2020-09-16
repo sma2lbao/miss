@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "50%",
       padding: theme.spacing(2),
       borderRadius: theme.shape.borderRadius,
-      height: "100%",
+      maxHeight: "100%",
       background: "rgba(0, 0, 0, .1)",
       backdropFilter: "blur(8px)",
       overflow: "auto"

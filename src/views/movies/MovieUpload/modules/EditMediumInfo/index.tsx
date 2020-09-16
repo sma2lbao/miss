@@ -7,8 +7,7 @@ import {
   Box,
   Theme,
   makeStyles,
-  createStyles,
-  Typography
+  createStyles
 } from "@material-ui/core";
 import {
   FullScreen,
@@ -143,23 +142,21 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
             <ContentScreen className={classes.content}>
               {/* <VideoInfo /> */}
               {/* <NextPlay /> */}
-              <Typography>
-                <EditableInput value={name} onChange={setName} />
-              </Typography>
-              <Typography>
-                <EditableInput
-                  value={alias_name}
-                  onChange={setAliasName}
-                  placeholder="alias_name"
-                />
-              </Typography>
-              <Typography>
-                <EditableInput
-                  value={description}
-                  onChange={setDescription}
-                  placeholder="description..."
-                />
-              </Typography>
+              <EditableInput
+                value={name}
+                onChange={setName}
+                placeholder="name"
+              />
+              <EditableInput
+                value={alias_name}
+                onChange={setAliasName}
+                placeholder="alias_name"
+              />
+              <EditableInput
+                value={description}
+                onChange={setDescription}
+                placeholder="description..."
+              />
             </ContentScreen>
             <AiderScreen sticky className={classes.aider}>
               {/* <Comment /> */}

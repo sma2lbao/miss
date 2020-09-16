@@ -4,7 +4,6 @@ import {
   ListItem,
   ListItemAvatar,
   Avatar,
-  ListItemText,
   ListItemSecondaryAction,
   IconButton,
   Box,
@@ -92,43 +91,26 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
               {credits.map((item, idx) => {
                 return (
                   <ListItem key={idx}>
-                    {
-                      <div>
-                        <ListItemAvatar>
-                          <Avatar src={item.avatar}></Avatar>
-                        </ListItemAvatar>
-                      </div>
-                    }
-                    <ListItemText
-                      primary={
-                        <div>
-                          <Input
-                            data-idx={idx}
-                            data-key="name"
-                            onChange={handleChange}
-                            value={item.name}
-                            placeholder="请输入名字"
-                          />
-                        </div>
-                      }
-                      secondary={
-                        <div>
-                          <Input
-                            data-idx={idx}
-                            data-key="description"
-                            value={item.description}
-                            placeholder="请输入描述"
-                          />
-                        </div>
-                      }
-                    />
+                    <ListItemAvatar>
+                      <Avatar src={item.avatar}></Avatar>
+                    </ListItemAvatar>
+                    <div>
+                      <Input
+                        data-idx={idx}
+                        data-key="name"
+                        onChange={handleChange}
+                        value={item.name}
+                        placeholder="请输入名字"
+                      />
+
+                      <Input
+                        data-idx={idx}
+                        data-key="description"
+                        value={item.description}
+                        placeholder="请输入描述"
+                      />
+                    </div>
                     <ListItemSecondaryAction>
-                      {/* <IconButton>
-                      <Edit />
-                    </IconButton> */}
-                      {/* <IconButton>
-                      <Done />
-                    </IconButton> */}
                       <IconButton data-idx={idx} onClick={handleDelete}>
                         <Delete />
                       </IconButton>
