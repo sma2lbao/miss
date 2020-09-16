@@ -33,7 +33,7 @@ export const ExceptionDefault: React.FC<BaseExceptionProps> = (
       <div>
         <i className={clsx("iconfont icon-404", classes.icon)}></i>
       </div>
-      {title && <Typography variant="h4">{title}</Typography>}
+      {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
       {children}
     </div>

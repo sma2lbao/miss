@@ -49,7 +49,7 @@ export const LoadingDefault: React.FC<LoadingBaseProps> = (
   return (
     <div className={classes.root}>
       <i className={clsx("iconfont icon-logo", classes.logo)}></i>
-      {title && <Typography variant="h4">{title}</Typography>}
+      {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
       {children}
     </div>

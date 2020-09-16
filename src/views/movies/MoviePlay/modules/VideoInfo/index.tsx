@@ -62,18 +62,18 @@ export default function VideoInfo() {
         <Box display="flex" alignItems="center">
           <Box className={classes.toolBox}>
             <IconButton size="small">
-              <ThumbDownAlt />
+              <ThumbDownAlt fontSize="small" />
             </IconButton>
             <Typography className={classes.toolText}>TODO</Typography>
           </Box>
           <Box className={classes.toolBox}>
             <IconButton size="small">
-              <ThumbUpAlt />
+              <ThumbUpAlt fontSize="small" />
             </IconButton>
             <Typography className={classes.toolText}>TODO</Typography>
           </Box>
           <IconButton size="small">
-            <MoreVert />
+            <MoreVert fontSize="small" />
           </IconButton>
         </Box>
       </Box>

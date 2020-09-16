@@ -1,6 +1,11 @@
 import * as React from "react";
 import { MediaNormal } from "@/components/app/Media";
-import { ContentScreen, AiderScreen, BodyScreen } from "@/layouts/PageLayout";
+import {
+  ContentScreen,
+  AiderScreen,
+  BodyScreen,
+  FullScreen
+} from "@/layouts/PageLayout";
 import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
 import {
@@ -22,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
       margin: "0 auto",
-      padding: theme.spacing(2),
+      padding: theme.spacing(8),
       background: theme.palette.background.paper
     },
     aider: {
@@ -100,36 +105,39 @@ export default function MovieHome(props: Props) {
   });
 
   return (
-    <BodyScreen>
-      <ContentScreen className={classes.content}>
-        <Box className={classes.gridRoot}>
-          {data?.movies_paginated?.edges?.map((edge: any) => {
-            return (
-              <div key={edge.cursor} className={classes.gridCard}>
-                <MediaNormal {...edge.node} />
-              </div>
-            );
-          })}
-        </Box>
-        {data?.movies_paginated?.pageInfo?.hasNextPage && (
-          <Box className={classes.footer}>
-            <Button onClick={loadMore} disabled={loading}>
-              <Typography color="textSecondary" variant="caption">
-                {loading ? "加载中..." : "加载更多"}
-              </Typography>
-            </Button>
+    <FullScreen>
+      <BodyScreen>
+        <ContentScreen className={classes.content}>
+          <Box className={classes.gridRoot}>
+            {data?.movies_paginated?.edges?.map((edge: any) => {
+              return (
+                <div key={edge.cursor} className={classes.gridCard}>
+                  <MediaNormal {...edge.node} />
+                </div>
+              );
+            })}
           </Box>
-        )}
-      </ContentScreen>
-      <AiderScreen sticky className={classes.aider}>
-        <Sort />
-        <Filter />
-      </AiderScreen>
-      <Zoom in={trigger}>
-        <Fab size="small" className={classes.scollButton}>
-          <KeyboardArrowUp />
-        </Fab>
-      </Zoom>
-    </BodyScreen>
+          {data?.movies_paginated?.pageInfo?.hasNextPage && (
+            <Box className={classes.footer}>
+              <Button onClick={loadMore} disabled={loading}>
+                <Typography color="textSecondary" variant="caption">
+                  {loading ? "加载中..." : "加载更多"}
+                </Typography>
+              </Button>
+            </Box>
+          )}
+        </ContentScreen>
+        <AiderScreen sticky className={classes.aider}>
+          <Sort />
+          <Filter />
+        </AiderScreen>
+
+        <Zoom in={trigger}>
+          <Fab size="small" className={classes.scollButton}>
+            <KeyboardArrowUp />
+          </Fab>
+        </Zoom>
+      </BodyScreen>
+    </FullScreen>
   );
 }

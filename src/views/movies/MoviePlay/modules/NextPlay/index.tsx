@@ -28,7 +28,7 @@ export default function NextPlay() {
           {data.movie_next_urges_by_movie.map((item, idx) => {
             return (
               <GridListTile cols={1} key={idx}>
-                <MediaNormal />
+                <MediaNormal {...item} />
               </GridListTile>
             );
           })}

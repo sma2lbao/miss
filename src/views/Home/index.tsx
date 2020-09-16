@@ -2,7 +2,12 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Recommend, Topic, Aider } from "./modules";
 import { Divider } from "@material-ui/core";
-import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
+import {
+  BodyScreen,
+  ContentScreen,
+  AiderScreen,
+  FullScreen
+} from "@/layouts/PageLayout";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,15 +42,17 @@ export default function Home() {
   const classes = useStyles();
 
   return (
-    <BodyScreen>
-      <ContentScreen className={classes.main}>
-        <Topic />
-        <Divider />
-        <Recommend />
-      </ContentScreen>
-      <AiderScreen sticky className={classes.aider}>
-        <Aider />
-      </AiderScreen>
-    </BodyScreen>
+    <FullScreen>
+      <BodyScreen>
+        <ContentScreen className={classes.main}>
+          <Topic />
+          <Divider />
+          <Recommend />
+        </ContentScreen>
+        <AiderScreen sticky className={classes.aider}>
+          <Aider />
+        </AiderScreen>
+      </BodyScreen>
+    </FullScreen>
   );
 }

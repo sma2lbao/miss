@@ -34,7 +34,7 @@ export type Category = {
   readonly description?: Maybe<Scalars["String"]>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
   readonly children?: Maybe<ReadonlyArray<Category>>;
   readonly parent?: Maybe<Category>;
 };
@@ -181,7 +181,7 @@ export type Follow = {
   readonly owner: User;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export type FollowEdge = {
@@ -223,7 +223,7 @@ export type Medium = {
   readonly super_quality_url?: Maybe<Scalars["String"]>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
   readonly version: Scalars["Float"];
 };
 
@@ -243,7 +243,7 @@ export type Movie = {
   readonly author: User;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export type MovieEdge = {
@@ -269,7 +269,7 @@ export type MovieMedium = {
   readonly super_quality_url?: Maybe<Scalars["String"]>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
   readonly version: Scalars["Float"];
 };
 
@@ -447,7 +447,7 @@ export type Playlist = {
   readonly author: User;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export type PlaylistEdge = {
@@ -610,7 +610,7 @@ export type Review = {
   readonly author: User;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export type ReviewEdge = {
@@ -671,7 +671,7 @@ export type Topic = {
   readonly top_movies?: Maybe<ReadonlyArray<Movie>>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export type UpdateMovieInput = {
@@ -701,7 +701,7 @@ export type User = {
   readonly address?: Maybe<Scalars["String"]>;
   readonly avatar: Scalars["String"];
   readonly create_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
   readonly description?: Maybe<Scalars["String"]>;
   readonly email?: Maybe<Scalars["String"]>;
   readonly mobile?: Maybe<Scalars["String"]>;
@@ -746,7 +746,7 @@ export type Video = {
   readonly author: User;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export type VideoEdge = {
@@ -772,7 +772,7 @@ export type VideoMedium = {
   readonly super_quality_url?: Maybe<Scalars["String"]>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
   readonly version: Scalars["Float"];
 };
 
@@ -800,7 +800,7 @@ export type Vote = {
   readonly medium: Medium;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
-  readonly delete_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
 export enum VoteStatus {
@@ -1321,7 +1321,7 @@ export type UserQuery = {
     readonly description?: Maybe<string>;
     readonly create_at: any;
     readonly update_at: any;
-    readonly delete_at: any;
+    readonly delete_at?: Maybe<any>;
   };
 };
 
