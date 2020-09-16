@@ -1035,10 +1035,13 @@ export type MovieUrgesQuery = {
   readonly movie_urges: ReadonlyArray<{
     readonly __typename?: "Movie";
     readonly id: number | string;
+    readonly description?: Maybe<string>;
     readonly title: string;
     readonly sub_title?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
     readonly cover: string;
-    readonly description?: Maybe<string>;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
     readonly author: {
       readonly __typename?: "User";
       readonly uid: number | string;
@@ -1072,16 +1075,16 @@ export type MovieQuery = {
   readonly __typename?: "Query";
   readonly movie: {
     readonly __typename?: "Movie";
-    readonly cover: string;
-    readonly title: string;
-    readonly update_at: any;
-    readonly sub_title?: Maybe<string>;
+    readonly alias_title?: Maybe<string>;
+    readonly region: Region;
     readonly id: number | string;
     readonly description?: Maybe<string>;
+    readonly title: string;
+    readonly sub_title?: Maybe<string>;
     readonly create_at: any;
-    readonly alias_title?: Maybe<string>;
+    readonly update_at: any;
+    readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
-    readonly region: Region;
     readonly credits?: Maybe<
       ReadonlyArray<{
         readonly __typename?: "Character";
@@ -1100,6 +1103,7 @@ export type MovieQuery = {
     };
     readonly sources: ReadonlyArray<{
       readonly __typename?: "MovieMedium";
+      readonly id: number | string;
       readonly url: string;
       readonly super_quality_url?: Maybe<string>;
       readonly preview_url?: Maybe<string>;
@@ -1107,7 +1111,6 @@ export type MovieQuery = {
       readonly name?: Maybe<string>;
       readonly medium_quality_url?: Maybe<string>;
       readonly low_quality_url?: Maybe<string>;
-      readonly id: number | string;
       readonly high_quality_url?: Maybe<string>;
       readonly duration?: Maybe<number>;
       readonly description?: Maybe<string>;
@@ -1138,11 +1141,14 @@ export type MoviesPaginatedQuery = {
         readonly cursor: string;
         readonly node: {
           readonly __typename?: "Movie";
+          readonly id: number | string;
+          readonly description?: Maybe<string>;
           readonly title: string;
           readonly sub_title?: Maybe<string>;
-          readonly alias_title?: Maybe<string>;
+          readonly create_at: any;
+          readonly update_at: any;
           readonly cover: string;
-          readonly description?: Maybe<string>;
+          readonly posters?: Maybe<ReadonlyArray<string>>;
           readonly author: {
             readonly __typename?: "User";
             readonly uid: number | string;
@@ -1178,11 +1184,14 @@ export type UserMoviesPaginatedQuery = {
         readonly cursor: string;
         readonly node: {
           readonly __typename?: "Movie";
+          readonly id: number | string;
+          readonly description?: Maybe<string>;
           readonly title: string;
           readonly sub_title?: Maybe<string>;
-          readonly alias_title?: Maybe<string>;
+          readonly create_at: any;
+          readonly update_at: any;
           readonly cover: string;
-          readonly description?: Maybe<string>;
+          readonly posters?: Maybe<ReadonlyArray<string>>;
           readonly author: {
             readonly __typename?: "User";
             readonly uid: number | string;
@@ -1205,10 +1214,14 @@ export type MovieUrgesByMovieQuery = {
   readonly __typename?: "Query";
   readonly movie_urges_by_movie: ReadonlyArray<{
     readonly __typename?: "Movie";
+    readonly id: number | string;
+    readonly description?: Maybe<string>;
     readonly title: string;
     readonly sub_title?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
     readonly cover: string;
-    readonly description?: Maybe<string>;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
     readonly author: {
       readonly __typename?: "User";
       readonly uid: number | string;
@@ -1228,10 +1241,14 @@ export type MovieNextUrgesByMovieQuery = {
   readonly __typename?: "Query";
   readonly movie_next_urges_by_movie: ReadonlyArray<{
     readonly __typename?: "Movie";
+    readonly id: number | string;
+    readonly description?: Maybe<string>;
     readonly title: string;
     readonly sub_title?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
     readonly cover: string;
-    readonly description?: Maybe<string>;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
     readonly author: {
       readonly __typename?: "User";
       readonly uid: number | string;
@@ -1348,6 +1365,36 @@ export const AuthorFragmentDoc = gql`
     nickname
     username
     description
+  }
+`;
+export const MovieFragmentDoc = gql`
+  fragment Movie on Movie {
+    id
+    description
+    title
+    sub_title
+    create_at
+    update_at
+    cover
+    posters
+  }
+`;
+export const MovieSourceFragmentDoc = gql`
+  fragment MovieSource on MovieMedium {
+    id
+    url
+    super_quality_url
+    preview_url
+    posters
+    name
+    medium_quality_url
+    low_quality_url
+    high_quality_url
+    duration
+    description
+    alias_name
+    create_at
+    update_at
   }
 `;
 export const LoginDocument = gql`
@@ -2014,33 +2061,20 @@ export const CurrentTopicDocument = gql`
       title
       description
       top_movies {
-        id
-        description
-        title
-        sub_title
-        create_at
-        update_at
-        cover
-        posters
+        ...Movie
         author {
           ...Author
         }
       }
       top_movie {
-        id
-        description
-        title
-        sub_title
-        create_at
-        update_at
-        cover
-        posters
+        ...Movie
         author {
           ...Author
         }
       }
     }
   }
+  ${MovieFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
@@ -2094,16 +2128,13 @@ export type CurrentTopicQueryResult = ApolloReactCommon.QueryResult<
 export const MovieUrgesDocument = gql`
   query movieUrges {
     movie_urges {
-      id
-      title
-      sub_title
-      cover
-      description
+      ...Movie
       author {
         ...Author
       }
     }
   }
+  ${MovieFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
@@ -2220,35 +2251,17 @@ export const MovieDocument = gql`
       author {
         ...Author
       }
-      cover
-      title
-      update_at
-      sub_title
-      id
-      description
-      create_at
       alias_title
-      posters
       region
+      ...Movie
       sources {
-        url
-        super_quality_url
-        preview_url
-        posters
-        name
-        medium_quality_url
-        low_quality_url
-        id
-        high_quality_url
-        duration
-        description
-        alias_name
-        create_at
-        update_at
+        ...MovieSource
       }
     }
   }
   ${AuthorFragmentDoc}
+  ${MovieFragmentDoc}
+  ${MovieSourceFragmentDoc}
 `;
 
 /**
@@ -2306,11 +2319,7 @@ export const MoviesPaginatedDocument = gql`
       edges {
         cursor
         node {
-          title
-          sub_title
-          alias_title
-          cover
-          description
+          ...Movie
           author {
             ...Author
           }
@@ -2318,6 +2327,7 @@ export const MoviesPaginatedDocument = gql`
       }
     }
   }
+  ${MovieFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
@@ -2380,11 +2390,7 @@ export const UserMoviesPaginatedDocument = gql`
       edges {
         cursor
         node {
-          title
-          sub_title
-          alias_title
-          cover
-          description
+          ...Movie
           author {
             ...Author
           }
@@ -2392,6 +2398,7 @@ export const UserMoviesPaginatedDocument = gql`
       }
     }
   }
+  ${MovieFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
@@ -2447,15 +2454,13 @@ export type UserMoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
 export const MovieUrgesByMovieDocument = gql`
   query movieUrgesByMovie($movie_id: ID!) {
     movie_urges_by_movie(movie_id: $movie_id) {
-      title
-      sub_title
-      cover
-      description
+      ...Movie
       author {
         ...Author
       }
     }
   }
+  ${MovieFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
@@ -2510,15 +2515,13 @@ export type MovieUrgesByMovieQueryResult = ApolloReactCommon.QueryResult<
 export const MovieNextUrgesByMovieDocument = gql`
   query movieNextUrgesByMovie($movie_id: ID!) {
     movie_next_urges_by_movie(movie_id: $movie_id) {
-      title
-      sub_title
-      cover
-      description
+      ...Movie
       author {
         ...Author
       }
     }
   }
+  ${MovieFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 

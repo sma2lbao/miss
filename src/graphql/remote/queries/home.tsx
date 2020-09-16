@@ -7,27 +7,13 @@ export const CURRENT_TOPIC = gql`
       title
       description
       top_movies {
-        id
-        description
-        title
-        sub_title
-        create_at
-        update_at
-        cover
-        posters
+        ...Movie
         author {
           ...Author
         }
       }
       top_movie {
-        id
-        description
-        title
-        sub_title
-        create_at
-        update_at
-        cover
-        posters
+        ...Movie
         author {
           ...Author
         }
@@ -39,11 +25,7 @@ export const CURRENT_TOPIC = gql`
 export const MOVIE_URGES = gql`
   query movieUrges {
     movie_urges {
-      id
-      title
-      sub_title
-      cover
-      description
+      ...Movie
       author {
         ...Author
       }

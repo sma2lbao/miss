@@ -11,31 +11,11 @@ export const MOVIE = gql`
       author {
         ...Author
       }
-      cover
-      title
-      update_at
-      sub_title
-      id
-      description
-      create_at
       alias_title
-      posters
       region
+      ...Movie
       sources {
-        url
-        super_quality_url
-        preview_url
-        posters
-        name
-        medium_quality_url
-        low_quality_url
-        id
-        high_quality_url
-        duration
-        description
-        alias_name
-        create_at
-        update_at
+        ...MovieSource
       }
     }
   }
@@ -52,11 +32,7 @@ export const MOVIES_PAGINATED = gql`
       edges {
         cursor
         node {
-          title
-          sub_title
-          alias_title
-          cover
-          description
+          ...Movie
           author {
             ...Author
           }
@@ -77,11 +53,7 @@ export const USER_MOVIES_PAGINATED = gql`
       edges {
         cursor
         node {
-          title
-          sub_title
-          alias_title
-          cover
-          description
+          ...Movie
           author {
             ...Author
           }
@@ -94,10 +66,7 @@ export const USER_MOVIES_PAGINATED = gql`
 export const MOVIE_URGES_BY_MOVIE = gql`
   query movieUrgesByMovie($movie_id: ID!) {
     movie_urges_by_movie(movie_id: $movie_id) {
-      title
-      sub_title
-      cover
-      description
+      ...Movie
       author {
         ...Author
       }
@@ -108,10 +77,7 @@ export const MOVIE_URGES_BY_MOVIE = gql`
 export const MOVIE_NEXT_URGES_BY_MOVIE = gql`
   query movieNextUrgesByMovie($movie_id: ID!) {
     movie_next_urges_by_movie(movie_id: $movie_id) {
-      title
-      sub_title
-      cover
-      description
+      ...Movie
       author {
         ...Author
       }
