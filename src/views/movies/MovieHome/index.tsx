@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       background: theme.palette.background.paper
     },
+    aider: {
+      backgroundColor: "#fff",
+      width: "100%",
+      padding: theme.spacing(2, 2),
+      borderLeft: "1px solid",
+      borderColor: theme.palette.divider
+    },
     gridRoot: {
       display: "grid",
       gridTemplateColumns: "repeat(4, 1fr)",
@@ -114,7 +121,7 @@ export default function MovieHome(props: Props) {
           </Box>
         )}
       </ContentScreen>
-      <AiderScreen sticky>
+      <AiderScreen sticky className={classes.aider}>
         <Sort />
         <Filter />
       </AiderScreen>
