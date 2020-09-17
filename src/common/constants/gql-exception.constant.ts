@@ -1,20 +1,35 @@
-// 服务器繁忙
-export const BUSY_SERVER = "BUSY_SERVER";
+export enum BaseExceptionStatus {
+  ERROR = 100000,
+  ENTITY_NOT_FOUND = 100404
+}
 
-// 资源未找到
-export const RESOURCE_NOTFOUND = "RESOURCE_NOTFOUND";
+export enum MediumExceptionStatus {
+  ERROR = 200000,
+  MEDIUM_NOT_FOUND = 200404
+}
 
-// 验证码错误
-export const VERIFICATION_CODE_ERROR = "VERIFICATION_CODE_ERROR";
+export enum UserExceptionStatus {
+  ERROR = 300000,
+  REGISTER_OTP_DIFFERENT = 300001,
+  REGISTER_OTP_NOT_EXPIRED = 300002,
+  USER_UNAUTHORIZED = 300401,
+  USER_NOT_FOUND = 300404
+}
 
-// 重复请求
-export const REPEATED_REQUESTS = "REPEATED_REQUESTS";
+export enum FollowExceptionStutus {
+  ERROR = 400000,
+  FOLLOWER_OWNER_REPEAT = 400001,
+  FOLLOW_NOT_FOUND = 400404
+}
 
-// 用户未找到
-export const USER_NOTFOUND = "USER_NOTFOUND";
+export enum MovieExceptionStatus {
+  ERROR = 500000,
+  MEDIUM_NOT_FOUND = 500404
+}
 
-// 无权限
-export const NO_AUTHORITY = "NO_AUTHORITY";
-
-// Token已失效
-export const TOKEN_EXPIRED = "TOKEN_EXPIRED";
+export type ExceptionStatus =
+  | BaseExceptionStatus
+  | MediumExceptionStatus
+  | UserExceptionStatus
+  | FollowExceptionStutus
+  | MovieExceptionStatus;

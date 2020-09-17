@@ -78,7 +78,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
         ></Avatar>
       </div>
       <Box padding={1}>
-        <Typography variant="body2" color="textSecondary">
+        <Typography onClick={goProfile} variant="body2" color="textSecondary">
           {props.author && (props.author.nickname || props.author.username)}
         </Typography>
         <Typography variant="subtitle1" noWrap>

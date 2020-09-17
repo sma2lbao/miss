@@ -1,46 +1,30 @@
 import * as React from "react";
 import { TextField, Button, IconButton } from "@material-ui/core";
 import { useSnackbar } from "notistack";
-import {
-  useLoginMutation,
-  usePlatformAuthWayQuery,
-  useMeLazyQuery
-} from "@/schema";
-import { useRouterHelper } from "@/hooks";
+import { useLoginMutation, usePlatformAuthWayQuery } from "@/schema";
+import { useAuth } from "@/hooks";
 import { GitHub } from "@material-ui/icons";
 
 export default function SignIn() {
-  const RouterHelper = useRouterHelper();
+  const { verify } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const {
-    data: queryData,
-    loading: queryLoading,
-    error: queryError
+    data: thirdData,
+    loading: thirdLoading,
+    error: thirdError
   } = usePlatformAuthWayQuery();
-  const [login, res] = useLoginMutation({
+  const [login, { loading }] = useLoginMutation({
     onCompleted(data) {
       enqueueSnackbar("登录成功");
       localStorage.setItem("access_token", data?.login);
-      RouterHelper.gotoHome();
+      verify();
     },
     onError(error) {
       console.log(error);
     }
   });
-  const { loading } = res;
-
-  const [meQuery] = useMeLazyQuery({
-    onCompleted(data) {
-      if (!data.me.email || !data.me.uid || !data.me.username) {
-        RouterHelper.gotoAuthCompletion();
-      } else {
-        RouterHelper.gotoHome();
-      }
-    }
-  });
-
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
 
   const _signIn = function() {
     login({ variables: { username, password } });
@@ -75,16 +59,19 @@ export default function SignIn() {
         if (data && data.type === "access_token_callback") {
           clearInterval(timer);
           child && child.close();
-
           enqueueSnackbar(
             data.data.access_token ? "登录成功" : data.data.error || "登录失败"
           );
           localStorage.setItem("access_token", data.data.access_token);
-          meQuery();
+          verify();
         }
       });
     }
   };
+
+  React.useEffect(() => {
+    verify();
+  });
 
   return (
     <div>
@@ -112,7 +99,7 @@ export default function SignIn() {
           {loading ? "登录中" : "登录"}
         </Button>
       </form>
-      {queryData?.platform_auth_way.map((item, idx) => {
+      {thirdData?.platform_auth_way.map((item, idx) => {
         return (
           <div key={idx}>
             <IconButton
@@ -125,8 +112,8 @@ export default function SignIn() {
           </div>
         );
       })}
-      {queryLoading && <div>loading</div>}
-      {queryError && <div>error</div>}
+      {thirdLoading && <div>loading</div>}
+      {thirdError && <div>error</div>}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { cache } from "./cache";
 import { typeDefs } from "./local/schema";
 import { resolvers as mockResolvers } from "./__mock__/resolvers";
+import { UserExceptionStatus } from "@/common/constants/gql-exception.constant";
 
 // createUploadLink replace httpLink
 // const httpLink = new HttpLink({
@@ -43,28 +44,40 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: access_token ? `Bearer ${access_token}` : ""
+      authorization: access_token ? `Bearer ${access_token}` : undefined
     }
   };
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    console.log("graphQLErrors", graphQLErrors);
-    graphQLErrors.forEach(({ message, locations, path }) => {
-      Message.error(message || "服务器繁忙");
-      Sentry.captureMessage(message);
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      );
-    });
+const errorLink = onError(
+  ({ graphQLErrors, networkError, operation, response }) => {
+    if (operation.operationName === "IgnoreErrorsQuery") {
+      if (response?.errors) {
+        response.errors = undefined;
+      }
+    }
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ message, locations, path }) => {
+        Message.error(message || "服务器繁忙");
+        Sentry.captureMessage(message);
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        );
+      });
+      const isUnauthorized = graphQLErrors.some((item: any) => {
+        return item.status === UserExceptionStatus.USER_UNAUTHORIZED;
+      });
+      if (isUnauthorized) {
+        localStorage.removeItem("access_token");
+      }
+    }
+    if (networkError) {
+      Sentry.captureException(networkError);
+      Message.error("服务器繁忙");
+      console.log(`[Network error]: ${networkError}`);
+    }
   }
-  if (networkError) {
-    Sentry.captureException(networkError);
-    Message.error("服务器繁忙");
-    console.log(`[Network error]: ${networkError}`);
-  }
-});
+);
 
 const resolvers = process.env.REACT_APP_ENV === "mock" ? mockResolvers : {};
 

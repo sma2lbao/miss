@@ -39,3 +39,7 @@ export const ExceptionDefault: React.FC<BaseExceptionProps> = (
     </div>
   );
 };
+
+ExceptionDefault.defaultProps = {
+  title: "糟糕，出错啦"
+};
