@@ -11,10 +11,12 @@ type SnackbarProps = {
 const mountPoint = document.createElement("div");
 document.body.appendChild(mountPoint);
 
-const ShowSnackbar = (props: SnackbarProps) => {
+const ShowSnackbar: React.FC<SnackbarProps> = (props: SnackbarProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const { message, options } = props;
-  enqueueSnackbar(message, options);
+  React.useEffect(() => {
+    enqueueSnackbar(message, options);
+  }, [enqueueSnackbar, message, options]);
   return <div></div>;
 };
 

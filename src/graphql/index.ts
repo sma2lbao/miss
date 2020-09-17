@@ -1,6 +1,6 @@
 import Message from "@/components/base/Message";
 import * as Sentry from "@sentry/browser";
-import { ApolloClient, HttpLink, from, split, Resolvers } from "@apollo/client";
+import { ApolloClient, from, split, Resolvers } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/link-context";
 import { onError } from "@apollo/link-error";
@@ -10,8 +10,13 @@ import { cache } from "./cache";
 import { typeDefs } from "./local/schema";
 import { resolvers as mockResolvers } from "./__mock__/resolvers";
 
-const httpLink = new HttpLink({
-  uri: process.env.REACT_APP_HTTP_URL
+// createUploadLink replace httpLink
+// const httpLink = new HttpLink({
+//   uri: process.env.REACT_APP_HTTP_URL,
+// });
+
+const uploadLink = createUploadLink({
+  uri: process.env.REACT_APP_UPLOAD_URL
 });
 
 const wsLink = new WebSocketLink({
@@ -30,7 +35,7 @@ const splitLink = split(
     );
   },
   wsLink,
-  httpLink
+  uploadLink
 );
 
 const authLink = setContext((_, { headers }) => {
@@ -61,16 +66,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
-const uploadLink = createUploadLink({
-  uri: process.env.REACT_APP_UPLOAD_URL
-});
-
 const resolvers = process.env.REACT_APP_ENV === "mock" ? mockResolvers : {};
 
 export const client = new ApolloClient({
   resolvers: resolvers as Resolvers,
   typeDefs,
   cache,
-  link: from([errorLink, uploadLink, authLink, splitLink]),
+  link: from([authLink, errorLink, splitLink]),
   connectToDevTools: true
 });
