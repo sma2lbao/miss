@@ -6,8 +6,10 @@ import {
   useSendRegisterEmailMutation,
   useCreateUserWithCodeMutation
 } from "@/schema";
+import { useAuth } from "@/hooks";
 
 export default function SignIn() {
+  const { verify } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -25,10 +27,6 @@ export default function SignIn() {
   const [send_register_email] = useSendRegisterEmailMutation({
     onCompleted() {
       enqueueSnackbar("发送成功");
-    },
-    onError(error) {
-      console.error(error);
-      enqueueSnackbar("发送失败");
     }
   });
   const _sendVerifyCode = function() {
@@ -37,16 +35,12 @@ export default function SignIn() {
 
   // 注册
   const [create_user_with_code] = useCreateUserWithCodeMutation({
-    onError(error) {
-      console.error(error);
-      enqueueSnackbar("注册失败");
-    },
     onCompleted(data) {
-      console.log(data);
       enqueueSnackbar("注册成功");
+      verify();
     }
   });
-  const _signUp = function() {
+  const _signUp = () => {
     create_user_with_code({
       variables: {
         user: {
@@ -64,6 +58,10 @@ export default function SignIn() {
   ) => {
     setUsername(e.target.value);
   };
+
+  React.useEffect(() => {
+    verify();
+  });
 
   return (
     <div>

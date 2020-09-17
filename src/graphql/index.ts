@@ -10,6 +10,7 @@ import { cache } from "./cache";
 import { typeDefs } from "./local/schema";
 import { resolvers as mockResolvers } from "./__mock__/resolvers";
 import { UserExceptionStatus } from "@/common/constants/gql-exception.constant";
+import { accessTokenVar } from "./variables";
 
 // createUploadLink replace httpLink
 // const httpLink = new HttpLink({
@@ -68,6 +69,7 @@ const errorLink = onError(
         return item.status === UserExceptionStatus.USER_UNAUTHORIZED;
       });
       if (isUnauthorized) {
+        accessTokenVar(undefined);
         localStorage.removeItem("access_token");
       }
     }

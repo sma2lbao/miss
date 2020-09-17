@@ -1,9 +1,10 @@
-import { InMemoryCache, ReactiveVar, makeVar } from "@apollo/client";
+import { InMemoryCache } from "@apollo/client";
 import {
   DEFAULT_USER_AVATAR,
   DEFAULT_USER_NICKNAME,
   DEFAULT_USER_DESCRIPTION
 } from "@/common/constants/default.constant";
+import { httpDomainVar } from "./variables";
 
 export const cache: InMemoryCache = new InMemoryCache({
   typePolicies: {
@@ -46,7 +47,3 @@ export const cache: InMemoryCache = new InMemoryCache({
     }
   }
 });
-
-export const httpDomainVar: ReactiveVar<string> = makeVar<string>(
-  process.env.REACT_APP_HTTP_DOMAIN_URL || ""
-);
