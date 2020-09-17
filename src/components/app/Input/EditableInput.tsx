@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 export const EditableInput: React.FC<BaseInputProps> = props => {
-  const { value, onChange, placeholder, variant = "body1" } = props;
+  const { value, onChange, placeholder, variant = "body1", ...rest } = props;
   const classes = useStyles();
   return (
     <Input
@@ -51,6 +51,7 @@ export const EditableInput: React.FC<BaseInputProps> = props => {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      {...rest}
     />
   );
 };

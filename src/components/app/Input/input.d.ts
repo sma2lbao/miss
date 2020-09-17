@@ -1,3 +1,5 @@
+import { InputProps } from "@material-ui/core";
+
 const variantProps = [
   "body1",
   "body2",
@@ -21,7 +23,7 @@ export interface BaseInputAttributes {
   variant?: typeof variantProps[number];
 }
 
-export interface BaseInputProps extends BaseInputAttributes {
+export interface BaseInputProps extends InputProps, BaseInputAttributes {
   value: any;
 
   onChange?(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void;

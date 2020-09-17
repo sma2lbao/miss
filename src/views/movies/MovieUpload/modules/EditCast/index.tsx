@@ -8,13 +8,13 @@ import {
   IconButton,
   Box,
   ListSubheader,
-  Typography,
-  Input
+  Typography
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { AddCircle, Delete } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
+import { EditableInput } from "@/components/app/Input";
 
 export interface CharacterEdit extends Character {
   // status:
@@ -64,14 +64,9 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
       }
     };
 
-    const handleDelete = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      const { dataset } = e.currentTarget;
-      if (dataset.idx) {
-        const newCredits = credits.splice(+dataset.idx, 1);
-        setCredits([...newCredits]);
-      }
+    const handleDelete = (idx: number) => {
+      const newCredits = credits.splice(idx, 1);
+      setCredits([...newCredits]);
     };
 
     return (
@@ -95,23 +90,25 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                       <Avatar src={item.avatar}></Avatar>
                     </ListItemAvatar>
                     <div>
-                      <Input
-                        data-idx={idx}
-                        data-key="name"
-                        onChange={handleChange}
+                      <EditableInput
+                        inputProps={{ "data-idx": idx, "data-key": "name" }}
                         value={item.name}
+                        onChange={handleChange}
                         placeholder="请输入名字"
                       />
 
-                      <Input
-                        data-idx={idx}
-                        data-key="description"
-                        value={item.description}
+                      <EditableInput
+                        inputProps={{
+                          "data-idx": idx,
+                          "data-key": "description"
+                        }}
+                        value={item.name}
+                        onChange={handleChange}
                         placeholder="请输入描述"
                       />
                     </div>
                     <ListItemSecondaryAction>
-                      <IconButton data-idx={idx} onClick={handleDelete}>
+                      <IconButton onClick={() => handleDelete(idx)}>
                         <Delete />
                       </IconButton>
                     </ListItemSecondaryAction>
