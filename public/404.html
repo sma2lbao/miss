@@ -44,8 +44,62 @@
 </head>
 
 <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <style>
+        .wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            animation: name 2s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-weight: bold;
+            color: transparent;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(90deg,
+                    #e6e6e6 25%,
+                    #d6d6d6 37%,
+                    #e6e6e6 63%);
+            background-size: 400% 100%;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 90px;
+        }
+
+        .content {
+            font-size: 16px;
+        }
+
+        @keyframes skeleton-busy-animate {
+            0% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0 50%;
+            }
+        }
+    </style>
+    <div class="wrap">
+        <div class="main">
+            <i class="iconfont icon-logo logo"></i>
+            <div class="content">Loading</div>
+        </div>
+    </div>
 </body>
 
 </html>
