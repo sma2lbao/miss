@@ -12,17 +12,18 @@ export const useAuth = () => {
   const access_token = useReactiveVar(accessTokenVar);
 
   React.useEffect(() => {
-    // if (access_token()) {
-    //   meQuery();
-    // } else {
-    //   setHasLogged(false);
-    // }
+    if (access_token) {
+      meQuery();
+    } else {
+      setMember(null);
+      setHasLogged(false);
+    }
 
     if (data?.me) {
       setHasLogged(true);
       setMember(data?.me);
     }
-  }, [data, meQuery]);
+  }, [access_token, data, meQuery]);
 
   const verify = () => {
     if (hasLogged && member) {
@@ -34,9 +35,15 @@ export const useAuth = () => {
     }
   };
 
+  const setAccessToken = (access_token: string) => {
+    localStorage.setItem("access_token", access_token);
+    accessTokenVar(access_token);
+  };
+
   return {
     hasLogged,
     member,
-    verify
+    verify,
+    setAccessToken
   };
 };

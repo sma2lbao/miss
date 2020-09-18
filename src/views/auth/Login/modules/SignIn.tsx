@@ -4,10 +4,9 @@ import { useSnackbar } from "notistack";
 import { useLoginMutation, usePlatformAuthWayQuery } from "@/schema";
 import { useAuth } from "@/hooks";
 import { GitHub } from "@material-ui/icons";
-import { accessTokenVar } from "@/graphql/variables";
 
 export default function SignIn() {
-  const { verify } = useAuth();
+  const { verify, setAccessToken } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -19,7 +18,7 @@ export default function SignIn() {
   const [login, { loading }] = useLoginMutation({
     onCompleted(data) {
       enqueueSnackbar("登录成功");
-      accessTokenVar(data?.login);
+      setAccessToken(data?.login);
       verify();
     },
     onError(error) {
@@ -63,7 +62,7 @@ export default function SignIn() {
           enqueueSnackbar(
             data.data.access_token ? "登录成功" : data.data.error || "登录失败"
           );
-          accessTokenVar(data.data.access_token);
+          setAccessToken(data.data.access_token);
           verify();
         }
       });
