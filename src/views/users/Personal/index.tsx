@@ -2,7 +2,7 @@ import * as React from "react";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { BasicSetting, VideoManager, Playlist } from "./modules";
-import { BodyScreen } from "@/layouts/PageLayout";
+import { BodyScreen, FullScreen } from "@/layouts/PageLayout";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Personal() {
   const classes = useStyles();
   return (
-    <div>
+    <FullScreen>
       <BodyScreen className={classes.body}>
         <Grid container spacing={3}>
           <Grid item xs={4}>
@@ -37,6 +37,6 @@ export default function Personal() {
           </Grid>
         </Grid>
       </BodyScreen>
-    </div>
+    </FullScreen>
   );
 }

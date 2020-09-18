@@ -3,7 +3,12 @@ import Top from "./modules/Top";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Divider, Box } from "@material-ui/core";
 import { Medias, Basic } from "./modules";
-import { BodyScreen, ContentScreen, AiderScreen } from "@/layouts/PageLayout";
+import {
+  BodyScreen,
+  ContentScreen,
+  AiderScreen,
+  FullScreen
+} from "@/layouts/PageLayout";
 import { useParams } from "react-router-dom";
 import { useUserQuery, UserQuery } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
@@ -34,7 +39,7 @@ export default function Profile() {
   const [tab, setTab] = React.useState(0);
 
   return (
-    <>
+    <FullScreen>
       {data?.user ? (
         <BodyScreen>
           <ProfileContext.Provider value={data}>
@@ -50,7 +55,9 @@ export default function Profile() {
                   <Tab label="列表"></Tab>
                   <Tab label="社区"></Tab>
                 </Tabs>
-                <Box py={2}>{tab === 0 && <Medias />}</Box>
+                <Box py={2} hidden={tab !== 0}>
+                  <Medias />
+                </Box>
               </div>
             </ContentScreen>
           </ProfileContext.Provider>
@@ -58,6 +65,6 @@ export default function Profile() {
       ) : (
         <SpecialBox loading={loading} error={!!error} />
       )}
-    </>
+    </FullScreen>
   );
 }
