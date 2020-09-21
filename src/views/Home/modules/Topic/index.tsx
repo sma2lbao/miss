@@ -103,7 +103,11 @@ function Topic() {
             </Box>
           </div>
           <div className={classes.headItem}>
-            <MediaNormal {...data?.current_topic.top_movie} />
+            {data.current_topic.top_movie ? (
+              <MediaNormal {...data?.current_topic.top_movie} />
+            ) : (
+              <SpecialBox placeholder placeholderTitle="敬请期待" />
+            )}
           </div>
         </div>
       ) : (
