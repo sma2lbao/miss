@@ -5,9 +5,10 @@ import {
   Theme
   // useTheme
 } from "@material-ui/core/styles";
-import { useMediaQuery, Toolbar } from "@material-ui/core";
+import { Toolbar } from "@material-ui/core";
 import { Sidebar, Topbar } from "./modules";
 import clsx from "clsx";
+import { useSidebar } from "./modules/Sidebar/useSidebar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,26 +43,24 @@ interface MainProps {
 const Main: React.FC<MainProps> = (props: MainProps) => {
   const { children, hideSidebar } = props;
   const classes = useStyles();
-  // const theme = useTheme();
+  const { isLargeDesktop, hasExpand, setHasExpand } = useSidebar();
   // const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  const isDesktop = useMediaQuery("(min-width: 1600px)");
-  const [openSidebar, setOpenSidebar] = React.useState(false);
-
+  // const { isLargeDesktop, hasExpand } = useSidebar();
   return (
     <div className={classes.root}>
-      <Topbar toggleSidebar={() => setOpenSidebar(!openSidebar)} />
+      <Topbar />
       <div>
         {!hideSidebar && (
           <Sidebar
+            hasExpand={hasExpand}
+            setHasExpand={setHasExpand}
+            variant={isLargeDesktop ? "persistent" : "temporary"}
             classes={{ paper: classes.drawer }}
-            open={openSidebar}
-            variant={isDesktop ? "persistent" : "temporary"}
-            closeSidebarHandler={() => setOpenSidebar(false)}
           />
         )}
         <main
           className={clsx(classes.main, {
-            [classes.shiftMain]: openSidebar && isDesktop
+            [classes.shiftMain]: hasExpand && isLargeDesktop
           })}
         >
           <Toolbar />

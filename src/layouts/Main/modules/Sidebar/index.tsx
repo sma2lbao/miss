@@ -12,11 +12,11 @@ import { DrawerProps } from "@material-ui/core/Drawer";
 import useMenus, { MenuProps } from "./useMenus";
 import clsx from "clsx";
 import { useRouterHelper } from "@/hooks";
+import { ChevronRight } from "@material-ui/icons";
 
-type CloseSidebarFunc = (...args: any[]) => void;
-
-interface SidebarProps extends DrawerProps {
-  closeSidebarHandler?: CloseSidebarFunc;
+interface SidebarProps extends Omit<DrawerProps, "open" | "onClose"> {
+  hasExpand: boolean;
+  setHasExpand: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -37,73 +37,113 @@ const useStyles = makeStyles((theme: Theme) => {
       flex: 1,
       overflow: "hidden",
       padding: theme.spacing(2, 1)
+    },
+    openWrap: {
+      position: "absolute",
+      left: "0",
+      top: "50%",
+      transform: "translateY(-50%)"
+    },
+    active: {
+      color: theme.palette.primary.main
     }
   });
 });
 
-export default function Sidebar(props: SidebarProps) {
-  const { closeSidebarHandler, ...rest } = props;
-  const [menus] = useMenus();
+export const Sidebar = (props: SidebarProps, ref) => {
+  const { hasExpand, setHasExpand, ...rest } = props;
+  const { menus, pid, cid } = useMenus();
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
-  const [pid, setPid] = React.useState(1000);
-  const [cid, setCid] = React.useState(1001);
+  const [vid, setVid] = React.useState<number | undefined>(pid);
+  React.useEffect(() => {
+    setVid(pid);
+  }, [pid]);
 
   const handleParentClick = (parent: MenuProps) => {
-    setPid(parent.id);
-    if (parent.path && !parent.disabled) {
+    setVid(parent.id);
+    if (parent.path && !parent.disabled && parent.id !== pid) {
       RouterHelper.push(parent.path);
     }
   };
 
   const handleChildClick = (child: MenuProps) => {
-    setCid(child.id);
-    if (child.path && !child.disabled) {
+    if (child.path && !child.disabled && child.id !== cid) {
       RouterHelper.push(child.path);
     }
   };
 
+  const handleCloseDrawer = () => {
+    setHasExpand(false);
+  };
+
+  const handleOpenDrawer = () => {
+    setHasExpand(true);
+  };
+
   return (
-    <Drawer {...rest} onClose={closeSidebarHandler}>
-      <div className={classes.toolbar}></div>
-      <div className={classes.root}>
-        <div className={classes.parent}>
-          {menus.map((parent, idx) => (
-            <div key={idx}>
-              <IconButton
-                color={pid === parent.id ? "primary" : "default"}
-                onClick={() => handleParentClick(parent)}
+    <>
+      <Drawer {...rest} open={hasExpand} onClose={handleCloseDrawer}>
+        <div className={classes.toolbar}></div>
+        <div className={classes.root}>
+          <div className={classes.parent}>
+            {menus.map((parent, idx) => (
+              <div key={idx}>
+                <IconButton
+                  color={
+                    pid === parent.id
+                      ? "primary"
+                      : vid === parent.id
+                      ? "secondary"
+                      : "default"
+                  }
+                  onClick={() => handleParentClick(parent)}
+                >
+                  <Icon>{parent.icon}</Icon>
+                </IconButton>
+              </div>
+            ))}
+          </div>
+          {menus.map((parent, idx) => {
+            return (
+              <div
+                key={idx}
+                className={classes.child}
+                hidden={parent.id !== vid}
               >
-                <Icon>{parent.icon}</Icon>
-              </IconButton>
-            </div>
-          ))}
+                {parent.children ? (
+                  parent?.children.map((child, index) => {
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => handleChildClick(child)}
+                        className={clsx({
+                          [classes.active]: child.id === cid
+                        })}
+                      >
+                        <Typography variant="subtitle1" gutterBottom>
+                          {child.label}
+                        </Typography>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div>no children router</div>
+                )}
+              </div>
+            );
+          })}
         </div>
-        {menus.map((parent, idx) => {
-          return (
-            <div key={idx} className={classes.child} hidden={parent.id !== pid}>
-              {parent.children ? (
-                parent?.children.map((child, index) => {
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => handleChildClick(child)}
-                      className={clsx({ active: child.id === cid })}
-                    >
-                      <Typography variant="subtitle1" gutterBottom>
-                        {child.label}
-                      </Typography>
-                    </div>
-                  );
-                })
-              ) : (
-                <div>no children router</div>
-              )}
-            </div>
-          );
-        })}
+        <div onClick={handleCloseDrawer}>close menu</div>
+      </Drawer>
+      <div className={classes.openWrap} hidden={hasExpand}>
+        <IconButton onClick={handleOpenDrawer}>
+          <ChevronRight />
+        </IconButton>
+        {/* open menu */}
       </div>
-      <div onClick={closeSidebarHandler}>close menu</div>
-    </Drawer>
+    </>
   );
-}
+};
+
+export default Sidebar;

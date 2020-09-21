@@ -9,7 +9,7 @@ import {
   IconButton,
   Icon
 } from "@material-ui/core";
-import { Menu, AddCircle } from "@material-ui/icons";
+import { AddCircle } from "@material-ui/icons";
 import Search from "./components/Search";
 import Account from "./components/Account";
 import Notice from "./components/Notice";
@@ -38,9 +38,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 type ToggleidebarFunc = (...args: any[]) => void;
 
-interface TopbarProps {
-  toggleSidebar?: ToggleidebarFunc;
-}
+interface TopbarProps {}
 
 export default function Topbar(props: TopbarProps) {
   const classes = useStyles();
@@ -56,13 +54,13 @@ export default function Topbar(props: TopbarProps) {
                 className={clsx("iconfont icon-logo")}
               ></Icon>
             </div>
-            <IconButton
+            {/* <IconButton
               size="small"
               onClick={props.toggleSidebar}
               className={classes.icon}
             >
               <Menu fontSize="small" />
-            </IconButton>
+            </IconButton> */}
             <IconButton
               onClick={RouterHelper.gotoMovieUpload}
               size="small"
