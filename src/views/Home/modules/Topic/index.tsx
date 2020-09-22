@@ -10,6 +10,7 @@ import { mod } from "react-swipeable-views-core";
 import clsx from "clsx";
 import { useCurrentTopicQuery } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
+import { Placeholder } from "@/components/base/Placeholder";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -68,37 +69,82 @@ function Topic() {
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center">
-                <Box>
-                  <IconButton size="small" onClick={() => setIndex(index - 1)}>
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </Box>
-                <div className={classes.bannerRoot}>
-                  <VirtualizeSwipeableViews
-                    className={classes.banner}
-                    index={index}
-                    onChangeIndex={index => setIndex(index)}
-                    enableMouseEvents
-                    slideRenderer={params => {
-                      const { key, index } = params;
-                      const items = data?.current_topic.top_movies || [];
-                      const idx = mod(index, items.length);
-
-                      if (items[idx]) {
-                        return (
-                          <div key={key} className={clsx(classes.bannerItem)}>
-                            <MediaNormal {...items[idx]} />
-                          </div>
-                        );
-                      }
-                    }}
-                  />
-                </div>
-                <Box>
-                  <IconButton size="small" onClick={() => setIndex(index + 1)}>
-                    <KeyboardArrowRight />
-                  </IconButton>
-                </Box>
+                {(() => {
+                  const top_movies = data?.current_topic.top_movies || [];
+                  if (top_movies.length > 2) {
+                    return (
+                      <React.Fragment>
+                        <div>
+                          <IconButton
+                            size="small"
+                            onClick={() => setIndex(index - 1)}
+                          >
+                            <KeyboardArrowLeft />
+                          </IconButton>
+                        </div>
+                        <div className={classes.bannerRoot}>
+                          <VirtualizeSwipeableViews
+                            className={classes.banner}
+                            index={index}
+                            onChangeIndex={index => setIndex(index)}
+                            enableMouseEvents
+                            slideRenderer={params => {
+                              const { key, index } = params;
+                              const items =
+                                data?.current_topic.top_movies || [];
+                              const idx = mod(index, items.length);
+                              if (items[idx]) {
+                                return (
+                                  <div
+                                    key={key}
+                                    className={clsx(classes.bannerItem)}
+                                  >
+                                    <MediaNormal {...items[idx]} />
+                                  </div>
+                                );
+                              }
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <IconButton
+                            size="small"
+                            onClick={() => setIndex(index + 1)}
+                          >
+                            <KeyboardArrowRight />
+                          </IconButton>
+                        </div>
+                      </React.Fragment>
+                    );
+                  } else if (top_movies.length > 0 && top_movies.length <= 2) {
+                    return (
+                      <React.Fragment>
+                        <div className={classes.bannerRoot}>
+                          {top_movies.map((item, idx) => {
+                            return (
+                              <div
+                                key={idx}
+                                className={clsx(classes.bannerItem)}
+                              >
+                                <MediaNormal {...item} />
+                              </div>
+                            );
+                          })}
+                          {top_movies.length === 1 && (
+                            <div className={clsx(classes.bannerItem)}>
+                              <SpecialBox
+                                placeholder
+                                placeholderTitle="敬请期待"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </React.Fragment>
+                    );
+                  } else {
+                    return <Placeholder title="敬请期待" />;
+                  }
+                })()}
               </Box>
             </Box>
           </div>
@@ -106,7 +152,7 @@ function Topic() {
             {data.current_topic.top_movie ? (
               <MediaNormal {...data?.current_topic.top_movie} />
             ) : (
-              <SpecialBox placeholder placeholderTitle="敬请期待" />
+              <Placeholder title="敬请期待" />
             )}
           </div>
         </div>
