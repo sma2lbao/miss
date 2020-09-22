@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const FileUpload: React.FC<BaseFileUploadProps> = props => {
-  const { onComplete, onError, children, component, custom } = props;
+  const { onComplete, onError, children, component, custom, title } = props;
   const classes = useStyles(props);
 
   const inputRef = React.createRef<HTMLInputElement>();
@@ -81,9 +81,7 @@ export const FileUpload: React.FC<BaseFileUploadProps> = props => {
             <CloudUpload className={classes.icon} />
             {/* <CircularProgress className={classes.icon} /> */}
           </div>
-          <Typography variant="h6">
-            {loading ? "上传中..." : "点击上传"}
-          </Typography>
+          <Typography variant="h6">{loading ? "上传中..." : title}</Typography>
         </Box>
       )}
     </Tag>
@@ -91,5 +89,6 @@ export const FileUpload: React.FC<BaseFileUploadProps> = props => {
 };
 
 FileUpload.defaultProps = {
-  custom: false
+  custom: false,
+  title: "点击上传"
 };

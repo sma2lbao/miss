@@ -6,10 +6,11 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button
+  Button,
+  DialogProps
 } from "@material-ui/core";
 
-interface ConfirmProps {
+interface ConfirmProps extends Omit<DialogProps, "open"> {
   title?: string;
   content: string;
   cancel?: boolean;

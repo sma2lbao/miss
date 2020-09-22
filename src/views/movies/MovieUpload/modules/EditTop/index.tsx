@@ -149,7 +149,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
                 </GridListTile>
               ))}
               <GridListTile cols={1}>
-                <FileUpload onComplete={handleAddPoster}>add poster</FileUpload>
+                <FileUpload onComplete={handleAddPoster} title="上传海报" />
               </GridListTile>
             </GridList>
           </div>

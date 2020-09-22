@@ -25,6 +25,7 @@ import {
 } from "@material-ui/core";
 import { useCreateMovieMutation } from "@/schema";
 import { useRouterHelper } from "@/hooks";
+import Confirm from "@/components/base/Confirm";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,9 +47,13 @@ export const MovieUpload: React.FC = () => {
   const castRef = React.createRef<EditCastHandles>();
 
   const [create_movie] = useCreateMovieMutation({
-    onCompleted(data) {
-      window.alert("success");
-      RouterHelper.gotoHome();
+    onCompleted() {
+      Confirm.dialog({
+        title: "提示",
+        content: "上传成功。"
+      }).then(() => {
+        RouterHelper.gotoHome();
+      });
     }
   });
 
