@@ -1,5 +1,6 @@
 import * as React from "react";
-import { FileUpload } from "@/components/app/FileUpload";
+// import { FileUpload } from "@/components/app/FileUpload";
+import NormalEditor from "@/components/base/Editor";
 // import { withTool, MediaNormal } from "@/components/app/Media";
 // import Confirm from "@/components/base/Confirm";
 
@@ -18,7 +19,8 @@ const Test: React.FC = () => {
     <div>
       <div>
         {/* <div onClick={handleConfirm}>confirm</div> */}
-        <FileUpload />
+        {/* <FileUpload /> */}
+        <NormalEditor />
       </div>
     </div>
   );
