@@ -10,6 +10,7 @@ import {
 import "draft-js/dist/Draft.css";
 import { BaseEditorProps, BaseEditorHandles } from "./editor";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { Controls } from "./Controls";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -128,13 +129,13 @@ export const NormalEditor = React.forwardRef<
   };
 
   const mapKeyToEditorCommand = e => {
-    if (e.keyCode === 9 /* TAB */) {
-      const newEditorState = RichUtils.onTab(e, editorState, 4 /* maxDepth */);
-      if (newEditorState !== editorState) {
-        setEditorState(newEditorState);
-      }
-      return null;
-    }
+    // if (e.keyCode === 9 /* TAB */) {
+    //   const newEditorState = RichUtils.onTab(e, editorState, 4 /* maxDepth */);
+    //   if (newEditorState !== editorState) {
+    //     setEditorState(newEditorState);
+    //   }
+    //   return null;
+    // }
     return getDefaultKeyBinding(e);
   };
 
@@ -167,13 +168,18 @@ export const NormalEditor = React.forwardRef<
 
   return (
     <div className={classes.root}>
-      <BlockStyleControls
+      {/* <BlockStyleControls
         editorState={editorState}
         onToggle={toggleBlockType}
       />
       <InlineStyleControls
         editorState={editorState}
         onToggle={toggleInlineStyle}
+      /> */}
+      <Controls
+        editorState={editorState}
+        toggleBlockType={toggleBlockType}
+        toggleInlineStyle={toggleInlineStyle}
       />
       <div className={classes.editor}>
         <Editor
