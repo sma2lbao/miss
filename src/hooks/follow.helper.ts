@@ -4,6 +4,7 @@ import {
   useCreateFollowMutation,
   useRemoveFollowMutation
 } from "@/schema";
+import { useAuth } from "@/hooks";
 import { useSnackbar } from "notistack";
 
 export interface IFollowProps {
@@ -13,6 +14,7 @@ export interface IFollowProps {
 export const useFollowHelper = (props: IFollowProps) => {
   const { owner_uid } = props;
   const { enqueueSnackbar } = useSnackbar();
+  const { hasLogged } = useAuth();
   const [following, setFollowing] = React.useState<boolean>(false);
 
   const [isFollowing] = useIsFollowingLazyQuery({
@@ -22,14 +24,14 @@ export const useFollowHelper = (props: IFollowProps) => {
   });
 
   React.useEffect(() => {
-    if (owner_uid) {
+    if (owner_uid && hasLogged) {
       isFollowing({
         variables: {
           owner_uid
         }
       });
     }
-  }, [isFollowing, owner_uid]);
+  }, [hasLogged, isFollowing, owner_uid]);
 
   const [createFollow] = useCreateFollowMutation({
     onCompleted() {
