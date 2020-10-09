@@ -8,21 +8,19 @@ import {
 } from "@material-ui/core";
 import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 import {
-  FormatAlignLeft,
-  FormatAlignCenter,
-  FormatAlignRight,
-  FormatAlignJustify,
   FormatBold,
   FormatItalic,
   FormatUnderlined,
-  FormatColorFill,
-  ArrowDropDown
+  FormatQuote,
+  FormatListBulleted,
+  FormatListNumbered,
+  Code
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      display: "flex",
+      display: "inline-flex",
       border: `1px solid ${theme.palette.divider}`,
       flexWrap: "wrap"
     },
@@ -43,66 +41,122 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const BLOCK_TYPES = [
-  { label: "H1", style: "header-one" },
-  { label: "H2", style: "header-two" },
-  { label: "H3", style: "header-three" },
-  { label: "H4", style: "header-four" },
-  { label: "H5", style: "header-five" },
-  { label: "H6", style: "header-six" },
-  { label: "Blockquote", style: "blockquote" },
-  { label: "UL", style: "unordered-list-item" },
-  { label: "OL", style: "ordered-list-item" },
-  { label: "Code Block", style: "code-block" }
+  // { label: "H1", style: "header-one", value: "h1", icon: <FormatBold /> },
+  // { label: "H2", style: "header-two", value: "h2", icon: <FormatBold /> },
+  // { label: "H3", style: "header-three", value: "h3", icon: <FormatBold /> },
+  // { label: "H4", style: "header-four", value: "h4", icon: <FormatBold /> },
+  // { label: "H5", style: "header-five", value: "h5", icon: <FormatBold /> },
+  // { label: "H6", style: "header-six", value: "h6", icon: <FormatBold /> },
+  {
+    label: "Blockquote",
+    style: "blockquote",
+    value: "blockquote",
+    icon: <FormatQuote />
+  },
+  {
+    label: "UL",
+    style: "unordered-list-item",
+    value: "ul",
+    icon: <FormatListBulleted />
+  },
+  {
+    label: "OL",
+    style: "ordered-list-item",
+    value: "ol",
+    icon: <FormatListNumbered />
+  },
+  {
+    label: "CodeBlock",
+    style: "code-block",
+    value: "codeblock",
+    icon: <Code />
+  }
 ];
 
 const INLINE_STYLES = [
-  { label: "Bold", style: "BOLD" },
-  { label: "Italic", style: "ITALIC" },
-  { label: "Underline", style: "UNDERLINE" },
-  { label: "Monospace", style: "CODE" }
+  { label: "Bold", style: "BOLD", value: "bold", icon: <FormatBold /> },
+  { label: "Italic", style: "ITALIC", value: "italic", icon: <FormatItalic /> },
+  {
+    label: "Underline",
+    style: "UNDERLINE",
+    value: "underline",
+    icon: <FormatUnderlined />
+  }
+  // {
+  //   label: "Monospace",
+  //   style: "CODE",
+  //   value: "code",
+  //   icon: <FormatQuote />,
+  // },
 ];
 
 export const Controls = props => {
   const classes = useStyles();
-  const { editorState } = props;
-  const selection = editorState.getSelection();
-  const blockType = editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getType();
-  const currentStyle = editorState.getCurrentInlineStyle();
+  const [inlines, setInlines] = React.useState<string[]>([]);
+  const [blocktype, setBlocktype] = React.useState<string>();
+  const { toggleBlockType, toggleInlineStyle } = props;
+  // const selection = editorState.getSelection();
+  // const blockType = editorState
+  //   .getCurrentContent()
+  //   .getBlockForKey(selection.getStartKey())
+  //   .getType();
+  // const currentStyle = editorState.getCurrentInlineStyle();
+
+  const handleInlineFormat = (
+    event: React.MouseEvent<HTMLElement>,
+    newFormats: string[]
+  ) => {
+    const { style } = event.currentTarget.dataset;
+    if (style) {
+      toggleInlineStyle(style);
+    }
+    setInlines(newFormats);
+  };
+
+  const handleBlocktypeFormat = (
+    event: React.MouseEvent<HTMLElement>,
+    newFormat
+  ) => {
+    const { style } = event.currentTarget.dataset;
+    if (style) {
+      toggleBlockType(style);
+    }
+    setBlocktype(newFormat);
+  };
 
   return (
     <Paper elevation={0} className={classes.paper}>
-      <ToggleButtonGroup classes={{ grouped: classes.grouped }}>
-        <ToggleButton value="left" aria-label="left aligned">
-          <FormatAlignLeft />
-        </ToggleButton>
-        <ToggleButton value="center" aria-label="centered">
-          <FormatAlignCenter />
-        </ToggleButton>
-        <ToggleButton value="right" aria-label="right aligned">
-          <FormatAlignRight />
-        </ToggleButton>
-        <ToggleButton value="justify" aria-label="justified" disabled>
-          <FormatAlignJustify />
-        </ToggleButton>
+      <ToggleButtonGroup
+        value={inlines}
+        onChange={handleInlineFormat}
+        classes={{ grouped: classes.grouped }}
+      >
+        {INLINE_STYLES.map(type => (
+          <ToggleButton
+            data-style={type.style}
+            key={type.value}
+            value={type.value}
+          >
+            {type.icon}
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
       <Divider flexItem orientation="vertical" className={classes.divider} />
-      <ToggleButtonGroup classes={{ grouped: classes.grouped }}>
-        <ToggleButton value="bold" aria-label="bold">
-          <FormatBold />
-        </ToggleButton>
-        <ToggleButton value="italic" aria-label="italic">
-          <FormatItalic />
-        </ToggleButton>
-        <ToggleButton value="underlined" aria-label="underlined">
-          <FormatUnderlined />
-        </ToggleButton>
-        <ToggleButton value="color" aria-label="color" disabled>
-          <FormatColorFill />
-          <ArrowDropDown />
-        </ToggleButton>
+      <ToggleButtonGroup
+        value={blocktype}
+        exclusive
+        onChange={handleBlocktypeFormat}
+        classes={{ grouped: classes.grouped }}
+      >
+        {BLOCK_TYPES.map(type => (
+          <ToggleButton
+            data-style={type.style}
+            key={type.value}
+            value={type.value}
+          >
+            {type.icon}
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
     </Paper>
   );
