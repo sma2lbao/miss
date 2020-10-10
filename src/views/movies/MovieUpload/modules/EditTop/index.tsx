@@ -4,14 +4,15 @@ import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Typography,
-  Button,
   Box,
   GridList,
-  GridListTile
+  GridListTile,
+  IconButton
 } from "@material-ui/core";
 
 import { useEditableInput, EditableInput } from "@/components/app/Input";
 import { FileUpload } from "@/components/app/FileUpload";
+import { PlayCircleOutline } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -179,9 +180,9 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
               />
             </Typography>
             <Box mt={3}>
-              <Button disabled size="large" variant="contained" color="primary">
-                播放
-              </Button>
+              <IconButton disabled>
+                <PlayCircleOutline />
+              </IconButton>
             </Box>
           </div>
         </div>

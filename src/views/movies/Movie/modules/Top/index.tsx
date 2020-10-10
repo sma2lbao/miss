@@ -3,8 +3,9 @@ import { Image } from "@/components/base/Image";
 import { MovieContext } from "../..";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography, Button, Box } from "@material-ui/core";
+import { Typography, Box, IconButton } from "@material-ui/core";
 import { useRouterHelper } from "@/hooks";
+import { PlayCircleOutline } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,14 +55,9 @@ export const Top: React.FC = () => {
           {movieQuery?.movie.description}
         </Typography>
         <Box mt={3}>
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            onClick={goMoviePlay}
-          >
-            播放
-          </Button>
+          <IconButton onClick={goMoviePlay}>
+            <PlayCircleOutline />
+          </IconButton>
         </Box>
       </div>
     </div>
