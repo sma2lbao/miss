@@ -7,3 +7,5 @@ export const httpDomainVar: ReactiveVar<string> = makeVar<string>(
 export const accessTokenVar: ReactiveVar<string | undefined | null> = makeVar<
   string | undefined | null
 >(localStorage.getItem("access_token"));
+
+export const noticeFlagVar: ReactiveVar<boolean> = makeVar<boolean>(true);

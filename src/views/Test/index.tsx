@@ -1,27 +1,28 @@
 import * as React from "react";
-// import { FileUpload } from "@/components/app/FileUpload";
-// import NormalEditor from "@/components/base/Editor";
-// import { withTool, MediaNormal } from "@/components/app/Media";
-// import Confirm from "@/components/base/Confirm";
-
-// const ToolMediaNormal = withTool(MediaNormal);
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { Collapse, Link } from "@material-ui/core";
+import { noticeFlagVar } from "@/graphql/variables";
+import { useReactiveVar } from "@apollo/client";
 
 const Test: React.FC = () => {
-  // const handleConfirm = async () => {
-  //   const isConfirm = await Confirm.dialog({
-  //     title: "标题",
-  //     content: "内容",
-  //   });
-  //   console.log(isConfirm);
-  // };
+  // const [open, setOpen] = React.useState(true);
+  const notice_flag = useReactiveVar(noticeFlagVar);
 
   return (
     <div>
-      <div>
-        {/* <div onClick={handleConfirm}>confirm</div> */}
-        {/* <FileUpload /> */}
-        {/* <NormalEditor /> */}
-      </div>
+      <Collapse in={notice_flag}>
+        <Alert severity="warning" onClose={() => noticeFlagVar(false)}>
+          <AlertTitle>Warning</AlertTitle>
+          This is a warning alert —
+          <Link
+            target="_blank"
+            href="https://github.com/sma2lbao/miss/issues"
+            color="inherit"
+          >
+            <strong>new issues!</strong>
+          </Link>
+        </Alert>
+      </Collapse>
     </div>
   );
 };

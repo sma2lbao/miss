@@ -1,13 +1,16 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Recommend, Topic, Aider } from "./modules";
-import { Divider } from "@material-ui/core";
+import { Divider, Collapse, Link } from "@material-ui/core";
 import {
   BodyScreen,
   ContentScreen,
   AiderScreen,
   FullScreen
 } from "@/layouts/PageLayout";
+import { useReactiveVar } from "@apollo/client";
+import { noticeFlagVar } from "@/graphql/variables";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,15 +37,34 @@ const useStyles = makeStyles((theme: Theme) =>
       "& + &": {
         marginLeft: theme.spacing(4)
       }
+    },
+    alertWrap: {
+      flex: 1
     }
   })
 );
 
 export default function Home() {
   const classes = useStyles();
+  const notice_flag = useReactiveVar(noticeFlagVar);
 
   return (
     <FullScreen>
+      <BodyScreen>
+        <Collapse in={notice_flag} className={classes.alertWrap}>
+          <Alert severity="warning" onClose={() => noticeFlagVar(false)}>
+            <AlertTitle>重要消息</AlertTitle>
+            网站功能待完善，如遇到问题欢迎提bug。
+            <Link
+              target="_blank"
+              href="https://github.com/sma2lbao/miss/issues"
+              color="inherit"
+            >
+              <strong>去提Bug！</strong>
+            </Link>
+          </Alert>
+        </Collapse>
+      </BodyScreen>
       <BodyScreen>
         <ContentScreen className={classes.main}>
           <Topic />
