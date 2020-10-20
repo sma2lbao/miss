@@ -180,8 +180,8 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
               />
             </Typography>
             <Box mt={3}>
-              <IconButton disabled>
-                <PlayCircleOutline />
+              <IconButton size="medium" disabled>
+                <PlayCircleOutline fontSize="large" />
               </IconButton>
             </Box>
           </div>

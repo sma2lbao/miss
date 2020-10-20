@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRight: `1px solid ${theme.palette.divider}`
     },
     speedDial: {
-      position: "absolute",
+      position: "fixed",
       "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
         bottom: theme.spacing(2),
         right: theme.spacing(2)
@@ -118,9 +118,6 @@ export const MovieUpload: React.FC = () => {
             {/* {tab === 1 && <Relative />} */}
             <div hidden={tab !== 2}>
               <EditAbout ref={aboutRef} />
-            </div>
-            <div>
-              <div onClick={handleCreateMovie}>create</div>
             </div>
             <SpeedDial
               ariaLabel="SpeedDial OpenIcon"

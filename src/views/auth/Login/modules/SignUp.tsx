@@ -65,7 +65,7 @@ export default function SignIn() {
 
   return (
     <div>
-      <Typography variant="h3">Sign Up</Typography>
+      <Typography variant="h4">Sign Up</Typography>
       <form>
         <TextField
           id="username"

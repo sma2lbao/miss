@@ -10,7 +10,7 @@ import {
 } from "@/layouts/PageLayout";
 import { useReactiveVar } from "@apollo/client";
 import { noticeFlagVar } from "@/graphql/variables";
-import { Alert, AlertTitle } from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,8 +53,8 @@ export default function Home() {
       <BodyScreen>
         <Collapse in={notice_flag} className={classes.alertWrap}>
           <Alert severity="warning" onClose={() => noticeFlagVar(false)}>
-            <AlertTitle>重要消息</AlertTitle>
-            网站功能待完善，如遇到问题欢迎提bug。
+            {/* <AlertTitle>重要消息</AlertTitle> */}
+            网站功能正在完善中，如果在使用过程中遇到任何问题欢迎提bug。
             <Link
               target="_blank"
               href="https://github.com/sma2lbao/miss/issues"
