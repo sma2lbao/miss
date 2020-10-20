@@ -26,6 +26,8 @@ import {
 import { useCreateMovieMutation } from "@/schema";
 import { useRouterHelper } from "@/hooks";
 import Confirm from "@/components/base/Confirm";
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@material-ui/lab";
+import { Save } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +35,22 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1, 6),
       borderRight: `1px solid ${theme.palette.divider}`
+    },
+    speedDial: {
+      position: "absolute",
+      "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
+        bottom: theme.spacing(2),
+        right: theme.spacing(2)
+      },
+      "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
+        top: theme.spacing(2),
+        left: theme.spacing(2)
+      }
+    },
+    speedDialIcon: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
     }
   })
 );
@@ -41,6 +59,7 @@ export const MovieUpload: React.FC = () => {
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
   const [tab, setTab] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
   const topRef = React.createRef<EditTopHandles>();
   const mainRef = React.createRef<EditMainHandles>();
   const aboutRef = React.createRef<EditAboutHandles>();
@@ -103,6 +122,22 @@ export const MovieUpload: React.FC = () => {
             <div>
               <div onClick={handleCreateMovie}>create</div>
             </div>
+            <SpeedDial
+              ariaLabel="SpeedDial OpenIcon"
+              className={classes.speedDial}
+              // hidden={hidden}
+              // icon={<SpeedDialIcon openIcon={<EditIcon />} />}
+              icon={<SpeedDialIcon className={classes.speedDialIcon} />}
+              onClose={() => setOpen(false)}
+              onOpen={() => setOpen(true)}
+              open={open}
+            >
+              <SpeedDialAction
+                icon={<Save />}
+                tooltipTitle="Create"
+                onClick={handleCreateMovie}
+              />
+            </SpeedDial>
           </div>
         </ContentScreen>
         <AiderScreen>
