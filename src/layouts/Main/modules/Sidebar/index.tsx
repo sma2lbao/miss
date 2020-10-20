@@ -4,7 +4,9 @@ import {
   IconButton,
   // Icon,
   Typography,
-  Icon
+  Icon,
+  Breadcrumbs,
+  Link
   // Divider,
 } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
@@ -13,10 +15,11 @@ import useMenus, { MenuProps } from "./useMenus";
 import clsx from "clsx";
 import { useRouterHelper } from "@/hooks";
 import { ChevronRight } from "@material-ui/icons";
+import { Placeholder } from "@/components/base/Placeholder";
 
 interface SidebarProps extends Omit<DrawerProps, "open" | "onClose"> {
   hasExpand: boolean;
-  setHasExpand: React.Dispatch<React.SetStateAction<boolean>>;
+  setHasExpand: Function;
 }
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -26,33 +29,45 @@ const useStyles = makeStyles((theme: Theme) => {
       display: "flex"
     },
     parent: {
-      width: theme.custom?.layout.size.parent.width,
+      // width: theme.custom?.layout.size.parent.width,
       flexShrink: 0,
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center"
     },
+    parentIcon: {
+      padding: theme.spacing(1)
+    },
     child: {
       flex: 1,
       overflow: "hidden",
-      padding: theme.spacing(2, 1)
+      padding: theme.spacing(1, 2)
+    },
+    childWrap: {
+      padding: theme.spacing(1, 0)
+    },
+    childItem: {
+      padding: theme.spacing(1, 0)
+    },
+    active: {
+      color: theme.palette.primary.main
+    },
+    disabled: {
+      color: theme.palette.text.disabled
     },
     openWrap: {
       position: "absolute",
       left: "0",
       top: "50%",
       transform: "translateY(-50%)"
-    },
-    active: {
-      color: theme.palette.primary.main
     }
   });
 });
 
 export const Sidebar = (props: SidebarProps, ref) => {
   const { hasExpand, setHasExpand, ...rest } = props;
-  const { menus, pid, cid } = useMenus();
+  const { menus, pid, cid, parent: parentMenu, child: childMenu } = useMenus();
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
   const [vid, setVid] = React.useState<number | undefined>(pid);
@@ -88,8 +103,9 @@ export const Sidebar = (props: SidebarProps, ref) => {
         <div className={classes.root}>
           <div className={classes.parent}>
             {menus.map((parent, idx) => (
-              <div key={idx}>
+              <div key={idx} className={classes.parentIcon}>
                 <IconButton
+                  size="medium"
                   color={
                     pid === parent.id
                       ? "primary"
@@ -112,23 +128,33 @@ export const Sidebar = (props: SidebarProps, ref) => {
                 hidden={parent.id !== vid}
               >
                 {parent.children ? (
-                  parent?.children.map((child, index) => {
-                    return (
-                      <div
-                        key={index}
-                        onClick={() => handleChildClick(child)}
-                        className={clsx({
-                          [classes.active]: child.id === cid
-                        })}
-                      >
-                        <Typography variant="subtitle1" gutterBottom>
-                          {child.label}
-                        </Typography>
-                      </div>
-                    );
-                  })
+                  <div>
+                    <Breadcrumbs aria-label="breadcrumb">
+                      <Link color="inherit">{parentMenu?.label || "--"}</Link>
+                      <Link color="inherit">{childMenu?.label || "--"}</Link>
+                      {/* <Typography color="textPrimary">Breadcrumb</Typography> */}
+                    </Breadcrumbs>
+                    <div className={classes.childWrap}>
+                      {parent?.children.map((child, index) => {
+                        return (
+                          <div
+                            key={index}
+                            onClick={() => handleChildClick(child)}
+                            className={clsx(classes.childItem, {
+                              [classes.active]: child.id === cid,
+                              [classes.disabled]: child.disabled
+                            })}
+                          >
+                            <Typography variant="subtitle2">
+                              {child.label}
+                            </Typography>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
                 ) : (
-                  <div>no children router</div>
+                  <Placeholder size={80} title="no children router" />
                 )}
               </div>
             );

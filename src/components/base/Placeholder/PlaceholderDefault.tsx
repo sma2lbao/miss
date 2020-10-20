@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
       flex: 1
     },
-    icon: theme.custom.base.icon.large
+    icon: (props: IPlaceholderProps) =>
+      props.size ? { fontSize: props.size } : theme.custom.base.icon.large
   })
 );
 

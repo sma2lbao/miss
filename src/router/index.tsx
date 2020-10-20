@@ -78,7 +78,7 @@ function AppRoute() {
         <Route lazy path="/403" exact component={Forbidden} />
         <Route lazy path="/404" exact component={NotFound} />
         <Route lazy path="/50x" exact component={InternalServerError} />
-        <Route lazy path="/test" exact component={Test} />
+        <Route lazy path="/test" exact component={Test} layout={MainLayout} />
         <Route lazy component={NotFound} />
       </Switch>
     </Router>

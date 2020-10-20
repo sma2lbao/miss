@@ -44,8 +44,6 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
   const { children, hideSidebar } = props;
   const classes = useStyles();
   const { isLargeDesktop, hasExpand, setHasExpand } = useSidebar();
-  // const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  // const { isLargeDesktop, hasExpand } = useSidebar();
   return (
     <div className={classes.root}>
       <Topbar />

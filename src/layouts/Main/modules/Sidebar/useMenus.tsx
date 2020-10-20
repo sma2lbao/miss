@@ -78,12 +78,14 @@ const menus: MenuProps[] = [HomeMenus, MovieMenus, UserMenus];
 
 export const useMenus = () => {
   const { path } = useRouteMatch();
-  const [pid, setPid] = React.useState<number | undefined>(1000);
-  const [cid, setCid] = React.useState<number | undefined>(1001);
+  const [parent, setParent] = React.useState<MenuProps | undefined>();
+  const [child, setChild] = React.useState<
+    Omit<MenuProps, "children"> | undefined
+  >();
   React.useEffect(() => {
     if (path === "/") {
-      setPid(1000);
-      setCid(1001);
+      setParent(menus[0]);
+      setChild(menus[0].children ? menus[0].children[0] : undefined);
       return;
     }
     let curParentMenu: MenuProps | undefined = undefined;
@@ -100,17 +102,16 @@ export const useMenus = () => {
         break;
       }
     }
-
-    setPid(curParentMenu?.id);
-    setCid(curChildMenu?.id);
+    setParent(curParentMenu);
+    setChild(curChildMenu);
   }, [path]);
 
   return {
     menus,
-    pid,
-    cid
-    // setPid,
-    // setCid,
+    parent,
+    child,
+    pid: parent?.id,
+    cid: child?.id
   };
 };
 

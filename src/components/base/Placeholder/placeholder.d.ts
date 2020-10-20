@@ -8,4 +8,6 @@ export interface IPlaceholderProps {
   height?: any;
 
   children?: React.ReactNode;
+
+  size?: number;
 }
