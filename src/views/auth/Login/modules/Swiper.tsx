@@ -8,10 +8,15 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    image: {
+    root: {
       width: "100%",
       height: "100%",
-      objectFit: "cover"
+      display: "flex"
+    },
+    image: {
+      width: "100%",
+      height: "100%"
+      // objectFit: "cover",
     }
   })
 );
@@ -23,19 +28,27 @@ interface SwiperProps {
 function Swiper(props: SwiperProps) {
   const classes = useStyles();
   const { images } = props;
+  const [idx, setIdx] = React.useState(0);
+
+  const handleChangeIndex = (idx: number) => {
+    setIdx(idx);
+  };
 
   return (
-    <div>
-      <AutoPlaySwipeableViews enableMouseEvents index={0}>
-        {images.map((item, i) => {
-          return (
-            <div className={classes.image} key={i}>
-              <Image src={item} />
-            </div>
-          );
-        })}
-      </AutoPlaySwipeableViews>
-    </div>
+    <AutoPlaySwipeableViews
+      className={classes.root}
+      enableMouseEvents
+      onChangeIndex={handleChangeIndex}
+      index={idx}
+    >
+      {images.map((item, i) => {
+        return (
+          <div className={classes.image} key={i}>
+            <Image height="100%" src={item} />
+          </div>
+        );
+      })}
+    </AutoPlaySwipeableViews>
   );
 }
 

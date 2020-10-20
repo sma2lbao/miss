@@ -1,11 +1,29 @@
 import * as React from "react";
-import { TextField, Button, IconButton } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  IconButton,
+  Typography,
+  makeStyles,
+  Theme,
+  createStyles
+} from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import { useLoginMutation, usePlatformAuthWayQuery } from "@/schema";
 import { useAuth } from "@/hooks";
 import { GitHub } from "@material-ui/icons";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    thirdWrap: {
+      padding: theme.spacing(2),
+      textAlign: "center"
+    }
+  })
+);
+
 export default function SignIn() {
+  const classes = useStyles();
   const { verify, setAccessToken } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const [username, setUsername] = React.useState("");
@@ -75,6 +93,7 @@ export default function SignIn() {
 
   return (
     <div>
+      <Typography variant="h3">Sign In</Typography>
       <form>
         <TextField
           id="username"
@@ -83,6 +102,7 @@ export default function SignIn() {
           onChange={e => setUsername(e.target.value)}
           placeholder="请输入用户名"
           fullWidth
+          variant="outlined"
           margin="normal"
         />
         <TextField
@@ -93,27 +113,48 @@ export default function SignIn() {
           onChange={e => setPassword(e.target.value)}
           placeholder="请输入密码"
           fullWidth
+          variant="outlined"
           margin="normal"
         />
-        <Button variant="contained" onClick={_signIn} disabled={loading}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth
+          onClick={_signIn}
+          disabled={loading}
+        >
           {loading ? "登录中" : "登录"}
         </Button>
       </form>
-      {thirdData?.platform_auth_way.map((item, idx) => {
-        return (
-          <div key={idx}>
-            <IconButton
-              onClick={() =>
-                thirdLogin(item.platform, item.url, item.http_domain)
-              }
-            >
-              {item.platform === "github" && <GitHub />}
-            </IconButton>
-          </div>
-        );
-      })}
-      {thirdLoading && <div>loading</div>}
-      {thirdError && <div>error</div>}
+      <div className={classes.thirdWrap}>
+        <Typography variant="caption" color="textSecondary">
+          更多登录方式
+        </Typography>
+        {thirdData?.platform_auth_way.map((item, idx) => {
+          return (
+            <div key={idx}>
+              <IconButton
+                onClick={() =>
+                  thirdLogin(item.platform, item.url, item.http_domain)
+                }
+              >
+                {item.platform === "github" && <GitHub />}
+              </IconButton>
+            </div>
+          );
+        })}
+        {thirdLoading && (
+          <Typography variant="caption" color="textSecondary">
+            loading
+          </Typography>
+        )}
+        {thirdError && (
+          <Typography variant="caption" color="textSecondary">
+            oops!
+          </Typography>
+        )}
+      </div>
     </div>
   );
 }

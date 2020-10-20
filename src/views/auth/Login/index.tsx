@@ -2,6 +2,7 @@ import * as React from "react";
 import { SignIn, SignUp, Swiper } from "./modules";
 import { Button, Box } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Logo } from "@/components/base/Icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,19 +13,31 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "hidden"
     },
     left: {
-      flex: 1,
-      backgroundColor: theme.palette.primary.main
+      flex: 1.5
+      // backgroundColor: theme.palette.primary.main,
     },
     right: {
       flex: 1,
       backgroundColor: theme.palette.background.paper,
       display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: theme.spacing(0, 4)
+    },
+    rightHeader: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: theme.spacing(2, 0),
+      width: "100%"
+    },
+    rightMain: {
+      display: "flex",
       alignItems: "center",
       justifyContent: "center"
     },
-    main: {
-      width: 300
-    }
+    rightFooter: {}
   })
 );
 
@@ -38,14 +51,26 @@ export default function Login() {
         <Swiper />
       </div>
       <div className={classes.right}>
-        <div className={classes.main}>
-          <Button onClick={_ => setTag(0)}>登录</Button>
-          <Button onClick={_ => setTag(1)}>注册</Button>
+        <div className={classes.rightHeader}>
+          <Logo fontSize="large" />
+          {tag === 1 && (
+            <Button variant="outlined" color="primary" onClick={_ => setTag(0)}>
+              Sign In
+            </Button>
+          )}
+          {tag === 0 && (
+            <Button variant="outlined" color="primary" onClick={_ => setTag(1)}>
+              Sign Up
+            </Button>
+          )}
+        </div>
+        <div className={classes.rightMain}>
           <div>
             {tag === 0 && <SignIn />}
             {tag === 1 && <SignUp />}
           </div>
         </div>
+        <div className={classes.rightFooter}></div>
       </div>
     </Box>
   );

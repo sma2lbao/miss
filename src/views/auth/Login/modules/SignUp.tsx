@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextField, Button, Box } from "@material-ui/core";
+import { TextField, Button, Box, Typography } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import {
   useHasUsernameQuery,
@@ -65,6 +65,7 @@ export default function SignIn() {
 
   return (
     <div>
+      <Typography variant="h3">Sign Up</Typography>
       <form>
         <TextField
           id="username"
@@ -74,6 +75,7 @@ export default function SignIn() {
           onChange={_changeUsername}
           placeholder="请输入用户名"
           fullWidth
+          variant="outlined"
           margin="normal"
         />
         <TextField
@@ -85,6 +87,7 @@ export default function SignIn() {
           onChange={e => setPassword(e.target.value)}
           placeholder="请输入密码"
           fullWidth
+          variant="outlined"
           margin="normal"
         />
         <TextField
@@ -96,22 +99,30 @@ export default function SignIn() {
           onChange={e => setEmail(e.target.value)}
           placeholder="请输入邮箱"
           fullWidth
+          variant="outlined"
           margin="normal"
         />
-        <Box>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
           <TextField
             id="code"
             label="验证码"
             value={code}
             onChange={e => setCode(e.target.value)}
             placeholder="请输入验证码"
+            variant="outlined"
             margin="normal"
           />
           <Button variant="contained" onClick={_sendVerifyCode}>
             获取验证码
           </Button>
         </Box>
-        <Button variant="contained" fullWidth onClick={_signUp}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth
+          onClick={_signUp}
+        >
           注册
         </Button>
       </form>
