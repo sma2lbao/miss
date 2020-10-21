@@ -43,6 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
     sourceWrap: {
       width: "100%",
       position: "relative"
+    },
+    toolbarWrap: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "space-between"
     }
   })
 );
@@ -114,17 +119,18 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
   return (
     <div>
       <Dialog open={open} fullScreen onClose={handleCancle}>
-        <AppBar position="relative">
-          <Toolbar>
+        <AppBar position="fixed">
+          <Toolbar className={classes.toolbarWrap}>
             <Button onClick={handleSave} color="inherit">
-              save
+              保存
             </Button>
             <Button onClick={handleCancle} color="inherit">
-              cancle
+              取消
             </Button>
           </Toolbar>
         </AppBar>
         <Box className={classes.root}>
+          <Toolbar />
           <FullScreen>
             <BodyScreen>
               <div className={classes.sourceWrap}>

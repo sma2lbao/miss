@@ -9,6 +9,7 @@ import {
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MediaNormal } from "@/components/app/Media";
 import { EditMediumInfo } from "../EditMediumInfo";
+import { Placeholder } from "@/components/base/Placeholder";
 // import Placeholder from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,7 +61,9 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
                 );
               })}
 
-              <Button onClick={() => setOpenMedium(true)}>添加</Button>
+              <Button onClick={() => setOpenMedium(true)}>
+                <Placeholder />
+              </Button>
             </GridList>
           </Box>
           {/* <Box className={classes.box}>
