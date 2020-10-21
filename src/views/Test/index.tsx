@@ -1,17 +1,13 @@
 import * as React from "react";
-import { EditableInput, useEditableInput } from "@/components/app/Input";
+import { EditCast } from "../movies/MovieUpload/modules";
+import { AiderScreen } from "@/layouts/PageLayout";
 
 const Test: React.FC = () => {
-  const [title, setTitle] = useEditableInput("");
-
   return (
     <div>
-      <EditableInput
-        // variant="h4"
-        value={title}
-        onChange={setTitle}
-        placeholder="请输入"
-      />
+      <AiderScreen>
+        <EditCast />
+      </AiderScreen>
     </div>
   );
 };

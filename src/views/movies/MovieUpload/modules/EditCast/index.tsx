@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: theme.palette.background.paper
+    },
+    subheaderWrap: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
     }
   })
 );
@@ -60,7 +65,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
       if (dataset.idx && dataset.key) {
         const cur = credits[dataset.idx];
         cur[dataset.key] = value;
-        setCredits([...credits, cur]);
+        setCredits([...credits]);
       }
     };
 
@@ -73,7 +78,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
       <Box className={classes.root}>
         <List
           subheader={
-            <ListSubheader>
+            <ListSubheader className={classes.subheaderWrap}>
               <Typography>演职表</Typography>
               <IconButton onClick={handleAddCredit} size="small">
                 <AddCircle fontSize="small" />
@@ -102,7 +107,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                           "data-idx": idx,
                           "data-key": "description"
                         }}
-                        value={item.name}
+                        value={item.description}
                         onChange={handleChange}
                         placeholder="请输入描述"
                       />
