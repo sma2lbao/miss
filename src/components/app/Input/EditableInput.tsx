@@ -1,6 +1,14 @@
 import * as React from "react";
-import { Input, makeStyles, Theme, createStyles } from "@material-ui/core";
-import { BaseInputProps } from "./input";
+import {
+  Input,
+  makeStyles,
+  Theme,
+  createStyles,
+  InputAdornment,
+  IconButton
+} from "@material-ui/core";
+import { BaseInputProps, InputStatus } from "./input.d";
+import { Edit } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -35,23 +43,53 @@ const useStyles = makeStyles((theme: Theme) => {
     /* Styles applied to the root element if `variant="overline"`. */
     overline: theme.typography.overline,
     /* Styles applied to the root element if `variant="inherit"`. */
-    inherit: {}
+    inherit: {},
+
+    normalRoot: {
+      position: "relative"
+    },
+
+    toolIcon: {
+      position: "relative",
+      top: theme.spacing(-1),
+      cursor: "pointer"
+    }
   });
 });
 
 export const EditableInput: React.FC<BaseInputProps> = props => {
   const { value, onChange, placeholder, variant = "body1", ...rest } = props;
   const classes = useStyles();
+  const [status, setStatus] = React.useState<InputStatus>(InputStatus.NORMAL);
+
   return (
     <Input
       classes={{
         root: classes.root
       }}
+      autoFocus
+      fullWidth
+      multiline
       className={classes[variant]}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       {...rest}
+      startAdornment={
+        status === InputStatus.NORMAL ? (
+          <InputAdornment position="start">
+            <IconButton
+              size="small"
+              onClick={() => setStatus(InputStatus.EDITING)}
+            >
+              <Edit fontSize="small" />
+            </IconButton>
+          </InputAdornment>
+        ) : null
+      }
+      readOnly={status === InputStatus.NORMAL}
+      disableUnderline={status === InputStatus.NORMAL}
+      onBlur={() => setStatus(InputStatus.NORMAL)}
     />
   );
 };

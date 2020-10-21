@@ -28,3 +28,9 @@ export interface BaseInputProps extends InputProps, BaseInputAttributes {
 
   onChange?(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void;
 }
+
+export enum InputStatus {
+  NORMAL = 0, // 默认状态
+
+  EDITING = 1 // 编辑中
+}

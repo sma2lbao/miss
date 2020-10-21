@@ -65,8 +65,8 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
     };
 
     const handleDelete = (idx: number) => {
-      const newCredits = credits.splice(idx, 1);
-      setCredits([...newCredits]);
+      credits.splice(idx, 1);
+      setCredits([...credits]);
     };
 
     return (
@@ -118,7 +118,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
             </>
           ) : (
             <div>
-              <Placeholder title="请添加演职人员" />
+              <Placeholder title="Please add cast." />
             </div>
           )}
         </List>
