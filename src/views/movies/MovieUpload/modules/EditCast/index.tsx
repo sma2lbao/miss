@@ -100,6 +100,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                         value={item.name}
                         onChange={handleChange}
                         placeholder="请输入名字"
+                        rowsMax={1}
                       />
 
                       <EditableInput
@@ -110,6 +111,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                         value={item.description}
                         onChange={handleChange}
                         placeholder="请输入描述"
+                        rowsMax={1}
                       />
                     </div>
                     <ListItemSecondaryAction>

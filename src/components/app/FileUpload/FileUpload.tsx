@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
       flex: 1
     },
-    icon: theme.custom.base.icon.large
+    icon: theme.custom.base.icon.small
   })
 );
 

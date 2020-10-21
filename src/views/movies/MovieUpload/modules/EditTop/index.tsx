@@ -3,16 +3,22 @@ import { Image } from "@/components/base/Image";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
-  Typography,
   Box,
   GridList,
   GridListTile,
-  IconButton
+  IconButton,
+  Switch,
+  Tooltip,
+  Zoom
 } from "@material-ui/core";
 
 import { useEditableInput, EditableInput } from "@/components/app/Input";
 import { FileUpload } from "@/components/app/FileUpload";
-import { PlayCircleOutline } from "@material-ui/icons";
+import { PlayCircleOutline, Delete } from "@material-ui/icons";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     aiderContent: {
       width: "50%",
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       borderRadius: theme.shape.borderRadius,
       maxHeight: "100%",
       background: "rgba(0, 0, 0, .1)",
@@ -54,9 +60,23 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(4),
       borderRadius: theme.shape.borderRadius
     },
-    posters: {},
+    poster: {
+      position: "relative"
+    },
     posterTool: {
-      display: "none"
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      visibility: "hidden",
+      position: "absolute",
+      padding: theme.spacing(1),
+      top: 0,
+      left: 0,
+      width: "100%",
+      color: "#fff",
+      "$poster:hover &": {
+        visibility: "initial"
+      }
     }
   })
 );
@@ -76,10 +96,14 @@ export interface EditTopHandles {
 export const EditTop = React.forwardRef<EditTopHandles, unknown>(
   (props, ref) => {
     const classes = useStyles();
+    const [activeStep, setActiveStep] = React.useState(0);
     const [title, setTitle] = useEditableInput("");
     const [sub_title, setSubTitle] = useEditableInput("");
     const [description, setDescription] = useEditableInput("");
-    const [posters, setPosters] = React.useState<string[]>([]);
+    const [posters, setPosters] = React.useState<string[]>([
+      "https://static.runoob.com/images/demo/demo2.jpg",
+      "https://static.veer.com/veer/static/resources/keyword/2020-02-19/533ed30de651499da1c463bca44b6d60.jpg"
+    ]);
     const [cover, setCover] = React.useState<string>("");
 
     React.useEffect(() => {
@@ -117,34 +141,62 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
       }
     };
 
-    const handleChangeCover = (
-      e: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => {
-      const { dataset } = e.currentTarget;
-      if (dataset.idx) {
-        setCover(posters[dataset.idx]);
-      }
+    const handleChangeCover = (idx: number) => {
+      setCover(posters[idx]);
     };
 
     return (
       <div className={classes.root}>
-        <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
+        {posters.length ? (
+          <AutoPlaySwipeableViews
+            onChangeIndex={step => setActiveStep(step)}
+            index={activeStep}
+          >
+            {posters.map((image, idx) => {
+              return <Image key={idx} aspectRatio={16 / 9} src={image} />;
+            })}
+          </AutoPlaySwipeableViews>
+        ) : (
+          <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
+        )}
+
         <div className={classes.aider}>
           <div className={classes.aiderContent}>
-            <GridList cellHeight="auto" className={classes.posters} cols={1}>
+            <GridList cellHeight="auto" cols={1}>
               {posters.map((poster, idx) => (
-                <GridListTile key={poster} cols={1}>
+                <GridListTile key={poster} cols={1} className={classes.poster}>
                   <Image
                     aspectRatio={16 / 9}
                     src={poster}
                     alt={"poster" + idx}
                   />
                   <div className={classes.posterTool}>
-                    <div data-idx={idx} onClick={handleRemovePoster}>
-                      remove poster
+                    <div>
+                      <Tooltip
+                        TransitionComponent={Zoom}
+                        title="设成封面"
+                        placement="bottom"
+                        arrow
+                      >
+                        <Switch
+                          size="small"
+                          color="primary"
+                          checked={cover === poster}
+                          onChange={() => handleChangeCover(idx)}
+                        />
+                      </Tooltip>
                     </div>
-                    <div data-idx={idx} onClick={handleChangeCover}>
-                      {cover === poster ? "is cover" : "isn't cover"}
+                    <div data-idx={idx} onClick={handleRemovePoster}>
+                      <Tooltip
+                        TransitionComponent={Zoom}
+                        title="删除"
+                        placement="bottom"
+                        arrow
+                      >
+                        <IconButton size="medium">
+                          <Delete fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
                     </div>
                   </div>
                 </GridListTile>
@@ -157,28 +209,22 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
         </div>
         <div className={classes.main}>
           <div className={classes.mainContent}>
-            <Typography gutterBottom variant="h4" component="div">
-              <EditableInput
-                variant="h4"
-                value={title}
-                onChange={setTitle}
-                placeholder="movie title"
-              />
-            </Typography>
-            <Typography gutterBottom variant="subtitle1" component="div">
-              <EditableInput
-                value={sub_title}
-                onChange={setSubTitle}
-                placeholder="请输入副标题"
-              />
-            </Typography>
-            <Typography variant="body2" component="div">
-              <EditableInput
-                value={description}
-                onChange={setDescription}
-                placeholder="请输入电影描述..."
-              />
-            </Typography>
+            <EditableInput
+              variant="h4"
+              value={title}
+              onChange={setTitle}
+              placeholder="请输入标题"
+            />
+            <EditableInput
+              value={sub_title}
+              onChange={setSubTitle}
+              placeholder="请输入副标题"
+            />
+            <EditableInput
+              value={description}
+              onChange={setDescription}
+              placeholder="请输入电影描述..."
+            />
             <Box mt={3}>
               <IconButton size="medium" disabled>
                 <PlayCircleOutline fontSize="large" />

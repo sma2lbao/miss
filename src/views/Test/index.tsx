@@ -1,13 +1,13 @@
 import * as React from "react";
-import { EditCast } from "../movies/MovieUpload/modules";
-import { AiderScreen } from "@/layouts/PageLayout";
+import { EditTop } from "../movies/MovieUpload/modules";
+import { BodyScreen } from "@/layouts/PageLayout";
 
 const Test: React.FC = () => {
   return (
     <div>
-      <AiderScreen>
-        <EditCast />
-      </AiderScreen>
+      <BodyScreen>
+        <EditTop />
+      </BodyScreen>
     </div>
   );
 };
