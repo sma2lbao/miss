@@ -7,7 +7,8 @@ import {
   Box,
   Theme,
   makeStyles,
-  createStyles
+  createStyles,
+  Fab
 } from "@material-ui/core";
 import {
   FullScreen,
@@ -20,6 +21,9 @@ import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { Placeholder } from "@/components/base/Placeholder";
 import { useEditableInput, EditableInput } from "@/components/app/Input";
 import { FileUpload } from "@/components/app/FileUpload";
+import ImageIcon from "@material-ui/icons/Image";
+import { MovieCreation } from "@material-ui/icons";
+import { ShadowPlayer } from "@/components/app/Player";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,6 +52,16 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       display: "flex",
       justifyContent: "space-between"
+    },
+    imageFab: {
+      position: "absolute",
+      left: theme.spacing(4),
+      bottom: theme.spacing(4)
+    },
+    shadowFab: {
+      position: "absolute",
+      right: theme.spacing(4),
+      bottom: theme.spacing(4)
     }
   })
 );
@@ -134,12 +148,34 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
           <FullScreen>
             <BodyScreen>
               <div className={classes.sourceWrap}>
-                <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
-                <FileUpload onComplete={handleChangeCover}>
-                  add cover
+                {url ? (
+                  <ShadowPlayer
+                    url={url}
+                    light={cover ? cover : DEFULAT_MOVIE_COVER}
+                  />
+                ) : (
+                  <Image
+                    aspectRatio={16 / 9}
+                    src={cover ? cover : DEFULAT_MOVIE_COVER}
+                  />
+                )}
+                <FileUpload custom onComplete={handleChangeCover}>
+                  <Fab
+                    color={url ? "primary" : "default"}
+                    size="medium"
+                    className={classes.imageFab}
+                  >
+                    <ImageIcon />
+                  </Fab>
                 </FileUpload>
-                <FileUpload onComplete={handleChangeSource}>
-                  add source
+                <FileUpload custom onComplete={handleChangeSource}>
+                  <Fab
+                    color={cover ? "primary" : "default"}
+                    size="medium"
+                    className={classes.shadowFab}
+                  >
+                    <MovieCreation />
+                  </Fab>
                 </FileUpload>
               </div>
             </BodyScreen>

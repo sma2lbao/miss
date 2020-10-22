@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactPlayer from "react-player";
+import ReactPlayer, { ReactPlayerProps } from "react-player";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,18 +19,25 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ShadowPlayer: React.FC = () => {
+export interface PlayerBaseProps
+  extends Pick<
+    ReactPlayerProps,
+    "url" | "playing" | "controls" | "muted" | "wrapper" | "light"
+  > {}
+
+export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
   const classes = useStyles();
+  const { url, ...rest } = props;
 
   return (
     <div className={classes.root}>
-      <ReactPlayer
-        className={classes.player}
-        url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-        playing
-      />
+      <ReactPlayer {...rest} className={classes.player} url={url} />
     </div>
   );
+};
+
+ShadowPlayer.defaultProps = {
+  controls: true
 };
 
 export default ShadowPlayer;

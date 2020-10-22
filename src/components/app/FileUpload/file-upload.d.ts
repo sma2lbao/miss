@@ -1,6 +1,8 @@
 export interface BaseFileUploadProps {
   custom?: boolean;
 
+  children?: React.ReactNode;
+
   title?: string;
 
   component?: React.ElementType<any>;

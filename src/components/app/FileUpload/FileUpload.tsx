@@ -74,12 +74,11 @@ export const FileUpload: React.FC<BaseFileUploadProps> = props => {
         onChange={handleChange}
       />
       {custom ? (
-        { children }
+        <>{children}</>
       ) : (
         <Box className={classes.root}>
           <div>
             <CloudUpload className={classes.icon} />
-            {/* <CircularProgress className={classes.icon} /> */}
           </div>
           <Typography variant="h6">{loading ? "上传中..." : title}</Typography>
         </Box>

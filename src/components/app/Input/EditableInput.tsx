@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 export const EditableInput: React.FC<BaseInputProps> = props => {
-  const { value, onChange, placeholder, variant = "body1", ...rest } = props;
+  const { value, onChange, placeholder, variant = "inherit", ...rest } = props;
   const classes = useStyles();
   const [status, setStatus] = React.useState<InputStatus>(InputStatus.NORMAL);
 
