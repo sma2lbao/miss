@@ -9,11 +9,9 @@ import Home from "@/views/Home";
 import H5NotSupported from "@/views/public/H5NotSupported";
 
 const ShadowHome = React.lazy(() => import("@/views/shadows/ShadowHome"));
-const TVHome = React.lazy(() => import("@/views/tvs/TVHome"));
 const Shadow = React.lazy(() => import("@/views/shadows/Shadow"));
 const ShadowPlay = React.lazy(() => import("@/views/shadows/ShadowPlay"));
 const ShadowUpload = React.lazy(() => import("@/views/shadows/ShadowUpload"));
-const TV = React.lazy(() => import("@/views/tvs/TV"));
 const Profile = React.lazy(() => import("@/views/users/Profile"));
 const Personal = React.lazy(() => import("@/views/users/Personal"));
 const Resume = React.lazy(() => import("@/views/users/Resume"));
@@ -63,8 +61,6 @@ function AppRoute() {
           component={ShadowUpload}
           layout={MainLayout}
         />
-        <Route lazy path="/tv-home" component={TVHome} layout={MainLayout} />
-        <Route lazy path="/tv" component={TV} layout={MainLayout} />
         <Route
           lazy
           path="/profile/:username"
