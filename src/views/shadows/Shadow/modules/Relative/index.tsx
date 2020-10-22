@@ -1,6 +1,6 @@
 import * as React from "react";
 import { MediaNormal } from "@/components/app/Media";
-import { Box, GridListTile, GridList, Typography } from "@material-ui/core";
+import { Box, GridListTile, GridList } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useShadowUrgesByShadowQuery } from "@/schema";
 import { useParams } from "react-router-dom";
@@ -25,9 +25,9 @@ export const Relative: React.FC = () => {
 
   return (
     <Box className={classes.root}>
-      <Typography variant="subtitle1" gutterBottom>
+      {/* <Typography variant="subtitle1" gutterBottom>
         喜欢该视频的也喜欢
-      </Typography>
+      </Typography> */}
       {data?.shadow_urges_by_shadow?.length ? (
         <GridList cellHeight="auto" cols={4}>
           {data?.shadow_urges_by_shadow.map((shadow, idx) => {

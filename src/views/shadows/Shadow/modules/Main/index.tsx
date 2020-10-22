@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, GridList, GridListTile } from "@material-ui/core";
+import { Box, GridList, GridListTile } from "@material-ui/core";
 // import { Rating } from "@material-ui/lab";
 // import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -40,9 +40,9 @@ export const Main: React.FC = () => {
         />
       </Box> */}
       <Box className={classes.box}>
-        <Typography variant="subtitle1" gutterBottom>
+        {/* <Typography variant="subtitle1" gutterBottom>
           相关资源
-        </Typography>
+        </Typography> */}
         {shadowQuery?.shadow.sources.length ? (
           <GridList cellHeight="auto" cols={4}>
             {shadowQuery.shadow.sources.map((source, idx) => {
@@ -59,9 +59,9 @@ export const Main: React.FC = () => {
           </div>
         )}
       </Box>
-      <Box className={classes.box}>
+      {/* <Box className={classes.box}>
         <Typography variant="subtitle1">精彩点评</Typography>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

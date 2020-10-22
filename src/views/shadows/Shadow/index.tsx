@@ -78,17 +78,6 @@ export default function Shadow() {
                 <div hidden={tab !== TabStatus.ABOUT}>
                   <About html={data?.shadow?.description || ""} />
                 </div>
-                {/* <TabContext value={tab}>
-                  <TabPanel value={TabStatus.INFO}>
-                    <ShadowMain />
-                  </TabPanel>
-                  <TabPanel value={TabStatus.RELATIVE}>
-                    <Relative />
-                  </TabPanel>
-                  <TabPanel value={TabStatus.ABOUT}>
-                    <About html={data?.shadow?.description || ""} />
-                  </TabPanel>
-                </TabContext> */}
               </div>
             </ContentScreen>
             <AiderScreen className={classes.aider}>
