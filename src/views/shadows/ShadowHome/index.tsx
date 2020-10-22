@@ -17,7 +17,7 @@ import {
   Typography
 } from "@material-ui/core";
 import { KeyboardArrowUp } from "@material-ui/icons";
-import { useMoviesPaginatedQuery } from "@/schema";
+import { useShadowsPaginatedQuery } from "@/schema";
 
 interface Props {
   window?: () => Window;
@@ -59,8 +59,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MovieHome(props: Props) {
-  const { data, loading, fetchMore } = useMoviesPaginatedQuery({
+export default function ShadowHome(props: Props) {
+  const { data, loading, fetchMore } = useShadowsPaginatedQuery({
     variables: {
       query: {
         first: 16
@@ -72,22 +72,22 @@ export default function MovieHome(props: Props) {
       variables: {
         query: {
           last: 8,
-          after: data?.movies_paginated?.pageInfo?.endCursor
+          after: data?.shadows_paginated?.pageInfo?.endCursor
         }
       },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => {
-        if (fetchMoreResult?.movies_paginated?.edges) {
+        if (fetchMoreResult?.shadows_paginated?.edges) {
           const {
             edges,
             pageInfo,
             totalCount
-          } = fetchMoreResult.movies_paginated;
+          } = fetchMoreResult.shadows_paginated;
           return {
-            movies_paginated: {
+            shadows_paginated: {
               pageInfo,
               totalCount,
-              edges: [...previousQueryResult.movies_paginated.edges, ...edges],
-              __typename: previousQueryResult.movies_paginated.__typename
+              edges: [...previousQueryResult.shadows_paginated.edges, ...edges],
+              __typename: previousQueryResult.shadows_paginated.__typename
             }
           };
         }
@@ -109,7 +109,7 @@ export default function MovieHome(props: Props) {
       <BodyScreen>
         <ContentScreen className={classes.content}>
           <Box className={classes.gridRoot}>
-            {data?.movies_paginated?.edges?.map((edge: any) => {
+            {data?.shadows_paginated?.edges?.map((edge: any) => {
               return (
                 <div key={edge.cursor} className={classes.gridCard}>
                   <MediaNormal {...edge.node} />
@@ -117,7 +117,7 @@ export default function MovieHome(props: Props) {
               );
             })}
           </Box>
-          {data?.movies_paginated?.pageInfo?.hasNextPage && (
+          {data?.shadows_paginated?.pageInfo?.hasNextPage && (
             <Box className={classes.footer}>
               <Button onClick={loadMore} disabled={loading}>
                 <Typography color="textSecondary" variant="caption">

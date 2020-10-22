@@ -6,14 +6,14 @@ export const CURRENT_TOPIC = gql`
       id
       title
       description
-      top_movies {
-        ...Movie
+      top_shadows {
+        ...Shadow
         author {
           ...Author
         }
       }
-      top_movie {
-        ...Movie
+      top_shadow {
+        ...Shadow
         author {
           ...Author
         }
@@ -23,9 +23,9 @@ export const CURRENT_TOPIC = gql`
 `;
 
 export const MOVIE_URGES = gql`
-  query movieUrges {
-    movie_urges {
-      ...Movie
+  query shadowUrges {
+    shadow_urges {
+      ...Shadow
       author {
         ...Author
       }

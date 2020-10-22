@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MoreVert } from "@material-ui/icons";
-import { MovieContext } from "../..";
+import { ShadowContext } from "../..";
 import { Placeholder } from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Cast: React.FC = () => {
+export const Cast: React.FC = () => {
   const classes = useStyles();
-  const movieQuery = React.useContext(MovieContext);
+  const shadowQuery = React.useContext(ShadowContext);
 
   return (
     <Box className={classes.root}>
@@ -37,9 +37,9 @@ const Cast: React.FC = () => {
           </ListSubheader>
         }
       >
-        {movieQuery?.movie?.credits?.length ? (
+        {shadowQuery?.shadow?.credits?.length ? (
           <>
-            {movieQuery.movie.credits.map((item, i) => {
+            {shadowQuery.shadow.credits.map((item, i) => {
               return (
                 <ListItem key={i}>
                   <ListItemAvatar>

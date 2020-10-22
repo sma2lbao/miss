@@ -22,7 +22,7 @@ export enum FollowExceptionStutus {
   FOLLOW_NOT_FOUND = 400404
 }
 
-export enum MovieExceptionStatus {
+export enum ShadowExceptionStatus {
   ERROR = 500000,
   MEDIUM_NOT_FOUND = 500404
 }
@@ -32,4 +32,4 @@ export type ExceptionStatus =
   | MediumExceptionStatus
   | UserExceptionStatus
   | FollowExceptionStutus
-  | MovieExceptionStatus;
+  | ShadowExceptionStatus;

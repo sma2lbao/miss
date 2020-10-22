@@ -28,13 +28,13 @@ export const MediaPlain: React.FC<MediaPlainProps> = (
   const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
-  const goMovie = (e: React.MouseEvent) => {
+  const goShadow = (e: React.MouseEvent) => {
     e.stopPropagation();
-    RouterHelper.gotoMovie(props?.id);
+    RouterHelper.gotoShadow(props?.id);
   };
 
   return (
-    <Box className={classes.wrap} onClick={goMovie}>
+    <Box className={classes.wrap} onClick={goShadow}>
       <div className={classes.cover}>
         <Image src={DEFULAT_MOVIE_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (

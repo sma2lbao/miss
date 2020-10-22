@@ -26,7 +26,7 @@ export const AUTHOR = gql`
 `;
 
 export const MOVIE = gql`
-  fragment Movie on Movie {
+  fragment Shadow on Shadow {
     id
     description
     title
@@ -39,7 +39,7 @@ export const MOVIE = gql`
 `;
 
 export const SOURCE = gql`
-  fragment MovieSource on MovieMedium {
+  fragment ShadowSource on ShadowMedium {
     id
     url
     super_quality_url

@@ -70,8 +70,8 @@ function Topic() {
               </Box>
               <Box display="flex" alignItems="center">
                 {(() => {
-                  const top_movies = data?.current_topic.top_movies || [];
-                  if (top_movies.length > 2) {
+                  const top_shadows = data?.current_topic.top_shadows || [];
+                  if (top_shadows.length > 2) {
                     return (
                       <React.Fragment>
                         <div>
@@ -91,7 +91,7 @@ function Topic() {
                             slideRenderer={params => {
                               const { key, index } = params;
                               const items =
-                                data?.current_topic.top_movies || [];
+                                data?.current_topic.top_shadows || [];
                               const idx = mod(index, items.length);
                               if (items[idx]) {
                                 return (
@@ -116,11 +116,14 @@ function Topic() {
                         </div>
                       </React.Fragment>
                     );
-                  } else if (top_movies.length > 0 && top_movies.length <= 2) {
+                  } else if (
+                    top_shadows.length > 0 &&
+                    top_shadows.length <= 2
+                  ) {
                     return (
                       <React.Fragment>
                         <div className={classes.bannerRoot}>
-                          {top_movies.map((item, idx) => {
+                          {top_shadows.map((item, idx) => {
                             return (
                               <div
                                 key={idx}
@@ -130,7 +133,7 @@ function Topic() {
                               </div>
                             );
                           })}
-                          {top_movies.length === 1 && (
+                          {top_shadows.length === 1 && (
                             <div className={clsx(classes.bannerItem)}>
                               <SpecialBox
                                 placeholder
@@ -149,8 +152,8 @@ function Topic() {
             </Box>
           </div>
           <div className={classes.headItem}>
-            {data.current_topic.top_movie ? (
-              <MediaNormal {...data?.current_topic.top_movie} />
+            {data.current_topic.top_shadow ? (
+              <MediaNormal {...data?.current_topic.top_shadow} />
             ) : (
               <Placeholder title="敬请期待" />
             )}

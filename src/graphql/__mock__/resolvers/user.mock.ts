@@ -17,8 +17,8 @@ export default {
       return {
         title: "title",
         description: "description",
-        top_movies: [],
-        top_movie: null
+        top_shadows: [],
+        top_shadow: null
       };
     },
     user_urges: () => {

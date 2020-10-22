@@ -2,7 +2,7 @@ import * as React from "react";
 import { MediaNormal } from "@/components/app/Media";
 import { Box, GridListTile, GridList, Typography } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { useMovieUrgesByMovieQuery } from "@/schema";
+import { useShadowUrgesByShadowQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import { SpecialBox } from "@/components/public/SpecialBox";
 
@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Relative() {
+export const Relative: React.FC = () => {
   const classes = useStyles();
   const { id } = useParams();
-  const { data, error, loading } = useMovieUrgesByMovieQuery({
+  const { data, error, loading } = useShadowUrgesByShadowQuery({
     variables: {
-      movie_id: id
+      shadow_id: id
     }
   });
 
@@ -28,12 +28,12 @@ export default function Relative() {
       <Typography variant="subtitle1" gutterBottom>
         喜欢该视频的也喜欢
       </Typography>
-      {data?.movie_urges_by_movie?.length ? (
+      {data?.shadow_urges_by_shadow?.length ? (
         <GridList cellHeight="auto" cols={4}>
-          {data?.movie_urges_by_movie.map((movie, idx) => {
+          {data?.shadow_urges_by_shadow.map((shadow, idx) => {
             return (
               <GridListTile key={idx}>
-                <MediaNormal {...movie} />
+                <MediaNormal {...shadow} />
               </GridListTile>
             );
           })}
@@ -49,4 +49,6 @@ export default function Relative() {
       )}
     </Box>
   );
-}
+};
+
+export default Relative;

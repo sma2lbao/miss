@@ -23,7 +23,7 @@ import {
   Tabs,
   Tab
 } from "@material-ui/core";
-import { useCreateMovieMutation } from "@/schema";
+import { useCreateShadowMutation } from "@/schema";
 import { useRouterHelper } from "@/hooks";
 import Confirm from "@/components/base/Confirm";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@material-ui/lab";
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const MovieUpload: React.FC = () => {
+export const ShadowUpload: React.FC = () => {
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
   const [tab, setTab] = React.useState(0);
@@ -65,7 +65,7 @@ export const MovieUpload: React.FC = () => {
   const aboutRef = React.createRef<EditAboutHandles>();
   const castRef = React.createRef<EditCastHandles>();
 
-  const [create_movie] = useCreateMovieMutation({
+  const [create_shadow] = useCreateShadowMutation({
     onCompleted() {
       Confirm.dialog({
         title: "提示",
@@ -76,15 +76,15 @@ export const MovieUpload: React.FC = () => {
     }
   });
 
-  const handleCreateMovie = () => {
+  const handleCreateShadow = () => {
     const topFields = topRef.current;
     const mainFields = mainRef.current;
     const aboutFields = aboutRef.current;
     const castFields = castRef.current;
 
-    create_movie({
+    create_shadow({
       variables: {
-        movie: {
+        shadow: {
           title: topFields?.title || "",
           cover: topFields?.cover || "",
           posters: topFields?.posters,
@@ -132,7 +132,7 @@ export const MovieUpload: React.FC = () => {
               <SpeedDialAction
                 icon={<Save />}
                 tooltipTitle="Create"
-                onClick={handleCreateMovie}
+                onClick={handleCreateShadow}
               />
             </SpeedDial>
           </div>
@@ -144,4 +144,4 @@ export const MovieUpload: React.FC = () => {
     </Box>
   );
 };
-export default MovieUpload;
+export default ShadowUpload;

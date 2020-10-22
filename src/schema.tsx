@@ -73,29 +73,6 @@ export type CreateFollowInput = {
   readonly owner_uid: Scalars["ID"];
 };
 
-export type CreateMovieInput = {
-  readonly title: Scalars["String"];
-  readonly sub_title?: Maybe<Scalars["String"]>;
-  readonly alias_title?: Maybe<Scalars["String"]>;
-  readonly cover: Scalars["String"];
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly about?: Maybe<Scalars["String"]>;
-  readonly region?: Maybe<Scalars["String"]>;
-  readonly credits?: Maybe<ReadonlyArray<CreateCharacterInput>>;
-  readonly sources?: Maybe<ReadonlyArray<CreateMovieMediumInput>>;
-};
-
-export type CreateMovieMediumInput = {
-  readonly name: Scalars["String"];
-  readonly url: Scalars["String"];
-  readonly alias_name?: Maybe<Scalars["String"]>;
-  readonly cover?: Maybe<Scalars["String"]>;
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly movie_id?: Maybe<Scalars["ID"]>;
-};
-
 export type CreatePlaylistInput = {
   readonly title: Scalars["String"];
   readonly description?: Maybe<Scalars["String"]>;
@@ -109,6 +86,29 @@ export type CreateReviewInput = {
   readonly type_id: Scalars["ID"];
 };
 
+export type CreateShadowInput = {
+  readonly title: Scalars["String"];
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly cover: Scalars["String"];
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly about?: Maybe<Scalars["String"]>;
+  readonly region?: Maybe<Scalars["String"]>;
+  readonly credits?: Maybe<ReadonlyArray<CreateCharacterInput>>;
+  readonly sources?: Maybe<ReadonlyArray<CreateShadowMediumInput>>;
+};
+
+export type CreateShadowMediumInput = {
+  readonly name: Scalars["String"];
+  readonly url: Scalars["String"];
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly shadow_id?: Maybe<Scalars["ID"]>;
+};
+
 export type CreateTagInput = {
   readonly label: Scalars["String"];
   readonly description?: Maybe<Scalars["String"]>;
@@ -117,8 +117,8 @@ export type CreateTagInput = {
 export type CreateTopicInput = {
   readonly title: Scalars["String"];
   readonly description?: Maybe<Scalars["String"]>;
-  readonly top_movie_id?: Maybe<Scalars["ID"]>;
-  readonly top_movies_ids?: Maybe<ReadonlyArray<Scalars["ID"]>>;
+  readonly top_shadow_id?: Maybe<Scalars["ID"]>;
+  readonly top_shadows_ids?: Maybe<ReadonlyArray<Scalars["ID"]>>;
 };
 
 export type CreateUserInput = {
@@ -142,26 +142,6 @@ export type CreateUserWithCodeInput = {
   readonly address?: Maybe<Scalars["String"]>;
   readonly description?: Maybe<Scalars["String"]>;
   readonly code: Scalars["String"];
-};
-
-export type CreateVideoInput = {
-  readonly title: Scalars["String"];
-  readonly sub_title?: Maybe<Scalars["String"]>;
-  readonly alias_title?: Maybe<Scalars["String"]>;
-  readonly cover: Scalars["String"];
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly sources?: Maybe<ReadonlyArray<CreateVideoMediumInput>>;
-};
-
-export type CreateVideoMediumInput = {
-  readonly name: Scalars["String"];
-  readonly url: Scalars["String"];
-  readonly alias_name?: Maybe<Scalars["String"]>;
-  readonly cover?: Maybe<Scalars["String"]>;
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly video_id?: Maybe<Scalars["ID"]>;
 };
 
 export type CreateVoteInput = {
@@ -227,76 +207,14 @@ export type Medium = {
   readonly version: Scalars["Float"];
 };
 
-export type Movie = {
-  readonly __typename?: "Movie";
-  readonly id: Scalars["ID"];
-  readonly title: Scalars["String"];
-  readonly sub_title?: Maybe<Scalars["String"]>;
-  readonly alias_title?: Maybe<Scalars["String"]>;
-  readonly cover: Scalars["String"];
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly about?: Maybe<Scalars["String"]>;
-  readonly region: Region;
-  readonly credits?: Maybe<ReadonlyArray<Character>>;
-  readonly sources: ReadonlyArray<MovieMedium>;
-  readonly author: User;
-  readonly create_at: Scalars["Date"];
-  readonly update_at: Scalars["Date"];
-  readonly delete_at?: Maybe<Scalars["Date"]>;
-};
-
-export type MovieEdge = {
-  readonly __typename?: "MovieEdge";
-  readonly cursor: Scalars["String"];
-  readonly node: Movie;
-};
-
-export type MovieMedium = {
-  readonly __typename?: "MovieMedium";
-  readonly id: Scalars["ID"];
-  readonly name?: Maybe<Scalars["String"]>;
-  readonly alias_name?: Maybe<Scalars["String"]>;
-  readonly cover?: Maybe<Scalars["String"]>;
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly duration?: Maybe<Scalars["Float"]>;
-  readonly preview_url?: Maybe<Scalars["String"]>;
-  readonly url: Scalars["String"];
-  readonly low_quality_url?: Maybe<Scalars["String"]>;
-  readonly medium_quality_url?: Maybe<Scalars["String"]>;
-  readonly high_quality_url?: Maybe<Scalars["String"]>;
-  readonly super_quality_url?: Maybe<Scalars["String"]>;
-  readonly create_at: Scalars["Date"];
-  readonly update_at: Scalars["Date"];
-  readonly delete_at?: Maybe<Scalars["Date"]>;
-  readonly version: Scalars["Float"];
-};
-
-export type MoviePageInfo = {
-  readonly __typename?: "MoviePageInfo";
-  readonly hasNextPage: Scalars["Boolean"];
-  readonly hasPreviousPage: Scalars["Boolean"];
-  readonly startCursor: Scalars["String"];
-  readonly endCursor: Scalars["String"];
-};
-
-export type MoviePaginated = {
-  readonly __typename?: "MoviePaginated";
-  readonly edges?: Maybe<ReadonlyArray<MovieEdge>>;
-  readonly nodes?: Maybe<ReadonlyArray<Movie>>;
-  readonly pageInfo: MoviePageInfo;
-  readonly totalCount: Scalars["Int"];
-};
-
 export type Mutation = {
   readonly __typename?: "Mutation";
   readonly create_tag: Tag;
-  readonly add_movie_to_tag: Scalars["Boolean"];
+  readonly add_shadow_to_tag: Scalars["Boolean"];
   readonly add_category_to_tag: Scalars["Boolean"];
-  readonly create_movie: Movie;
-  readonly update_movie: Movie;
-  readonly add_mediums_to_movie: Movie;
+  readonly create_shadow: Shadow;
+  readonly update_shadow: Shadow;
+  readonly add_mediums_to_shadow: Shadow;
   readonly create_category: Category;
   readonly delete_category: Scalars["Boolean"];
   readonly create_bullet: Bullet;
@@ -311,11 +229,9 @@ export type Mutation = {
   readonly create_topic: Topic;
   readonly create_review: Review;
   readonly create_playlist: Playlist;
-  readonly add_movie_to_playlist: Scalars["Boolean"];
+  readonly add_shadow_to_playlist: Scalars["Boolean"];
   readonly create_follow: Follow;
   readonly remove_follow: Follow;
-  readonly create_video: Video;
-  readonly add_mediums_to_video: Video;
   readonly create_or_update_vote: Vote;
 };
 
@@ -323,9 +239,9 @@ export type MutationCreate_TagArgs = {
   tag: CreateTagInput;
 };
 
-export type MutationAdd_Movie_To_TagArgs = {
+export type MutationAdd_Shadow_To_TagArgs = {
   tag_id: Scalars["Float"];
-  movie_id: Scalars["Float"];
+  shadow_id: Scalars["Float"];
 };
 
 export type MutationAdd_Category_To_TagArgs = {
@@ -333,18 +249,18 @@ export type MutationAdd_Category_To_TagArgs = {
   category_id: Scalars["Float"];
 };
 
-export type MutationCreate_MovieArgs = {
-  movie: CreateMovieInput;
+export type MutationCreate_ShadowArgs = {
+  shadow: CreateShadowInput;
 };
 
-export type MutationUpdate_MovieArgs = {
-  movie: UpdateMovieInput;
-  movie_id: Scalars["ID"];
+export type MutationUpdate_ShadowArgs = {
+  shadow: UpdateShadowInput;
+  shadow_id: Scalars["ID"];
 };
 
-export type MutationAdd_Mediums_To_MovieArgs = {
-  movie_medium: CreateMovieMediumInput;
-  movie_id: Scalars["ID"];
+export type MutationAdd_Mediums_To_ShadowArgs = {
+  shadow_medium: CreateShadowMediumInput;
+  shadow_id: Scalars["ID"];
 };
 
 export type MutationCreate_CategoryArgs = {
@@ -396,9 +312,9 @@ export type MutationCreate_PlaylistArgs = {
   playlist: CreatePlaylistInput;
 };
 
-export type MutationAdd_Movie_To_PlaylistArgs = {
+export type MutationAdd_Shadow_To_PlaylistArgs = {
   playlist_id: Scalars["Float"];
-  movie_id: Scalars["Float"];
+  shadow_id: Scalars["Float"];
 };
 
 export type MutationCreate_FollowArgs = {
@@ -407,15 +323,6 @@ export type MutationCreate_FollowArgs = {
 
 export type MutationRemove_FollowArgs = {
   follow: DeleteFollowInput;
-};
-
-export type MutationCreate_VideoArgs = {
-  video: CreateVideoInput;
-};
-
-export type MutationAdd_Mediums_To_VideoArgs = {
-  video_medium: CreateVideoMediumInput;
-  video_id: Scalars["ID"];
 };
 
 export type MutationCreate_Or_Update_VoteArgs = {
@@ -442,8 +349,8 @@ export type Playlist = {
   readonly title: Scalars["String"];
   readonly description?: Maybe<Scalars["String"]>;
   readonly cover?: Maybe<Scalars["String"]>;
-  readonly movies?: Maybe<ReadonlyArray<Movie>>;
-  readonly movies_count?: Maybe<Scalars["Float"]>;
+  readonly shadows?: Maybe<ReadonlyArray<Shadow>>;
+  readonly shadows_count?: Maybe<Scalars["Float"]>;
   readonly author: User;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
@@ -474,9 +381,9 @@ export type PlaylistPaginated = {
 
 export type Query = {
   readonly __typename?: "Query";
-  readonly movie: Movie;
-  readonly movies_paginated: MoviePaginated;
-  readonly user_movies_paginated: MoviePaginated;
+  readonly shadow: Shadow;
+  readonly shadows_paginated: ShadowPaginated;
+  readonly user_shadows_paginated: ShadowPaginated;
   readonly me: User;
   readonly platform_auth_way: ReadonlyArray<PlatformAuthWay>;
   /** find username exit. */
@@ -486,10 +393,10 @@ export type Query = {
   /** all user with paginated. */
   readonly users_paginated: UserPaginated;
   readonly current_topic: Topic;
-  readonly movie_urges: ReadonlyArray<Movie>;
-  readonly movie_urges_by_movie: ReadonlyArray<Movie>;
+  readonly shadow_urges: ReadonlyArray<Shadow>;
+  readonly shadow_urges_by_shadow: ReadonlyArray<Shadow>;
   readonly user_urges: ReadonlyArray<User>;
-  readonly movie_next_urges_by_movie: ReadonlyArray<Movie>;
+  readonly shadow_next_urges_by_shadow: ReadonlyArray<Shadow>;
   readonly reviews_paginated: ReviewPaginated;
   readonly playlists_paginated: PlaylistPaginated;
   readonly playlist: Playlist;
@@ -500,21 +407,19 @@ export type Query = {
   readonly fans_paginated: FollowPaginated;
   readonly fans_total: Scalars["Int"];
   readonly is_following: Scalars["Boolean"];
-  readonly video: Video;
-  readonly videos_paginated: VideoPaginated;
   readonly vote: Vote;
   readonly medium_vote_count: Scalars["Int"];
 };
 
-export type QueryMovieArgs = {
+export type QueryShadowArgs = {
   id: Scalars["ID"];
 };
 
-export type QueryMovies_PaginatedArgs = {
+export type QueryShadows_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
 };
 
-export type QueryUser_Movies_PaginatedArgs = {
+export type QueryUser_Shadows_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
   author_username: Scalars["String"];
 };
@@ -532,12 +437,12 @@ export type QueryUsers_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
 };
 
-export type QueryMovie_Urges_By_MovieArgs = {
-  movie_id: Scalars["ID"];
+export type QueryShadow_Urges_By_ShadowArgs = {
+  shadow_id: Scalars["ID"];
 };
 
-export type QueryMovie_Next_Urges_By_MovieArgs = {
-  movie_id: Scalars["ID"];
+export type QueryShadow_Next_Urges_By_ShadowArgs = {
+  shadow_id: Scalars["ID"];
 };
 
 export type QueryReviews_PaginatedArgs = {
@@ -577,14 +482,6 @@ export type QueryIs_FollowingArgs = {
   owner_uid: Scalars["String"];
 };
 
-export type QueryVideoArgs = {
-  id: Scalars["ID"];
-};
-
-export type QueryVideos_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-};
-
 export type QueryVoteArgs = {
   medium_id: Scalars["Float"];
 };
@@ -621,7 +518,7 @@ export type ReviewEdge = {
 
 export enum ReviewMedium {
   Medium = "MEDIUM",
-  Movie = "MOVIE"
+  Shadow = "SHADOW"
 }
 
 export type ReviewPageInfo = {
@@ -637,6 +534,68 @@ export type ReviewPaginated = {
   readonly edges?: Maybe<ReadonlyArray<ReviewEdge>>;
   readonly nodes?: Maybe<ReadonlyArray<Review>>;
   readonly pageInfo: ReviewPageInfo;
+  readonly totalCount: Scalars["Int"];
+};
+
+export type Shadow = {
+  readonly __typename?: "Shadow";
+  readonly id: Scalars["ID"];
+  readonly title: Scalars["String"];
+  readonly sub_title?: Maybe<Scalars["String"]>;
+  readonly alias_title?: Maybe<Scalars["String"]>;
+  readonly cover: Scalars["String"];
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly about?: Maybe<Scalars["String"]>;
+  readonly region: Region;
+  readonly credits?: Maybe<ReadonlyArray<Character>>;
+  readonly sources: ReadonlyArray<ShadowMedium>;
+  readonly author: User;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
+};
+
+export type ShadowEdge = {
+  readonly __typename?: "ShadowEdge";
+  readonly cursor: Scalars["String"];
+  readonly node: Shadow;
+};
+
+export type ShadowMedium = {
+  readonly __typename?: "ShadowMedium";
+  readonly id: Scalars["ID"];
+  readonly name?: Maybe<Scalars["String"]>;
+  readonly alias_name?: Maybe<Scalars["String"]>;
+  readonly cover?: Maybe<Scalars["String"]>;
+  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
+  readonly description?: Maybe<Scalars["String"]>;
+  readonly duration?: Maybe<Scalars["Float"]>;
+  readonly preview_url?: Maybe<Scalars["String"]>;
+  readonly url: Scalars["String"];
+  readonly low_quality_url?: Maybe<Scalars["String"]>;
+  readonly medium_quality_url?: Maybe<Scalars["String"]>;
+  readonly high_quality_url?: Maybe<Scalars["String"]>;
+  readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly create_at: Scalars["Date"];
+  readonly update_at: Scalars["Date"];
+  readonly delete_at?: Maybe<Scalars["Date"]>;
+  readonly version: Scalars["Float"];
+};
+
+export type ShadowPageInfo = {
+  readonly __typename?: "ShadowPageInfo";
+  readonly hasNextPage: Scalars["Boolean"];
+  readonly hasPreviousPage: Scalars["Boolean"];
+  readonly startCursor: Scalars["String"];
+  readonly endCursor: Scalars["String"];
+};
+
+export type ShadowPaginated = {
+  readonly __typename?: "ShadowPaginated";
+  readonly edges?: Maybe<ReadonlyArray<ShadowEdge>>;
+  readonly nodes?: Maybe<ReadonlyArray<Shadow>>;
+  readonly pageInfo: ShadowPageInfo;
   readonly totalCount: Scalars["Int"];
 };
 
@@ -656,7 +615,7 @@ export type Tag = {
   readonly id: Scalars["ID"];
   readonly label: Scalars["String"];
   readonly description?: Maybe<Scalars["String"]>;
-  readonly movies?: Maybe<ReadonlyArray<Movie>>;
+  readonly shadows?: Maybe<ReadonlyArray<Shadow>>;
   readonly categories?: Maybe<ReadonlyArray<Category>>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
@@ -667,14 +626,14 @@ export type Topic = {
   readonly id: Scalars["ID"];
   readonly title: Scalars["String"];
   readonly description?: Maybe<Scalars["String"]>;
-  readonly top_movie?: Maybe<Movie>;
-  readonly top_movies?: Maybe<ReadonlyArray<Movie>>;
+  readonly top_shadow?: Maybe<Shadow>;
+  readonly top_shadows?: Maybe<ReadonlyArray<Shadow>>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
   readonly delete_at?: Maybe<Scalars["Date"]>;
 };
 
-export type UpdateMovieInput = {
+export type UpdateShadowInput = {
   readonly sub_title?: Maybe<Scalars["String"]>;
   readonly alias_title?: Maybe<Scalars["String"]>;
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
@@ -682,7 +641,7 @@ export type UpdateMovieInput = {
   readonly about?: Maybe<Scalars["String"]>;
   readonly region?: Maybe<Scalars["String"]>;
   readonly credits?: Maybe<ReadonlyArray<CreateCharacterInput>>;
-  readonly sources?: Maybe<ReadonlyArray<CreateMovieMediumInput>>;
+  readonly sources?: Maybe<ReadonlyArray<CreateShadowMediumInput>>;
   readonly title?: Maybe<Scalars["String"]>;
   readonly cover?: Maybe<Scalars["String"]>;
 };
@@ -730,65 +689,6 @@ export type UserPaginated = {
   readonly edges?: Maybe<ReadonlyArray<UserEdge>>;
   readonly nodes?: Maybe<ReadonlyArray<User>>;
   readonly pageInfo: UserPageInfo;
-  readonly totalCount: Scalars["Int"];
-};
-
-export type Video = {
-  readonly __typename?: "Video";
-  readonly id: Scalars["ID"];
-  readonly title: Scalars["String"];
-  readonly sub_title?: Maybe<Scalars["String"]>;
-  readonly alias_title?: Maybe<Scalars["String"]>;
-  readonly cover: Scalars["String"];
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly sources: ReadonlyArray<VideoMedium>;
-  readonly author: User;
-  readonly create_at: Scalars["Date"];
-  readonly update_at: Scalars["Date"];
-  readonly delete_at?: Maybe<Scalars["Date"]>;
-};
-
-export type VideoEdge = {
-  readonly __typename?: "VideoEdge";
-  readonly cursor: Scalars["String"];
-  readonly node: Video;
-};
-
-export type VideoMedium = {
-  readonly __typename?: "VideoMedium";
-  readonly id: Scalars["ID"];
-  readonly name?: Maybe<Scalars["String"]>;
-  readonly alias_name?: Maybe<Scalars["String"]>;
-  readonly cover?: Maybe<Scalars["String"]>;
-  readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
-  readonly description?: Maybe<Scalars["String"]>;
-  readonly duration?: Maybe<Scalars["Float"]>;
-  readonly preview_url?: Maybe<Scalars["String"]>;
-  readonly url: Scalars["String"];
-  readonly low_quality_url?: Maybe<Scalars["String"]>;
-  readonly medium_quality_url?: Maybe<Scalars["String"]>;
-  readonly high_quality_url?: Maybe<Scalars["String"]>;
-  readonly super_quality_url?: Maybe<Scalars["String"]>;
-  readonly create_at: Scalars["Date"];
-  readonly update_at: Scalars["Date"];
-  readonly delete_at?: Maybe<Scalars["Date"]>;
-  readonly version: Scalars["Float"];
-};
-
-export type VideoPageInfo = {
-  readonly __typename?: "VideoPageInfo";
-  readonly hasNextPage: Scalars["Boolean"];
-  readonly hasPreviousPage: Scalars["Boolean"];
-  readonly startCursor: Scalars["String"];
-  readonly endCursor: Scalars["String"];
-};
-
-export type VideoPaginated = {
-  readonly __typename?: "VideoPaginated";
-  readonly edges?: Maybe<ReadonlyArray<VideoEdge>>;
-  readonly nodes?: Maybe<ReadonlyArray<Video>>;
-  readonly pageInfo: VideoPageInfo;
   readonly totalCount: Scalars["Int"];
 };
 
@@ -862,42 +762,42 @@ export type UpdateUserMutation = {
   };
 };
 
-export type CreateMovieMutationVariables = Exact<{
-  movie: CreateMovieInput;
+export type CreateShadowMutationVariables = Exact<{
+  shadow: CreateShadowInput;
 }>;
 
-export type CreateMovieMutation = {
+export type CreateShadowMutation = {
   readonly __typename?: "Mutation";
-  readonly create_movie: {
-    readonly __typename?: "Movie";
+  readonly create_shadow: {
+    readonly __typename?: "Shadow";
     readonly create_at: any;
   };
 };
 
-export type UpdateMovieMutationVariables = Exact<{
-  movie: UpdateMovieInput;
-  movie_id: Scalars["ID"];
+export type UpdateShadowMutationVariables = Exact<{
+  shadow: UpdateShadowInput;
+  shadow_id: Scalars["ID"];
 }>;
 
-export type UpdateMovieMutation = {
+export type UpdateShadowMutation = {
   readonly __typename?: "Mutation";
-  readonly update_movie: {
-    readonly __typename?: "Movie";
+  readonly update_shadow: {
+    readonly __typename?: "Shadow";
     readonly create_at: any;
   };
 };
 
-export type AddMediumsToMovieMutationVariables = Exact<{
-  movie_id: Scalars["ID"];
-  movie_medium: CreateMovieMediumInput;
+export type AddMediumsToShadowMutationVariables = Exact<{
+  shadow_id: Scalars["ID"];
+  shadow_medium: CreateShadowMediumInput;
 }>;
 
-export type AddMediumsToMovieMutation = {
+export type AddMediumsToShadowMutation = {
   readonly __typename?: "Mutation";
-  readonly add_mediums_to_movie: {
-    readonly __typename?: "Movie";
+  readonly add_mediums_to_shadow: {
+    readonly __typename?: "Shadow";
     readonly sources: ReadonlyArray<{
-      readonly __typename?: "MovieMedium";
+      readonly __typename?: "ShadowMedium";
       readonly name?: Maybe<string>;
     }>;
   };
@@ -985,9 +885,9 @@ export type CurrentTopicQuery = {
     readonly id: number | string;
     readonly title: string;
     readonly description?: Maybe<string>;
-    readonly top_movies?: Maybe<
+    readonly top_shadows?: Maybe<
       ReadonlyArray<{
-        readonly __typename?: "Movie";
+        readonly __typename?: "Shadow";
         readonly id: number | string;
         readonly description?: Maybe<string>;
         readonly title: string;
@@ -1006,8 +906,8 @@ export type CurrentTopicQuery = {
         };
       }>
     >;
-    readonly top_movie?: Maybe<{
-      readonly __typename?: "Movie";
+    readonly top_shadow?: Maybe<{
+      readonly __typename?: "Shadow";
       readonly id: number | string;
       readonly description?: Maybe<string>;
       readonly title: string;
@@ -1028,12 +928,12 @@ export type CurrentTopicQuery = {
   };
 };
 
-export type MovieUrgesQueryVariables = Exact<{ [key: string]: never }>;
+export type ShadowUrgesQueryVariables = Exact<{ [key: string]: never }>;
 
-export type MovieUrgesQuery = {
+export type ShadowUrgesQuery = {
   readonly __typename?: "Query";
-  readonly movie_urges: ReadonlyArray<{
-    readonly __typename?: "Movie";
+  readonly shadow_urges: ReadonlyArray<{
+    readonly __typename?: "Shadow";
     readonly id: number | string;
     readonly description?: Maybe<string>;
     readonly title: string;
@@ -1067,199 +967,6 @@ export type UserUrgesQuery = {
   }>;
 };
 
-export type MovieQueryVariables = Exact<{
-  id: Scalars["ID"];
-}>;
-
-export type MovieQuery = {
-  readonly __typename?: "Query";
-  readonly movie: {
-    readonly __typename?: "Movie";
-    readonly alias_title?: Maybe<string>;
-    readonly region: Region;
-    readonly id: number | string;
-    readonly description?: Maybe<string>;
-    readonly title: string;
-    readonly sub_title?: Maybe<string>;
-    readonly create_at: any;
-    readonly update_at: any;
-    readonly cover: string;
-    readonly posters?: Maybe<ReadonlyArray<string>>;
-    readonly credits?: Maybe<
-      ReadonlyArray<{
-        readonly __typename?: "Character";
-        readonly avatar: string;
-        readonly name: string;
-        readonly description?: Maybe<string>;
-      }>
-    >;
-    readonly author: {
-      readonly __typename?: "User";
-      readonly uid: number | string;
-      readonly avatar: string;
-      readonly nickname?: Maybe<string>;
-      readonly username: string;
-      readonly description?: Maybe<string>;
-    };
-    readonly sources: ReadonlyArray<{
-      readonly __typename?: "MovieMedium";
-      readonly id: number | string;
-      readonly url: string;
-      readonly super_quality_url?: Maybe<string>;
-      readonly preview_url?: Maybe<string>;
-      readonly posters?: Maybe<ReadonlyArray<string>>;
-      readonly name?: Maybe<string>;
-      readonly medium_quality_url?: Maybe<string>;
-      readonly low_quality_url?: Maybe<string>;
-      readonly high_quality_url?: Maybe<string>;
-      readonly duration?: Maybe<number>;
-      readonly description?: Maybe<string>;
-      readonly alias_name?: Maybe<string>;
-      readonly create_at: any;
-      readonly update_at: any;
-    }>;
-  };
-};
-
-export type MoviesPaginatedQueryVariables = Exact<{
-  query?: Maybe<PaginatedQuery>;
-}>;
-
-export type MoviesPaginatedQuery = {
-  readonly __typename?: "Query";
-  readonly movies_paginated: {
-    readonly __typename?: "MoviePaginated";
-    readonly totalCount: number;
-    readonly pageInfo: {
-      readonly __typename?: "MoviePageInfo";
-      readonly hasNextPage: boolean;
-      readonly endCursor: string;
-    };
-    readonly edges?: Maybe<
-      ReadonlyArray<{
-        readonly __typename?: "MovieEdge";
-        readonly cursor: string;
-        readonly node: {
-          readonly __typename?: "Movie";
-          readonly id: number | string;
-          readonly description?: Maybe<string>;
-          readonly title: string;
-          readonly sub_title?: Maybe<string>;
-          readonly create_at: any;
-          readonly update_at: any;
-          readonly cover: string;
-          readonly posters?: Maybe<ReadonlyArray<string>>;
-          readonly author: {
-            readonly __typename?: "User";
-            readonly uid: number | string;
-            readonly avatar: string;
-            readonly nickname?: Maybe<string>;
-            readonly username: string;
-            readonly description?: Maybe<string>;
-          };
-        };
-      }>
-    >;
-  };
-};
-
-export type UserMoviesPaginatedQueryVariables = Exact<{
-  author_username: Scalars["String"];
-  query?: Maybe<PaginatedQuery>;
-}>;
-
-export type UserMoviesPaginatedQuery = {
-  readonly __typename?: "Query";
-  readonly user_movies_paginated: {
-    readonly __typename?: "MoviePaginated";
-    readonly totalCount: number;
-    readonly pageInfo: {
-      readonly __typename?: "MoviePageInfo";
-      readonly hasNextPage: boolean;
-      readonly endCursor: string;
-    };
-    readonly edges?: Maybe<
-      ReadonlyArray<{
-        readonly __typename?: "MovieEdge";
-        readonly cursor: string;
-        readonly node: {
-          readonly __typename?: "Movie";
-          readonly id: number | string;
-          readonly description?: Maybe<string>;
-          readonly title: string;
-          readonly sub_title?: Maybe<string>;
-          readonly create_at: any;
-          readonly update_at: any;
-          readonly cover: string;
-          readonly posters?: Maybe<ReadonlyArray<string>>;
-          readonly author: {
-            readonly __typename?: "User";
-            readonly uid: number | string;
-            readonly avatar: string;
-            readonly nickname?: Maybe<string>;
-            readonly username: string;
-            readonly description?: Maybe<string>;
-          };
-        };
-      }>
-    >;
-  };
-};
-
-export type MovieUrgesByMovieQueryVariables = Exact<{
-  movie_id: Scalars["ID"];
-}>;
-
-export type MovieUrgesByMovieQuery = {
-  readonly __typename?: "Query";
-  readonly movie_urges_by_movie: ReadonlyArray<{
-    readonly __typename?: "Movie";
-    readonly id: number | string;
-    readonly description?: Maybe<string>;
-    readonly title: string;
-    readonly sub_title?: Maybe<string>;
-    readonly create_at: any;
-    readonly update_at: any;
-    readonly cover: string;
-    readonly posters?: Maybe<ReadonlyArray<string>>;
-    readonly author: {
-      readonly __typename?: "User";
-      readonly uid: number | string;
-      readonly avatar: string;
-      readonly nickname?: Maybe<string>;
-      readonly username: string;
-      readonly description?: Maybe<string>;
-    };
-  }>;
-};
-
-export type MovieNextUrgesByMovieQueryVariables = Exact<{
-  movie_id: Scalars["ID"];
-}>;
-
-export type MovieNextUrgesByMovieQuery = {
-  readonly __typename?: "Query";
-  readonly movie_next_urges_by_movie: ReadonlyArray<{
-    readonly __typename?: "Movie";
-    readonly id: number | string;
-    readonly description?: Maybe<string>;
-    readonly title: string;
-    readonly sub_title?: Maybe<string>;
-    readonly create_at: any;
-    readonly update_at: any;
-    readonly cover: string;
-    readonly posters?: Maybe<ReadonlyArray<string>>;
-    readonly author: {
-      readonly __typename?: "User";
-      readonly uid: number | string;
-      readonly avatar: string;
-      readonly nickname?: Maybe<string>;
-      readonly username: string;
-      readonly description?: Maybe<string>;
-    };
-  }>;
-};
-
 export type PlaylistsPaginatedQueryVariables = Exact<{
   query?: Maybe<PaginatedQuery>;
   author_uid?: Maybe<Scalars["String"]>;
@@ -1290,6 +997,199 @@ export type PlaylistsPaginatedQuery = {
       }>
     >;
   };
+};
+
+export type ShadowQueryVariables = Exact<{
+  id: Scalars["ID"];
+}>;
+
+export type ShadowQuery = {
+  readonly __typename?: "Query";
+  readonly shadow: {
+    readonly __typename?: "Shadow";
+    readonly alias_title?: Maybe<string>;
+    readonly region: Region;
+    readonly id: number | string;
+    readonly description?: Maybe<string>;
+    readonly title: string;
+    readonly sub_title?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
+    readonly cover: string;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly credits?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "Character";
+        readonly avatar: string;
+        readonly name: string;
+        readonly description?: Maybe<string>;
+      }>
+    >;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly uid: number | string;
+      readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+      readonly description?: Maybe<string>;
+    };
+    readonly sources: ReadonlyArray<{
+      readonly __typename?: "ShadowMedium";
+      readonly id: number | string;
+      readonly url: string;
+      readonly super_quality_url?: Maybe<string>;
+      readonly preview_url?: Maybe<string>;
+      readonly posters?: Maybe<ReadonlyArray<string>>;
+      readonly name?: Maybe<string>;
+      readonly medium_quality_url?: Maybe<string>;
+      readonly low_quality_url?: Maybe<string>;
+      readonly high_quality_url?: Maybe<string>;
+      readonly duration?: Maybe<number>;
+      readonly description?: Maybe<string>;
+      readonly alias_name?: Maybe<string>;
+      readonly create_at: any;
+      readonly update_at: any;
+    }>;
+  };
+};
+
+export type ShadowsPaginatedQueryVariables = Exact<{
+  query?: Maybe<PaginatedQuery>;
+}>;
+
+export type ShadowsPaginatedQuery = {
+  readonly __typename?: "Query";
+  readonly shadows_paginated: {
+    readonly __typename?: "ShadowPaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "ShadowPageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
+    };
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Shadow";
+          readonly id: number | string;
+          readonly description?: Maybe<string>;
+          readonly title: string;
+          readonly sub_title?: Maybe<string>;
+          readonly create_at: any;
+          readonly update_at: any;
+          readonly cover: string;
+          readonly posters?: Maybe<ReadonlyArray<string>>;
+          readonly author: {
+            readonly __typename?: "User";
+            readonly uid: number | string;
+            readonly avatar: string;
+            readonly nickname?: Maybe<string>;
+            readonly username: string;
+            readonly description?: Maybe<string>;
+          };
+        };
+      }>
+    >;
+  };
+};
+
+export type UserShadowsPaginatedQueryVariables = Exact<{
+  author_username: Scalars["String"];
+  query?: Maybe<PaginatedQuery>;
+}>;
+
+export type UserShadowsPaginatedQuery = {
+  readonly __typename?: "Query";
+  readonly user_shadows_paginated: {
+    readonly __typename?: "ShadowPaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "ShadowPageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
+    };
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Shadow";
+          readonly id: number | string;
+          readonly description?: Maybe<string>;
+          readonly title: string;
+          readonly sub_title?: Maybe<string>;
+          readonly create_at: any;
+          readonly update_at: any;
+          readonly cover: string;
+          readonly posters?: Maybe<ReadonlyArray<string>>;
+          readonly author: {
+            readonly __typename?: "User";
+            readonly uid: number | string;
+            readonly avatar: string;
+            readonly nickname?: Maybe<string>;
+            readonly username: string;
+            readonly description?: Maybe<string>;
+          };
+        };
+      }>
+    >;
+  };
+};
+
+export type ShadowUrgesByShadowQueryVariables = Exact<{
+  shadow_id: Scalars["ID"];
+}>;
+
+export type ShadowUrgesByShadowQuery = {
+  readonly __typename?: "Query";
+  readonly shadow_urges_by_shadow: ReadonlyArray<{
+    readonly __typename?: "Shadow";
+    readonly id: number | string;
+    readonly description?: Maybe<string>;
+    readonly title: string;
+    readonly sub_title?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
+    readonly cover: string;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly uid: number | string;
+      readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+      readonly description?: Maybe<string>;
+    };
+  }>;
+};
+
+export type ShadowNextUrgesByShadowQueryVariables = Exact<{
+  shadow_id: Scalars["ID"];
+}>;
+
+export type ShadowNextUrgesByShadowQuery = {
+  readonly __typename?: "Query";
+  readonly shadow_next_urges_by_shadow: ReadonlyArray<{
+    readonly __typename?: "Shadow";
+    readonly id: number | string;
+    readonly description?: Maybe<string>;
+    readonly title: string;
+    readonly sub_title?: Maybe<string>;
+    readonly create_at: any;
+    readonly update_at: any;
+    readonly cover: string;
+    readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly author: {
+      readonly __typename?: "User";
+      readonly uid: number | string;
+      readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+      readonly description?: Maybe<string>;
+    };
+  }>;
 };
 
 export type IsFollowingQueryVariables = Exact<{
@@ -1367,8 +1267,8 @@ export const AuthorFragmentDoc = gql`
     description
   }
 `;
-export const MovieFragmentDoc = gql`
-  fragment Movie on Movie {
+export const ShadowFragmentDoc = gql`
+  fragment Shadow on Shadow {
     id
     description
     title
@@ -1379,8 +1279,8 @@ export const MovieFragmentDoc = gql`
     posters
   }
 `;
-export const MovieSourceFragmentDoc = gql`
-  fragment MovieSource on MovieMedium {
+export const ShadowSourceFragmentDoc = gql`
+  fragment ShadowSource on ShadowMedium {
     id
     url
     super_quality_url
@@ -1594,162 +1494,165 @@ export type UpdateUserMutationOptions = ApolloReactCommon.BaseMutationOptions<
   UpdateUserMutation,
   UpdateUserMutationVariables
 >;
-export const CreateMovieDocument = gql`
-  mutation createMovie($movie: CreateMovieInput!) {
-    create_movie(movie: $movie) {
+export const CreateShadowDocument = gql`
+  mutation createShadow($shadow: CreateShadowInput!) {
+    create_shadow(shadow: $shadow) {
       create_at
     }
   }
 `;
-export type CreateMovieMutationFn = ApolloReactCommon.MutationFunction<
-  CreateMovieMutation,
-  CreateMovieMutationVariables
+export type CreateShadowMutationFn = ApolloReactCommon.MutationFunction<
+  CreateShadowMutation,
+  CreateShadowMutationVariables
 >;
 
 /**
- * __useCreateMovieMutation__
+ * __useCreateShadowMutation__
  *
- * To run a mutation, you first call `useCreateMovieMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateMovieMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateShadowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateShadowMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createMovieMutation, { data, loading, error }] = useCreateMovieMutation({
+ * const [createShadowMutation, { data, loading, error }] = useCreateShadowMutation({
  *   variables: {
- *      movie: // value for 'movie'
+ *      shadow: // value for 'shadow'
  *   },
  * });
  */
-export function useCreateMovieMutation(
+export function useCreateShadowMutation(
   baseOptions?: ApolloReactHooks.MutationHookOptions<
-    CreateMovieMutation,
-    CreateMovieMutationVariables
+    CreateShadowMutation,
+    CreateShadowMutationVariables
   >
 ) {
   return ApolloReactHooks.useMutation<
-    CreateMovieMutation,
-    CreateMovieMutationVariables
-  >(CreateMovieDocument, baseOptions);
+    CreateShadowMutation,
+    CreateShadowMutationVariables
+  >(CreateShadowDocument, baseOptions);
 }
-export type CreateMovieMutationHookResult = ReturnType<
-  typeof useCreateMovieMutation
+export type CreateShadowMutationHookResult = ReturnType<
+  typeof useCreateShadowMutation
 >;
-export type CreateMovieMutationResult = ApolloReactCommon.MutationResult<
-  CreateMovieMutation
+export type CreateShadowMutationResult = ApolloReactCommon.MutationResult<
+  CreateShadowMutation
 >;
-export type CreateMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  CreateMovieMutation,
-  CreateMovieMutationVariables
+export type CreateShadowMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateShadowMutation,
+  CreateShadowMutationVariables
 >;
-export const UpdateMovieDocument = gql`
-  mutation updateMovie($movie: UpdateMovieInput!, $movie_id: ID!) {
-    update_movie(movie_id: $movie_id, movie: $movie) {
+export const UpdateShadowDocument = gql`
+  mutation updateShadow($shadow: UpdateShadowInput!, $shadow_id: ID!) {
+    update_shadow(shadow_id: $shadow_id, shadow: $shadow) {
       create_at
     }
   }
 `;
-export type UpdateMovieMutationFn = ApolloReactCommon.MutationFunction<
-  UpdateMovieMutation,
-  UpdateMovieMutationVariables
+export type UpdateShadowMutationFn = ApolloReactCommon.MutationFunction<
+  UpdateShadowMutation,
+  UpdateShadowMutationVariables
 >;
 
 /**
- * __useUpdateMovieMutation__
+ * __useUpdateShadowMutation__
  *
- * To run a mutation, you first call `useUpdateMovieMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateMovieMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateShadowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateShadowMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updateMovieMutation, { data, loading, error }] = useUpdateMovieMutation({
+ * const [updateShadowMutation, { data, loading, error }] = useUpdateShadowMutation({
  *   variables: {
- *      movie: // value for 'movie'
- *      movie_id: // value for 'movie_id'
+ *      shadow: // value for 'shadow'
+ *      shadow_id: // value for 'shadow_id'
  *   },
  * });
  */
-export function useUpdateMovieMutation(
+export function useUpdateShadowMutation(
   baseOptions?: ApolloReactHooks.MutationHookOptions<
-    UpdateMovieMutation,
-    UpdateMovieMutationVariables
+    UpdateShadowMutation,
+    UpdateShadowMutationVariables
   >
 ) {
   return ApolloReactHooks.useMutation<
-    UpdateMovieMutation,
-    UpdateMovieMutationVariables
-  >(UpdateMovieDocument, baseOptions);
+    UpdateShadowMutation,
+    UpdateShadowMutationVariables
+  >(UpdateShadowDocument, baseOptions);
 }
-export type UpdateMovieMutationHookResult = ReturnType<
-  typeof useUpdateMovieMutation
+export type UpdateShadowMutationHookResult = ReturnType<
+  typeof useUpdateShadowMutation
 >;
-export type UpdateMovieMutationResult = ApolloReactCommon.MutationResult<
-  UpdateMovieMutation
+export type UpdateShadowMutationResult = ApolloReactCommon.MutationResult<
+  UpdateShadowMutation
 >;
-export type UpdateMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  UpdateMovieMutation,
-  UpdateMovieMutationVariables
+export type UpdateShadowMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  UpdateShadowMutation,
+  UpdateShadowMutationVariables
 >;
-export const AddMediumsToMovieDocument = gql`
-  mutation addMediumsToMovie(
-    $movie_id: ID!
-    $movie_medium: CreateMovieMediumInput!
+export const AddMediumsToShadowDocument = gql`
+  mutation addMediumsToShadow(
+    $shadow_id: ID!
+    $shadow_medium: CreateShadowMediumInput!
   ) {
-    add_mediums_to_movie(movie_id: $movie_id, movie_medium: $movie_medium) {
+    add_mediums_to_shadow(
+      shadow_id: $shadow_id
+      shadow_medium: $shadow_medium
+    ) {
       sources {
         name
       }
     }
   }
 `;
-export type AddMediumsToMovieMutationFn = ApolloReactCommon.MutationFunction<
-  AddMediumsToMovieMutation,
-  AddMediumsToMovieMutationVariables
+export type AddMediumsToShadowMutationFn = ApolloReactCommon.MutationFunction<
+  AddMediumsToShadowMutation,
+  AddMediumsToShadowMutationVariables
 >;
 
 /**
- * __useAddMediumsToMovieMutation__
+ * __useAddMediumsToShadowMutation__
  *
- * To run a mutation, you first call `useAddMediumsToMovieMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddMediumsToMovieMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAddMediumsToShadowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddMediumsToShadowMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [addMediumsToMovieMutation, { data, loading, error }] = useAddMediumsToMovieMutation({
+ * const [addMediumsToShadowMutation, { data, loading, error }] = useAddMediumsToShadowMutation({
  *   variables: {
- *      movie_id: // value for 'movie_id'
- *      movie_medium: // value for 'movie_medium'
+ *      shadow_id: // value for 'shadow_id'
+ *      shadow_medium: // value for 'shadow_medium'
  *   },
  * });
  */
-export function useAddMediumsToMovieMutation(
+export function useAddMediumsToShadowMutation(
   baseOptions?: ApolloReactHooks.MutationHookOptions<
-    AddMediumsToMovieMutation,
-    AddMediumsToMovieMutationVariables
+    AddMediumsToShadowMutation,
+    AddMediumsToShadowMutationVariables
   >
 ) {
   return ApolloReactHooks.useMutation<
-    AddMediumsToMovieMutation,
-    AddMediumsToMovieMutationVariables
-  >(AddMediumsToMovieDocument, baseOptions);
+    AddMediumsToShadowMutation,
+    AddMediumsToShadowMutationVariables
+  >(AddMediumsToShadowDocument, baseOptions);
 }
-export type AddMediumsToMovieMutationHookResult = ReturnType<
-  typeof useAddMediumsToMovieMutation
+export type AddMediumsToShadowMutationHookResult = ReturnType<
+  typeof useAddMediumsToShadowMutation
 >;
-export type AddMediumsToMovieMutationResult = ApolloReactCommon.MutationResult<
-  AddMediumsToMovieMutation
+export type AddMediumsToShadowMutationResult = ApolloReactCommon.MutationResult<
+  AddMediumsToShadowMutation
 >;
-export type AddMediumsToMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  AddMediumsToMovieMutation,
-  AddMediumsToMovieMutationVariables
+export type AddMediumsToShadowMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  AddMediumsToShadowMutation,
+  AddMediumsToShadowMutationVariables
 >;
 export const UploadFileOssDocument = gql`
   mutation uploadFileOss($file: Upload!) {
@@ -2060,21 +1963,21 @@ export const CurrentTopicDocument = gql`
       id
       title
       description
-      top_movies {
-        ...Movie
+      top_shadows {
+        ...Shadow
         author {
           ...Author
         }
       }
-      top_movie {
-        ...Movie
+      top_shadow {
+        ...Shadow
         author {
           ...Author
         }
       }
     }
   }
-  ${MovieFragmentDoc}
+  ${ShadowFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
@@ -2125,63 +2028,63 @@ export type CurrentTopicQueryResult = ApolloReactCommon.QueryResult<
   CurrentTopicQuery,
   CurrentTopicQueryVariables
 >;
-export const MovieUrgesDocument = gql`
-  query movieUrges {
-    movie_urges {
-      ...Movie
+export const ShadowUrgesDocument = gql`
+  query shadowUrges {
+    shadow_urges {
+      ...Shadow
       author {
         ...Author
       }
     }
   }
-  ${MovieFragmentDoc}
+  ${ShadowFragmentDoc}
   ${AuthorFragmentDoc}
 `;
 
 /**
- * __useMovieUrgesQuery__
+ * __useShadowUrgesQuery__
  *
- * To run a query within a React component, call `useMovieUrgesQuery` and pass it any options that fit your needs.
- * When your component renders, `useMovieUrgesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useShadowUrgesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useShadowUrgesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMovieUrgesQuery({
+ * const { data, loading, error } = useShadowUrgesQuery({
  *   variables: {
  *   },
  * });
  */
-export function useMovieUrgesQuery(
+export function useShadowUrgesQuery(
   baseOptions?: ApolloReactHooks.QueryHookOptions<
-    MovieUrgesQuery,
-    MovieUrgesQueryVariables
+    ShadowUrgesQuery,
+    ShadowUrgesQueryVariables
   >
 ) {
-  return ApolloReactHooks.useQuery<MovieUrgesQuery, MovieUrgesQueryVariables>(
-    MovieUrgesDocument,
+  return ApolloReactHooks.useQuery<ShadowUrgesQuery, ShadowUrgesQueryVariables>(
+    ShadowUrgesDocument,
     baseOptions
   );
 }
-export function useMovieUrgesLazyQuery(
+export function useShadowUrgesLazyQuery(
   baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    MovieUrgesQuery,
-    MovieUrgesQueryVariables
+    ShadowUrgesQuery,
+    ShadowUrgesQueryVariables
   >
 ) {
   return ApolloReactHooks.useLazyQuery<
-    MovieUrgesQuery,
-    MovieUrgesQueryVariables
-  >(MovieUrgesDocument, baseOptions);
+    ShadowUrgesQuery,
+    ShadowUrgesQueryVariables
+  >(ShadowUrgesDocument, baseOptions);
 }
-export type MovieUrgesQueryHookResult = ReturnType<typeof useMovieUrgesQuery>;
-export type MovieUrgesLazyQueryHookResult = ReturnType<
-  typeof useMovieUrgesLazyQuery
+export type ShadowUrgesQueryHookResult = ReturnType<typeof useShadowUrgesQuery>;
+export type ShadowUrgesLazyQueryHookResult = ReturnType<
+  typeof useShadowUrgesLazyQuery
 >;
-export type MovieUrgesQueryResult = ApolloReactCommon.QueryResult<
-  MovieUrgesQuery,
-  MovieUrgesQueryVariables
+export type ShadowUrgesQueryResult = ApolloReactCommon.QueryResult<
+  ShadowUrgesQuery,
+  ShadowUrgesQueryVariables
 >;
 export const UserUrgesDocument = gql`
   query userUrges {
@@ -2239,339 +2142,6 @@ export type UserUrgesLazyQueryHookResult = ReturnType<
 export type UserUrgesQueryResult = ApolloReactCommon.QueryResult<
   UserUrgesQuery,
   UserUrgesQueryVariables
->;
-export const MovieDocument = gql`
-  query movie($id: ID!) {
-    movie(id: $id) {
-      credits {
-        avatar
-        name
-        description
-      }
-      author {
-        ...Author
-      }
-      alias_title
-      region
-      ...Movie
-      sources {
-        ...MovieSource
-      }
-    }
-  }
-  ${AuthorFragmentDoc}
-  ${MovieFragmentDoc}
-  ${MovieSourceFragmentDoc}
-`;
-
-/**
- * __useMovieQuery__
- *
- * To run a query within a React component, call `useMovieQuery` and pass it any options that fit your needs.
- * When your component renders, `useMovieQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMovieQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useMovieQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    MovieQuery,
-    MovieQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<MovieQuery, MovieQueryVariables>(
-    MovieDocument,
-    baseOptions
-  );
-}
-export function useMovieLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    MovieQuery,
-    MovieQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<MovieQuery, MovieQueryVariables>(
-    MovieDocument,
-    baseOptions
-  );
-}
-export type MovieQueryHookResult = ReturnType<typeof useMovieQuery>;
-export type MovieLazyQueryHookResult = ReturnType<typeof useMovieLazyQuery>;
-export type MovieQueryResult = ApolloReactCommon.QueryResult<
-  MovieQuery,
-  MovieQueryVariables
->;
-export const MoviesPaginatedDocument = gql`
-  query moviesPaginated($query: PaginatedQuery) {
-    movies_paginated(query: $query) {
-      totalCount
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      edges {
-        cursor
-        node {
-          ...Movie
-          author {
-            ...Author
-          }
-        }
-      }
-    }
-  }
-  ${MovieFragmentDoc}
-  ${AuthorFragmentDoc}
-`;
-
-/**
- * __useMoviesPaginatedQuery__
- *
- * To run a query within a React component, call `useMoviesPaginatedQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoviesPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoviesPaginatedQuery({
- *   variables: {
- *      query: // value for 'query'
- *   },
- * });
- */
-export function useMoviesPaginatedQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    MoviesPaginatedQuery,
-    MoviesPaginatedQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    MoviesPaginatedQuery,
-    MoviesPaginatedQueryVariables
-  >(MoviesPaginatedDocument, baseOptions);
-}
-export function useMoviesPaginatedLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    MoviesPaginatedQuery,
-    MoviesPaginatedQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    MoviesPaginatedQuery,
-    MoviesPaginatedQueryVariables
-  >(MoviesPaginatedDocument, baseOptions);
-}
-export type MoviesPaginatedQueryHookResult = ReturnType<
-  typeof useMoviesPaginatedQuery
->;
-export type MoviesPaginatedLazyQueryHookResult = ReturnType<
-  typeof useMoviesPaginatedLazyQuery
->;
-export type MoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
-  MoviesPaginatedQuery,
-  MoviesPaginatedQueryVariables
->;
-export const UserMoviesPaginatedDocument = gql`
-  query userMoviesPaginated($author_username: String!, $query: PaginatedQuery) {
-    user_movies_paginated(author_username: $author_username, query: $query) {
-      totalCount
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      edges {
-        cursor
-        node {
-          ...Movie
-          author {
-            ...Author
-          }
-        }
-      }
-    }
-  }
-  ${MovieFragmentDoc}
-  ${AuthorFragmentDoc}
-`;
-
-/**
- * __useUserMoviesPaginatedQuery__
- *
- * To run a query within a React component, call `useUserMoviesPaginatedQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserMoviesPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useUserMoviesPaginatedQuery({
- *   variables: {
- *      author_username: // value for 'author_username'
- *      query: // value for 'query'
- *   },
- * });
- */
-export function useUserMoviesPaginatedQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    UserMoviesPaginatedQuery,
-    UserMoviesPaginatedQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    UserMoviesPaginatedQuery,
-    UserMoviesPaginatedQueryVariables
-  >(UserMoviesPaginatedDocument, baseOptions);
-}
-export function useUserMoviesPaginatedLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    UserMoviesPaginatedQuery,
-    UserMoviesPaginatedQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    UserMoviesPaginatedQuery,
-    UserMoviesPaginatedQueryVariables
-  >(UserMoviesPaginatedDocument, baseOptions);
-}
-export type UserMoviesPaginatedQueryHookResult = ReturnType<
-  typeof useUserMoviesPaginatedQuery
->;
-export type UserMoviesPaginatedLazyQueryHookResult = ReturnType<
-  typeof useUserMoviesPaginatedLazyQuery
->;
-export type UserMoviesPaginatedQueryResult = ApolloReactCommon.QueryResult<
-  UserMoviesPaginatedQuery,
-  UserMoviesPaginatedQueryVariables
->;
-export const MovieUrgesByMovieDocument = gql`
-  query movieUrgesByMovie($movie_id: ID!) {
-    movie_urges_by_movie(movie_id: $movie_id) {
-      ...Movie
-      author {
-        ...Author
-      }
-    }
-  }
-  ${MovieFragmentDoc}
-  ${AuthorFragmentDoc}
-`;
-
-/**
- * __useMovieUrgesByMovieQuery__
- *
- * To run a query within a React component, call `useMovieUrgesByMovieQuery` and pass it any options that fit your needs.
- * When your component renders, `useMovieUrgesByMovieQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMovieUrgesByMovieQuery({
- *   variables: {
- *      movie_id: // value for 'movie_id'
- *   },
- * });
- */
-export function useMovieUrgesByMovieQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    MovieUrgesByMovieQuery,
-    MovieUrgesByMovieQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    MovieUrgesByMovieQuery,
-    MovieUrgesByMovieQueryVariables
-  >(MovieUrgesByMovieDocument, baseOptions);
-}
-export function useMovieUrgesByMovieLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    MovieUrgesByMovieQuery,
-    MovieUrgesByMovieQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    MovieUrgesByMovieQuery,
-    MovieUrgesByMovieQueryVariables
-  >(MovieUrgesByMovieDocument, baseOptions);
-}
-export type MovieUrgesByMovieQueryHookResult = ReturnType<
-  typeof useMovieUrgesByMovieQuery
->;
-export type MovieUrgesByMovieLazyQueryHookResult = ReturnType<
-  typeof useMovieUrgesByMovieLazyQuery
->;
-export type MovieUrgesByMovieQueryResult = ApolloReactCommon.QueryResult<
-  MovieUrgesByMovieQuery,
-  MovieUrgesByMovieQueryVariables
->;
-export const MovieNextUrgesByMovieDocument = gql`
-  query movieNextUrgesByMovie($movie_id: ID!) {
-    movie_next_urges_by_movie(movie_id: $movie_id) {
-      ...Movie
-      author {
-        ...Author
-      }
-    }
-  }
-  ${MovieFragmentDoc}
-  ${AuthorFragmentDoc}
-`;
-
-/**
- * __useMovieNextUrgesByMovieQuery__
- *
- * To run a query within a React component, call `useMovieNextUrgesByMovieQuery` and pass it any options that fit your needs.
- * When your component renders, `useMovieNextUrgesByMovieQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMovieNextUrgesByMovieQuery({
- *   variables: {
- *      movie_id: // value for 'movie_id'
- *   },
- * });
- */
-export function useMovieNextUrgesByMovieQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    MovieNextUrgesByMovieQuery,
-    MovieNextUrgesByMovieQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    MovieNextUrgesByMovieQuery,
-    MovieNextUrgesByMovieQueryVariables
-  >(MovieNextUrgesByMovieDocument, baseOptions);
-}
-export function useMovieNextUrgesByMovieLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    MovieNextUrgesByMovieQuery,
-    MovieNextUrgesByMovieQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    MovieNextUrgesByMovieQuery,
-    MovieNextUrgesByMovieQueryVariables
-  >(MovieNextUrgesByMovieDocument, baseOptions);
-}
-export type MovieNextUrgesByMovieQueryHookResult = ReturnType<
-  typeof useMovieNextUrgesByMovieQuery
->;
-export type MovieNextUrgesByMovieLazyQueryHookResult = ReturnType<
-  typeof useMovieNextUrgesByMovieLazyQuery
->;
-export type MovieNextUrgesByMovieQueryResult = ApolloReactCommon.QueryResult<
-  MovieNextUrgesByMovieQuery,
-  MovieNextUrgesByMovieQueryVariables
 >;
 export const PlaylistsPaginatedDocument = gql`
   query playlistsPaginated(
@@ -2651,6 +2221,342 @@ export type PlaylistsPaginatedLazyQueryHookResult = ReturnType<
 export type PlaylistsPaginatedQueryResult = ApolloReactCommon.QueryResult<
   PlaylistsPaginatedQuery,
   PlaylistsPaginatedQueryVariables
+>;
+export const ShadowDocument = gql`
+  query shadow($id: ID!) {
+    shadow(id: $id) {
+      credits {
+        avatar
+        name
+        description
+      }
+      author {
+        ...Author
+      }
+      alias_title
+      region
+      ...Shadow
+      sources {
+        ...ShadowSource
+      }
+    }
+  }
+  ${AuthorFragmentDoc}
+  ${ShadowFragmentDoc}
+  ${ShadowSourceFragmentDoc}
+`;
+
+/**
+ * __useShadowQuery__
+ *
+ * To run a query within a React component, call `useShadowQuery` and pass it any options that fit your needs.
+ * When your component renders, `useShadowQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useShadowQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useShadowQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ShadowQuery,
+    ShadowQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<ShadowQuery, ShadowQueryVariables>(
+    ShadowDocument,
+    baseOptions
+  );
+}
+export function useShadowLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ShadowQuery,
+    ShadowQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<ShadowQuery, ShadowQueryVariables>(
+    ShadowDocument,
+    baseOptions
+  );
+}
+export type ShadowQueryHookResult = ReturnType<typeof useShadowQuery>;
+export type ShadowLazyQueryHookResult = ReturnType<typeof useShadowLazyQuery>;
+export type ShadowQueryResult = ApolloReactCommon.QueryResult<
+  ShadowQuery,
+  ShadowQueryVariables
+>;
+export const ShadowsPaginatedDocument = gql`
+  query shadowsPaginated($query: PaginatedQuery) {
+    shadows_paginated(query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          ...Shadow
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+  ${ShadowFragmentDoc}
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useShadowsPaginatedQuery__
+ *
+ * To run a query within a React component, call `useShadowsPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useShadowsPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useShadowsPaginatedQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useShadowsPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ShadowsPaginatedQuery,
+    ShadowsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ShadowsPaginatedQuery,
+    ShadowsPaginatedQueryVariables
+  >(ShadowsPaginatedDocument, baseOptions);
+}
+export function useShadowsPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ShadowsPaginatedQuery,
+    ShadowsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ShadowsPaginatedQuery,
+    ShadowsPaginatedQueryVariables
+  >(ShadowsPaginatedDocument, baseOptions);
+}
+export type ShadowsPaginatedQueryHookResult = ReturnType<
+  typeof useShadowsPaginatedQuery
+>;
+export type ShadowsPaginatedLazyQueryHookResult = ReturnType<
+  typeof useShadowsPaginatedLazyQuery
+>;
+export type ShadowsPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  ShadowsPaginatedQuery,
+  ShadowsPaginatedQueryVariables
+>;
+export const UserShadowsPaginatedDocument = gql`
+  query userShadowsPaginated(
+    $author_username: String!
+    $query: PaginatedQuery
+  ) {
+    user_shadows_paginated(author_username: $author_username, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          ...Shadow
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+  ${ShadowFragmentDoc}
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useUserShadowsPaginatedQuery__
+ *
+ * To run a query within a React component, call `useUserShadowsPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserShadowsPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserShadowsPaginatedQuery({
+ *   variables: {
+ *      author_username: // value for 'author_username'
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useUserShadowsPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    UserShadowsPaginatedQuery,
+    UserShadowsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    UserShadowsPaginatedQuery,
+    UserShadowsPaginatedQueryVariables
+  >(UserShadowsPaginatedDocument, baseOptions);
+}
+export function useUserShadowsPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    UserShadowsPaginatedQuery,
+    UserShadowsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    UserShadowsPaginatedQuery,
+    UserShadowsPaginatedQueryVariables
+  >(UserShadowsPaginatedDocument, baseOptions);
+}
+export type UserShadowsPaginatedQueryHookResult = ReturnType<
+  typeof useUserShadowsPaginatedQuery
+>;
+export type UserShadowsPaginatedLazyQueryHookResult = ReturnType<
+  typeof useUserShadowsPaginatedLazyQuery
+>;
+export type UserShadowsPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  UserShadowsPaginatedQuery,
+  UserShadowsPaginatedQueryVariables
+>;
+export const ShadowUrgesByShadowDocument = gql`
+  query shadowUrgesByShadow($shadow_id: ID!) {
+    shadow_urges_by_shadow(shadow_id: $shadow_id) {
+      ...Shadow
+      author {
+        ...Author
+      }
+    }
+  }
+  ${ShadowFragmentDoc}
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useShadowUrgesByShadowQuery__
+ *
+ * To run a query within a React component, call `useShadowUrgesByShadowQuery` and pass it any options that fit your needs.
+ * When your component renders, `useShadowUrgesByShadowQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useShadowUrgesByShadowQuery({
+ *   variables: {
+ *      shadow_id: // value for 'shadow_id'
+ *   },
+ * });
+ */
+export function useShadowUrgesByShadowQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ShadowUrgesByShadowQuery,
+    ShadowUrgesByShadowQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ShadowUrgesByShadowQuery,
+    ShadowUrgesByShadowQueryVariables
+  >(ShadowUrgesByShadowDocument, baseOptions);
+}
+export function useShadowUrgesByShadowLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ShadowUrgesByShadowQuery,
+    ShadowUrgesByShadowQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ShadowUrgesByShadowQuery,
+    ShadowUrgesByShadowQueryVariables
+  >(ShadowUrgesByShadowDocument, baseOptions);
+}
+export type ShadowUrgesByShadowQueryHookResult = ReturnType<
+  typeof useShadowUrgesByShadowQuery
+>;
+export type ShadowUrgesByShadowLazyQueryHookResult = ReturnType<
+  typeof useShadowUrgesByShadowLazyQuery
+>;
+export type ShadowUrgesByShadowQueryResult = ApolloReactCommon.QueryResult<
+  ShadowUrgesByShadowQuery,
+  ShadowUrgesByShadowQueryVariables
+>;
+export const ShadowNextUrgesByShadowDocument = gql`
+  query shadowNextUrgesByShadow($shadow_id: ID!) {
+    shadow_next_urges_by_shadow(shadow_id: $shadow_id) {
+      ...Shadow
+      author {
+        ...Author
+      }
+    }
+  }
+  ${ShadowFragmentDoc}
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useShadowNextUrgesByShadowQuery__
+ *
+ * To run a query within a React component, call `useShadowNextUrgesByShadowQuery` and pass it any options that fit your needs.
+ * When your component renders, `useShadowNextUrgesByShadowQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useShadowNextUrgesByShadowQuery({
+ *   variables: {
+ *      shadow_id: // value for 'shadow_id'
+ *   },
+ * });
+ */
+export function useShadowNextUrgesByShadowQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ShadowNextUrgesByShadowQuery,
+    ShadowNextUrgesByShadowQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ShadowNextUrgesByShadowQuery,
+    ShadowNextUrgesByShadowQueryVariables
+  >(ShadowNextUrgesByShadowDocument, baseOptions);
+}
+export function useShadowNextUrgesByShadowLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ShadowNextUrgesByShadowQuery,
+    ShadowNextUrgesByShadowQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ShadowNextUrgesByShadowQuery,
+    ShadowNextUrgesByShadowQueryVariables
+  >(ShadowNextUrgesByShadowDocument, baseOptions);
+}
+export type ShadowNextUrgesByShadowQueryHookResult = ReturnType<
+  typeof useShadowNextUrgesByShadowQuery
+>;
+export type ShadowNextUrgesByShadowLazyQueryHookResult = ReturnType<
+  typeof useShadowNextUrgesByShadowLazyQuery
+>;
+export type ShadowNextUrgesByShadowQueryResult = ApolloReactCommon.QueryResult<
+  ShadowNextUrgesByShadowQuery,
+  ShadowNextUrgesByShadowQueryVariables
 >;
 export const IsFollowingDocument = gql`
   query isFollowing($owner_uid: String!, $follower_uid: String) {

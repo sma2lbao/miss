@@ -40,11 +40,11 @@ const HomeMenus: MenuProps = {
   ]
 };
 
-const MovieMenus: MenuProps = {
+const ShadowMenus: MenuProps = {
   id: 2000,
   icon: <Movie />,
-  label: "Movie",
-  value: "movie",
+  label: "Shadow",
+  value: "shadow",
   path: MOVIE_HOME
   // children: [],
 };
@@ -74,7 +74,7 @@ const UserMenus: MenuProps = {
   ]
 };
 
-const menus: MenuProps[] = [HomeMenus, MovieMenus, UserMenus];
+const menus: MenuProps[] = [HomeMenus, ShadowMenus, UserMenus];
 
 export const useMenus = () => {
   const { path } = useRouteMatch();

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const MoviePlayer: React.FC = () => {
+export const ShadowPlayer: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -33,4 +33,4 @@ export const MoviePlayer: React.FC = () => {
   );
 };
 
-export default MoviePlayer;
+export default ShadowPlayer;

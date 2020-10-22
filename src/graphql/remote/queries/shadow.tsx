@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const MOVIE = gql`
-  query movie($id: ID!) {
-    movie(id: $id) {
+  query shadow($id: ID!) {
+    shadow(id: $id) {
       credits {
         avatar
         name
@@ -13,17 +13,17 @@ export const MOVIE = gql`
       }
       alias_title
       region
-      ...Movie
+      ...Shadow
       sources {
-        ...MovieSource
+        ...ShadowSource
       }
     }
   }
 `;
 
 export const MOVIES_PAGINATED = gql`
-  query moviesPaginated($query: PaginatedQuery) {
-    movies_paginated(query: $query) {
+  query shadowsPaginated($query: PaginatedQuery) {
+    shadows_paginated(query: $query) {
       totalCount
       pageInfo {
         hasNextPage
@@ -32,7 +32,7 @@ export const MOVIES_PAGINATED = gql`
       edges {
         cursor
         node {
-          ...Movie
+          ...Shadow
           author {
             ...Author
           }
@@ -43,8 +43,11 @@ export const MOVIES_PAGINATED = gql`
 `;
 
 export const USER_MOVIES_PAGINATED = gql`
-  query userMoviesPaginated($author_username: String!, $query: PaginatedQuery) {
-    user_movies_paginated(author_username: $author_username, query: $query) {
+  query userShadowsPaginated(
+    $author_username: String!
+    $query: PaginatedQuery
+  ) {
+    user_shadows_paginated(author_username: $author_username, query: $query) {
       totalCount
       pageInfo {
         hasNextPage
@@ -53,7 +56,7 @@ export const USER_MOVIES_PAGINATED = gql`
       edges {
         cursor
         node {
-          ...Movie
+          ...Shadow
           author {
             ...Author
           }
@@ -64,9 +67,9 @@ export const USER_MOVIES_PAGINATED = gql`
 `;
 
 export const MOVIE_URGES_BY_MOVIE = gql`
-  query movieUrgesByMovie($movie_id: ID!) {
-    movie_urges_by_movie(movie_id: $movie_id) {
-      ...Movie
+  query shadowUrgesByShadow($shadow_id: ID!) {
+    shadow_urges_by_shadow(shadow_id: $shadow_id) {
+      ...Shadow
       author {
         ...Author
       }
@@ -75,9 +78,9 @@ export const MOVIE_URGES_BY_MOVIE = gql`
 `;
 
 export const MOVIE_NEXT_URGES_BY_MOVIE = gql`
-  query movieNextUrgesByMovie($movie_id: ID!) {
-    movie_next_urges_by_movie(movie_id: $movie_id) {
-      ...Movie
+  query shadowNextUrgesByShadow($shadow_id: ID!) {
+    shadow_next_urges_by_shadow(shadow_id: $shadow_id) {
+      ...Shadow
       author {
         ...Author
       }

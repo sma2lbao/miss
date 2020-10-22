@@ -23,7 +23,7 @@ export interface AboutProps {
   html?: string;
 }
 
-export default function About(props: AboutProps) {
+export const About: React.FC<AboutProps> = (props: AboutProps) => {
   const classes = useStyles();
   const defaulHtml = "该资源没有介绍";
   const { html } = props;
@@ -36,4 +36,6 @@ export default function About(props: AboutProps) {
       )}
     </Box>
   );
-}
+};
+
+export default About;

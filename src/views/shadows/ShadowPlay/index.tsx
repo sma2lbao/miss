@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MoviePlayer } from "@/components/app/Player";
+import { ShadowPlayer } from "@/components/app/Player";
 import { Box } from "@material-ui/core";
 import {
   FullScreen,
@@ -11,7 +11,7 @@ import {
 // import Image from "@/components/Image";
 import { NextPlay, VideoInfo, Comment } from "./modules";
 import { useParams } from "react-router";
-import { useMovieQuery, MovieQuery } from "@/schema";
+import { useShadowQuery, ShadowQuery } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,14 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const MoviePlayContext = React.createContext<MovieQuery | undefined>(
+export const ShadowPlayContext = React.createContext<ShadowQuery | undefined>(
   undefined
 );
 
-export default function MoviePlay() {
+export default function ShadowPlay() {
   const classes = useStyles();
   const { id } = useParams();
-  let { data } = useMovieQuery({
+  let { data } = useShadowQuery({
     variables: {
       id: id
     }
@@ -50,10 +50,10 @@ export default function MoviePlay() {
 
   return (
     <Box className={classes.root}>
-      <MoviePlayContext.Provider value={data}>
+      <ShadowPlayContext.Provider value={data}>
         <FullScreen>
           <BodyScreen>
-            <MoviePlayer />
+            <ShadowPlayer />
           </BodyScreen>
         </FullScreen>
         <BodyScreen className={classes.body}>
@@ -65,7 +65,7 @@ export default function MoviePlay() {
             <Comment />
           </AiderScreen>
         </BodyScreen>
-      </MoviePlayContext.Provider>
+      </ShadowPlayContext.Provider>
     </Box>
   );
 }

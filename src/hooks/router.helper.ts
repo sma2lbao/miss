@@ -23,23 +23,23 @@ export const useRouterHelper = () => {
     history.push(`${PROFILE}/${username}`);
   };
 
-  // go movie detail page.
-  const gotoMovie = (movie_id: number | undefined | null | string) => {
-    history.push(`${MOVIE_DETAIL}/${movie_id}`);
+  // go shadow detail page.
+  const gotoShadow = (shadow_id: number | undefined | null | string) => {
+    history.push(`${MOVIE_DETAIL}/${shadow_id}`);
   };
 
-  // go movie home page.
-  const gotoMovieHome = () => {
+  // go shadow home page.
+  const gotoShadowHome = () => {
     history.push(MOVIE_HOME);
   };
 
-  // go movie play page.
-  const gotoMoviePlay = (movie_id: number | undefined | string | null) => {
-    history.push(`${MOVIE_PLAY}/${movie_id}`);
+  // go shadow play page.
+  const gotoShadowPlay = (shadow_id: number | undefined | string | null) => {
+    history.push(`${MOVIE_PLAY}/${shadow_id}`);
   };
 
-  // go movie upload.
-  const gotoMovieUpload = () => {
+  // go shadow upload.
+  const gotoShadowUpload = () => {
     history.push(`${MOVIE_UPLOAD}`);
   };
 
@@ -55,10 +55,10 @@ export const useRouterHelper = () => {
     },
     gotoHome,
     gotoProfile,
-    gotoMovie,
-    gotoMovieHome,
-    gotoMoviePlay,
-    gotoMovieUpload,
+    gotoShadow,
+    gotoShadowHome,
+    gotoShadowPlay,
+    gotoShadowUpload,
     gotoAuthCompletion
   };
 };

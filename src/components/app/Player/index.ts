@@ -1,1 +1,1 @@
-export * from "./MoviePlayer";
+export * from "./ShadowPlayer";

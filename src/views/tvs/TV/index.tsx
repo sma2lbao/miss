@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Movie() {
+export default function Shadow() {
   const classes = useStyles();
   const [tab, setTab] = React.useState(0);
 

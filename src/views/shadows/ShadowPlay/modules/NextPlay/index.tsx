@@ -1,15 +1,15 @@
 import * as React from "react";
 import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile, Typography, Box } from "@material-ui/core";
-import { useMovieNextUrgesByMovieQuery } from "@/schema";
+import { useShadowNextUrgesByShadowQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import Placeholder from "@/components/base/Placeholder";
 
 export default function NextPlay() {
   const { id } = useParams();
-  const { data, error, loading } = useMovieNextUrgesByMovieQuery({
+  const { data, error, loading } = useShadowNextUrgesByShadowQuery({
     variables: {
-      movie_id: id
+      shadow_id: id
     }
   });
   if (loading) {
@@ -23,9 +23,9 @@ export default function NextPlay() {
       <Typography variant="subtitle1" gutterBottom>
         接下来播放
       </Typography>
-      {data?.movie_next_urges_by_movie.length ? (
+      {data?.shadow_next_urges_by_shadow.length ? (
         <GridList cellHeight="auto" cols={4}>
-          {data.movie_next_urges_by_movie.map((item, idx) => {
+          {data.shadow_next_urges_by_shadow.map((item, idx) => {
             return (
               <GridListTile cols={1} key={idx}>
                 <MediaNormal {...item} />

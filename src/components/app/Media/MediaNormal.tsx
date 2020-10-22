@@ -47,9 +47,9 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   const RouterHelper = useRouterHelper();
   const classes = useStyles(props);
 
-  const goMovie = (e: React.MouseEvent) => {
+  const goShadow = (e: React.MouseEvent) => {
     e.stopPropagation();
-    RouterHelper.gotoMovie(props?.id);
+    RouterHelper.gotoShadow(props?.id);
   };
 
   const goProfile = (e: React.MouseEvent) => {
@@ -62,7 +62,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   }
 
   return (
-    <Box className={classes.wrap} onClick={goMovie}>
+    <Box className={classes.wrap} onClick={goShadow}>
       <div className={classes.cover}>
         <Image src={DEFULAT_MOVIE_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (

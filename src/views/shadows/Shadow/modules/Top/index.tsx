@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "@/components/base/Image";
-import { MovieContext } from "../..";
+import { ShadowContext } from "../..";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Box, IconButton } from "@material-ui/core";
@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Top: React.FC = () => {
-  const movieQuery = React.useContext(MovieContext);
+  const shadowQuery = React.useContext(ShadowContext);
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
 
-  const goMoviePlay = () => {
-    RouterHelper.gotoMoviePlay(movieQuery?.movie.id);
+  const goShadowPlay = () => {
+    RouterHelper.gotoShadowPlay(shadowQuery?.shadow.id);
   };
 
   return (
@@ -39,23 +39,23 @@ export const Top: React.FC = () => {
       <Image
         aspectRatio={16 / 9}
         src={
-          (movieQuery && movieQuery.movie && movieQuery.movie.cover) ||
+          (shadowQuery && shadowQuery.shadow && shadowQuery.shadow.cover) ||
           DEFULAT_MOVIE_COVER
         }
       />
       <div className={classes.main}>
         <Typography gutterBottom variant="h4" component="div">
-          {movieQuery?.movie.title}
+          {shadowQuery?.shadow.title}
         </Typography>
         <Typography gutterBottom variant="subtitle1" component="div">
-          {movieQuery?.movie.sub_title}
+          {shadowQuery?.shadow.sub_title}
         </Typography>
         {/* <div></div> */}
         <Typography variant="body2" component="div">
-          {movieQuery?.movie.description}
+          {shadowQuery?.shadow.description}
         </Typography>
         <Box mt={3}>
-          <IconButton onClick={goMoviePlay}>
+          <IconButton onClick={goShadowPlay}>
             <PlayCircleOutline />
           </IconButton>
         </Box>

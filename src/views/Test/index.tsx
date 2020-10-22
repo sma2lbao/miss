@@ -1,5 +1,5 @@
 import * as React from "react";
-import { EditMain } from "../movies/MovieUpload/modules";
+import { EditMain } from "../shadows/ShadowUpload/modules";
 import { ContentScreen } from "@/layouts/PageLayout";
 
 const Test: React.FC = () => {

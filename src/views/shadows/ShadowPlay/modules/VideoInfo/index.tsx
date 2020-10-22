@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Box, IconButton, Avatar, Button } from "@material-ui/core";
 import { ThumbUpAlt, ThumbDownAlt, MoreVert } from "@material-ui/icons";
-import { MoviePlayContext } from "../..";
+import { ShadowPlayContext } from "../..";
 import moment from "moment";
 import { useFollowHelper } from "@/hooks";
 
@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function VideoInfo() {
   const classes = useStyles();
-  const moviePlayQuery = React.useContext(MoviePlayContext);
+  const shadowPlayQuery = React.useContext(ShadowPlayContext);
   const { following, toggleFollow } = useFollowHelper({
-    owner_uid: moviePlayQuery?.movie.author.uid as string
+    owner_uid: shadowPlayQuery?.shadow.author.uid as string
   });
 
   return (
@@ -45,7 +45,7 @@ export default function VideoInfo() {
       <Box className={classes.header}>
         <div>
           <Typography variant="subtitle1">
-            {moviePlayQuery?.movie.title}
+            {shadowPlayQuery?.shadow.title}
           </Typography>
           <Box display="flex">
             <Typography variant="caption" className={classes.infoItem}>
@@ -53,7 +53,7 @@ export default function VideoInfo() {
             </Typography>
             <Typography variant="caption" className={classes.infoItem}>
               发布时间:{" "}
-              {moment(moviePlayQuery?.movie.create_at).format(
+              {moment(shadowPlayQuery?.shadow.create_at).format(
                 "YYYY-MM-DD HH:mm"
               )}
             </Typography>
@@ -78,18 +78,18 @@ export default function VideoInfo() {
         </Box>
       </Box>
       <Typography className={classes.description} variant="body2">
-        {moviePlayQuery?.movie.description}
+        {shadowPlayQuery?.shadow.description}
       </Typography>
 
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" alignItems="center">
-          <Avatar src={moviePlayQuery?.movie.author.avatar}></Avatar>
+          <Avatar src={shadowPlayQuery?.shadow.author.avatar}></Avatar>
           <Box ml={1}>
             <Typography variant="subtitle2">
-              {moviePlayQuery?.movie.author.nickname}
+              {shadowPlayQuery?.shadow.author.nickname}
             </Typography>
             <Typography variant="caption">
-              {moviePlayQuery?.movie.author.description}
+              {shadowPlayQuery?.shadow.author.description}
             </Typography>
           </Box>
         </Box>

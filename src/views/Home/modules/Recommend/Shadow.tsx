@@ -2,13 +2,13 @@ import * as React from "react";
 import { Typography, Box, Link, Grow } from "@material-ui/core";
 import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile } from "@material-ui/core";
-import { useMovieUrgesQuery } from "@/schema";
+import { useShadowUrgesQuery } from "@/schema";
 import { useRouterHelper } from "@/hooks";
 import { SpecialBox } from "@/components/public/SpecialBox";
 
-export default function MovieRecommend() {
+export default function ShadowRecommend() {
   const RouterHelper = useRouterHelper();
-  const { data, loading, error } = useMovieUrgesQuery();
+  const { data, loading, error } = useShadowUrgesQuery();
 
   return (
     <Box padding={0}>
@@ -22,7 +22,7 @@ export default function MovieRecommend() {
           电影推荐
         </Typography>
         <Link
-          onClick={RouterHelper.gotoMovieHome}
+          onClick={RouterHelper.gotoShadowHome}
           color="textSecondary"
           variant="caption"
         >
@@ -30,13 +30,13 @@ export default function MovieRecommend() {
         </Link>
       </Box>
 
-      {data?.movie_urges.length ? (
+      {data?.shadow_urges.length ? (
         <GridList cellHeight="auto" cols={4}>
-          {data.movie_urges.map((movie: any, index: number) => {
+          {data.shadow_urges.map((shadow: any, index: number) => {
             return (
               <Grow key={index} in timeout={index * 500}>
-                <GridListTile cols={movie.cols || 1}>
-                  <MediaNormal key={index} {...movie} />
+                <GridListTile cols={shadow.cols || 1}>
+                  <MediaNormal key={index} {...shadow} />
                 </GridListTile>
               </Grow>
             );

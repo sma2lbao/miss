@@ -10,7 +10,7 @@ import {
   Theme
 } from "@material-ui/core";
 import { MediaOwn } from "@/components/app/Media";
-import { useUserMoviesPaginatedQuery } from "@/schema";
+import { useUserShadowsPaginatedQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import { SpecialBox } from "@/components/public/SpecialBox";
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Medias: React.FC = () => {
   const classes = useStyles();
   const { username } = useParams();
-  const { data, loading, error, fetchMore } = useUserMoviesPaginatedQuery({
+  const { data, loading, error, fetchMore } = useUserShadowsPaginatedQuery({
     variables: {
       query: {
         last: 8
@@ -40,25 +40,25 @@ export const Medias: React.FC = () => {
       variables: {
         query: {
           last: 8,
-          after: data?.user_movies_paginated?.pageInfo?.endCursor
+          after: data?.user_shadows_paginated?.pageInfo?.endCursor
         }
       },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => {
-        if (fetchMoreResult?.user_movies_paginated?.edges) {
+        if (fetchMoreResult?.user_shadows_paginated?.edges) {
           const {
             edges,
             pageInfo,
             totalCount
-          } = fetchMoreResult.user_movies_paginated;
+          } = fetchMoreResult.user_shadows_paginated;
           return {
-            user_movies_paginated: {
+            user_shadows_paginated: {
               pageInfo,
               totalCount,
               edges: [
-                ...previousQueryResult.user_movies_paginated.edges,
+                ...previousQueryResult.user_shadows_paginated.edges,
                 ...edges
               ],
-              __typename: previousQueryResult.user_movies_paginated.__typename
+              __typename: previousQueryResult.user_shadows_paginated.__typename
             }
           };
         }
@@ -69,10 +69,10 @@ export const Medias: React.FC = () => {
 
   return (
     <Box>
-      {data?.user_movies_paginated.totalCount ? (
+      {data?.user_shadows_paginated.totalCount ? (
         <>
           <GridList cellHeight="auto" cols={4}>
-            {data.user_movies_paginated.edges?.map(item => {
+            {data.user_shadows_paginated.edges?.map(item => {
               return (
                 <GridListTile key={item.cursor} cols={1} rows={1}>
                   <MediaOwn {...item.node} />
@@ -80,7 +80,7 @@ export const Medias: React.FC = () => {
               );
             })}
           </GridList>
-          {data?.user_movies_paginated?.pageInfo?.hasNextPage && (
+          {data?.user_shadows_paginated?.pageInfo?.hasNextPage && (
             <Box className={classes.footer}>
               <Button onClick={loadMore} disabled={loading}>
                 <Typography color="textSecondary" variant="caption">

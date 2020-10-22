@@ -1,20 +1,20 @@
 // home page
 export const HOME = "/home";
 
-// movie home page
-export const MOVIE_HOME = "/movie-home";
+// shadow home page
+export const MOVIE_HOME = "/shadow-home";
 
-// movie detail page
-export const MOVIE_DETAIL = "/movie";
+// shadow detail page
+export const MOVIE_DETAIL = "/shadow";
 
 // profile page
 export const PROFILE = "/profile";
 
-// movie play page
-export const MOVIE_PLAY = "/movie-play";
+// shadow play page
+export const MOVIE_PLAY = "/shadow-play";
 
-// movie upload page
-export const MOVIE_UPLOAD = "/movie-upload";
+// shadow upload page
+export const MOVIE_UPLOAD = "/shadow-upload";
 
 // auth completion page
 export const AUTH_COMPLETION = "/completion";

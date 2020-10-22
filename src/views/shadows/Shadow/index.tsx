@@ -1,14 +1,14 @@
 import * as React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Tab, Box, Tabs } from "@material-ui/core";
-import { MovieMain, Relative, Cast, About, Top } from "./modules";
+import { Main, Relative, Cast, About, Top } from "./modules";
 import {
   ContentScreen,
   AiderScreen,
   FullScreen,
   BodyScreen
 } from "@/layouts/PageLayout";
-import { useMovieQuery, MovieQuery } from "@/schema";
+import { useShadowQuery, ShadowQuery } from "@/schema";
 import { useParams } from "react-router";
 import { SpecialBox } from "@/components/public/SpecialBox";
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const MovieContext = React.createContext<MovieQuery | undefined>(
+export const ShadowContext = React.createContext<ShadowQuery | undefined>(
   undefined
 );
 
@@ -41,9 +41,9 @@ enum TabStatus {
   ABOUT = 2
 }
 
-export default function Movie() {
+export default function Shadow() {
   const { id } = useParams();
-  const { data, error, loading } = useMovieQuery({
+  const { data, error, loading } = useShadowQuery({
     variables: {
       id: id
     }
@@ -54,8 +54,8 @@ export default function Movie() {
 
   return (
     <Box>
-      {data?.movie ? (
-        <MovieContext.Provider value={data}>
+      {data?.shadow ? (
+        <ShadowContext.Provider value={data}>
           <FullScreen>
             <BodyScreen>
               <Top />
@@ -70,23 +70,23 @@ export default function Movie() {
               </Tabs>
               <div className={classes.content}>
                 <div hidden={tab !== TabStatus.INFO}>
-                  <MovieMain />
+                  <Main />
                 </div>
                 <div hidden={tab !== TabStatus.RELATIVE}>
                   <Relative />
                 </div>
                 <div hidden={tab !== TabStatus.ABOUT}>
-                  <About html={data?.movie?.description || ""} />
+                  <About html={data?.shadow?.description || ""} />
                 </div>
                 {/* <TabContext value={tab}>
                   <TabPanel value={TabStatus.INFO}>
-                    <MovieMain />
+                    <ShadowMain />
                   </TabPanel>
                   <TabPanel value={TabStatus.RELATIVE}>
                     <Relative />
                   </TabPanel>
                   <TabPanel value={TabStatus.ABOUT}>
-                    <About html={data?.movie?.description || ""} />
+                    <About html={data?.shadow?.description || ""} />
                   </TabPanel>
                 </TabContext> */}
               </div>
@@ -95,7 +95,7 @@ export default function Movie() {
               <Cast />
             </AiderScreen>
           </BodyScreen>
-        </MovieContext.Provider>
+        </ShadowContext.Provider>
       ) : (
         <SpecialBox error={!!error} loading={loading} />
       )}

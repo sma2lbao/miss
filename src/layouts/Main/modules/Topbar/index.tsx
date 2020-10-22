@@ -62,7 +62,7 @@ export default function Topbar(props: TopbarProps) {
               <Menu fontSize="small" />
             </IconButton> */}
             <IconButton
-              onClick={RouterHelper.gotoMovieUpload}
+              onClick={RouterHelper.gotoShadowUpload}
               size="small"
               className={classes.icon}
             >
