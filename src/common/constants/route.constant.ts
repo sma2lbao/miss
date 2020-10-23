@@ -18,3 +18,6 @@ export const MOVIE_UPLOAD = "/shadow-upload";
 
 // auth completion page
 export const AUTH_COMPLETION = "/completion";
+
+// auth login page
+export const AUTH_LOGIN = "/login";

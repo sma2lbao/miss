@@ -1,5 +1,5 @@
 // import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import {
   PROFILE,
   MOVIE_DETAIL,
@@ -7,11 +7,13 @@ import {
   MOVIE_HOME,
   MOVIE_PLAY,
   MOVIE_UPLOAD,
-  AUTH_COMPLETION
+  AUTH_COMPLETION,
+  AUTH_LOGIN
 } from "@/common/constants/route.constant";
 
 export const useRouterHelper = () => {
   const history = useHistory();
+  const location = useLocation();
 
   // go home page.
   const gotoHome = () => {
@@ -48,10 +50,24 @@ export const useRouterHelper = () => {
     history.push(`${AUTH_COMPLETION}`);
   };
 
+  const redirectAuthLogin = (referrer?: boolean) => {
+    history.replace(
+      `${AUTH_LOGIN}`,
+      referrer
+        ? {
+            __referrer_from__: location
+          }
+        : undefined
+    );
+  };
+
   return {
     push: (path: string, state?: any) => {
       // console.log(path, state);
       history.push(path, state);
+    },
+    replace: (pathOrlocation, stateOptions?) => {
+      history.replace(pathOrlocation, stateOptions);
     },
     gotoHome,
     gotoProfile,
@@ -59,6 +75,7 @@ export const useRouterHelper = () => {
     gotoShadowHome,
     gotoShadowPlay,
     gotoShadowUpload,
-    gotoAuthCompletion
+    gotoAuthCompletion,
+    redirectAuthLogin
   };
 };

@@ -7,6 +7,7 @@ import {
 } from "../layouts";
 import Home from "@/views/Home";
 import H5NotSupported from "@/views/public/H5NotSupported";
+import { Authority } from "@/layouts/RouteWithLayout";
 
 const ShadowHome = React.lazy(() => import("@/views/shadows/ShadowHome"));
 const Shadow = React.lazy(() => import("@/views/shadows/Shadow"));
@@ -60,6 +61,7 @@ function AppRoute() {
           path="/shadow-upload"
           component={ShadowUpload}
           layout={MainLayout}
+          authority={Authority.MEMBER}
         />
         <Route
           lazy

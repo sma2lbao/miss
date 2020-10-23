@@ -19,11 +19,11 @@ import {
 import { Image } from "@/components/base/Image";
 import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
 import { Placeholder } from "@/components/base/Placeholder";
-import { useEditableInput, EditableInput } from "@/components/app/Input";
 import { FileUpload } from "@/components/app/FileUpload";
 import ImageIcon from "@material-ui/icons/Image";
 import { MovieCreation } from "@material-ui/icons";
 import { ShadowPlayer } from "@/components/app/Player";
+import { EditInfo, EditInfoHandles } from "./EditInfo";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,9 +83,8 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
   const [open, setOpen] = React.useState(false);
   const [url, setUrl] = React.useState("");
   const [cover, setCover] = React.useState("");
-  const [name, setName] = useEditableInput("");
-  const [alias_name, setAliasName] = useEditableInput("");
-  const [description, setDescription] = useEditableInput("");
+
+  const infoRef = React.createRef<EditInfoHandles>();
 
   React.useEffect(() => {
     setOpen(props.open);
@@ -95,9 +94,6 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
     setOpen(false);
     setUrl("");
     setCover("");
-    setName("");
-    setAliasName("");
-    setDescription("");
   };
 
   const handleChangeCover = imageUrl => {
@@ -117,9 +113,9 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
       onSave({
         url,
         cover,
-        name,
-        alias_name,
-        description
+        name: infoRef.current?.name,
+        alias_name: infoRef.current?.alias_name,
+        description: infoRef.current?.description
       });
     handleCancle();
   };
@@ -182,26 +178,9 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
           </FullScreen>
           <BodyScreen className={classes.body}>
             <ContentScreen className={classes.content}>
-              {/* <VideoInfo /> */}
-              {/* <NextPlay /> */}
-              <EditableInput
-                value={name}
-                onChange={setName}
-                placeholder="name"
-              />
-              <EditableInput
-                value={alias_name}
-                onChange={setAliasName}
-                placeholder="alias_name"
-              />
-              <EditableInput
-                value={description}
-                onChange={setDescription}
-                placeholder="description..."
-              />
+              <EditInfo ref={infoRef} />
             </ContentScreen>
             <AiderScreen sticky className={classes.aider}>
-              {/* <Comment /> */}
               <Placeholder title="评论区" />
             </AiderScreen>
           </BodyScreen>
