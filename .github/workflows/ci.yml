@@ -27,6 +27,7 @@ jobs:
           npm install
           npm run build
         env:
+          REACT_APP_HTTP_DOMAIN_URL: ${{ secrets.REACT_APP_HTTP_DOMAIN_URL }}
           REACT_APP_HTTP_URL: ${{ secrets.REACT_APP_HTTP_URL }}
           REACT_APP_UPLOAD_URL: ${{ secrets.REACT_APP_UPLOAD_URL }}
           REACT_APP_WEBSOCKET_URL: ${{ secrets.REACT_APP_WEBSOCKET_URL }}
