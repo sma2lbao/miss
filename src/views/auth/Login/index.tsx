@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: theme.spacing(0, 4)
+      padding: theme.spacing(0, 4),
+      overflow: "auto"
     },
     rightHeader: {
       display: "flex",
@@ -35,7 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
     rightMain: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      width: "100%",
+      padding: theme.spacing(0, 8)
     },
     rightFooter: {}
   })
@@ -65,10 +68,8 @@ export default function Login() {
           )}
         </div>
         <div className={classes.rightMain}>
-          <div>
-            {tag === 0 && <SignIn />}
-            {tag === 1 && <SignUp />}
-          </div>
+          {tag === 0 && <SignIn />}
+          {tag === 1 && <SignUp />}
         </div>
         <div className={classes.rightFooter}></div>
       </div>

@@ -15,6 +15,13 @@ import { GitHub } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      width: "100%"
+    },
+    formWrap: {
+      display: "flex",
+      flexDirection: "column"
+    },
     thirdWrap: {
       padding: theme.spacing(2),
       textAlign: "center"
@@ -57,6 +64,10 @@ export default function SignIn() {
     const height = 450;
     const top = (window.screen.availHeight - height) / 2;
     const left = (window.screen.availWidth - width) / 2;
+    console.log("----debug start----");
+    console.log("http_domain: ", http_domain);
+    console.log("url: ", url);
+    console.log("----debug end----");
     const child = window.open(
       http_domain + url,
       platform,
@@ -92,9 +103,9 @@ export default function SignIn() {
   });
 
   return (
-    <div>
+    <div className={classes.root}>
       <Typography variant="h4">Sign In</Typography>
-      <form>
+      <form className={classes.formWrap}>
         <TextField
           id="username"
           label="用户名"
@@ -145,12 +156,12 @@ export default function SignIn() {
           );
         })}
         {thirdLoading && (
-          <Typography variant="caption" color="textSecondary">
+          <Typography component="div" variant="caption" color="textSecondary">
             loading
           </Typography>
         )}
         {thirdError && (
-          <Typography variant="caption" color="textSecondary">
+          <Typography component="div" variant="caption" color="textSecondary">
             oops!
           </Typography>
         )}

@@ -1,14 +1,35 @@
 import * as React from "react";
-import { TextField, Button, Box, Typography } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  makeStyles,
+  Theme,
+  createStyles
+} from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import {
-  useHasUsernameQuery,
+  // useHasUsernameLazyQuery,
   useSendRegisterEmailMutation,
   useCreateUserWithCodeMutation
 } from "@/schema";
 import { useAuth } from "@/hooks";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%"
+    },
+    formWrap: {
+      display: "flex",
+      flexDirection: "column"
+    }
+  })
+);
+
 export default function SignIn() {
+  const classes = useStyles();
   const { verify } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const [username, setUsername] = React.useState("");
@@ -16,12 +37,7 @@ export default function SignIn() {
   const [email, setEmail] = React.useState("");
   const [code, setCode] = React.useState("");
 
-  const { data, loading } = useHasUsernameQuery({
-    variables: {
-      username: username
-    }
-  });
-  console.log("_changeUsername: ", username, data, loading);
+  // const [hasUsernameQuery, data] = useHasUsernameLazyQuery();
 
   // 发送验证码
   const [send_register_email] = useSendRegisterEmailMutation({
@@ -56,6 +72,7 @@ export default function SignIn() {
   const _changeUsername = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
+    // hasUsernameQuery();
     setUsername(e.target.value);
   };
 
@@ -64,9 +81,9 @@ export default function SignIn() {
   });
 
   return (
-    <div>
+    <div className={classes.root}>
       <Typography variant="h4">Sign Up</Typography>
-      <form>
+      <form className={classes.formWrap}>
         <TextField
           id="username"
           label="用户名"
