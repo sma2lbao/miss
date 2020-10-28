@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Paper } from "@material-ui/core";
+import { Placeholder } from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -8,7 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100vh",
       display: "flex",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      padding: theme.spacing(2),
+      background: theme.palette.background.paper
     }
   })
 );
@@ -17,10 +20,8 @@ export default function H5NotSupported() {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.root}>
-      <Typography variant="h5">
-        暂不支持移动端访问，请在PC浏览器访问。
-      </Typography>
-    </Paper>
+    <div className={classes.root}>
+      <Placeholder title="暂不支持移动端访问，请在PC浏览器访问。" />
+    </div>
   );
 }
