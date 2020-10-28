@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: (props: BaseExceptionProps) => {
         return props.height ?? "100%";
       },
+      color: theme.palette.text.secondary,
       flex: 1
     },
     icon: theme.custom.base.icon.large

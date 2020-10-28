@@ -6,15 +6,14 @@ import {
   // Typography,
   Box,
   Divider,
-  IconButton,
-  Icon
+  IconButton
 } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import Search from "./components/Search";
 import Account from "./components/Account";
 import Notice from "./components/Notice";
-import clsx from "clsx";
 import { useRouterHelper } from "@/hooks";
+import { Logo } from "@/components/base/Icons";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -48,12 +47,13 @@ export default function Topbar(props: TopbarProps) {
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Toolbar classes={{ root: classes.toolbar }}>
           <Box display="flex" alignItems="center">
-            <div>
+            <Logo fontSize="large" onClick={RouterHelper.gotoHome} />
+            {/* <div>
               <Icon
                 fontSize="large"
                 className={clsx("iconfont icon-logo")}
               ></Icon>
-            </div>
+            </div> */}
             {/* <IconButton
               size="small"
               onClick={props.toggleSidebar}
