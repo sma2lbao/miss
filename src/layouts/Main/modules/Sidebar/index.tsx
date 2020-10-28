@@ -14,7 +14,7 @@ import { DrawerProps } from "@material-ui/core/Drawer";
 import useMenus, { MenuProps } from "./useMenus";
 import clsx from "clsx";
 import { useRouterHelper } from "@/hooks";
-import { ChevronRight } from "@material-ui/icons";
+import { ChevronRight, ChevronLeft } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 
 interface SidebarProps extends Omit<DrawerProps, "open" | "onClose"> {
@@ -24,7 +24,13 @@ interface SidebarProps extends Omit<DrawerProps, "open" | "onClose"> {
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
-    toolbar: theme.mixins.toolbar,
+    toolbar: {
+      padding: theme.spacing(0, 2),
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      ...theme.mixins.toolbar
+    },
     root: {
       display: "flex"
     },
@@ -57,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => {
       color: theme.palette.text.disabled
     },
     openWrap: {
-      position: "absolute",
+      position: "fixed",
       left: "0",
       top: "50%",
       transform: "translateY(-50%)"
@@ -99,7 +105,11 @@ export const Sidebar = (props: SidebarProps, ref) => {
   return (
     <>
       <Drawer {...rest} open={hasExpand} onClose={handleCloseDrawer}>
-        <div className={classes.toolbar}></div>
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleCloseDrawer}>
+            <ChevronLeft />
+          </IconButton>
+        </div>
         <div className={classes.root}>
           <div className={classes.parent}>
             {menus.map((parent, idx) => (
@@ -160,7 +170,6 @@ export const Sidebar = (props: SidebarProps, ref) => {
             );
           })}
         </div>
-        <div onClick={handleCloseDrawer}>close menu</div>
       </Drawer>
       <div className={classes.openWrap} hidden={hasExpand}>
         <IconButton onClick={handleOpenDrawer}>
