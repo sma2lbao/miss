@@ -1192,6 +1192,46 @@ export type ShadowNextUrgesByShadowQuery = {
   }>;
 };
 
+export type ReviewsPaginatedQueryVariables = Exact<{
+  type?: Maybe<ReviewMedium>;
+  type_id?: Maybe<Scalars["ID"]>;
+  query?: Maybe<PaginatedQuery>;
+}>;
+
+export type ReviewsPaginatedQuery = {
+  readonly __typename?: "Query";
+  readonly reviews_paginated: {
+    readonly __typename?: "ReviewPaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "ReviewPageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
+    };
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ReviewEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Review";
+          readonly id: number | string;
+          readonly content: string;
+          readonly create_at: any;
+          readonly update_at: any;
+          readonly author: {
+            readonly __typename?: "User";
+            readonly uid: number | string;
+            readonly avatar: string;
+            readonly nickname?: Maybe<string>;
+            readonly username: string;
+            readonly description?: Maybe<string>;
+          };
+        };
+      }>
+    >;
+  };
+};
+
 export type IsFollowingQueryVariables = Exact<{
   owner_uid: Scalars["String"];
   follower_uid?: Maybe<Scalars["String"]>;
@@ -1293,6 +1333,14 @@ export const ShadowSourceFragmentDoc = gql`
     duration
     description
     alias_name
+    create_at
+    update_at
+  }
+`;
+export const ReviewFragmentDoc = gql`
+  fragment Review on Review {
+    id
+    content
     create_at
     update_at
   }
@@ -2557,6 +2605,83 @@ export type ShadowNextUrgesByShadowLazyQueryHookResult = ReturnType<
 export type ShadowNextUrgesByShadowQueryResult = ApolloReactCommon.QueryResult<
   ShadowNextUrgesByShadowQuery,
   ShadowNextUrgesByShadowQueryVariables
+>;
+export const ReviewsPaginatedDocument = gql`
+  query reviewsPaginated(
+    $type: ReviewMedium
+    $type_id: ID
+    $query: PaginatedQuery
+  ) {
+    reviews_paginated(type: $type, type_id: $type_id, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          ...Review
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+  ${ReviewFragmentDoc}
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useReviewsPaginatedQuery__
+ *
+ * To run a query within a React component, call `useReviewsPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useReviewsPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReviewsPaginatedQuery({
+ *   variables: {
+ *      type: // value for 'type'
+ *      type_id: // value for 'type_id'
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useReviewsPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ReviewsPaginatedQuery,
+    ReviewsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ReviewsPaginatedQuery,
+    ReviewsPaginatedQueryVariables
+  >(ReviewsPaginatedDocument, baseOptions);
+}
+export function useReviewsPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ReviewsPaginatedQuery,
+    ReviewsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ReviewsPaginatedQuery,
+    ReviewsPaginatedQueryVariables
+  >(ReviewsPaginatedDocument, baseOptions);
+}
+export type ReviewsPaginatedQueryHookResult = ReturnType<
+  typeof useReviewsPaginatedQuery
+>;
+export type ReviewsPaginatedLazyQueryHookResult = ReturnType<
+  typeof useReviewsPaginatedLazyQuery
+>;
+export type ReviewsPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  ReviewsPaginatedQuery,
+  ReviewsPaginatedQueryVariables
 >;
 export const IsFollowingDocument = gql`
   query isFollowing($owner_uid: String!, $follower_uid: String) {

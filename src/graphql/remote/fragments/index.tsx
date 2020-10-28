@@ -56,3 +56,12 @@ export const SOURCE = gql`
     update_at
   }
 `;
+
+export const REVIEW = gql`
+  fragment Review on Review {
+    id
+    content
+    create_at
+    update_at
+  }
+`;

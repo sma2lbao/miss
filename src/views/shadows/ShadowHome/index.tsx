@@ -63,7 +63,7 @@ export default function ShadowHome(props: Props) {
   const { data, loading, fetchMore } = useShadowsPaginatedQuery({
     variables: {
       query: {
-        first: 16
+        last: 16
       }
     }
   });

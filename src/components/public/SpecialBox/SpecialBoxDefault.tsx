@@ -44,6 +44,8 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
           <Exception title={errorTitle} subtitle={errorSubtitle} />
         ))}
       {placeholder &&
+        !error &&
+        !loading &&
         (PlaceholderNode ? (
           <PlaceholderNode />
         ) : (

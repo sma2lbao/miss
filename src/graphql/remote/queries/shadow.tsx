@@ -87,3 +87,28 @@ export const MOVIE_NEXT_URGES_BY_MOVIE = gql`
     }
   }
 `;
+
+export const REVIEWS_PAGINATED = gql`
+  query reviewsPaginated(
+    $type: ReviewMedium
+    $type_id: ID
+    $query: PaginatedQuery
+  ) {
+    reviews_paginated(type: $type, type_id: $type_id, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          ...Review
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+`;
