@@ -5,6 +5,8 @@ import { ThumbUpAlt, ThumbDownAlt, MoreVert } from "@material-ui/icons";
 import { ShadowPlayContext } from "../..";
 import moment from "moment";
 import { useFollowHelper } from "@/hooks";
+import { useCreateOrUpdateVoteMutation, VoteStatus } from "@/schema";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +41,19 @@ export default function VideoInfo() {
   const { following, toggleFollow } = useFollowHelper({
     owner_uid: shadowPlayQuery?.shadow.author.uid as string
   });
+  const [create_or_update_vote] = useCreateOrUpdateVoteMutation();
+  const { id } = useParams();
+
+  const handleVote = () => {
+    create_or_update_vote({
+      variables: {
+        vote: {
+          medium_id: id,
+          status: VoteStatus.Likd
+        }
+      }
+    });
+  };
 
   return (
     <div>
@@ -61,13 +76,13 @@ export default function VideoInfo() {
         </div>
         <Box display="flex" alignItems="center">
           <Box className={classes.toolBox}>
-            <IconButton size="small">
+            <IconButton size="small" onClick={handleVote}>
               <ThumbDownAlt fontSize="small" />
             </IconButton>
             <Typography className={classes.toolText}>TODO</Typography>
           </Box>
           <Box className={classes.toolBox}>
-            <IconButton size="small">
+            <IconButton size="small" onClick={handleVote}>
               <ThumbUpAlt fontSize="small" />
             </IconButton>
             <Typography className={classes.toolText}>TODO</Typography>

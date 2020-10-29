@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Home, Movie, Person, HourglassEmpty } from "@material-ui/icons";
-import { HOME, MOVIE_HOME } from "@/common/constants/route.constant";
+import { HOME, SHADOW_HOME } from "@/common/constants/route.constant";
 import { useRouteMatch } from "react-router";
 
 export interface MenuProps {
@@ -45,7 +45,7 @@ const ShadowMenus: MenuProps = {
   icon: <Movie />,
   label: "Shadow",
   value: "shadow",
-  path: MOVIE_HOME
+  path: SHADOW_HOME
   // children: [],
 };
 

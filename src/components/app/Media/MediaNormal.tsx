@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Image from "@/components/base/Image";
 import { MediaNormalProps } from "./media";
 import Duration from "../Duration";
-import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
+import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import moment from "moment";
 import { useRouterHelper } from "@/hooks";
 import { Skeleton } from "@material-ui/lab";
@@ -64,7 +64,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   return (
     <Box className={classes.wrap} onClick={goShadow}>
       <div className={classes.cover}>
-        <Image src={DEFULAT_MOVIE_COVER || props.cover} aspectRatio={16 / 9} />
+        <Image src={DEFULAT_SHADOW_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (
           <Duration
             classes={{ root: classes.duration }}

@@ -25,7 +25,7 @@ export const AUTHOR = gql`
   }
 `;
 
-export const MOVIE = gql`
+export const SHADOW = gql`
   fragment Shadow on Shadow {
     id
     description
@@ -54,6 +54,8 @@ export const SOURCE = gql`
     alias_name
     create_at
     update_at
+    vote_like_count
+    vote_dislike_count
   }
 `;
 

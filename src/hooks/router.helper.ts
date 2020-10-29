@@ -2,11 +2,11 @@
 import { useHistory, useLocation } from "react-router";
 import {
   PROFILE,
-  MOVIE_DETAIL,
+  SHADOW_DETAIL,
   HOME,
-  MOVIE_HOME,
-  MOVIE_PLAY,
-  MOVIE_UPLOAD,
+  SHADOW_HOME,
+  SHADOW_PLAY,
+  SHADOW_UPLOAD,
   AUTH_COMPLETION,
   AUTH_LOGIN
 } from "@/common/constants/route.constant";
@@ -27,22 +27,22 @@ export const useRouterHelper = () => {
 
   // go shadow detail page.
   const gotoShadow = (shadow_id: number | undefined | null | string) => {
-    history.push(`${MOVIE_DETAIL}/${shadow_id}`);
+    history.push(`${SHADOW_DETAIL}/${shadow_id}`);
   };
 
   // go shadow home page.
   const gotoShadowHome = () => {
-    history.push(MOVIE_HOME);
+    history.push(SHADOW_HOME);
   };
 
   // go shadow play page.
   const gotoShadowPlay = (shadow_id: number | undefined | string | null) => {
-    history.push(`${MOVIE_PLAY}/${shadow_id}`);
+    history.push(`${SHADOW_PLAY}/${shadow_id}`);
   };
 
   // go shadow upload.
   const gotoShadowUpload = () => {
-    history.push(`${MOVIE_UPLOAD}`);
+    history.push(`${SHADOW_UPLOAD}`);
   };
 
   // go info completion page.

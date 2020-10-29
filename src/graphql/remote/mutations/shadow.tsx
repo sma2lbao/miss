@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_MOVIE = gql`
+export const CREATE_SHADOW = gql`
   mutation createShadow($shadow: CreateShadowInput!) {
     create_shadow(shadow: $shadow) {
       create_at
@@ -8,7 +8,7 @@ export const CREATE_MOVIE = gql`
   }
 `;
 
-export const UPDATE_MOVIE = gql`
+export const UPDATE_SHADOW = gql`
   mutation updateShadow($shadow: UpdateShadowInput!, $shadow_id: ID!) {
     update_shadow(shadow_id: $shadow_id, shadow: $shadow) {
       create_at
@@ -16,7 +16,7 @@ export const UPDATE_MOVIE = gql`
   }
 `;
 
-export const ADD_MEDIUMS_TO_MOVIE = gql`
+export const ADD_MEDIUMS_TO_SHADOW = gql`
   mutation addMediumsToShadow(
     $shadow_id: ID!
     $shadow_medium: CreateShadowMediumInput!
@@ -28,6 +28,14 @@ export const ADD_MEDIUMS_TO_MOVIE = gql`
       sources {
         name
       }
+    }
+  }
+`;
+
+export const CREATE_OR_UPDATE_VOTE = gql`
+  mutation createOrUpdateVote($vote: CreateVoteInput!) {
+    create_or_update_vote(vote: $vote) {
+      status
     }
   }
 `;

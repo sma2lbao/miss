@@ -22,7 +22,7 @@ export const CURRENT_TOPIC = gql`
   }
 `;
 
-export const MOVIE_URGES = gql`
+export const SHADOW_URGES = gql`
   query shadowUrges {
     shadow_urges {
       ...Shadow

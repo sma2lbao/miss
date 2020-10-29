@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Image } from "@/components/base/Image";
 import { ShadowContext } from "../..";
-import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
+import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Box, IconButton } from "@material-ui/core";
 import { useRouterHelper } from "@/hooks";
@@ -40,7 +40,7 @@ export const Top: React.FC = () => {
         aspectRatio={16 / 9}
         src={
           (shadowQuery && shadowQuery.shadow && shadowQuery.shadow.cover) ||
-          DEFULAT_MOVIE_COVER
+          DEFULAT_SHADOW_COVER
         }
       />
       <div className={classes.main}>

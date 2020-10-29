@@ -17,7 +17,7 @@ import {
   AiderScreen
 } from "@/layouts/PageLayout";
 import { Image } from "@/components/base/Image";
-import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
+import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import { Placeholder } from "@/components/base/Placeholder";
 import { FileUpload } from "@/components/app/FileUpload";
 import ImageIcon from "@material-ui/icons/Image";
@@ -147,12 +147,12 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
                 {url ? (
                   <ShadowPlayer
                     url={url}
-                    light={cover ? cover : DEFULAT_MOVIE_COVER}
+                    light={cover ? cover : DEFULAT_SHADOW_COVER}
                   />
                 ) : (
                   <Image
                     aspectRatio={16 / 9}
-                    src={cover ? cover : DEFULAT_MOVIE_COVER}
+                    src={cover ? cover : DEFULAT_SHADOW_COVER}
                   />
                 )}
                 <FileUpload custom onComplete={handleChangeCover}>

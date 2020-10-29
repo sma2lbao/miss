@@ -201,6 +201,9 @@ export type Medium = {
   readonly medium_quality_url?: Maybe<Scalars["String"]>;
   readonly high_quality_url?: Maybe<Scalars["String"]>;
   readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly votes?: Maybe<ReadonlyArray<Vote>>;
+  readonly vote_like_count?: Maybe<Scalars["Float"]>;
+  readonly vote_dislike_count?: Maybe<Scalars["Float"]>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
   readonly delete_at?: Maybe<Scalars["Date"]>;
@@ -577,6 +580,9 @@ export type ShadowMedium = {
   readonly medium_quality_url?: Maybe<Scalars["String"]>;
   readonly high_quality_url?: Maybe<Scalars["String"]>;
   readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly votes?: Maybe<ReadonlyArray<Vote>>;
+  readonly vote_like_count?: Maybe<Scalars["Float"]>;
+  readonly vote_dislike_count?: Maybe<Scalars["Float"]>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
   readonly delete_at?: Maybe<Scalars["Date"]>;
@@ -800,6 +806,18 @@ export type AddMediumsToShadowMutation = {
       readonly __typename?: "ShadowMedium";
       readonly name?: Maybe<string>;
     }>;
+  };
+};
+
+export type CreateOrUpdateVoteMutationVariables = Exact<{
+  vote: CreateVoteInput;
+}>;
+
+export type CreateOrUpdateVoteMutation = {
+  readonly __typename?: "Mutation";
+  readonly create_or_update_vote: {
+    readonly __typename?: "Vote";
+    readonly status: VoteStatus;
   };
 };
 
@@ -1049,6 +1067,8 @@ export type ShadowQuery = {
       readonly alias_name?: Maybe<string>;
       readonly create_at: any;
       readonly update_at: any;
+      readonly vote_like_count?: Maybe<number>;
+      readonly vote_dislike_count?: Maybe<number>;
     }>;
   };
 };
@@ -1335,6 +1355,8 @@ export const ShadowSourceFragmentDoc = gql`
     alias_name
     create_at
     update_at
+    vote_like_count
+    vote_dislike_count
   }
 `;
 export const ReviewFragmentDoc = gql`
@@ -1701,6 +1723,56 @@ export type AddMediumsToShadowMutationResult = ApolloReactCommon.MutationResult<
 export type AddMediumsToShadowMutationOptions = ApolloReactCommon.BaseMutationOptions<
   AddMediumsToShadowMutation,
   AddMediumsToShadowMutationVariables
+>;
+export const CreateOrUpdateVoteDocument = gql`
+  mutation createOrUpdateVote($vote: CreateVoteInput!) {
+    create_or_update_vote(vote: $vote) {
+      status
+    }
+  }
+`;
+export type CreateOrUpdateVoteMutationFn = ApolloReactCommon.MutationFunction<
+  CreateOrUpdateVoteMutation,
+  CreateOrUpdateVoteMutationVariables
+>;
+
+/**
+ * __useCreateOrUpdateVoteMutation__
+ *
+ * To run a mutation, you first call `useCreateOrUpdateVoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrUpdateVoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrUpdateVoteMutation, { data, loading, error }] = useCreateOrUpdateVoteMutation({
+ *   variables: {
+ *      vote: // value for 'vote'
+ *   },
+ * });
+ */
+export function useCreateOrUpdateVoteMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    CreateOrUpdateVoteMutation,
+    CreateOrUpdateVoteMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    CreateOrUpdateVoteMutation,
+    CreateOrUpdateVoteMutationVariables
+  >(CreateOrUpdateVoteDocument, baseOptions);
+}
+export type CreateOrUpdateVoteMutationHookResult = ReturnType<
+  typeof useCreateOrUpdateVoteMutation
+>;
+export type CreateOrUpdateVoteMutationResult = ApolloReactCommon.MutationResult<
+  CreateOrUpdateVoteMutation
+>;
+export type CreateOrUpdateVoteMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateOrUpdateVoteMutation,
+  CreateOrUpdateVoteMutationVariables
 >;
 export const UploadFileOssDocument = gql`
   mutation uploadFileOss($file: Upload!) {

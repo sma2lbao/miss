@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "@/components/base/Image";
-import { DEFULAT_MOVIE_COVER } from "@/common/constants/default.constant";
+import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Box,
@@ -157,7 +157,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
             })}
           </AutoPlaySwipeableViews>
         ) : (
-          <Image aspectRatio={16 / 9} src={DEFULAT_MOVIE_COVER} />
+          <Image aspectRatio={16 / 9} src={DEFULAT_SHADOW_COVER} />
         )}
 
         <div className={classes.aider}>

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const MOVIE = gql`
+export const SHADOW = gql`
   query shadow($id: ID!) {
     shadow(id: $id) {
       credits {
@@ -21,7 +21,7 @@ export const MOVIE = gql`
   }
 `;
 
-export const MOVIES_PAGINATED = gql`
+export const SHADOWS_PAGINATED = gql`
   query shadowsPaginated($query: PaginatedQuery) {
     shadows_paginated(query: $query) {
       totalCount
@@ -42,7 +42,7 @@ export const MOVIES_PAGINATED = gql`
   }
 `;
 
-export const USER_MOVIES_PAGINATED = gql`
+export const USER_SHADOWS_PAGINATED = gql`
   query userShadowsPaginated(
     $author_username: String!
     $query: PaginatedQuery
@@ -66,7 +66,7 @@ export const USER_MOVIES_PAGINATED = gql`
   }
 `;
 
-export const MOVIE_URGES_BY_MOVIE = gql`
+export const SHADOW_URGES_BY_SHADOW = gql`
   query shadowUrgesByShadow($shadow_id: ID!) {
     shadow_urges_by_shadow(shadow_id: $shadow_id) {
       ...Shadow
@@ -77,7 +77,7 @@ export const MOVIE_URGES_BY_MOVIE = gql`
   }
 `;
 
-export const MOVIE_NEXT_URGES_BY_MOVIE = gql`
+export const SHADOW_NEXT_URGES_BY_SHADOW = gql`
   query shadowNextUrgesByShadow($shadow_id: ID!) {
     shadow_next_urges_by_shadow(shadow_id: $shadow_id) {
       ...Shadow
