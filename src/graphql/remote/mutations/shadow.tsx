@@ -39,3 +39,11 @@ export const CREATE_OR_UPDATE_VOTE = gql`
     }
   }
 `;
+
+export const CREATE_REVIEW = gql`
+  mutation createReview($review: CreateReviewInput!) {
+    create_review(review: $review) {
+      id
+    }
+  }
+`;

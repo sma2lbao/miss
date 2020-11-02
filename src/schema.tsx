@@ -821,6 +821,18 @@ export type CreateOrUpdateVoteMutation = {
   };
 };
 
+export type CreateReviewMutationVariables = Exact<{
+  review: CreateReviewInput;
+}>;
+
+export type CreateReviewMutation = {
+  readonly __typename?: "Mutation";
+  readonly create_review: {
+    readonly __typename?: "Review";
+    readonly id: number | string;
+  };
+};
+
 export type UploadFileOssMutationVariables = Exact<{
   file: Scalars["Upload"];
 }>;
@@ -1773,6 +1785,56 @@ export type CreateOrUpdateVoteMutationResult = ApolloReactCommon.MutationResult<
 export type CreateOrUpdateVoteMutationOptions = ApolloReactCommon.BaseMutationOptions<
   CreateOrUpdateVoteMutation,
   CreateOrUpdateVoteMutationVariables
+>;
+export const CreateReviewDocument = gql`
+  mutation createReview($review: CreateReviewInput!) {
+    create_review(review: $review) {
+      id
+    }
+  }
+`;
+export type CreateReviewMutationFn = ApolloReactCommon.MutationFunction<
+  CreateReviewMutation,
+  CreateReviewMutationVariables
+>;
+
+/**
+ * __useCreateReviewMutation__
+ *
+ * To run a mutation, you first call `useCreateReviewMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateReviewMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createReviewMutation, { data, loading, error }] = useCreateReviewMutation({
+ *   variables: {
+ *      review: // value for 'review'
+ *   },
+ * });
+ */
+export function useCreateReviewMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    CreateReviewMutation,
+    CreateReviewMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    CreateReviewMutation,
+    CreateReviewMutationVariables
+  >(CreateReviewDocument, baseOptions);
+}
+export type CreateReviewMutationHookResult = ReturnType<
+  typeof useCreateReviewMutation
+>;
+export type CreateReviewMutationResult = ApolloReactCommon.MutationResult<
+  CreateReviewMutation
+>;
+export type CreateReviewMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateReviewMutation,
+  CreateReviewMutationVariables
 >;
 export const UploadFileOssDocument = gql`
   mutation uploadFileOss($file: Upload!) {

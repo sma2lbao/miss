@@ -100,10 +100,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
     const [title, setTitle] = useEditableInput("");
     const [sub_title, setSubTitle] = useEditableInput("");
     const [description, setDescription] = useEditableInput("");
-    const [posters, setPosters] = React.useState<string[]>([
-      "https://static.runoob.com/images/demo/demo2.jpg",
-      "https://static.veer.com/veer/static/resources/keyword/2020-02-19/533ed30de651499da1c463bca44b6d60.jpg"
-    ]);
+    const [posters, setPosters] = React.useState<string[]>([]);
     const [cover, setCover] = React.useState<string>("");
 
     React.useEffect(() => {
