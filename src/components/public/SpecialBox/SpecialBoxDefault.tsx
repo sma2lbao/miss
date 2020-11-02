@@ -16,6 +16,7 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
 ) => {
   const classes = useStyles();
   const {
+    component,
     placeholder,
     placeholderTitle,
     placeholderSubtitle,
@@ -29,8 +30,11 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
     errorSubtitle,
     errorNode: ErrorNode
   } = props;
+
+  const Tag = component || "div";
+
   return (
-    <div className={classes.root}>
+    <Tag className={classes.root}>
       {loading &&
         (LoadingNode ? (
           <LoadingNode />
@@ -54,6 +58,6 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
             subtitle={placeholderSubtitle}
           />
         ))}
-    </div>
+    </Tag>
   );
 };

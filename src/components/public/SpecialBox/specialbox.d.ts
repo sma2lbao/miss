@@ -1,6 +1,8 @@
 export interface BaseSpecialBoxProps {
   status?: SpecialBoxStatus;
 
+  component?: React.ElementType<any>;
+
   placeholder?: boolean;
 
   placeholderTitle?: string;
@@ -25,3 +27,14 @@ export interface BaseSpecialBoxProps {
 
   errorNode?: any;
 }
+
+export interface TextSpecialBoxProps
+  extends Omit<
+    BaseSpecialBoxProps,
+    | "placeholderTitle"
+    | "placeholderSubtitle"
+    | "loadingTitle"
+    | "loadingSubtitle"
+    | "errorTitle"
+    | "errorSubtitle"
+  > {}
