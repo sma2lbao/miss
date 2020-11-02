@@ -207,7 +207,7 @@ export type Medium = {
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
   readonly delete_at?: Maybe<Scalars["Date"]>;
-  readonly version: Scalars["Float"];
+  readonly version?: Maybe<Scalars["Float"]>;
 };
 
 export type Mutation = {
@@ -586,7 +586,7 @@ export type ShadowMedium = {
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
   readonly delete_at?: Maybe<Scalars["Date"]>;
-  readonly version: Scalars["Float"];
+  readonly version?: Maybe<Scalars["Float"]>;
 };
 
 export type ShadowPageInfo = {

@@ -6,7 +6,6 @@ import { ShadowPlayContext } from "../..";
 import moment from "moment";
 import { useFollowHelper } from "@/hooks";
 import { useCreateOrUpdateVoteMutation, VoteStatus } from "@/schema";
-import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,18 +36,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function VideoInfo() {
   const classes = useStyles();
-  const shadowPlayQuery = React.useContext(ShadowPlayContext);
+  const [shadowPlayQuery, shadowMedium] = React.useContext(ShadowPlayContext);
   const { following, toggleFollow } = useFollowHelper({
     owner_uid: shadowPlayQuery?.shadow.author.uid as string
   });
   const [create_or_update_vote] = useCreateOrUpdateVoteMutation();
-  const { id } = useParams();
 
   const handleVote = () => {
     create_or_update_vote({
       variables: {
         vote: {
-          medium_id: id,
+          medium_id: shadowMedium ? +shadowMedium.id : -1,
           status: VoteStatus.Likd
         }
       }

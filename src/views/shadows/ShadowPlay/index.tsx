@@ -11,7 +11,7 @@ import {
 // import Image from "@/components/Image";
 import { NextPlay, VideoInfo, Comment } from "./modules";
 import { useParams } from "react-router";
-import { useShadowQuery, ShadowQuery } from "@/schema";
+import { useShadowQuery, ShadowQuery, ShadowMedium } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,25 +35,34 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ShadowPlayContext = React.createContext<ShadowQuery | undefined>(
-  undefined
-);
+export const ShadowPlayContext = React.createContext<
+  [ShadowQuery | undefined, ShadowMedium | undefined]
+>([undefined, undefined]);
 
 export default function ShadowPlay() {
   const classes = useStyles();
   const { id } = useParams();
+  const [shadowMedium, setShadowMedium] = React.useState<
+    ShadowMedium | undefined
+  >();
   let { data } = useShadowQuery({
     variables: {
       id: id
     }
   });
 
+  React.useEffect(() => {
+    if (data?.shadow.sources.length) {
+      setShadowMedium(data.shadow.sources[0]);
+    }
+  }, [data]);
+
   return (
     <Box className={classes.root}>
-      <ShadowPlayContext.Provider value={data}>
+      <ShadowPlayContext.Provider value={[data, shadowMedium]}>
         <FullScreen>
           <BodyScreen>
-            <ShadowPlayer />
+            <ShadowPlayer url={shadowMedium?.url} />
           </BodyScreen>
         </FullScreen>
         <BodyScreen className={classes.body}>
