@@ -3,6 +3,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { DEFAULT_PROFILE_COVER } from "@/common/constants/default.constant";
 import { Typography } from "@material-ui/core";
 import { ProfileContext } from "../..";
+import { useFansTotalQuery, useFollowsTotalQuery } from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Basic: React.FC = () => {
   const classes = useStyles();
   const userQuery = React.useContext(ProfileContext);
+  const {
+    data: fansData
+    // loading: fansLoading,
+    // error: fansError,
+  } = useFansTotalQuery();
+  const {
+    data: followsData
+    // loading: followsLoading,
+    // error: followsError,
+  } = useFollowsTotalQuery();
 
   return (
     <div className={classes.root}>
@@ -44,7 +55,10 @@ export const Basic: React.FC = () => {
           </Typography>
         </div>
         <Typography gutterBottom className={classes.pirmaryColor}>
-          135k Subscribers
+          {fansData?.fans_total || 0} Subscribers
+        </Typography>
+        <Typography gutterBottom className={classes.pirmaryColor}>
+          {followsData?.follows_total || 0} Follower
         </Typography>
         <Typography
           component="div"

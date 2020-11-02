@@ -1297,6 +1297,24 @@ export type UserQuery = {
   };
 };
 
+export type FansTotalQueryVariables = Exact<{
+  owner_uid: Scalars["String"];
+}>;
+
+export type FansTotalQuery = {
+  readonly __typename?: "Query";
+  readonly fans_total: number;
+};
+
+export type FollowsTotalQueryVariables = Exact<{
+  follower_uid: Scalars["String"];
+}>;
+
+export type FollowsTotalQuery = {
+  readonly __typename?: "Query";
+  readonly follows_total: number;
+};
+
 export type ReviewCreatedSubscriptionVariables = Exact<{
   type: ReviewMedium;
   type_id: Scalars["ID"];
@@ -2929,6 +2947,112 @@ export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
 export type UserQueryResult = ApolloReactCommon.QueryResult<
   UserQuery,
   UserQueryVariables
+>;
+export const FansTotalDocument = gql`
+  query fansTotal($owner_uid: String!) {
+    fans_total(owner_uid: $owner_uid)
+  }
+`;
+
+/**
+ * __useFansTotalQuery__
+ *
+ * To run a query within a React component, call `useFansTotalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFansTotalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFansTotalQuery({
+ *   variables: {
+ *      owner_uid: // value for 'owner_uid'
+ *   },
+ * });
+ */
+export function useFansTotalQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    FansTotalQuery,
+    FansTotalQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<FansTotalQuery, FansTotalQueryVariables>(
+    FansTotalDocument,
+    baseOptions
+  );
+}
+export function useFansTotalLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    FansTotalQuery,
+    FansTotalQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<FansTotalQuery, FansTotalQueryVariables>(
+    FansTotalDocument,
+    baseOptions
+  );
+}
+export type FansTotalQueryHookResult = ReturnType<typeof useFansTotalQuery>;
+export type FansTotalLazyQueryHookResult = ReturnType<
+  typeof useFansTotalLazyQuery
+>;
+export type FansTotalQueryResult = ApolloReactCommon.QueryResult<
+  FansTotalQuery,
+  FansTotalQueryVariables
+>;
+export const FollowsTotalDocument = gql`
+  query followsTotal($follower_uid: String!) {
+    follows_total(follower_uid: $follower_uid)
+  }
+`;
+
+/**
+ * __useFollowsTotalQuery__
+ *
+ * To run a query within a React component, call `useFollowsTotalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFollowsTotalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFollowsTotalQuery({
+ *   variables: {
+ *      follower_uid: // value for 'follower_uid'
+ *   },
+ * });
+ */
+export function useFollowsTotalQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    FollowsTotalQuery,
+    FollowsTotalQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    FollowsTotalQuery,
+    FollowsTotalQueryVariables
+  >(FollowsTotalDocument, baseOptions);
+}
+export function useFollowsTotalLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    FollowsTotalQuery,
+    FollowsTotalQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    FollowsTotalQuery,
+    FollowsTotalQueryVariables
+  >(FollowsTotalDocument, baseOptions);
+}
+export type FollowsTotalQueryHookResult = ReturnType<
+  typeof useFollowsTotalQuery
+>;
+export type FollowsTotalLazyQueryHookResult = ReturnType<
+  typeof useFollowsTotalLazyQuery
+>;
+export type FollowsTotalQueryResult = ApolloReactCommon.QueryResult<
+  FollowsTotalQuery,
+  FollowsTotalQueryVariables
 >;
 export const ReviewCreatedDocument = gql`
   subscription reviewCreated($type: ReviewMedium!, $type_id: ID!) {

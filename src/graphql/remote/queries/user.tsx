@@ -23,3 +23,15 @@ export const USER = gql`
     }
   }
 `;
+
+export const FANS_TOTAL = gql`
+  query fansTotal($owner_uid: String) {
+    fans_total(owner_uid: $owner_uid)
+  }
+`;
+
+export const FOLLOWS_TOTAL = gql`
+  query followsTotal($follower_uid: String) {
+    follows_total(follower_uid: $follower_uid)
+  }
+`;
