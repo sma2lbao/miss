@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, Box, Link, Grow } from "@material-ui/core";
+import { Typography, Box, Link } from "@material-ui/core";
 import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile } from "@material-ui/core";
 import { useShadowUrgesQuery } from "@/schema";
