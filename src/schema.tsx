@@ -1298,7 +1298,7 @@ export type UserQuery = {
 };
 
 export type FansTotalQueryVariables = Exact<{
-  owner_uid: Scalars["String"];
+  owner_uid?: Maybe<Scalars["String"]>;
 }>;
 
 export type FansTotalQuery = {
@@ -1307,7 +1307,7 @@ export type FansTotalQuery = {
 };
 
 export type FollowsTotalQueryVariables = Exact<{
-  follower_uid: Scalars["String"];
+  follower_uid?: Maybe<Scalars["String"]>;
 }>;
 
 export type FollowsTotalQuery = {
@@ -2949,7 +2949,7 @@ export type UserQueryResult = ApolloReactCommon.QueryResult<
   UserQueryVariables
 >;
 export const FansTotalDocument = gql`
-  query fansTotal($owner_uid: String!) {
+  query fansTotal($owner_uid: String) {
     fans_total(owner_uid: $owner_uid)
   }
 `;
@@ -3001,7 +3001,7 @@ export type FansTotalQueryResult = ApolloReactCommon.QueryResult<
   FansTotalQueryVariables
 >;
 export const FollowsTotalDocument = gql`
-  query followsTotal($follower_uid: String!) {
+  query followsTotal($follower_uid: String) {
     follows_total(follower_uid: $follower_uid)
   }
 `;
