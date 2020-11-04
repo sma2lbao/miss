@@ -6,7 +6,7 @@ import { Box } from "@material-ui/core";
 export default function Recommend() {
   return (
     <>
-      <Box paddingTop={4}>
+      <Box>
         <ShadowRecommend />
       </Box>
       {/* <Box paddingTop={4}>
