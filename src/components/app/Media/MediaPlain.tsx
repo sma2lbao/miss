@@ -5,7 +5,6 @@ import Image from "@/components/base/Image";
 import { MediaPlainProps } from "./media";
 import Duration from "../Duration";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
-import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,16 +24,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MediaPlain: React.FC<MediaPlainProps> = (
   props: MediaPlainProps
 ) => {
-  const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
-  const goShadow = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    RouterHelper.gotoShadow(props?.id);
+  const handleClickRoot = (e: React.MouseEvent) => {
+    props.onClickRoot && props.onClickRoot(e);
   };
 
   return (
-    <Box className={classes.wrap} onClick={goShadow}>
+    <Box className={classes.wrap} onClick={handleClickRoot}>
       <div className={classes.cover}>
         <Image src={DEFULAT_SHADOW_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (
@@ -47,10 +44,5 @@ export const MediaPlain: React.FC<MediaPlainProps> = (
     </Box>
   );
 };
-
-MediaPlain.defaultProps = {
-  create_at: new Date(),
-  duration: 3242341
-} as Partial<MediaPlainProps>;
 
 export default MediaPlain;

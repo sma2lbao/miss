@@ -6,7 +6,6 @@ import { MediaNormalProps } from "./media";
 import Duration from "../Duration";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import moment from "moment";
-import { useRouterHelper } from "@/hooks";
 import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,17 +45,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MediaNormal: React.FC<MediaNormalProps> = (
   props: MediaNormalProps
 ) => {
-  const RouterHelper = useRouterHelper();
   const classes = useStyles(props);
 
-  const goShadow = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    RouterHelper.gotoShadow(props?.id);
+  const handleClickRoot = (e: React.MouseEvent) => {
+    props.onClickRoot && props.onClickRoot(e);
   };
 
-  const goProfile = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    RouterHelper.gotoProfile(props?.author?.username);
+  const handleClickAuthor = (e: React.MouseEvent) => {
+    props.onClickAuthor && props.onClickAuthor(e);
   };
 
   if (props.loading) {
@@ -64,7 +60,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   }
 
   return (
-    <Box className={classes.wrap} onClick={goShadow}>
+    <Box className={classes.wrap} onClick={handleClickRoot}>
       <div className={classes.cover}>
         <Image src={DEFULAT_SHADOW_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (
@@ -74,13 +70,17 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
           />
         )}
         <Avatar
-          onClick={goProfile}
+          onClick={handleClickAuthor}
           className={classes.avatar}
           src={props.author && props.author.avatar}
         ></Avatar>
       </div>
       <Box padding={1}>
-        <Typography onClick={goProfile} variant="body2" color="textSecondary">
+        <Typography
+          onClick={handleClickAuthor}
+          variant="body2"
+          color="textSecondary"
+        >
           {props.author && (props.author.nickname || props.author.username)}
         </Typography>
         <Typography variant="subtitle1" noWrap>

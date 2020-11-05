@@ -6,7 +6,6 @@ import { MediaOwnProps } from "./media";
 import Duration from "../Duration";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import moment from "moment";
-import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,16 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
-  const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
-  const goShadow = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    RouterHelper.gotoShadow(props?.id);
+  const handleClickRoot = (e: React.MouseEvent) => {
+    props.onClickRoot && props.onClickRoot(e);
   };
 
   return (
-    <Box className={classes.wrap} onClick={goShadow}>
+    <Box className={classes.wrap} onClick={handleClickRoot}>
       <div className={classes.cover}>
         <Image src={DEFULAT_SHADOW_COVER || props.cover} aspectRatio={16 / 9} />
         {props.duration && (
@@ -59,12 +56,5 @@ export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
     </Box>
   );
 };
-
-MediaOwn.defaultProps = {
-  title: "视频标题",
-  subtitle: "视频副标题",
-  create_at: new Date(),
-  duration: 3242341
-} as Partial<MediaOwnProps>;
 
 export default MediaOwn;
