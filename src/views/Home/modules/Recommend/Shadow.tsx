@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, Box, Link, Grow } from "@material-ui/core";
+import { Typography, Box, Link } from "@material-ui/core";
 import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile } from "@material-ui/core";
 import { useShadowUrgesQuery } from "@/schema";
@@ -13,7 +13,7 @@ export default function ShadowRecommend() {
   return (
     <Box padding={0}>
       <Box
-        paddingY={1}
+        paddingY={2}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
@@ -34,11 +34,11 @@ export default function ShadowRecommend() {
         <GridList cellHeight="auto" cols={4}>
           {data.shadow_urges.map((shadow: any, index: number) => {
             return (
-              <Grow key={index} in timeout={index * 500}>
-                <GridListTile cols={shadow.cols || 1}>
-                  <MediaNormal key={index} {...shadow} />
-                </GridListTile>
-              </Grow>
+              // <Grow in>
+              <GridListTile key={index} cols={shadow.cols || 1}>
+                <MediaNormal key={index} {...shadow} />
+              </GridListTile>
+              // </Grow>
             );
           })}
         </GridList>
@@ -49,7 +49,7 @@ export default function ShadowRecommend() {
           loadingNode={() => {
             return (
               <GridList cellHeight="auto" cols={4}>
-                {new Array(8).map((_, index: number) => {
+                {[0, 0, 0, 0, 0, 0, 0, 0].map((_, index: number) => {
                   return (
                     <GridListTile key={index} cols={1}>
                       <MediaNormal loading />
