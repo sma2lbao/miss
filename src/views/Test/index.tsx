@@ -1,10 +1,10 @@
 import * as React from "react";
-import { EditMediumInfo } from "../shadows/ShadowUpload/modules/EditMediumInfo";
+import { MediaNormal } from "@/components/app/Media";
 
 const Test: React.FC = () => {
   return (
-    <div>
-      <EditMediumInfo open />
+    <div style={{ width: 300 }}>
+      <MediaNormal loading />
     </div>
   );
 };

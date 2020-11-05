@@ -23,10 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
     avatar: {
       width: 56,
       height: 56,
+      backgroundColor: "#eee",
       border: "3px solid #fff",
       position: "absolute",
       bottom: -28,
       right: 10,
+      borderRadius: "50%",
       [theme.breakpoints.down("md")]: {
         width: 40,
         height: 40,
@@ -58,7 +60,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   };
 
   if (props.loading) {
-    return <MediaNormalLoading classes />;
+    return <MediaNormalLoading classes={classes} />;
   }
 
   return (
@@ -86,7 +88,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="caption" color="textSecondary">
-            观看次数：TODO
+            {/* 观看次数：TODO */}
           </Typography>
           <Typography variant="caption" color="textSecondary">
             {moment(props.create_at).format("YYYY-MM-DD")}
@@ -97,12 +99,16 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   );
 };
 
-const MediaNormalLoading = classes => {
+const MediaNormalLoading = props => {
+  console.log(props.classes.wrap);
+
   return (
-    <Box className={classes.wrap}>
-      <div className={classes.cover}>
+    <Box className={props.classes.wrap}>
+      <div className={props.classes.cover}>
         <Image aspectRatio={16 / 9} />
-        <Avatar className={classes.avatar}></Avatar>
+        <div className={props.classes.avatar}>
+          <Skeleton width="100%" height="100%" variant="circle"></Skeleton>
+        </div>
       </div>
       <Box padding={1}>
         <Typography variant="body2" color="textSecondary">
@@ -112,12 +118,10 @@ const MediaNormalLoading = classes => {
           <Skeleton width="40%" />
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="caption" color="textSecondary">
-            <Skeleton width="30%" />
-          </Typography>
-          <Typography variant="caption" color="textSecondary">
-            <Skeleton width="40%" />
-          </Typography>
+          <Skeleton width="30%" />
+          <Skeleton width="40%" />
+          {/* <Typography variant="subtitle2" color="textSecondary">
+          </Typography> */}
         </Box>
       </Box>
     </Box>
