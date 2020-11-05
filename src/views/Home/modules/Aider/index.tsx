@@ -46,8 +46,8 @@ export default function Aider() {
                     <Avatar src={user.avatar}></Avatar>
                   </ListItemAvatar>
                   <ListItemText>
-                    <Typography>{user.nickname}</Typography>
-                    <Typography variant="caption">
+                    <Typography noWrap>{user.nickname}</Typography>
+                    <Typography noWrap variant="caption">
                       {user.description}
                     </Typography>
                   </ListItemText>
