@@ -64,10 +64,6 @@ export default function SignIn() {
     const height = 450;
     const top = (window.screen.availHeight - height) / 2;
     const left = (window.screen.availWidth - width) / 2;
-    console.log("----debug start----");
-    console.log("http_domain: ", http_domain);
-    console.log("url: ", url);
-    console.log("----debug end----");
     const child = window.open(
       http_domain + url,
       platform,

@@ -29,6 +29,7 @@ function AppRoute() {
   const isH5 = /Android|webOS|iPhone|iPod|BlackBerry/i.test(
     navigator.userAgent
   );
+
   if (isH5) {
     return (
       <Router>
@@ -38,6 +39,11 @@ function AppRoute() {
       </Router>
     );
   }
+
+  // if (isH5 && window.location.pathname !== "/not-support") {
+  //   window.location.href = window.location.origin + "/not-support";
+  // }
+
   return (
     <Router>
       <Switch>
@@ -76,6 +82,7 @@ function AppRoute() {
         <Route lazy path="/403" exact component={Forbidden} />
         <Route lazy path="/404" exact component={NotFound} />
         <Route lazy path="/50x" exact component={InternalServerError} />
+        <Route path="/not-support" component={H5NotSupported} />
         <Route lazy path="/test" exact component={Test} layout={MainLayout} />
         <Route lazy component={NotFound} />
       </Switch>
