@@ -8,8 +8,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Box,
-  ListSubheader,
-  Typography
+  ListSubheader
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MoreVert } from "@material-ui/icons";
@@ -30,13 +29,7 @@ export const Cast: React.FC = () => {
 
   return (
     <Box className={classes.root}>
-      <List
-        subheader={
-          <ListSubheader>
-            <Typography>演职表</Typography>
-          </ListSubheader>
-        }
-      >
+      <List subheader={<ListSubheader>演职表</ListSubheader>}>
         {shadowQuery?.shadow?.credits?.length ? (
           <>
             {shadowQuery.shadow.credits.map((item, i) => {

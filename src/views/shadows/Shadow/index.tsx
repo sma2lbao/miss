@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1, 6),
-      borderRight: `1px solid ${theme.palette.divider}`,
-      flex: 4
+      borderRight: `1px solid ${theme.palette.divider}`
+      // flex: 4
     },
     aider: {
-      flex: 1
+      // flex: 1
     },
     content: {
       flex: 1

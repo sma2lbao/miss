@@ -7,7 +7,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       maxWidth: 1200,
-      flex: 3
+      flexGrow: 3,
+      flexShrink: 3,
+      flexBasis: "auto"
     }
   })
 );
