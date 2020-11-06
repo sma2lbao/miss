@@ -3,7 +3,7 @@ import { Box, GridList, GridListTile } from "@material-ui/core";
 // import { Rating } from "@material-ui/lab";
 // import { Favorite } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MediaNormal } from "@/components/app/Media";
+import { MediaOwn } from "@/components/app/Media";
 import { ShadowContext } from "../..";
 import Placeholder from "@/components/base/Placeholder";
 
@@ -48,7 +48,7 @@ export const Main: React.FC = () => {
             {shadowQuery.shadow.sources.map((source, idx) => {
               return (
                 <GridListTile cols={1}>
-                  <MediaNormal />
+                  <MediaOwn />
                 </GridListTile>
               );
             })}

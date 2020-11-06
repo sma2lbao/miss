@@ -26,6 +26,7 @@ export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
   const classes = useStyles();
 
   const handleClickRoot = (e: React.MouseEvent) => {
+    e.stopPropagation();
     props.onClickRoot && props.onClickRoot(e);
   };
 

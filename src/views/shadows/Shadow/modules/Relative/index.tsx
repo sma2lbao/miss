@@ -5,6 +5,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useShadowUrgesByShadowQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import { SpecialBox } from "@/components/public/SpecialBox";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Relative: React.FC = () => {
   const classes = useStyles();
   const { id } = useParams();
+  const RouterHelper = useRouterHelper();
   const { data, error, loading } = useShadowUrgesByShadowQuery({
     variables: {
       shadow_id: id
@@ -33,7 +35,12 @@ export const Relative: React.FC = () => {
           {data?.shadow_urges_by_shadow.map((shadow, idx) => {
             return (
               <GridListTile key={idx}>
-                <MediaNormal {...shadow} />
+                <MediaNormal
+                  {...shadow}
+                  onClickRoot={() => RouterHelper.gotoShadow(shadow.id)}
+                  onClickAuthor={() => () =>
+                    RouterHelper.gotoProfile(shadow.author.username)}
+                />
               </GridListTile>
             );
           })}

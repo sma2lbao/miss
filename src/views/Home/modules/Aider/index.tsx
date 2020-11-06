@@ -4,7 +4,6 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  ListItemSecondaryAction,
   Avatar,
   Typography
   // Button,
@@ -51,11 +50,11 @@ export default function Aider() {
                       {user.description}
                     </Typography>
                   </ListItemText>
-                  <ListItemSecondaryAction>
-                    {/* <Button>
+                  {/* <ListItemSecondaryAction>
+                    <Button>
                       <Typography>关注</Typography>
-                    </Button> */}
-                  </ListItemSecondaryAction>
+                    </Button>
+                  </ListItemSecondaryAction> */}
                 </ListItem>
               );
             })

@@ -19,7 +19,7 @@ export const AddComment = (props: AddCommentProps) => {
         onChange={e => setContent(e.target.value)}
         placeholder=""
       />
-      <Button onClick={handleSend} disabled={!!content}>
+      <Button onClick={handleSend} disabled={!content}>
         Send
       </Button>
     </div>

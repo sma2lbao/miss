@@ -32,11 +32,16 @@ export default function ShadowRecommend() {
 
       {data?.shadow_urges.length ? (
         <GridList cellHeight="auto" cols={4}>
-          {data.shadow_urges.map((shadow: any, index: number) => {
+          {data.shadow_urges.map((shadow, index: number) => {
             return (
               // <Grow in>
-              <GridListTile key={index} cols={shadow.cols || 1}>
-                <MediaNormal key={index} {...shadow} />
+              <GridListTile key={index} cols={1}>
+                <MediaNormal
+                  {...shadow}
+                  onClickRoot={() => RouterHelper.gotoShadow(shadow.id)}
+                  onClickAuthor={() => () =>
+                    RouterHelper.gotoProfile(shadow.author.username)}
+                />
               </GridListTile>
               // </Grow>
             );

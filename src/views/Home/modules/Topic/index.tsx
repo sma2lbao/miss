@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { useCurrentTopicQuery } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
 import { Placeholder } from "@/components/base/Placeholder";
+import { useRouterHelper } from "@/hooks";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -50,6 +51,7 @@ function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
   const { data, loading, error } = useCurrentTopicQuery();
+  const RouterHelper = useRouterHelper();
 
   return (
     <>
@@ -59,7 +61,7 @@ function Topic() {
             <Box>
               <Box mb={3}>
                 <Typography variant="h6" gutterBottom>
-                  每月精选
+                  精选
                 </Typography>
                 <Typography variant="h5" gutterBottom>
                   {data?.current_topic.title}
@@ -93,13 +95,23 @@ function Topic() {
                               const items =
                                 data?.current_topic.top_shadows || [];
                               const idx = mod(index, items.length);
-                              if (items[idx]) {
+                              let shadow = items[idx];
+                              if (shadow) {
                                 return (
                                   <div
                                     key={key}
                                     className={clsx(classes.bannerItem)}
                                   >
-                                    <MediaNormal {...items[idx]} />
+                                    <MediaNormal
+                                      {...items[idx]}
+                                      onClickRoot={() =>
+                                        RouterHelper.gotoShadow(shadow.id)
+                                      }
+                                      onClickAuthor={() => () =>
+                                        RouterHelper.gotoProfile(
+                                          shadow.author.username
+                                        )}
+                                    />
                                   </div>
                                 );
                               }
@@ -129,7 +141,16 @@ function Topic() {
                                 key={idx}
                                 className={clsx(classes.bannerItem)}
                               >
-                                <MediaNormal {...item} />
+                                <MediaNormal
+                                  {...item}
+                                  onClickRoot={() =>
+                                    RouterHelper.gotoShadow(item.id)
+                                  }
+                                  onClickAuthor={() => () =>
+                                    RouterHelper.gotoProfile(
+                                      item.author.username
+                                    )}
+                                />
                               </div>
                             );
                           })}
@@ -153,7 +174,16 @@ function Topic() {
           </div>
           <div className={classes.headItem}>
             {data.current_topic.top_shadow ? (
-              <MediaNormal {...data?.current_topic.top_shadow} />
+              <MediaNormal
+                {...data?.current_topic.top_shadow}
+                onClickRoot={() =>
+                  RouterHelper.gotoShadow(data?.current_topic?.top_shadow?.id)
+                }
+                onClickAuthor={() => () =>
+                  RouterHelper.gotoProfile(
+                    data?.current_topic?.top_shadow?.author?.username
+                  )}
+              />
             ) : (
               <Placeholder title="敬请期待" />
             )}

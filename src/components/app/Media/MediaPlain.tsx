@@ -27,6 +27,7 @@ export const MediaPlain: React.FC<MediaPlainProps> = (
   const classes = useStyles();
 
   const handleClickRoot = (e: React.MouseEvent) => {
+    e.stopPropagation();
     props.onClickRoot && props.onClickRoot(e);
   };
 

@@ -48,10 +48,12 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   const classes = useStyles(props);
 
   const handleClickRoot = (e: React.MouseEvent) => {
+    e.stopPropagation();
     props.onClickRoot && props.onClickRoot(e);
   };
 
   const handleClickAuthor = (e: React.MouseEvent) => {
+    e.stopPropagation();
     props.onClickAuthor && props.onClickAuthor(e);
   };
 

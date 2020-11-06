@@ -18,6 +18,7 @@ import {
 } from "@material-ui/core";
 import { KeyboardArrowUp } from "@material-ui/icons";
 import { useShadowsPaginatedQuery } from "@/schema";
+import { useRouterHelper } from "@/hooks";
 
 interface Props {
   window?: () => Window;
@@ -60,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ShadowHome(props: Props) {
+  const RouterHelper = useRouterHelper();
   const { data, loading, fetchMore } = useShadowsPaginatedQuery({
     variables: {
       query: {
@@ -112,7 +114,12 @@ export default function ShadowHome(props: Props) {
             {data?.shadows_paginated?.edges?.map((edge: any) => {
               return (
                 <div key={edge.cursor} className={classes.gridCard}>
-                  <MediaNormal {...edge.node} />
+                  <MediaNormal
+                    {...edge.node}
+                    onClickRoot={() => RouterHelper.gotoShadow(edge.node.id)}
+                    onClickAuthor={() => () =>
+                      RouterHelper.gotoProfile(edge.node.author.username)}
+                  />
                 </div>
               );
             })}
