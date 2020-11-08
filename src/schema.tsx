@@ -1324,12 +1324,17 @@ export type ReviewCreatedSubscription = {
   readonly __typename?: "Subscription";
   readonly review_created: {
     readonly __typename?: "Review";
+    readonly id: number | string;
     readonly content: string;
     readonly create_at: any;
+    readonly update_at: any;
     readonly author: {
       readonly __typename?: "User";
-      readonly nickname?: Maybe<string>;
+      readonly uid: number | string;
       readonly avatar: string;
+      readonly nickname?: Maybe<string>;
+      readonly username: string;
+      readonly description?: Maybe<string>;
     };
   };
 };
@@ -3057,14 +3062,14 @@ export type FollowsTotalQueryResult = ApolloReactCommon.QueryResult<
 export const ReviewCreatedDocument = gql`
   subscription reviewCreated($type: ReviewMedium!, $type_id: ID!) {
     review_created(type: $type, type_id: $type_id) {
-      content
-      create_at
+      ...Review
       author {
-        nickname
-        avatar
+        ...Author
       }
     }
   }
+  ${ReviewFragmentDoc}
+  ${AuthorFragmentDoc}
 `;
 
 /**

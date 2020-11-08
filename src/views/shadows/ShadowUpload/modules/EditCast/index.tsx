@@ -7,8 +7,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Box,
-  ListSubheader,
-  Typography
+  ListSubheader
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { AddCircle, Delete } from "@material-ui/icons";
@@ -79,7 +78,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
         <List
           subheader={
             <ListSubheader className={classes.subheaderWrap}>
-              <Typography>演职表</Typography>
+              演职表
               <IconButton onClick={handleAddCredit} size="small">
                 <AddCircle fontSize="small" />
               </IconButton>

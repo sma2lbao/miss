@@ -6,7 +6,9 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import {
   useReviewsPaginatedQuery,
   ReviewMedium,
-  useCreateReviewMutation
+  useCreateReviewMutation,
+  useReviewCreatedSubscription,
+  ReviewsPaginatedDocument
 } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
 import { ShadowPlayContext } from "../..";
@@ -38,6 +40,36 @@ export default function Comment() {
       type_id
     },
     skip: type_id === -1
+  });
+
+  useReviewCreatedSubscription({
+    variables: {
+      type: ReviewMedium.Medium,
+      type_id
+    },
+    skip: type_id === -1,
+    onSubscriptionData({ client, subscriptionData }) {
+      const newItem = subscriptionData.data?.review_created;
+      client.writeQuery({
+        query: ReviewsPaginatedDocument,
+        variables: {
+          query: {
+            last: 16
+          },
+          type: ReviewMedium.Medium,
+          type_id
+        },
+        data: Object.assign({}, data, {
+          reviews_paginated: {
+            ...data?.reviews_paginated,
+            edges: [
+              { cursor: Date.now(), __typename: "ReviewEdge", node: newItem },
+              ...data?.reviews_paginated.edges
+            ]
+          }
+        })
+      });
+    }
   });
 
   const loadMore = () => {
@@ -73,7 +105,7 @@ export default function Comment() {
 
   const [applyComment] = useCreateReviewMutation();
 
-  const handleSubmit = (text: string) => {
+  const handleSubmit = (text: string, callback: Function) => {
     applyComment({
       variables: {
         review: {
@@ -83,6 +115,7 @@ export default function Comment() {
         }
       }
     });
+    callback();
   };
 
   return (
@@ -94,10 +127,10 @@ export default function Comment() {
       <div>
         {data?.reviews_paginated?.edges?.length ? (
           <div>
-            {data?.reviews_paginated?.edges?.map((edge: any) => {
+            {data?.reviews_paginated?.edges?.map((edge: any, idx) => {
               return (
-                <div key={edge.cursor}>
-                  <CommentItem />
+                <div key={idx}>
+                  <CommentItem {...edge.node} />
                 </div>
               );
             })}

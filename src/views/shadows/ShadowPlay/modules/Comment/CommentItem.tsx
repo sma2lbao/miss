@@ -27,20 +27,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function CommentItem() {
+function CommentItem(props) {
   const classes = useStyles();
 
   return (
     <Box>
       <Box display="flex">
-        <Avatar className={classes.avatar}>L</Avatar>
+        <Avatar className={classes.avatar} src={props.author.avatar}></Avatar>
         <div className={classes.main}>
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography>昵称</Typography>
+            <Typography>{props.author.nickname}</Typography>
             <Typography variant="caption">2020年10月01日</Typography>
           </Box>
           <Box display="flex">
@@ -54,7 +54,7 @@ function CommentItem() {
         </div>
       </Box>
       <Typography variant="body2" className={classes.commentText}>
-        你的评论内容。你的评论内容。你的评论内容。你的评论内容。你的评论内容。你的评论内容。
+        {props.content}
       </Typography>
     </Box>
   );
