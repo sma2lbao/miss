@@ -40,7 +40,7 @@ export const Medias: React.FC = () => {
       variables: {
         query: {
           last: 8,
-          after: data?.user_shadows_paginated?.pageInfo?.endCursor
+          before: data?.user_shadows_paginated?.pageInfo?.endCursor
         }
       },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => {

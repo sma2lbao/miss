@@ -33,7 +33,7 @@ export default function Playlist() {
   const { data, fetchMore } = usePlaylistsPaginatedQuery({
     variables: {
       query: {
-        first: 8
+        last: 8
       }
     }
   });
@@ -42,7 +42,7 @@ export default function Playlist() {
       variables: {
         query: {
           last: 8,
-          after: data?.playlists_paginated?.pageInfo?.endCursor
+          before: data?.playlists_paginated?.pageInfo?.endCursor
         }
       },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => {

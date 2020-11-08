@@ -79,7 +79,7 @@ export default function Comment() {
         type_id,
         query: {
           last: 8,
-          after: data?.reviews_paginated.pageInfo.endCursor
+          before: data?.reviews_paginated.pageInfo.endCursor
         }
       },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => {

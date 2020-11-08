@@ -74,7 +74,7 @@ export default function ShadowHome(props: Props) {
       variables: {
         query: {
           last: 8,
-          after: data?.shadows_paginated?.pageInfo?.endCursor
+          before: data?.shadows_paginated?.pageInfo?.endCursor
         }
       },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => {
