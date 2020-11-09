@@ -107,10 +107,11 @@ function Topic() {
                                       onClickRoot={() =>
                                         RouterHelper.gotoShadow(shadow.id)
                                       }
-                                      onClickAuthor={() => () =>
+                                      onClickAuthor={() =>
                                         RouterHelper.gotoProfile(
                                           shadow.author.username
-                                        )}
+                                        )
+                                      }
                                     />
                                   </div>
                                 );
@@ -146,10 +147,11 @@ function Topic() {
                                   onClickRoot={() =>
                                     RouterHelper.gotoShadow(item.id)
                                   }
-                                  onClickAuthor={() => () =>
+                                  onClickAuthor={() =>
                                     RouterHelper.gotoProfile(
                                       item.author.username
-                                    )}
+                                    )
+                                  }
                                 />
                               </div>
                             );
@@ -179,10 +181,11 @@ function Topic() {
                 onClickRoot={() =>
                   RouterHelper.gotoShadow(data?.current_topic?.top_shadow?.id)
                 }
-                onClickAuthor={() => () =>
+                onClickAuthor={() =>
                   RouterHelper.gotoProfile(
                     data?.current_topic?.top_shadow?.author?.username
-                  )}
+                  )
+                }
               />
             ) : (
               <Placeholder title="敬请期待" />

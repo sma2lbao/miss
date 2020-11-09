@@ -1,7 +1,13 @@
 import * as React from "react";
 import { IPlaceholderProps } from "./placeholder.d";
 import clsx from "clsx";
-import { makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  Typography,
+  Icon
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,9 +37,9 @@ export const PlaceholderDefault: React.FC<IPlaceholderProps> = (
   const { title, subtitle, children } = props;
   return (
     <div className={classes.root}>
-      <div>
-        <i className={clsx("iconfont icon-404", classes.icon)}></i>
-      </div>
+      {/* <div> */}
+      <Icon className={clsx("iconfont icon-404", classes.icon)}></Icon>
+      {/* </div> */}
       {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
       {children}

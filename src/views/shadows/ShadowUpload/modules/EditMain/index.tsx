@@ -50,7 +50,7 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
       const idx = mediums.findIndex(item => item === medium);
       if (idx !== -1) {
         mediums.splice(idx, 1);
-        setMediums(mediums);
+        setMediums([...mediums]);
       }
     };
 

@@ -86,7 +86,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
           {props.author && (props.author.nickname || props.author.username)}
         </Typography>
         <Typography variant="subtitle1" noWrap>
-          {props.title}
+          {props.title || props.name}
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="caption" color="textSecondary">
@@ -102,8 +102,6 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
 };
 
 const MediaNormalLoading = props => {
-  console.log(props.classes.wrap);
-
   return (
     <Box className={props.classes.wrap}>
       <div className={props.classes.cover}>

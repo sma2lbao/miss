@@ -39,8 +39,9 @@ export default function ShadowRecommend() {
                 <MediaNormal
                   {...shadow}
                   onClickRoot={() => RouterHelper.gotoShadow(shadow.id)}
-                  onClickAuthor={() => () =>
-                    RouterHelper.gotoProfile(shadow.author.username)}
+                  onClickAuthor={() => {
+                    RouterHelper.gotoProfile(shadow.author.username);
+                  }}
                 />
               </GridListTile>
               // </Grow>

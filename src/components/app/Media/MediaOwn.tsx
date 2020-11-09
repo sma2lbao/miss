@@ -43,7 +43,7 @@ export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
       </div>
       <Box padding={1}>
         <Typography variant="subtitle1" noWrap>
-          {props.title}
+          {props.title || props.name}
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="caption" color="textSecondary">

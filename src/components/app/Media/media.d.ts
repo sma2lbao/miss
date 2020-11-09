@@ -7,10 +7,14 @@ export interface Author {
 export interface MediaBase {
   id?: number | string;
   title?: string;
+  alias_title?: string;
   subtitle?: string;
+  name?: string;
+  alias_name?: string;
   cover?: string;
   posters?: readonly string[] | null;
   create_at?: Date;
+  description?: string | null;
   duration?: number;
 }
 

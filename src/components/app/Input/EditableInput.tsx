@@ -12,7 +12,9 @@ import { Edit } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
-    root: {},
+    root: {
+      color: "inherit"
+    },
     input: {
       borderColor: "transparent"
     },
@@ -80,6 +82,7 @@ export const EditableInput: React.FC<BaseInputProps> = props => {
           <InputAdornment position="start">
             <IconButton
               size="small"
+              color="inherit"
               onClick={() => setStatus(InputStatus.EDITING)}
             >
               <Edit fontSize="small" />

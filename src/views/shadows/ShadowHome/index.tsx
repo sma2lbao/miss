@@ -117,8 +117,9 @@ export default function ShadowHome(props: Props) {
                   <MediaNormal
                     {...edge.node}
                     onClickRoot={() => RouterHelper.gotoShadow(edge.node.id)}
-                    onClickAuthor={() => () =>
-                      RouterHelper.gotoProfile(edge.node.author.username)}
+                    onClickAuthor={() =>
+                      RouterHelper.gotoProfile(edge.node.author.username)
+                    }
                   />
                 </div>
               );
