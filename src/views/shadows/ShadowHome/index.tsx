@@ -10,13 +10,13 @@ import { Filter, Sort } from "./modules";
 import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Box,
-  Fab,
-  useScrollTrigger,
-  Zoom,
+  // Fab,
+  // useScrollTrigger,
+  // Zoom,
   Button,
   Typography
 } from "@material-ui/core";
-import { KeyboardArrowUp } from "@material-ui/icons";
+// import { KeyboardArrowUp } from "@material-ui/icons";
 import { useShadowsPaginatedQuery } from "@/schema";
 import { useRouterHelper } from "@/hooks";
 
@@ -99,12 +99,12 @@ export default function ShadowHome(props: Props) {
   };
 
   const classes = useStyles();
-  const { window } = props;
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-    disableHysteresis: true,
-    threshold: 500
-  });
+  // const { window } = props;
+  // const trigger = useScrollTrigger({
+  //   target: window ? window() : undefined,
+  //   disableHysteresis: true,
+  //   threshold: 500,
+  // });
 
   return (
     <FullScreen>
@@ -139,11 +139,11 @@ export default function ShadowHome(props: Props) {
           <Filter />
         </AiderScreen>
 
-        <Zoom in={trigger}>
+        {/* <Zoom in={trigger}>
           <Fab size="small" className={classes.scollButton}>
             <KeyboardArrowUp />
           </Fab>
-        </Zoom>
+        </Zoom> */}
       </BodyScreen>
     </FullScreen>
   );
