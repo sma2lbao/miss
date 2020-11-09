@@ -35,11 +35,13 @@ export const useFollowHelper = (props: IFollowProps) => {
 
   const [createFollow] = useCreateFollowMutation({
     onCompleted() {
+      setFollowing(true);
       enqueueSnackbar("关注成功");
     }
   });
   const [removeFollow] = useRemoveFollowMutation({
     onCompleted() {
+      setFollowing(false);
       enqueueSnackbar("取消成功");
     }
   });
