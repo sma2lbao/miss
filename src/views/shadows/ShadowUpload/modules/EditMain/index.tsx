@@ -7,10 +7,11 @@ import {
   Button
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MediaNormal } from "@/components/app/Media";
+import { MediaOwn, withTool } from "@/components/app/Media";
 import { EditMediumInfo } from "../EditMediumInfo";
 import { Placeholder } from "@/components/base/Placeholder";
-// import Placeholder from "@/components/base/Placeholder";
+
+const EditMediaOwn = withTool(MediaOwn);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +36,7 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
   (props, ref) => {
     const classes = useStyles();
     const [openMedium, setOpenMedium] = React.useState(false);
-    const [mediums, setMediums] = React.useState<any>([]);
+    const [mediums, setMediums] = React.useState<any[]>([]);
 
     React.useImperativeHandle(ref, () => ({
       mediums: mediums
@@ -43,6 +44,14 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
 
     const handleSave = medium => {
       setMediums([...mediums, medium]);
+    };
+
+    const handleDelete = medium => {
+      const idx = mediums.findIndex(item => item === medium);
+      if (idx !== -1) {
+        mediums.splice(idx, 1);
+        setMediums(mediums);
+      }
     };
 
     return (
@@ -56,13 +65,16 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
               {mediums.map((item, idx) => {
                 return (
                   <GridListTile cols={1} key={idx}>
-                    <MediaNormal {...item} />
+                    <EditMediaOwn
+                      {...item}
+                      onDelete={() => handleDelete(item)}
+                    />
                   </GridListTile>
                 );
               })}
 
               <Button onClick={() => setOpenMedium(true)}>
-                <Placeholder />
+                <Placeholder title="Create Medium" />
               </Button>
             </GridList>
           </Box>

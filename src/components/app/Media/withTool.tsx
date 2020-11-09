@@ -1,6 +1,7 @@
 import * as React from "react";
 import { WithToolProps } from "./media";
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { makeStyles, Theme, createStyles, IconButton } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,9 @@ export function withTool<P>(Component: React.FC<P & WithToolProps>) {
       <div className={classes.wrap}>
         <Component {...(rest as P)} />
         <div className={classes.tool}>
-          <div onClick={onDelete}>delete</div>
+          <IconButton onClick={onDelete}>
+            <Delete></Delete>
+          </IconButton>
         </div>
       </div>
     );

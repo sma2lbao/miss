@@ -129,17 +129,19 @@ export default function Comment() {
           <div>
             {data?.reviews_paginated?.edges?.map((edge: any, idx) => {
               return (
-                <div key={idx}>
+                <Box marginY={1} key={idx}>
                   <CommentItem {...edge.node} />
-                </div>
+                </Box>
               );
             })}
             {data?.reviews_paginated?.pageInfo?.hasNextPage && (
-              <Button onClick={loadMore} disabled={loading}>
-                <Typography color="textSecondary" variant="caption">
-                  {loading ? "加载中..." : "加载更多"}
-                </Typography>
-              </Button>
+              <Box textAlign="center">
+                <Button onClick={loadMore} disabled={loading}>
+                  <Typography color="textSecondary" variant="caption">
+                    {loading ? "加载中..." : "加载更多"}
+                  </Typography>
+                </Button>
+              </Box>
             )}
           </div>
         ) : (

@@ -7,6 +7,7 @@ import {
   createStyles,
   Theme
 } from "@material-ui/core";
+import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export interface CommentItemProps {
+  id?: number | string;
+
+  create_at?: Date;
+
+  content: string;
+
+  author?: {
+    avatar?: string;
+    nickname?: string;
+  };
+}
+
 function CommentItem(props) {
   const classes = useStyles();
 
@@ -41,15 +55,17 @@ function CommentItem(props) {
             alignItems="center"
           >
             <Typography>{props.author.nickname}</Typography>
-            <Typography variant="caption">2020年10月01日</Typography>
+            <Typography variant="caption">
+              {moment(props.create_at).format("YYYY-MM-DD HH:mm")}
+            </Typography>
           </Box>
           <Box display="flex">
-            <Typography variant="caption" className={classes.infoItem}>
+            {/* <Typography variant="caption" className={classes.infoItem}>
               like 2
             </Typography>
             <Typography variant="caption" className={classes.infoItem}>
               dislike 0
-            </Typography>
+            </Typography> */}
           </Box>
         </div>
       </Box>
