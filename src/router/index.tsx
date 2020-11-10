@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import {
   RouteWithLayout as Route,
-  Main as MainLayout
+  MainWithoutSidebar as MainLayout
   // MainWithoutSidebar as SecondaryLayout,
 } from "../layouts";
 import Home from "@/views/Home";

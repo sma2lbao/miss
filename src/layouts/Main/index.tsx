@@ -58,7 +58,7 @@ const Main: React.FC<MainProps> = (props: MainProps) => {
         )}
         <main
           className={clsx(classes.main, {
-            [classes.shiftMain]: hasExpand && isLargeDesktop
+            [classes.shiftMain]: hasExpand && isLargeDesktop && !hideSidebar
           })}
         >
           <Toolbar />

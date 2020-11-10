@@ -91,7 +91,12 @@ export const Medias: React.FC = () => {
           )}
         </>
       ) : (
-        <SpecialBox loading={loading} error={!!error} />
+        <SpecialBox
+          loading={loading}
+          error={!!error}
+          placeholder
+          placeholderTitle="暂未上传视频"
+        />
       )}
     </Box>
   );
