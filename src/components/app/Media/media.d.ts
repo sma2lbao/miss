@@ -9,13 +9,13 @@ export interface MediaBase {
   title?: string;
   alias_title?: string;
   subtitle?: string;
-  name?: string;
-  alias_name?: string;
+  name?: string | null;
+  alias_name?: string | null;
   cover?: string;
   posters?: readonly string[] | null;
   create_at?: Date;
   description?: string | null;
-  duration?: number;
+  duration?: number | null;
 }
 
 export interface MediaEvent {

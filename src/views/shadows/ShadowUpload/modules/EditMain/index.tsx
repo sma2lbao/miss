@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Box,
-  Typography,
+  // Typography,
   GridList,
   GridListTile,
   Button
@@ -58,9 +58,9 @@ export const EditMain = React.forwardRef<EditMainHandles, unknown>(
       <>
         <Box className={classes.root}>
           <Box className={classes.box}>
-            <Typography variant="subtitle1" gutterBottom>
+            {/* <Typography variant="subtitle1" gutterBottom>
               相关资源
-            </Typography>
+            </Typography> */}
             <GridList cellHeight="auto" cols={4}>
               {mediums.map((item, idx) => {
                 return (

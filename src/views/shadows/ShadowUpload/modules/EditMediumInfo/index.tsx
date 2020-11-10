@@ -157,7 +157,7 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
                 )}
                 <FileUpload custom onComplete={handleChangeCover}>
                   <Fab
-                    color={url ? "primary" : "default"}
+                    color={cover ? "primary" : "default"}
                     size="medium"
                     className={classes.imageFab}
                   >
@@ -166,7 +166,7 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
                 </FileUpload>
                 <FileUpload custom onComplete={handleChangeSource}>
                   <Fab
-                    color={cover ? "primary" : "default"}
+                    color={url ? "primary" : "default"}
                     size="medium"
                     className={classes.shadowFab}
                   >

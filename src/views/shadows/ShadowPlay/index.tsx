@@ -12,6 +12,7 @@ import {
 import { NextPlay, VideoInfo, Comment } from "./modules";
 import { useParams } from "react-router";
 import { useShadowQuery, ShadowQuery, ShadowMedium } from "@/schema";
+import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +63,12 @@ export default function ShadowPlay() {
       <ShadowPlayContext.Provider value={[data, shadowMedium]}>
         <FullScreen>
           <BodyScreen>
-            <ShadowPlayer url={shadowMedium?.url} />
+            <ShadowPlayer
+              url={shadowMedium?.url}
+              light={
+                shadowMedium?.cover ? shadowMedium?.cover : DEFULAT_SHADOW_COVER
+              }
+            />
           </BodyScreen>
         </FullScreen>
         <BodyScreen className={classes.body}>

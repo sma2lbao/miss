@@ -47,8 +47,8 @@ export const Main: React.FC = () => {
           <GridList cellHeight="auto" cols={4}>
             {shadowQuery.shadow.sources.map((source, idx) => {
               return (
-                <GridListTile cols={1}>
-                  <MediaOwn />
+                <GridListTile key={idx} cols={1}>
+                  <MediaOwn {...source} />
                 </GridListTile>
               );
             })}

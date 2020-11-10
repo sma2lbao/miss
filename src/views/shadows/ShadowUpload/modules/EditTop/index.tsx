@@ -17,6 +17,7 @@ import { FileUpload } from "@/components/app/FileUpload";
 import { PlayCircleOutline, Delete } from "@material-ui/icons";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { AspectRatioBox } from "@/components/base/AspectRatioBox";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -199,7 +200,9 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
                 </GridListTile>
               ))}
               <GridListTile cols={1}>
-                <FileUpload onComplete={handleAddPoster} title="上传海报" />
+                <AspectRatioBox ratio={16 / 9}>
+                  <FileUpload onComplete={handleAddPoster} title="上传海报" />
+                </AspectRatioBox>
               </GridListTile>
             </GridList>
           </div>
@@ -213,11 +216,13 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
               placeholder="请输入标题"
             />
             <EditableInput
+              variant="subtitle1"
               value={sub_title}
               onChange={setSubTitle}
               placeholder="请输入副标题"
             />
             <EditableInput
+              variant="body2"
               value={description}
               onChange={setDescription}
               placeholder="请输入电影描述..."

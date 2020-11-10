@@ -100,6 +100,7 @@ export const EditInfo = React.forwardRef<EditInfoHandles, unknown>(
         </Box>
         <Typography className={classes.description} variant="body2">
           <EditableInput
+            variant="body2"
             value={description}
             onChange={setDescription}
             placeholder="description..."

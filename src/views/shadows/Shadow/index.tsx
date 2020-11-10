@@ -20,10 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1, 6),
       borderRight: `1px solid ${theme.palette.divider}`
-      // flex: 4
-    },
-    aider: {
-      // flex: 1
     },
     content: {
       flex: 1
@@ -80,7 +76,7 @@ export default function Shadow() {
                 </div>
               </div>
             </ContentScreen>
-            <AiderScreen className={classes.aider}>
+            <AiderScreen>
               <Cast />
             </AiderScreen>
           </BodyScreen>

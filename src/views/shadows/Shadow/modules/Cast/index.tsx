@@ -5,13 +5,13 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  ListItemSecondaryAction,
-  IconButton,
+  // ListItemSecondaryAction,
+  // IconButton,
   Box,
   ListSubheader
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { MoreVert } from "@material-ui/icons";
+// import { MoreVert } from "@material-ui/icons";
 import { ShadowContext } from "../..";
 import { Placeholder } from "@/components/base/Placeholder";
 
@@ -39,11 +39,11 @@ export const Cast: React.FC = () => {
                     <Avatar src={item.avatar}></Avatar>
                   </ListItemAvatar>
                   <ListItemText primary="" secondary="" />
-                  <ListItemSecondaryAction>
+                  {/* <ListItemSecondaryAction>
                     <IconButton>
                       <MoreVert />
                     </IconButton>
-                  </ListItemSecondaryAction>
+                  </ListItemSecondaryAction> */}
                 </ListItem>
               );
             })}
