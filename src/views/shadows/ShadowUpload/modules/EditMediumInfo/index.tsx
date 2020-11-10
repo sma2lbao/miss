@@ -114,7 +114,7 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
         url,
         cover,
         name: infoRef.current?.name,
-        alias_name: infoRef.current?.alias_name,
+        sub_name: infoRef.current?.sub_name,
         description: infoRef.current?.description
       });
     handleCancle();

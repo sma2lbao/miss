@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface EditInfoHandles {
   name?: string;
 
-  alias_name?: string;
+  sub_name?: string;
 
   description?: string;
 }
@@ -45,13 +45,13 @@ export const EditInfo = React.forwardRef<EditInfoHandles, unknown>(
   (props, ref) => {
     const classes = useStyles();
     const [name, setName] = useEditableInput("");
-    const [alias_name, setAliasName] = useEditableInput("");
+    const [sub_name, setSubName] = useEditableInput("");
     const [description, setDescription] = useEditableInput("");
     const { member } = useAuth();
 
     React.useImperativeHandle(ref, () => ({
       name,
-      alias_name,
+      sub_name,
       description
     }));
 
@@ -66,9 +66,9 @@ export const EditInfo = React.forwardRef<EditInfoHandles, unknown>(
                 placeholder="name"
               />
               <EditableInput
-                value={alias_name}
-                onChange={setAliasName}
-                placeholder="alias_name"
+                value={sub_name}
+                onChange={setSubName}
+                placeholder="sub_name"
               />
             </Typography>
             <Box display="flex">

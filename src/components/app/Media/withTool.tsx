@@ -11,7 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
     tool: {
       position: "absolute",
       left: 10,
-      top: 10
+      top: 10,
+      display: "flex",
+      justifyContent: "flex-end"
     }
   })
 );

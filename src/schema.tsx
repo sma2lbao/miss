@@ -65,7 +65,6 @@ export type CreateCharacterInput = {
   readonly name: Scalars["String"];
   readonly avatar?: Maybe<Scalars["String"]>;
   readonly description?: Maybe<Scalars["String"]>;
-  readonly tags?: Maybe<ReadonlyArray<Scalars["String"]>>;
 };
 
 export type CreateFollowInput = {
@@ -102,6 +101,7 @@ export type CreateShadowInput = {
 export type CreateShadowMediumInput = {
   readonly name: Scalars["String"];
   readonly url: Scalars["String"];
+  readonly sub_name?: Maybe<Scalars["String"]>;
   readonly alias_name?: Maybe<Scalars["String"]>;
   readonly cover?: Maybe<Scalars["String"]>;
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
@@ -111,6 +111,7 @@ export type CreateShadowMediumInput = {
 
 export type CreateTagInput = {
   readonly label: Scalars["String"];
+  readonly alias?: Maybe<Scalars["String"]>;
   readonly description?: Maybe<Scalars["String"]>;
 };
 
@@ -190,6 +191,7 @@ export type Medium = {
   readonly __typename?: "Medium";
   readonly id: Scalars["ID"];
   readonly name?: Maybe<Scalars["String"]>;
+  readonly sub_name?: Maybe<Scalars["String"]>;
   readonly alias_name?: Maybe<Scalars["String"]>;
   readonly cover?: Maybe<Scalars["String"]>;
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
@@ -213,11 +215,7 @@ export type Medium = {
 export type Mutation = {
   readonly __typename?: "Mutation";
   readonly create_tag: Tag;
-  readonly add_shadow_to_tag: Scalars["Boolean"];
   readonly add_category_to_tag: Scalars["Boolean"];
-  readonly create_shadow: Shadow;
-  readonly update_shadow: Shadow;
-  readonly add_mediums_to_shadow: Shadow;
   readonly create_category: Category;
   readonly delete_category: Scalars["Boolean"];
   readonly create_bullet: Bullet;
@@ -229,6 +227,10 @@ export type Mutation = {
   readonly send_register_email: Scalars["Boolean"];
   readonly update_user: User;
   readonly upload_file_oss: Scalars["String"];
+  readonly create_shadow: Shadow;
+  readonly update_shadow: Shadow;
+  readonly add_mediums_to_shadow: Shadow;
+  readonly add_tags_to_shadow: Shadow;
   readonly create_topic: Topic;
   readonly create_review: Review;
   readonly create_playlist: Playlist;
@@ -242,28 +244,9 @@ export type MutationCreate_TagArgs = {
   tag: CreateTagInput;
 };
 
-export type MutationAdd_Shadow_To_TagArgs = {
-  tag_id: Scalars["Float"];
-  shadow_id: Scalars["Float"];
-};
-
 export type MutationAdd_Category_To_TagArgs = {
   tag_id: Scalars["Float"];
   category_id: Scalars["Float"];
-};
-
-export type MutationCreate_ShadowArgs = {
-  shadow: CreateShadowInput;
-};
-
-export type MutationUpdate_ShadowArgs = {
-  shadow: UpdateShadowInput;
-  shadow_id: Scalars["ID"];
-};
-
-export type MutationAdd_Mediums_To_ShadowArgs = {
-  shadow_medium: CreateShadowMediumInput;
-  shadow_id: Scalars["ID"];
 };
 
 export type MutationCreate_CategoryArgs = {
@@ -301,6 +284,25 @@ export type MutationUpdate_UserArgs = {
 
 export type MutationUpload_File_OssArgs = {
   file: Scalars["Upload"];
+};
+
+export type MutationCreate_ShadowArgs = {
+  shadow: CreateShadowInput;
+};
+
+export type MutationUpdate_ShadowArgs = {
+  shadow: UpdateShadowInput;
+  shadow_id: Scalars["ID"];
+};
+
+export type MutationAdd_Mediums_To_ShadowArgs = {
+  shadow_medium: CreateShadowMediumInput;
+  shadow_id: Scalars["ID"];
+};
+
+export type MutationAdd_Tags_To_ShadowArgs = {
+  tag_ids: ReadonlyArray<Scalars["ID"]>;
+  shadow_id: Scalars["ID"];
 };
 
 export type MutationCreate_TopicArgs = {
@@ -384,9 +386,7 @@ export type PlaylistPaginated = {
 
 export type Query = {
   readonly __typename?: "Query";
-  readonly shadow: Shadow;
-  readonly shadows_paginated: ShadowPaginated;
-  readonly user_shadows_paginated: ShadowPaginated;
+  readonly category: Category;
   readonly me: User;
   readonly platform_auth_way: ReadonlyArray<PlatformAuthWay>;
   /** find username exit. */
@@ -395,6 +395,9 @@ export type Query = {
   readonly user: User;
   /** all user with paginated. */
   readonly users_paginated: UserPaginated;
+  readonly shadow: Shadow;
+  readonly shadows_paginated: ShadowPaginated;
+  readonly user_shadows_paginated: ShadowPaginated;
   readonly current_topic: Topic;
   readonly shadow_urges: ReadonlyArray<Shadow>;
   readonly shadow_urges_by_shadow: ReadonlyArray<Shadow>;
@@ -414,17 +417,8 @@ export type Query = {
   readonly medium_vote_count: Scalars["Int"];
 };
 
-export type QueryShadowArgs = {
-  id: Scalars["ID"];
-};
-
-export type QueryShadows_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-};
-
-export type QueryUser_Shadows_PaginatedArgs = {
-  query?: Maybe<PaginatedQuery>;
-  author_username: Scalars["String"];
+export type QueryCategoryArgs = {
+  id: Scalars["Float"];
 };
 
 export type QueryHas_UsernameArgs = {
@@ -438,6 +432,19 @@ export type QueryUserArgs = {
 
 export type QueryUsers_PaginatedArgs = {
   query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryShadowArgs = {
+  id: Scalars["ID"];
+};
+
+export type QueryShadows_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+};
+
+export type QueryUser_Shadows_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+  author_username: Scalars["String"];
 };
 
 export type QueryShadow_Urges_By_ShadowArgs = {
@@ -553,7 +560,9 @@ export type Shadow = {
   readonly region: Region;
   readonly credits?: Maybe<ReadonlyArray<Character>>;
   readonly sources: ReadonlyArray<ShadowMedium>;
+  readonly tags?: Maybe<ReadonlyArray<Tag>>;
   readonly author: User;
+  readonly clazz?: Maybe<Category>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
   readonly delete_at?: Maybe<Scalars["Date"]>;
@@ -569,6 +578,7 @@ export type ShadowMedium = {
   readonly __typename?: "ShadowMedium";
   readonly id: Scalars["ID"];
   readonly name?: Maybe<Scalars["String"]>;
+  readonly sub_name?: Maybe<Scalars["String"]>;
   readonly alias_name?: Maybe<Scalars["String"]>;
   readonly cover?: Maybe<Scalars["String"]>;
   readonly posters?: Maybe<ReadonlyArray<Scalars["String"]>>;
@@ -620,8 +630,8 @@ export type Tag = {
   readonly __typename?: "Tag";
   readonly id: Scalars["ID"];
   readonly label: Scalars["String"];
+  readonly alias?: Maybe<Scalars["String"]>;
   readonly description?: Maybe<Scalars["String"]>;
-  readonly shadows?: Maybe<ReadonlyArray<Shadow>>;
   readonly categories?: Maybe<ReadonlyArray<Category>>;
   readonly create_at: Scalars["Date"];
   readonly update_at: Scalars["Date"];
