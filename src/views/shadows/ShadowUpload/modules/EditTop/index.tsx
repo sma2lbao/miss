@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 
 import { useEditableInput, EditableInput } from "@/components/app/Input";
-import { FileUpload } from "@/components/app/FileUpload";
+import { DialogFileUpload } from "@/components/app/FileUpload";
 import { PlayCircleOutline, Delete } from "@material-ui/icons";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
@@ -207,7 +207,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
                     justifyContent="center"
                     height="100%"
                   >
-                    <FileUpload onComplete={handleAddPoster} title="上传海报" />
+                    <DialogFileUpload onComplete={handleAddPoster} />
                   </Box>
                 </AspectRatioBox>
               </GridListTile>

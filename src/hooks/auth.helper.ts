@@ -25,6 +25,7 @@ export const useAuth = () => {
       setHasLogged(true);
       setMember(data?.me);
     }
+    return () => {};
   }, [access_token, data, meQuery]);
 
   const verify = () => {

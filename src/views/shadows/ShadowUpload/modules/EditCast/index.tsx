@@ -15,7 +15,7 @@ import { AddCircle, Delete, Edit } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
 import { EditableInput } from "@/components/app/Input";
-import { FileUpload } from "@/components/app/FileUpload";
+import { DialogFileUpload } from "@/components/app/FileUpload";
 
 export interface CharacterEdit extends Character {
   // status:
@@ -99,7 +99,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                 return (
                   <ListItem key={idx}>
                     <ListItemAvatar>
-                      <FileUpload
+                      <DialogFileUpload
                         custom
                         onComplete={url => handleChangeAvatar(idx, url)}
                       >
@@ -113,7 +113,7 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                         >
                           <Avatar src={item.avatar}></Avatar>
                         </Badge>
-                      </FileUpload>
+                      </DialogFileUpload>
                     </ListItemAvatar>
                     <div>
                       <EditableInput

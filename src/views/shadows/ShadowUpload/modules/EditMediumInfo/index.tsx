@@ -19,7 +19,7 @@ import {
 import { Image } from "@/components/base/Image";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import { Placeholder } from "@/components/base/Placeholder";
-import { FileUpload } from "@/components/app/FileUpload";
+import { DialogFileUpload } from "@/components/app/FileUpload";
 import ImageIcon from "@material-ui/icons/Image";
 import { MovieCreation } from "@material-ui/icons";
 import { ShadowPlayer } from "@/components/app/Player";
@@ -155,7 +155,7 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
                     src={cover ? cover : DEFULAT_SHADOW_COVER}
                   />
                 )}
-                <FileUpload custom onComplete={handleChangeCover}>
+                <DialogFileUpload custom onComplete={handleChangeCover}>
                   <Fab
                     color={cover ? "primary" : "default"}
                     size="medium"
@@ -163,8 +163,8 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
                   >
                     <ImageIcon />
                   </Fab>
-                </FileUpload>
-                <FileUpload custom onComplete={handleChangeSource}>
+                </DialogFileUpload>
+                <DialogFileUpload custom onComplete={handleChangeSource}>
                   <Fab
                     color={url ? "primary" : "default"}
                     size="medium"
@@ -172,7 +172,7 @@ export const EditMediumInfo: React.FC<EditMediumInfoProp> = (
                   >
                     <MovieCreation />
                   </Fab>
-                </FileUpload>
+                </DialogFileUpload>
               </div>
             </BodyScreen>
           </FullScreen>
