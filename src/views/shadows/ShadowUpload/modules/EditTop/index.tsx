@@ -201,7 +201,14 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
               ))}
               <GridListTile cols={1}>
                 <AspectRatioBox ratio={16 / 9}>
-                  <FileUpload onComplete={handleAddPoster} title="上传海报" />
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    height="100%"
+                  >
+                    <FileUpload onComplete={handleAddPoster} title="上传海报" />
+                  </Box>
                 </AspectRatioBox>
               </GridListTile>
             </GridList>
