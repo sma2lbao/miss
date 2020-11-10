@@ -9,7 +9,7 @@ export interface BaseSpecialBoxProps {
 
   placeholderSubtitle?: string;
 
-  placeholderNode?: any;
+  placeholderNode?: React.ReactNode;
 
   loading?: boolean;
 
@@ -17,7 +17,7 @@ export interface BaseSpecialBoxProps {
 
   loadingSubtitle?: string;
 
-  loadingNode?: any;
+  loadingNode?: React.ReactNode;
 
   error?: boolean;
 
@@ -25,7 +25,7 @@ export interface BaseSpecialBoxProps {
 
   errorSubtitle?: string;
 
-  errorNode?: any;
+  errorNode?: React.ReactNode;
 }
 
 export interface TextSpecialBoxProps

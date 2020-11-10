@@ -33,17 +33,19 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
 
   const Tag = component || "div";
 
+  console.log(LoadingNode);
+
   return (
     <Tag className={classes.root}>
       {loading &&
         (LoadingNode ? (
-          <LoadingNode />
+          LoadingNode
         ) : (
           <Loading title={loadingTitle} subtitle={loadingSubtitle} />
         ))}
       {error &&
         (ErrorNode ? (
-          <ErrorNode />
+          ErrorNode
         ) : (
           <Exception title={errorTitle} subtitle={errorSubtitle} />
         ))}
@@ -51,7 +53,7 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
         !error &&
         !loading &&
         (PlaceholderNode ? (
-          <PlaceholderNode />
+          PlaceholderNode
         ) : (
           <Placeholder
             title={placeholderTitle}
