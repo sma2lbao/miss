@@ -5,7 +5,8 @@ import {
   Theme,
   createStyles,
   InputAdornment,
-  IconButton
+  IconButton,
+  ClickAwayListener
 } from "@material-ui/core";
 import { BaseInputProps, InputStatus } from "./input.d";
 import { Edit } from "@material-ui/icons";
@@ -64,35 +65,42 @@ export const EditableInput: React.FC<BaseInputProps> = props => {
   const classes = useStyles();
   const [status, setStatus] = React.useState<InputStatus>(InputStatus.NORMAL);
 
+  const handleClickAway = () => {
+    if (status !== InputStatus.NORMAL) {
+      setStatus(InputStatus.NORMAL);
+    }
+  };
+
   return (
-    <Input
-      classes={{
-        root: classes.root
-      }}
-      autoFocus
-      fullWidth
-      multiline
-      className={classes[variant]}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      {...rest}
-      startAdornment={
-        status === InputStatus.NORMAL ? (
-          <InputAdornment position="start">
-            <IconButton
-              size="small"
-              color="inherit"
-              onClick={() => setStatus(InputStatus.EDITING)}
-            >
-              <Edit fontSize="small" />
-            </IconButton>
-          </InputAdornment>
-        ) : null
-      }
-      readOnly={status === InputStatus.NORMAL}
-      disableUnderline={status === InputStatus.NORMAL}
-      onBlur={() => setStatus(InputStatus.NORMAL)}
-    />
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <Input
+        classes={{
+          root: classes.root
+        }}
+        fullWidth
+        multiline
+        className={classes[variant]}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        {...rest}
+        startAdornment={
+          status === InputStatus.NORMAL ? (
+            <InputAdornment position="start">
+              <IconButton
+                size="small"
+                color="inherit"
+                onClick={() => setStatus(InputStatus.EDITING)}
+              >
+                <Edit fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ) : null
+        }
+        readOnly={status === InputStatus.NORMAL}
+        disableUnderline={status === InputStatus.NORMAL}
+        // onBlur={() => setStatus(InputStatus.NORMAL)}
+      />
+    </ClickAwayListener>
   );
 };
