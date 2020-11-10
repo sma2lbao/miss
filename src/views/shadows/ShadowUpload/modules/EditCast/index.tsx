@@ -7,13 +7,15 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Box,
-  ListSubheader
+  ListSubheader,
+  Badge
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { AddCircle, Delete } from "@material-ui/icons";
+import { AddCircle, Delete, Edit } from "@material-ui/icons";
 import { Placeholder } from "@/components/base/Placeholder";
 import { Character } from "@/schema";
 import { EditableInput } from "@/components/app/Input";
+import { FileUpload } from "@/components/app/FileUpload";
 
 export interface CharacterEdit extends Character {
   // status:
@@ -68,6 +70,12 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
       }
     };
 
+    const handleChangeAvatar = (idx: number, url: string) => {
+      const cur = credits[idx];
+      Object.assign(cur, { avatar: url });
+      setCredits([...credits]);
+    };
+
     const handleDelete = (idx: number) => {
       credits.splice(idx, 1);
       setCredits([...credits]);
@@ -91,7 +99,21 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
                 return (
                   <ListItem key={idx}>
                     <ListItemAvatar>
-                      <Avatar src={item.avatar}></Avatar>
+                      <FileUpload
+                        custom
+                        onComplete={url => handleChangeAvatar(idx, url)}
+                      >
+                        <Badge
+                          overlap="circle"
+                          anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right"
+                          }}
+                          badgeContent={<Edit fontSize="small" />}
+                        >
+                          <Avatar src={item.avatar}></Avatar>
+                        </Badge>
+                      </FileUpload>
                     </ListItemAvatar>
                     <div>
                       <EditableInput
