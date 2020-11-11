@@ -52,19 +52,17 @@ export default function ShadowRecommend() {
         <SpecialBox
           loading={loading}
           error={!!error}
-          loadingNode={() => {
-            return (
-              <GridList cellHeight="auto" cols={4}>
-                {[0, 0, 0, 0, 0, 0, 0, 0].map((_, index: number) => {
-                  return (
-                    <GridListTile key={index} cols={1}>
-                      <MediaNormal loading />
-                    </GridListTile>
-                  );
-                })}
-              </GridList>
-            );
-          }}
+          loadingNode={
+            <GridList cellHeight="auto" cols={4}>
+              {[0, 0, 0, 0, 0, 0, 0, 0].map((_, index: number) => {
+                return (
+                  <GridListTile key={index} cols={1}>
+                    <MediaNormal loading />
+                  </GridListTile>
+                );
+              })}
+            </GridList>
+          }
         />
       )}
     </Box>

@@ -1,20 +1,13 @@
 import * as React from "react";
 import ReactPlayer, { ReactPlayerProps } from "react-player";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { AspectRatioBox } from "@/components/base/AspectRatioBox";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      width: "100%",
-      paddingTop: "calc(56.25%)",
-      position: "relative"
-    },
     player: {
       width: "100% !important",
-      height: "100% !important",
-      position: "absolute",
-      top: 0,
-      left: 0
+      height: "100% !important"
     }
   })
 );
@@ -30,9 +23,9 @@ export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
   const { url, ...rest } = props;
 
   return (
-    <div className={classes.root}>
-      <ReactPlayer {...rest} className={classes.player} url={url} />
-    </div>
+    <AspectRatioBox ratio={16 / 10}>
+      <ReactPlayer className={classes.player} {...rest} url={url} />
+    </AspectRatioBox>
   );
 };
 

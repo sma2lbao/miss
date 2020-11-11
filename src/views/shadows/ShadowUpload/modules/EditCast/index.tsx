@@ -53,8 +53,8 @@ export const EditCast = React.forwardRef<EditCastHandles, unknown>(
         {
           avatar: "",
           name: "",
-          description: "",
-          tags: []
+          description: ""
+          // tags: []
         }
       ]);
     };

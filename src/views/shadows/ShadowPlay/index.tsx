@@ -64,6 +64,8 @@ export default function ShadowPlay() {
         <FullScreen>
           <BodyScreen>
             <ShadowPlayer
+              controls
+              playing
               url={shadowMedium?.url}
               light={
                 shadowMedium?.cover ? shadowMedium?.cover : DEFULAT_SHADOW_COVER

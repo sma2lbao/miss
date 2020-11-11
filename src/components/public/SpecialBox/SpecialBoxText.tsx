@@ -6,7 +6,6 @@ import { Typography } from "@material-ui/core";
 export const SpecialBoxText: React.FC<TextSpecialBoxProps> = (
   props: TextSpecialBoxProps
 ) => {
-  console.log(props);
   const { component, placeholderNode, loadingNode, errorNode, ...rest } = props;
   return (
     <SpecialBoxDefault

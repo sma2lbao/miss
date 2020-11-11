@@ -33,8 +33,6 @@ export const SpecialBoxDefault: React.FC<BaseSpecialBoxProps> = (
 
   const Tag = component || "div";
 
-  console.log(LoadingNode);
-
   return (
     <Tag className={classes.root}>
       {loading &&

@@ -63,7 +63,6 @@ export const useRouterHelper = () => {
 
   return {
     push: (path: string, state?: any) => {
-      // console.log(path, state);
       history.push(path, state);
     },
     replace: (pathOrlocation, stateOptions?) => {
