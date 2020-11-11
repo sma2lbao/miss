@@ -63,7 +63,9 @@ export const Account: React.FC = () => {
             open={Boolean(anchorEl)}
             onClose={_close}
           >
-            <MenuItem onClick={_close}>退出</MenuItem>
+            <MenuItem disabled onClick={_close}>
+              退出
+            </MenuItem>
           </Menu>
         </>
       ) : (
