@@ -63,12 +63,12 @@ export const Account: React.FC = () => {
             open={Boolean(anchorEl)}
             onClose={_close}
           >
-            <MenuItem onClick={_close}>Resume</MenuItem>
+            <MenuItem onClick={_close}>退出</MenuItem>
           </Menu>
         </>
       ) : (
         <>
-          <Button onClick={handleLogin}>login</Button>
+          <Button onClick={handleLogin}>登录</Button>
         </>
       )}
     </Box>
