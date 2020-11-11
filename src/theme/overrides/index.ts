@@ -6,6 +6,9 @@ export default {
     "@global": {
       ".iconfont": {
         lineHeight: "1"
+      },
+      body: {
+        minWidth: 960
       }
     }
   },

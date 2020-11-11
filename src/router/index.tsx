@@ -30,19 +30,19 @@ function AppRoute() {
     navigator.userAgent
   );
 
-  if (isH5) {
-    return (
-      <Router>
-        <Switch>
-          <Route component={H5NotSupported} />
-        </Switch>
-      </Router>
-    );
-  }
-
-  // if (isH5 && window.location.pathname !== "/not-support") {
-  //   window.location.href = window.location.origin + "/not-support";
+  // if (isH5) {
+  //   return (
+  //     <Router>
+  //       <Switch>
+  //         <Route component={H5NotSupported} />
+  //       </Switch>
+  //     </Router>
+  //   );
   // }
+
+  if (isH5 && !window.location.pathname.includes("/not-support")) {
+    window.location.href = window.location.origin + "/not-support";
+  }
 
   return (
     <Router>
