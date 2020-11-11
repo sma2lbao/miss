@@ -40,6 +40,14 @@ export const CREATE_OR_UPDATE_VOTE = gql`
   }
 `;
 
+export const VOTE = gql`
+  query vote($medium_id: ID!) {
+    vote(medium_id: $medium_id) {
+      status
+    }
+  }
+`;
+
 export const CREATE_REVIEW = gql`
   mutation createReview($review: CreateReviewInput!) {
     create_review(review: $review) {

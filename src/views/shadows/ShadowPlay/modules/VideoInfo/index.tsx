@@ -5,7 +5,11 @@ import { ThumbUpAlt, ThumbDownAlt, MoreVert } from "@material-ui/icons";
 import { ShadowPlayContext } from "../..";
 import moment from "moment";
 import { useFollowHelper } from "@/hooks";
-import { useCreateOrUpdateVoteMutation, VoteStatus } from "@/schema";
+import {
+  useCreateOrUpdateVoteMutation,
+  VoteStatus,
+  useVoteLazyQuery
+} from "@/schema";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,18 +44,47 @@ export default function VideoInfo() {
   const { following, toggleFollow } = useFollowHelper({
     owner_uid: shadowPlayQuery?.shadow.author.uid as string
   });
-  const [create_or_update_vote] = useCreateOrUpdateVoteMutation();
+  const [voteQuery, { data }] = useVoteLazyQuery({
+    fetchPolicy: "network-only",
+    variables: {
+      medium_id: Number(shadowMedium?.id)
+    }
+    // skip: !shadowMedium?.id,
+  });
 
-  const handleVote = () => {
+  const [create_or_update_vote] = useCreateOrUpdateVoteMutation({
+    update(cache) {
+      // const newStatus = data?.create_or_update_vote.status;
+      // console.log("before: ", cache);
+      cache.modify({
+        fields: {
+          vote() {},
+          shadow() {}
+        }
+      });
+    }
+  });
+
+  const handleVote = (status: VoteStatus) => {
+    let report_status = status;
+    if (data?.vote.status === report_status && status !== VoteStatus.Default) {
+      report_status = VoteStatus.Default;
+    }
     create_or_update_vote({
       variables: {
         vote: {
           medium_id: shadowMedium ? +shadowMedium.id : -1,
-          status: VoteStatus.Likd
+          status: report_status
         }
       }
     });
   };
+
+  React.useEffect(() => {
+    if (shadowMedium?.id) {
+      voteQuery();
+    }
+  }, [shadowMedium, voteQuery]);
 
   return (
     <div>
@@ -74,16 +107,32 @@ export default function VideoInfo() {
         </div>
         <Box display="flex" alignItems="center">
           <Box className={classes.toolBox}>
-            <IconButton size="small" onClick={handleVote}>
-              <ThumbDownAlt fontSize="small" />
-            </IconButton>
-            <Typography className={classes.toolText}>TODO</Typography>
-          </Box>
-          <Box className={classes.toolBox}>
-            <IconButton size="small" onClick={handleVote}>
+            <IconButton
+              color={
+                data?.vote.status === VoteStatus.Likd ? "primary" : "default"
+              }
+              size="small"
+              onClick={() => handleVote(VoteStatus.Likd)}
+            >
               <ThumbUpAlt fontSize="small" />
             </IconButton>
-            <Typography className={classes.toolText}>TODO</Typography>
+            <Typography className={classes.toolText}>
+              {shadowMedium?.vote_like_count}
+            </Typography>
+          </Box>
+          <Box className={classes.toolBox}>
+            <IconButton
+              color={
+                data?.vote.status === VoteStatus.Dislike ? "primary" : "default"
+              }
+              size="small"
+              onClick={() => handleVote(VoteStatus.Dislike)}
+            >
+              <ThumbDownAlt fontSize="small" />
+            </IconButton>
+            <Typography className={classes.toolText}>
+              {shadowMedium?.vote_dislike_count}
+            </Typography>
           </Box>
           <IconButton size="small">
             <MoreVert fontSize="small" />

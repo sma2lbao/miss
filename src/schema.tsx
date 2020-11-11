@@ -493,7 +493,7 @@ export type QueryIs_FollowingArgs = {
 };
 
 export type QueryVoteArgs = {
-  medium_id: Scalars["Float"];
+  medium_id: Scalars["ID"];
 };
 
 export type QueryMedium_Vote_CountArgs = {
@@ -829,6 +829,15 @@ export type CreateOrUpdateVoteMutation = {
     readonly __typename?: "Vote";
     readonly status: VoteStatus;
   };
+};
+
+export type VoteQueryVariables = Exact<{
+  medium_id: Scalars["ID"];
+}>;
+
+export type VoteQuery = {
+  readonly __typename?: "Query";
+  readonly vote: { readonly __typename?: "Vote"; readonly status: VoteStatus };
 };
 
 export type CreateReviewMutationVariables = Exact<{
@@ -1818,6 +1827,55 @@ export type CreateOrUpdateVoteMutationResult = ApolloReactCommon.MutationResult<
 export type CreateOrUpdateVoteMutationOptions = ApolloReactCommon.BaseMutationOptions<
   CreateOrUpdateVoteMutation,
   CreateOrUpdateVoteMutationVariables
+>;
+export const VoteDocument = gql`
+  query vote($medium_id: ID!) {
+    vote(medium_id: $medium_id) {
+      status
+    }
+  }
+`;
+
+/**
+ * __useVoteQuery__
+ *
+ * To run a query within a React component, call `useVoteQuery` and pass it any options that fit your needs.
+ * When your component renders, `useVoteQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useVoteQuery({
+ *   variables: {
+ *      medium_id: // value for 'medium_id'
+ *   },
+ * });
+ */
+export function useVoteQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<VoteQuery, VoteQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<VoteQuery, VoteQueryVariables>(
+    VoteDocument,
+    baseOptions
+  );
+}
+export function useVoteLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    VoteQuery,
+    VoteQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<VoteQuery, VoteQueryVariables>(
+    VoteDocument,
+    baseOptions
+  );
+}
+export type VoteQueryHookResult = ReturnType<typeof useVoteQuery>;
+export type VoteLazyQueryHookResult = ReturnType<typeof useVoteLazyQuery>;
+export type VoteQueryResult = ApolloReactCommon.QueryResult<
+  VoteQuery,
+  VoteQueryVariables
 >;
 export const CreateReviewDocument = gql`
   mutation createReview($review: CreateReviewInput!) {
