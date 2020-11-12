@@ -35,6 +35,10 @@ export const SHADOW = gql`
     update_at
     cover
     posters
+    region
+    sources {
+      ...ShadowSource
+    }
   }
 `;
 

@@ -13,7 +13,9 @@ import {
   Typography
 } from "@material-ui/core";
 import { FileUpload } from "./FileUpload";
-import { Directions, Menu, CloudUpload } from "@material-ui/icons";
+import { CloudUpload } from "@material-ui/icons";
+import LinkIcon from "@material-ui/icons/Link";
+import DoneIcon from "@material-ui/icons/Done";
 import { DialogFileUploadProps } from "./file-upload";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -93,7 +95,7 @@ export const DialogFileUpload: React.FC<DialogFileUploadProps> = (
             <div hidden={tab !== 1}>
               <Paper className={classes.paper} component="form">
                 <IconButton disabled>
-                  <Menu />
+                  <LinkIcon />
                 </IconButton>
                 <InputBase
                   value={remoteUrl}
@@ -106,7 +108,7 @@ export const DialogFileUpload: React.FC<DialogFileUploadProps> = (
                   color="primary"
                   disabled={!remoteUrl}
                 >
-                  <Directions />
+                  <DoneIcon />
                 </IconButton>
               </Paper>
             </div>

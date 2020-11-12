@@ -43,7 +43,7 @@ export const Main: React.FC = () => {
         {/* <Typography variant="subtitle1" gutterBottom>
           相关资源
         </Typography> */}
-        {shadowQuery?.shadow.sources.length ? (
+        {shadowQuery?.shadow.sources?.length ? (
           <GridList cellHeight="auto" cols={4}>
             {shadowQuery.shadow.sources.map((source, idx) => {
               return (

@@ -34,8 +34,8 @@ export interface MediaOwnProps extends MediaBase, MediaEvent {
 }
 
 export interface MediaPlainProps extends MediaEvent {
-  id?: number;
-  cover?: string;
+  id?: number | string;
+  cover?: string | null;
   duration?: number;
 }
 

@@ -1,8 +1,7 @@
 import * as React from "react";
-import Top from "./modules/Top";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Tabs, Tab, Divider, Box } from "@material-ui/core";
-import { Medias, Basic, Playlists } from "./modules";
+import { Medias, Basic, Playlists, Top } from "./modules";
 import {
   BodyScreen,
   ContentScreen,
@@ -10,7 +9,7 @@ import {
   FullScreen
 } from "@/layouts/PageLayout";
 import { useParams } from "react-router-dom";
-import { useUserQuery, UserQuery } from "@/schema";
+import { useUserQuery, UserQuery, Shadow } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,9 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ProfileContext = React.createContext<UserQuery | undefined>(
-  undefined
-);
+export const ProfileContext = React.createContext<
+  [
+    UserQuery | undefined,
+    [Shadow | undefined, React.Dispatch<Shadow | undefined>]
+  ]
+>([undefined, [undefined, () => {}]]);
 
 export default function Profile() {
   const classes = useStyles();
@@ -36,13 +38,14 @@ export default function Profile() {
       username
     }
   });
+  const [topShadow, setTopShadow] = React.useState<Shadow | undefined>();
   const [tab, setTab] = React.useState(0);
 
   return (
     <FullScreen>
       {data?.user ? (
         <BodyScreen>
-          <ProfileContext.Provider value={data}>
+          <ProfileContext.Provider value={[data, [topShadow, setTopShadow]]}>
             <AiderScreen className={classes.aider}>
               <Basic />
             </AiderScreen>

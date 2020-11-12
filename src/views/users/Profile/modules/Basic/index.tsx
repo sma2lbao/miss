@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Basic: React.FC = () => {
   const classes = useStyles();
-  const userQuery = React.useContext(ProfileContext);
+  const [userQuery] = React.useContext(ProfileContext);
   const {
     data: fansData,
     loading: fansLoading,
@@ -71,7 +71,7 @@ export const Basic: React.FC = () => {
         >
           {userQuery?.user.description}
         </Typography>
-        <div>
+        {/* <div>
           <Typography
             variant="subtitle2"
             component="div"
@@ -87,7 +87,7 @@ export const Basic: React.FC = () => {
           >
             出生日期
           </Typography>
-        </div>
+        </div> */}
       </div>
     </div>
   );

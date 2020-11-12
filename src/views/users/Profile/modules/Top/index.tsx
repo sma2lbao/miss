@@ -10,7 +10,9 @@ import {
 } from "@material-ui/core";
 import { MediaPlain } from "@/components/app/Media";
 import clsx from "clsx";
+import { useFollowHelper } from "@/hooks";
 import { ProfileContext } from "../..";
+import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Top: React.FC = () => {
   const classes = useStyles();
-  const userQuery = React.useContext(ProfileContext);
+  const [userQuery, [topShadow]] = React.useContext(ProfileContext);
+  const { following, toggleFollow } = useFollowHelper({
+    owner_uid: userQuery?.user.uid as string
+  });
+  console.log(topShadow);
 
   return (
     <Box className={classes.root}>
@@ -58,20 +64,25 @@ export const Top: React.FC = () => {
               <Typography variant="subtitle1">
                 {userQuery?.user.nickname}
               </Typography>
-              <Typography variant="caption">ShengZhen</Typography>
+              <Typography variant="caption">
+                {userQuery?.user.description}
+              </Typography>
             </Box>
           </Box>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.mainButton}
-          >
-            关注
-          </Button>
+
+          {following ? (
+            <Button className={classes.mainButton} onClick={toggleFollow}>
+              已关注
+            </Button>
+          ) : (
+            <Button className={classes.mainButton} onClick={toggleFollow}>
+              关注
+            </Button>
+          )}
         </Box>
         <Box className={classes.content}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            江城子·乙卯正月二十日夜记梦
+            {topShadow?.title}
           </Typography>
           <Typography
             gutterBottom
@@ -79,19 +90,19 @@ export const Top: React.FC = () => {
             color="textSecondary"
             component="div"
           >
-            十年生死两茫茫，不思量，自难忘。千里孤坟，无处话凄凉。纵使相逢应不识，尘满面，鬓如霜。
-            夜来幽梦忽还乡，小轩窗，正梳妆。相顾无言，惟有泪千行。料得年年肠断处，明月夜，短松冈。(肠断
-            一作：断肠)
+            {topShadow?.description}
           </Typography>
           <div>
-            <Typography variant="caption">观看数： TODO</Typography>
-            <Typography variant="caption">点赞数： TODO</Typography>
-            <Typography variant="caption">发布时间： TODO</Typography>
+            {/* <Typography variant="caption">观看数： TODO</Typography> */}
+            {/* <Typography variant="caption">点赞数： TODO</Typography> */}
+            <Typography variant="caption">
+              发布于：{moment(topShadow?.create_at).format("YYYY-MM-DD")}
+            </Typography>
           </div>
         </Box>
       </div>
       <div className={classes.item}>
-        <MediaPlain />
+        <MediaPlain {...topShadow} />
       </div>
     </Box>
   );

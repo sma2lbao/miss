@@ -53,7 +53,7 @@ export default function ShadowPlay() {
   });
 
   React.useEffect(() => {
-    if (data?.shadow.sources.length) {
+    if (data?.shadow?.sources?.length) {
       setShadowMedium(data.shadow.sources[0]);
     }
   }, [data]);

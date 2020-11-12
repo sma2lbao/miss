@@ -559,7 +559,7 @@ export type Shadow = {
   readonly about?: Maybe<Scalars["String"]>;
   readonly region: Region;
   readonly credits?: Maybe<ReadonlyArray<Character>>;
-  readonly sources: ReadonlyArray<ShadowMedium>;
+  readonly sources?: Maybe<ReadonlyArray<ShadowMedium>>;
   readonly tags?: Maybe<ReadonlyArray<Tag>>;
   readonly author: User;
   readonly clazz?: Maybe<Category>;
@@ -675,14 +675,14 @@ export type User = {
   readonly __typename?: "User";
   readonly address?: Maybe<Scalars["String"]>;
   readonly avatar: Scalars["String"];
-  readonly create_at: Scalars["Date"];
+  readonly create_at?: Maybe<Scalars["Date"]>;
   readonly delete_at?: Maybe<Scalars["Date"]>;
   readonly description?: Maybe<Scalars["String"]>;
   readonly email?: Maybe<Scalars["String"]>;
   readonly mobile?: Maybe<Scalars["String"]>;
   readonly nickname?: Maybe<Scalars["String"]>;
   readonly uid: Scalars["ID"];
-  readonly update_at: Scalars["Date"];
+  readonly update_at?: Maybe<Scalars["Date"]>;
   readonly username: Scalars["String"];
 };
 
@@ -773,8 +773,8 @@ export type UpdateUserMutation = {
     readonly mobile?: Maybe<string>;
     readonly address?: Maybe<string>;
     readonly description?: Maybe<string>;
-    readonly create_at: any;
-    readonly update_at: any;
+    readonly create_at?: Maybe<any>;
+    readonly update_at?: Maybe<any>;
   };
 };
 
@@ -812,10 +812,12 @@ export type AddMediumsToShadowMutation = {
   readonly __typename?: "Mutation";
   readonly add_mediums_to_shadow: {
     readonly __typename?: "Shadow";
-    readonly sources: ReadonlyArray<{
-      readonly __typename?: "ShadowMedium";
-      readonly name?: Maybe<string>;
-    }>;
+    readonly sources?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowMedium";
+        readonly name?: Maybe<string>;
+      }>
+    >;
   };
 };
 
@@ -920,8 +922,8 @@ export type MeQuery = {
     readonly mobile?: Maybe<string>;
     readonly address?: Maybe<string>;
     readonly description?: Maybe<string>;
-    readonly create_at: any;
-    readonly update_at: any;
+    readonly create_at?: Maybe<any>;
+    readonly update_at?: Maybe<any>;
   };
 };
 
@@ -945,6 +947,30 @@ export type CurrentTopicQuery = {
         readonly update_at: any;
         readonly cover: string;
         readonly posters?: Maybe<ReadonlyArray<string>>;
+        readonly region: Region;
+        readonly sources?: Maybe<
+          ReadonlyArray<{
+            readonly __typename?: "ShadowMedium";
+            readonly id: number | string;
+            readonly cover?: Maybe<string>;
+            readonly url: string;
+            readonly super_quality_url?: Maybe<string>;
+            readonly preview_url?: Maybe<string>;
+            readonly posters?: Maybe<ReadonlyArray<string>>;
+            readonly name?: Maybe<string>;
+            readonly sub_name?: Maybe<string>;
+            readonly medium_quality_url?: Maybe<string>;
+            readonly low_quality_url?: Maybe<string>;
+            readonly high_quality_url?: Maybe<string>;
+            readonly duration?: Maybe<number>;
+            readonly description?: Maybe<string>;
+            readonly alias_name?: Maybe<string>;
+            readonly create_at: any;
+            readonly update_at: any;
+            readonly vote_like_count?: Maybe<number>;
+            readonly vote_dislike_count?: Maybe<number>;
+          }>
+        >;
         readonly author: {
           readonly __typename?: "User";
           readonly uid: number | string;
@@ -965,6 +991,30 @@ export type CurrentTopicQuery = {
       readonly update_at: any;
       readonly cover: string;
       readonly posters?: Maybe<ReadonlyArray<string>>;
+      readonly region: Region;
+      readonly sources?: Maybe<
+        ReadonlyArray<{
+          readonly __typename?: "ShadowMedium";
+          readonly id: number | string;
+          readonly cover?: Maybe<string>;
+          readonly url: string;
+          readonly super_quality_url?: Maybe<string>;
+          readonly preview_url?: Maybe<string>;
+          readonly posters?: Maybe<ReadonlyArray<string>>;
+          readonly name?: Maybe<string>;
+          readonly sub_name?: Maybe<string>;
+          readonly medium_quality_url?: Maybe<string>;
+          readonly low_quality_url?: Maybe<string>;
+          readonly high_quality_url?: Maybe<string>;
+          readonly duration?: Maybe<number>;
+          readonly description?: Maybe<string>;
+          readonly alias_name?: Maybe<string>;
+          readonly create_at: any;
+          readonly update_at: any;
+          readonly vote_like_count?: Maybe<number>;
+          readonly vote_dislike_count?: Maybe<number>;
+        }>
+      >;
       readonly author: {
         readonly __typename?: "User";
         readonly uid: number | string;
@@ -991,6 +1041,30 @@ export type ShadowUrgesQuery = {
     readonly update_at: any;
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly region: Region;
+    readonly sources?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowMedium";
+        readonly id: number | string;
+        readonly cover?: Maybe<string>;
+        readonly url: string;
+        readonly super_quality_url?: Maybe<string>;
+        readonly preview_url?: Maybe<string>;
+        readonly posters?: Maybe<ReadonlyArray<string>>;
+        readonly name?: Maybe<string>;
+        readonly sub_name?: Maybe<string>;
+        readonly medium_quality_url?: Maybe<string>;
+        readonly low_quality_url?: Maybe<string>;
+        readonly high_quality_url?: Maybe<string>;
+        readonly duration?: Maybe<number>;
+        readonly description?: Maybe<string>;
+        readonly alias_name?: Maybe<string>;
+        readonly create_at: any;
+        readonly update_at: any;
+        readonly vote_like_count?: Maybe<number>;
+        readonly vote_dislike_count?: Maybe<number>;
+      }>
+    >;
     readonly author: {
       readonly __typename?: "User";
       readonly uid: number | string;
@@ -1082,27 +1156,29 @@ export type ShadowQuery = {
       readonly username: string;
       readonly description?: Maybe<string>;
     };
-    readonly sources: ReadonlyArray<{
-      readonly __typename?: "ShadowMedium";
-      readonly id: number | string;
-      readonly cover?: Maybe<string>;
-      readonly url: string;
-      readonly super_quality_url?: Maybe<string>;
-      readonly preview_url?: Maybe<string>;
-      readonly posters?: Maybe<ReadonlyArray<string>>;
-      readonly name?: Maybe<string>;
-      readonly sub_name?: Maybe<string>;
-      readonly medium_quality_url?: Maybe<string>;
-      readonly low_quality_url?: Maybe<string>;
-      readonly high_quality_url?: Maybe<string>;
-      readonly duration?: Maybe<number>;
-      readonly description?: Maybe<string>;
-      readonly alias_name?: Maybe<string>;
-      readonly create_at: any;
-      readonly update_at: any;
-      readonly vote_like_count?: Maybe<number>;
-      readonly vote_dislike_count?: Maybe<number>;
-    }>;
+    readonly sources?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowMedium";
+        readonly id: number | string;
+        readonly cover?: Maybe<string>;
+        readonly url: string;
+        readonly super_quality_url?: Maybe<string>;
+        readonly preview_url?: Maybe<string>;
+        readonly posters?: Maybe<ReadonlyArray<string>>;
+        readonly name?: Maybe<string>;
+        readonly sub_name?: Maybe<string>;
+        readonly medium_quality_url?: Maybe<string>;
+        readonly low_quality_url?: Maybe<string>;
+        readonly high_quality_url?: Maybe<string>;
+        readonly duration?: Maybe<number>;
+        readonly description?: Maybe<string>;
+        readonly alias_name?: Maybe<string>;
+        readonly create_at: any;
+        readonly update_at: any;
+        readonly vote_like_count?: Maybe<number>;
+        readonly vote_dislike_count?: Maybe<number>;
+      }>
+    >;
   };
 };
 
@@ -1134,6 +1210,30 @@ export type ShadowsPaginatedQuery = {
           readonly update_at: any;
           readonly cover: string;
           readonly posters?: Maybe<ReadonlyArray<string>>;
+          readonly region: Region;
+          readonly sources?: Maybe<
+            ReadonlyArray<{
+              readonly __typename?: "ShadowMedium";
+              readonly id: number | string;
+              readonly cover?: Maybe<string>;
+              readonly url: string;
+              readonly super_quality_url?: Maybe<string>;
+              readonly preview_url?: Maybe<string>;
+              readonly posters?: Maybe<ReadonlyArray<string>>;
+              readonly name?: Maybe<string>;
+              readonly sub_name?: Maybe<string>;
+              readonly medium_quality_url?: Maybe<string>;
+              readonly low_quality_url?: Maybe<string>;
+              readonly high_quality_url?: Maybe<string>;
+              readonly duration?: Maybe<number>;
+              readonly description?: Maybe<string>;
+              readonly alias_name?: Maybe<string>;
+              readonly create_at: any;
+              readonly update_at: any;
+              readonly vote_like_count?: Maybe<number>;
+              readonly vote_dislike_count?: Maybe<number>;
+            }>
+          >;
           readonly author: {
             readonly __typename?: "User";
             readonly uid: number | string;
@@ -1177,6 +1277,30 @@ export type UserShadowsPaginatedQuery = {
           readonly update_at: any;
           readonly cover: string;
           readonly posters?: Maybe<ReadonlyArray<string>>;
+          readonly region: Region;
+          readonly sources?: Maybe<
+            ReadonlyArray<{
+              readonly __typename?: "ShadowMedium";
+              readonly id: number | string;
+              readonly cover?: Maybe<string>;
+              readonly url: string;
+              readonly super_quality_url?: Maybe<string>;
+              readonly preview_url?: Maybe<string>;
+              readonly posters?: Maybe<ReadonlyArray<string>>;
+              readonly name?: Maybe<string>;
+              readonly sub_name?: Maybe<string>;
+              readonly medium_quality_url?: Maybe<string>;
+              readonly low_quality_url?: Maybe<string>;
+              readonly high_quality_url?: Maybe<string>;
+              readonly duration?: Maybe<number>;
+              readonly description?: Maybe<string>;
+              readonly alias_name?: Maybe<string>;
+              readonly create_at: any;
+              readonly update_at: any;
+              readonly vote_like_count?: Maybe<number>;
+              readonly vote_dislike_count?: Maybe<number>;
+            }>
+          >;
           readonly author: {
             readonly __typename?: "User";
             readonly uid: number | string;
@@ -1207,6 +1331,30 @@ export type ShadowUrgesByShadowQuery = {
     readonly update_at: any;
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly region: Region;
+    readonly sources?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowMedium";
+        readonly id: number | string;
+        readonly cover?: Maybe<string>;
+        readonly url: string;
+        readonly super_quality_url?: Maybe<string>;
+        readonly preview_url?: Maybe<string>;
+        readonly posters?: Maybe<ReadonlyArray<string>>;
+        readonly name?: Maybe<string>;
+        readonly sub_name?: Maybe<string>;
+        readonly medium_quality_url?: Maybe<string>;
+        readonly low_quality_url?: Maybe<string>;
+        readonly high_quality_url?: Maybe<string>;
+        readonly duration?: Maybe<number>;
+        readonly description?: Maybe<string>;
+        readonly alias_name?: Maybe<string>;
+        readonly create_at: any;
+        readonly update_at: any;
+        readonly vote_like_count?: Maybe<number>;
+        readonly vote_dislike_count?: Maybe<number>;
+      }>
+    >;
     readonly author: {
       readonly __typename?: "User";
       readonly uid: number | string;
@@ -1234,6 +1382,30 @@ export type ShadowNextUrgesByShadowQuery = {
     readonly update_at: any;
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly region: Region;
+    readonly sources?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowMedium";
+        readonly id: number | string;
+        readonly cover?: Maybe<string>;
+        readonly url: string;
+        readonly super_quality_url?: Maybe<string>;
+        readonly preview_url?: Maybe<string>;
+        readonly posters?: Maybe<ReadonlyArray<string>>;
+        readonly name?: Maybe<string>;
+        readonly sub_name?: Maybe<string>;
+        readonly medium_quality_url?: Maybe<string>;
+        readonly low_quality_url?: Maybe<string>;
+        readonly high_quality_url?: Maybe<string>;
+        readonly duration?: Maybe<number>;
+        readonly description?: Maybe<string>;
+        readonly alias_name?: Maybe<string>;
+        readonly create_at: any;
+        readonly update_at: any;
+        readonly vote_like_count?: Maybe<number>;
+        readonly vote_dislike_count?: Maybe<number>;
+      }>
+    >;
     readonly author: {
       readonly __typename?: "User";
       readonly uid: number | string;
@@ -1312,8 +1484,8 @@ export type UserQuery = {
     readonly mobile?: Maybe<string>;
     readonly address?: Maybe<string>;
     readonly description?: Maybe<string>;
-    readonly create_at: any;
-    readonly update_at: any;
+    readonly create_at?: Maybe<any>;
+    readonly update_at?: Maybe<any>;
     readonly delete_at?: Maybe<any>;
   };
 };
@@ -1383,18 +1555,6 @@ export const AuthorFragmentDoc = gql`
     description
   }
 `;
-export const ShadowFragmentDoc = gql`
-  fragment Shadow on Shadow {
-    id
-    description
-    title
-    sub_title
-    create_at
-    update_at
-    cover
-    posters
-  }
-`;
 export const ShadowSourceFragmentDoc = gql`
   fragment ShadowSource on ShadowMedium {
     id
@@ -1416,6 +1576,23 @@ export const ShadowSourceFragmentDoc = gql`
     vote_like_count
     vote_dislike_count
   }
+`;
+export const ShadowFragmentDoc = gql`
+  fragment Shadow on Shadow {
+    id
+    description
+    title
+    sub_title
+    create_at
+    update_at
+    cover
+    posters
+    region
+    sources {
+      ...ShadowSource
+    }
+  }
+  ${ShadowSourceFragmentDoc}
 `;
 export const ReviewFragmentDoc = gql`
   fragment Review on Review {

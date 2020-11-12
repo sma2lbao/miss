@@ -13,6 +13,7 @@ import { MediaOwn } from "@/components/app/Media";
 import { useUserShadowsPaginatedQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import { SpecialBox } from "@/components/public/SpecialBox";
+import { ProfileContext } from "../..";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Medias: React.FC = () => {
   const classes = useStyles();
   const { username } = useParams();
+  const [, [, setTopShadow]] = React.useContext(ProfileContext);
   const { data, loading, error, fetchMore } = useUserShadowsPaginatedQuery({
     variables: {
       query: {
@@ -66,6 +68,12 @@ export const Medias: React.FC = () => {
       }
     });
   };
+
+  React.useEffect(() => {
+    if (data?.user_shadows_paginated.edges?.length) {
+      setTopShadow(data.user_shadows_paginated.edges[0].node);
+    }
+  }, [data, setTopShadow]);
 
   return (
     <Box>
