@@ -19,12 +19,13 @@ export default function ShadowRecommend() {
         justifyContent="space-between"
       >
         <Typography component="span" variant="h6">
-          电影推荐
+          最新发布
         </Typography>
         <Link
           onClick={RouterHelper.gotoShadowHome}
           color="textSecondary"
           variant="caption"
+          href=""
         >
           更多
         </Link>

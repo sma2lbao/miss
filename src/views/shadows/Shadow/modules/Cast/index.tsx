@@ -38,7 +38,10 @@ export const Cast: React.FC = () => {
                   <ListItemAvatar>
                     <Avatar src={item.avatar}></Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="" secondary="" />
+                  <ListItemText
+                    primary={item.name}
+                    secondary={item.description}
+                  />
                   {/* <ListItemSecondaryAction>
                     <IconButton>
                       <MoreVert />

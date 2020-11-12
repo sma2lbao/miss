@@ -11,7 +11,7 @@ export interface MediaBase {
   subtitle?: string;
   name?: string | null;
   alias_name?: string | null;
-  cover?: string;
+  cover?: string | null;
   posters?: readonly string[] | null;
   create_at?: Date;
   description?: string | null;

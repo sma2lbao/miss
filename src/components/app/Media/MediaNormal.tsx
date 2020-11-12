@@ -64,7 +64,7 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
   return (
     <Box className={classes.wrap} onClick={handleClickRoot}>
       <div className={classes.cover}>
-        <Image src={DEFULAT_SHADOW_COVER || props.cover} aspectRatio={16 / 9} />
+        <Image src={props.cover || DEFULAT_SHADOW_COVER} aspectRatio={16 / 9} />
         {props.duration && (
           <Duration
             classes={{ root: classes.duration }}
@@ -89,11 +89,11 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
           {props.title || props.name}
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center">
+          {/* <Typography variant="caption" color="textSecondary">
+            观看次数：TODO
+          </Typography> */}
           <Typography variant="caption" color="textSecondary">
-            {/* 观看次数：TODO */}
-          </Typography>
-          <Typography variant="caption" color="textSecondary">
-            {moment(props.create_at).format("YYYY-MM-DD")}
+            发布于：{moment(props.create_at).format("YYYY-MM-DD")}
           </Typography>
         </Box>
       </Box>

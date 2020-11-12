@@ -33,7 +33,7 @@ export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
   return (
     <Box className={classes.wrap} onClick={handleClickRoot}>
       <div className={classes.cover}>
-        <Image src={DEFULAT_SHADOW_COVER || props.cover} aspectRatio={16 / 9} />
+        <Image src={props.cover || DEFULAT_SHADOW_COVER} aspectRatio={16 / 9} />
         {props.duration && (
           <Duration
             classes={{ root: classes.duration }}

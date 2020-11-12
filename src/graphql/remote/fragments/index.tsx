@@ -41,11 +41,13 @@ export const SHADOW = gql`
 export const SOURCE = gql`
   fragment ShadowSource on ShadowMedium {
     id
+    cover
     url
     super_quality_url
     preview_url
     posters
     name
+    sub_name
     medium_quality_url
     low_quality_url
     high_quality_url

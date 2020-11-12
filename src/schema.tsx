@@ -1085,11 +1085,13 @@ export type ShadowQuery = {
     readonly sources: ReadonlyArray<{
       readonly __typename?: "ShadowMedium";
       readonly id: number | string;
+      readonly cover?: Maybe<string>;
       readonly url: string;
       readonly super_quality_url?: Maybe<string>;
       readonly preview_url?: Maybe<string>;
       readonly posters?: Maybe<ReadonlyArray<string>>;
       readonly name?: Maybe<string>;
+      readonly sub_name?: Maybe<string>;
       readonly medium_quality_url?: Maybe<string>;
       readonly low_quality_url?: Maybe<string>;
       readonly high_quality_url?: Maybe<string>;
@@ -1396,11 +1398,13 @@ export const ShadowFragmentDoc = gql`
 export const ShadowSourceFragmentDoc = gql`
   fragment ShadowSource on ShadowMedium {
     id
+    cover
     url
     super_quality_url
     preview_url
     posters
     name
+    sub_name
     medium_quality_url
     low_quality_url
     high_quality_url
