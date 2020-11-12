@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { MediaPlain } from "@/components/app/Media";
 import clsx from "clsx";
-import { useFollowHelper } from "@/hooks";
+import { useFollowHelper, useRouterHelper } from "@/hooks";
 import { ProfileContext } from "../..";
 import moment from "moment";
 
@@ -48,11 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Top: React.FC = () => {
   const classes = useStyles();
+  const RouterHelper = useRouterHelper();
   const [userQuery, [topShadow]] = React.useContext(ProfileContext);
   const { following, toggleFollow } = useFollowHelper({
     owner_uid: userQuery?.user.uid as string
   });
-  console.log(topShadow);
 
   return (
     <Box className={classes.root}>
@@ -102,7 +102,10 @@ export const Top: React.FC = () => {
         </Box>
       </div>
       <div className={classes.item}>
-        <MediaPlain {...topShadow} />
+        <MediaPlain
+          {...topShadow}
+          onClickRoot={() => RouterHelper.gotoShadow(topShadow?.id)}
+        />
       </div>
     </Box>
   );

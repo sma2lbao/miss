@@ -29,11 +29,13 @@ export interface MediaNormalProps extends MediaBase, MediaEvent {
   disabled?: boolean;
 }
 
-export interface MediaOwnProps extends MediaBase, MediaEvent {
+export interface MediaOwnProps
+  extends MediaBase,
+    Omit<MediaEvent, "onClickAuthor"> {
   disabled?: boolean;
 }
 
-export interface MediaPlainProps extends MediaEvent {
+export interface MediaPlainProps extends Omit<MediaEvent, "onClickAuthor"> {
   id?: number | string;
   cover?: string | null;
   duration?: number;

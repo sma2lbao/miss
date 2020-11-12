@@ -10,7 +10,7 @@ import {
 } from "@/layouts/PageLayout";
 // import Image from "@/components/Image";
 import { NextPlay, VideoInfo, Comment } from "./modules";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import { useShadowQuery, ShadowQuery, ShadowMedium } from "@/schema";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 
@@ -43,6 +43,11 @@ export const ShadowPlayContext = React.createContext<
 export default function ShadowPlay() {
   const classes = useStyles();
   const { id } = useParams();
+  const location = useLocation();
+
+  const { medium_id } = (location.state as any) || {
+    medium_id: undefined
+  };
   const [shadowMedium, setShadowMedium] = React.useState<
     ShadowMedium | undefined
   >();
@@ -54,9 +59,13 @@ export default function ShadowPlay() {
 
   React.useEffect(() => {
     if (data?.shadow?.sources?.length) {
-      setShadowMedium(data.shadow.sources[0]);
+      const playShadowMedium = data.shadow.sources.find(
+        item => +item.id === +medium_id
+      );
+      console.log("playShadowMedium: ", playShadowMedium);
+      setShadowMedium(playShadowMedium || data.shadow.sources[0]);
     }
-  }, [data]);
+  }, [data, medium_id]);
 
   return (
     <Box className={classes.root}>

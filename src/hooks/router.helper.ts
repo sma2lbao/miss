@@ -36,8 +36,11 @@ export const useRouterHelper = () => {
   };
 
   // go shadow play page.
-  const gotoShadowPlay = (shadow_id: number | undefined | string | null) => {
-    history.push(`${SHADOW_PLAY}/${shadow_id}`);
+  const gotoShadowPlay = (
+    shadow_id: number | undefined | string | null,
+    state?: any
+  ) => {
+    history.push(`${SHADOW_PLAY}/${shadow_id}`, state);
   };
 
   // go shadow upload.

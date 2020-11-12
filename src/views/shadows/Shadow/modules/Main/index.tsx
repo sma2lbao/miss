@@ -6,6 +6,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { MediaOwn } from "@/components/app/Media";
 import { ShadowContext } from "../..";
 import Placeholder from "@/components/base/Placeholder";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Main: React.FC = () => {
   const classes = useStyles();
+  const RouterHelper = useRouterHelper();
   const shadowQuery = React.useContext(ShadowContext);
+
+  const handleChangeMedium = id => {
+    RouterHelper.gotoShadowPlay(shadowQuery?.shadow.id, {
+      medium_id: id
+    });
+  };
 
   return (
     <Box className={classes.root}>
@@ -48,7 +56,10 @@ export const Main: React.FC = () => {
             {shadowQuery.shadow.sources.map((source, idx) => {
               return (
                 <GridListTile key={idx} cols={1}>
-                  <MediaOwn {...source} />
+                  <MediaOwn
+                    {...source}
+                    onClickRoot={() => handleChangeMedium(source.id)}
+                  />
                 </GridListTile>
               );
             })}

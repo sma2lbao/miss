@@ -14,6 +14,7 @@ import { useUserShadowsPaginatedQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import { SpecialBox } from "@/components/public/SpecialBox";
 import { ProfileContext } from "../..";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Medias: React.FC = () => {
   const classes = useStyles();
+  const RouterHelper = useRouterHelper();
   const { username } = useParams();
   const [, [, setTopShadow]] = React.useContext(ProfileContext);
   const { data, loading, error, fetchMore } = useUserShadowsPaginatedQuery({
@@ -83,7 +85,10 @@ export const Medias: React.FC = () => {
             {data.user_shadows_paginated.edges?.map(item => {
               return (
                 <GridListTile key={item.cursor} cols={1} rows={1}>
-                  <MediaOwn {...item.node} />
+                  <MediaOwn
+                    {...item.node}
+                    onClickRoot={() => RouterHelper.gotoShadow(item.node.id)}
+                  />
                 </GridListTile>
               );
             })}
