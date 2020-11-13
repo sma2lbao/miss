@@ -948,6 +948,7 @@ export type CurrentTopicQuery = {
         readonly cover: string;
         readonly posters?: Maybe<ReadonlyArray<string>>;
         readonly region: Region;
+        readonly about?: Maybe<string>;
         readonly sources?: Maybe<
           ReadonlyArray<{
             readonly __typename?: "ShadowMedium";
@@ -992,6 +993,7 @@ export type CurrentTopicQuery = {
       readonly cover: string;
       readonly posters?: Maybe<ReadonlyArray<string>>;
       readonly region: Region;
+      readonly about?: Maybe<string>;
       readonly sources?: Maybe<
         ReadonlyArray<{
           readonly __typename?: "ShadowMedium";
@@ -1042,6 +1044,7 @@ export type ShadowUrgesQuery = {
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
     readonly region: Region;
+    readonly about?: Maybe<string>;
     readonly sources?: Maybe<
       ReadonlyArray<{
         readonly __typename?: "ShadowMedium";
@@ -1140,6 +1143,7 @@ export type ShadowQuery = {
     readonly update_at: any;
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
+    readonly about?: Maybe<string>;
     readonly credits?: Maybe<
       ReadonlyArray<{
         readonly __typename?: "Character";
@@ -1211,6 +1215,7 @@ export type ShadowsPaginatedQuery = {
           readonly cover: string;
           readonly posters?: Maybe<ReadonlyArray<string>>;
           readonly region: Region;
+          readonly about?: Maybe<string>;
           readonly sources?: Maybe<
             ReadonlyArray<{
               readonly __typename?: "ShadowMedium";
@@ -1278,6 +1283,7 @@ export type UserShadowsPaginatedQuery = {
           readonly cover: string;
           readonly posters?: Maybe<ReadonlyArray<string>>;
           readonly region: Region;
+          readonly about?: Maybe<string>;
           readonly sources?: Maybe<
             ReadonlyArray<{
               readonly __typename?: "ShadowMedium";
@@ -1332,6 +1338,7 @@ export type ShadowUrgesByShadowQuery = {
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
     readonly region: Region;
+    readonly about?: Maybe<string>;
     readonly sources?: Maybe<
       ReadonlyArray<{
         readonly __typename?: "ShadowMedium";
@@ -1383,6 +1390,7 @@ export type ShadowNextUrgesByShadowQuery = {
     readonly cover: string;
     readonly posters?: Maybe<ReadonlyArray<string>>;
     readonly region: Region;
+    readonly about?: Maybe<string>;
     readonly sources?: Maybe<
       ReadonlyArray<{
         readonly __typename?: "ShadowMedium";
@@ -1588,6 +1596,7 @@ export const ShadowFragmentDoc = gql`
     cover
     posters
     region
+    about
     sources {
       ...ShadowSource
     }

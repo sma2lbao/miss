@@ -36,6 +36,7 @@ export const SHADOW = gql`
     cover
     posters
     region
+    about
     sources {
       ...ShadowSource
     }

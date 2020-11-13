@@ -72,7 +72,7 @@ export default function Shadow() {
                   <Relative />
                 </div>
                 <div hidden={tab !== TabStatus.ABOUT}>
-                  <About html={data?.shadow?.description || ""} />
+                  <About html={data?.shadow?.about || ""} />
                 </div>
               </div>
             </ContentScreen>
