@@ -24,7 +24,20 @@ export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
 
   return (
     <AspectRatioBox ratio={16 / 10}>
-      <ReactPlayer className={classes.player} {...rest} url={url} />
+      <ReactPlayer
+        className={classes.player}
+        {...rest}
+        url={url}
+        config={{
+          file: {
+            attributes: {
+              controlsList: "nodownload noremoteplayback",
+              disablePictureInPicture: true,
+              onContextMenu: e => e.preventDefault()
+            }
+          }
+        }}
+      />
     </AspectRatioBox>
   );
 };
