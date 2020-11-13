@@ -25,7 +25,6 @@ export default function ShadowRecommend() {
           onClick={RouterHelper.gotoShadowHome}
           color="textSecondary"
           variant="caption"
-          href=""
         >
           更多
         </Link>
