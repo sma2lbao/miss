@@ -88,6 +88,9 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
         <Typography variant="subtitle1" noWrap>
           {props.title || props.name}
         </Typography>
+        {props.showDescription && (
+          <Typography variant="body2">{props.description}</Typography>
+        )}
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* <Typography variant="caption" color="textSecondary">
             观看次数：TODO

@@ -145,7 +145,12 @@ export default function Comment() {
             )}
           </div>
         ) : (
-          <SpecialBox error={!!error} loading={loading} placeholder />
+          <SpecialBox
+            error={!!error}
+            loading={loading}
+            placeholder
+            placeholderTitle="暂无评论"
+          />
         )}
       </div>
     </Box>

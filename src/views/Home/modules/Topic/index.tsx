@@ -135,12 +135,16 @@ function Topic() {
                   ) {
                     return (
                       <React.Fragment>
-                        <div className={classes.bannerRoot}>
+                        <div
+                          className={classes.bannerRoot}
+                          style={{ display: "flex" }}
+                        >
                           {top_shadows.map((item, idx) => {
                             return (
                               <div
                                 key={idx}
                                 className={clsx(classes.bannerItem)}
+                                style={{ flex: 1 }}
                               >
                                 <MediaNormal
                                   {...item}
@@ -157,7 +161,10 @@ function Topic() {
                             );
                           })}
                           {top_shadows.length === 1 && (
-                            <div className={clsx(classes.bannerItem)}>
+                            <div
+                              style={{ flex: 1 }}
+                              className={clsx(classes.bannerItem)}
+                            >
                               <SpecialBox
                                 placeholder
                                 placeholderTitle="敬请期待"
@@ -177,6 +184,7 @@ function Topic() {
           <div className={classes.headItem}>
             {data.current_topic.top_shadow ? (
               <MediaNormal
+                showDescription
                 {...data?.current_topic.top_shadow}
                 onClickRoot={() =>
                   RouterHelper.gotoShadow(data?.current_topic?.top_shadow?.id)

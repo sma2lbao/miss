@@ -16,6 +16,8 @@ export interface MediaBase {
   create_at?: Date;
   description?: string | null;
   duration?: number | null;
+
+  showDescription?: boolean;
 }
 
 export interface MediaEvent {
