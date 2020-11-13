@@ -89,7 +89,9 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
           {props.title || props.name}
         </Typography>
         {props.showDescription && (
-          <Typography variant="body2">{props.description}</Typography>
+          <Typography variant="body2" color="textSecondary">
+            {props.description}
+          </Typography>
         )}
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* <Typography variant="caption" color="textSecondary">
