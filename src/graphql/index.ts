@@ -59,7 +59,7 @@ const errorLink = onError(
     }
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
-        Message.error(message || "服务器繁忙");
+        Message.error(message || "服务器繁忙", { preventDuplicate: true });
         Sentry.captureMessage(message);
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
@@ -75,7 +75,7 @@ const errorLink = onError(
     }
     if (networkError) {
       Sentry.captureException(networkError);
-      Message.error("服务器繁忙");
+      Message.error("服务器繁忙", { preventDuplicate: true });
       console.log(`[Network error]: ${networkError}`);
     }
   }

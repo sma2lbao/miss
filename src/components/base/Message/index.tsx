@@ -21,17 +21,17 @@ const ShowSnackbar: React.FC<SnackbarProps> = (props: SnackbarProps) => {
 };
 
 export const Message = {
-  success: function(msg: React.ReactNode) {
-    this.toast(msg, { variant: "success" });
+  success: function(msg: React.ReactNode, opts?: OptionsObject) {
+    this.toast(msg, { ...opts, variant: "success" });
   },
-  warning: function(msg: React.ReactNode) {
-    this.toast(msg, { variant: "warning" });
+  warning: function(msg: React.ReactNode, opts?: OptionsObject) {
+    this.toast(msg, { ...opts, variant: "warning" });
   },
-  info: function(msg: React.ReactNode) {
-    this.toast(msg, { variant: "info" });
+  info: function(msg: React.ReactNode, opts?: OptionsObject) {
+    this.toast(msg, { ...opts, variant: "info" });
   },
-  error: function(msg: React.ReactNode) {
-    this.toast(msg, { variant: "error" });
+  error: function(msg: React.ReactNode, opts?: OptionsObject) {
+    this.toast(msg, { ...opts, variant: "error" });
   },
   toast: function(msg: React.ReactNode, opts?: OptionsObject | undefined) {
     ReactDOM.render(

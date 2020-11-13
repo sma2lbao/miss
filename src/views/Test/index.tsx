@@ -4,7 +4,7 @@ import { FileUpload } from "@/components/app/FileUpload";
 const Test: React.FC = () => {
   return (
     <div>
-      <FileUpload />
+      <FileUpload maxSize={2} />
     </div>
   );
 };

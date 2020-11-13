@@ -5,6 +5,8 @@ export interface BaseFileUploadProps {
 
   title?: string;
 
+  maxSize?: number;
+
   component?: React.ElementType<any>;
 
   onComplete?(url: string): void;

@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { CloudUpload } from "@material-ui/icons";
 import { IPlaceholderProps } from "@/components/base/Placeholder/placeholder";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,8 +33,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const FileUpload: React.FC<BaseFileUploadProps> = props => {
-  const { onComplete, onError, children, component, custom, title } = props;
+  const {
+    onComplete,
+    onError,
+    children,
+    component,
+    custom,
+    title,
+    maxSize
+  } = props;
   const classes = useStyles(props);
+  const { enqueueSnackbar } = useSnackbar();
 
   const inputRef = React.createRef<HTMLInputElement>();
 
@@ -51,6 +61,10 @@ export const FileUpload: React.FC<BaseFileUploadProps> = props => {
       validity,
       files: [file]
     } = e.currentTarget;
+    if (maxSize && file.size > maxSize * 1024 * 1024) {
+      enqueueSnackbar("超出尺寸限制", { variant: "warning" });
+      return;
+    }
     if (validity.valid) {
       upload_file_oss({ variables: { file } });
     }
@@ -89,5 +103,6 @@ export const FileUpload: React.FC<BaseFileUploadProps> = props => {
 
 FileUpload.defaultProps = {
   custom: false,
-  title: "点击上传"
+  title: "点击上传",
+  maxSize: 200
 };
