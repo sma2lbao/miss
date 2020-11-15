@@ -35,6 +35,13 @@ const useStyles = makeStyles((theme: Theme) =>
         right: 8
       }
     },
+    desc: {
+      overflow: "hidden",
+      display: "-webkit-box",
+      textOverflow: "ellipsis",
+      "-webkit-line-clamp": 2,
+      "-webkit-box-orient": "vertical"
+    },
     duration: {
       position: "absolute",
       left: 10,
@@ -89,7 +96,11 @@ export const MediaNormal: React.FC<MediaNormalProps> = (
           {props.title || props.name}
         </Typography>
         {props.showDescription && (
-          <Typography variant="body2" color="textSecondary">
+          <Typography
+            className={classes.desc}
+            variant="body2"
+            color="textSecondary"
+          >
             {props.description}
           </Typography>
         )}

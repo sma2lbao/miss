@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { LoadingBaseProps } from "./loading";
-import { Typography } from "@material-ui/core";
+import { Icon, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
       height: (props: LoadingBaseProps) => {
         return props.height ?? "100%";
       },
-      flex: 1
+      flex: 1,
+      padding: theme.spacing(2, 0)
     },
     logo: theme.custom.base.icon.large,
     "@keyframes skeleton-busy-animate": {
@@ -48,7 +49,7 @@ export const LoadingDefault: React.FC<LoadingBaseProps> = (
 
   return (
     <div className={classes.root}>
-      <i className={clsx("iconfont icon-logo", classes.logo)}></i>
+      <Icon className={clsx("iconfont icon-logo", classes.logo)}></Icon>
       {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
       {children}

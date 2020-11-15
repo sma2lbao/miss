@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
         return props.height ?? "100%";
       },
       color: theme.palette.text.secondary,
-      flex: 1
+      flex: 1,
+      padding: theme.spacing(2, 0)
     },
     icon: (props: IPlaceholderProps) =>
       props.size ? { fontSize: props.size } : theme.custom.base.icon.large

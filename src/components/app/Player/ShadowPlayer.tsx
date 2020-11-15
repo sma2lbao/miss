@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     player: {
       width: "100% !important",
-      height: "100% !important"
+      height: "100% !important",
+      background: "#000"
     }
   })
 );
@@ -23,7 +24,7 @@ export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
   const { url, ...rest } = props;
 
   return (
-    <AspectRatioBox ratio={16 / 10}>
+    <AspectRatioBox ratio={16 / 9}>
       <ReactPlayer
         className={classes.player}
         {...rest}

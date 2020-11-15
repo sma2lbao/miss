@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { BaseExceptionProps } from "./exception";
-import { Typography } from "@material-ui/core";
+import { Icon, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
         return props.height ?? "100%";
       },
       color: theme.palette.text.secondary,
-      flex: 1
+      flex: 1,
+      padding: theme.spacing(2, 0)
     },
     icon: theme.custom.base.icon.large
   })
@@ -31,9 +32,7 @@ export const ExceptionDefault: React.FC<BaseExceptionProps> = (
   const { title, subtitle, children } = props;
   return (
     <div className={classes.root}>
-      <div>
-        <i className={clsx("iconfont icon-404", classes.icon)}></i>
-      </div>
+      <Icon className={clsx("iconfont icon-404", classes.icon)}></Icon>
       {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
       {children}
