@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 export const Account: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { hasLogged, member } = useAuth();
+  const { hasLogged, member, clearAccessToken } = useAuth();
   const RouterHelper = useRouterHelper();
   const classes = useStyles();
 
@@ -33,6 +33,11 @@ export const Account: React.FC = () => {
 
   const handleLogin = () => {
     RouterHelper.redirectAuthLogin();
+  };
+
+  const handleLogout = () => {
+    _close();
+    clearAccessToken();
   };
 
   return (
@@ -63,9 +68,7 @@ export const Account: React.FC = () => {
             open={Boolean(anchorEl)}
             onClose={_close}
           >
-            <MenuItem disabled onClick={_close}>
-              退出
-            </MenuItem>
+            <MenuItem onClick={handleLogout}>退出</MenuItem>
           </Menu>
         </>
       ) : (

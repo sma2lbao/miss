@@ -13,21 +13,6 @@ export const useAuth = () => {
   const access_token = useReactiveVar(accessTokenVar);
   const location = useLocation();
 
-  React.useEffect(() => {
-    if (access_token) {
-      meQuery();
-    } else {
-      setMember(null);
-      setHasLogged(false);
-    }
-
-    if (data?.me) {
-      setHasLogged(true);
-      setMember(data?.me);
-    }
-    return () => {};
-  }, [access_token, data, meQuery]);
-
   const verify = () => {
     const { __referrer_from__ } = (location.state as any) || {
       __referrer_from__: { pathname: "/" }
@@ -46,10 +31,30 @@ export const useAuth = () => {
     accessTokenVar(access_token);
   };
 
+  const clearAccessToken = () => {
+    localStorage.removeItem("access_token");
+    accessTokenVar(undefined);
+  };
+
+  React.useEffect(() => {
+    if (access_token) {
+      meQuery();
+      if (data?.me) {
+        setHasLogged(true);
+        setMember(data?.me);
+      }
+    } else {
+      setMember(null);
+      setHasLogged(false);
+    }
+    return () => {};
+  }, [access_token, data, meQuery]);
+
   return {
     hasLogged,
     member,
     verify,
-    setAccessToken
+    setAccessToken,
+    clearAccessToken
   };
 };
