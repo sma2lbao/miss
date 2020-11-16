@@ -112,3 +112,24 @@ export const REVIEWS_PAGINATED = gql`
     }
   }
 `;
+
+export const SEARCH_SHADOWS_PAGINATED = gql`
+  query searchShadowsPaginated($word: String, $query: PaginatedQuery) {
+    search_shadows_paginated(word: $word, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          ...Shadow
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+`;

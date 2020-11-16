@@ -8,7 +8,8 @@ import {
   SHADOW_PLAY,
   SHADOW_UPLOAD,
   AUTH_COMPLETION,
-  AUTH_LOGIN
+  AUTH_LOGIN,
+  SEARCH
 } from "@/common/constants/route.constant";
 
 export const useRouterHelper = () => {
@@ -64,6 +65,11 @@ export const useRouterHelper = () => {
     );
   };
 
+  // go search page.
+  const gotoSearch = word => {
+    history.push(`${SEARCH}/${word}`);
+  };
+
   return {
     push: (path: string, state?: any) => {
       history.push(path, state);
@@ -78,6 +84,7 @@ export const useRouterHelper = () => {
     gotoShadowPlay,
     gotoShadowUpload,
     gotoAuthCompletion,
-    redirectAuthLogin
+    redirectAuthLogin,
+    gotoSearch
   };
 };

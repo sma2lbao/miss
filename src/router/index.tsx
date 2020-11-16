@@ -23,6 +23,7 @@ const Forbidden = React.lazy(() => import("@/views/public/Forbidden"));
 const InternalServerError = React.lazy(() =>
   import("@/views/public/InternalServer")
 );
+const Search = React.lazy(() => import("@/views/public/Search"));
 const Test = React.lazy(() => import("@/views/Test"));
 
 function AppRoute() {
@@ -76,12 +77,19 @@ function AppRoute() {
           layout={MainLayout}
         />
         <Route lazy path="/personal" component={Personal} layout={MainLayout} />
+        <Route
+          path="/search/:word"
+          lazy
+          component={Search}
+          layout={MainLayout}
+        />
         <Route lazy path="/resume" component={Resume} />
         <Route lazy path="/login" component={Login} />
         <Route lazy path="/completion" component={Completion} />
         <Route lazy path="/403" exact component={Forbidden} />
         <Route lazy path="/404" exact component={NotFound} />
         <Route lazy path="/50x" exact component={InternalServerError} />
+
         <Route path="/not-support" component={H5NotSupported} />
         <Route lazy path="/test" exact component={Test} layout={MainLayout} />
         <Route lazy component={NotFound} />

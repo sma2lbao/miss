@@ -415,6 +415,7 @@ export type Query = {
   readonly is_following: Scalars["Boolean"];
   readonly vote: Vote;
   readonly medium_vote_count: Scalars["Int"];
+  readonly search_shadows_paginated: ShadowPaginated;
 };
 
 export type QueryCategoryArgs = {
@@ -499,6 +500,11 @@ export type QueryVoteArgs = {
 export type QueryMedium_Vote_CountArgs = {
   status: Scalars["String"];
   medium_id: Scalars["Float"];
+};
+
+export type QuerySearch_Shadows_PaginatedArgs = {
+  query?: Maybe<PaginatedQuery>;
+  word?: Maybe<Scalars["String"]>;
 };
 
 export enum Region {
@@ -1451,6 +1457,74 @@ export type ReviewsPaginatedQuery = {
           readonly content: string;
           readonly create_at: any;
           readonly update_at: any;
+          readonly author: {
+            readonly __typename?: "User";
+            readonly uid: number | string;
+            readonly avatar: string;
+            readonly nickname?: Maybe<string>;
+            readonly username: string;
+            readonly description?: Maybe<string>;
+          };
+        };
+      }>
+    >;
+  };
+};
+
+export type SearchShadowsPaginatedQueryVariables = Exact<{
+  word?: Maybe<Scalars["String"]>;
+  query?: Maybe<PaginatedQuery>;
+}>;
+
+export type SearchShadowsPaginatedQuery = {
+  readonly __typename?: "Query";
+  readonly search_shadows_paginated: {
+    readonly __typename?: "ShadowPaginated";
+    readonly totalCount: number;
+    readonly pageInfo: {
+      readonly __typename?: "ShadowPageInfo";
+      readonly hasNextPage: boolean;
+      readonly endCursor: string;
+    };
+    readonly edges?: Maybe<
+      ReadonlyArray<{
+        readonly __typename?: "ShadowEdge";
+        readonly cursor: string;
+        readonly node: {
+          readonly __typename?: "Shadow";
+          readonly id: number | string;
+          readonly description?: Maybe<string>;
+          readonly title: string;
+          readonly sub_title?: Maybe<string>;
+          readonly create_at: any;
+          readonly update_at: any;
+          readonly cover: string;
+          readonly posters?: Maybe<ReadonlyArray<string>>;
+          readonly region: Region;
+          readonly about?: Maybe<string>;
+          readonly sources?: Maybe<
+            ReadonlyArray<{
+              readonly __typename?: "ShadowMedium";
+              readonly id: number | string;
+              readonly cover?: Maybe<string>;
+              readonly url: string;
+              readonly super_quality_url?: Maybe<string>;
+              readonly preview_url?: Maybe<string>;
+              readonly posters?: Maybe<ReadonlyArray<string>>;
+              readonly name?: Maybe<string>;
+              readonly sub_name?: Maybe<string>;
+              readonly medium_quality_url?: Maybe<string>;
+              readonly low_quality_url?: Maybe<string>;
+              readonly high_quality_url?: Maybe<string>;
+              readonly duration?: Maybe<number>;
+              readonly description?: Maybe<string>;
+              readonly alias_name?: Maybe<string>;
+              readonly create_at: any;
+              readonly update_at: any;
+              readonly vote_like_count?: Maybe<number>;
+              readonly vote_dislike_count?: Maybe<number>;
+            }>
+          >;
           readonly author: {
             readonly __typename?: "User";
             readonly uid: number | string;
@@ -3097,6 +3171,78 @@ export type ReviewsPaginatedLazyQueryHookResult = ReturnType<
 export type ReviewsPaginatedQueryResult = ApolloReactCommon.QueryResult<
   ReviewsPaginatedQuery,
   ReviewsPaginatedQueryVariables
+>;
+export const SearchShadowsPaginatedDocument = gql`
+  query searchShadowsPaginated($word: String, $query: PaginatedQuery) {
+    search_shadows_paginated(word: $word, query: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          ...Shadow
+          author {
+            ...Author
+          }
+        }
+      }
+    }
+  }
+  ${ShadowFragmentDoc}
+  ${AuthorFragmentDoc}
+`;
+
+/**
+ * __useSearchShadowsPaginatedQuery__
+ *
+ * To run a query within a React component, call `useSearchShadowsPaginatedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchShadowsPaginatedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchShadowsPaginatedQuery({
+ *   variables: {
+ *      word: // value for 'word'
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useSearchShadowsPaginatedQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    SearchShadowsPaginatedQuery,
+    SearchShadowsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    SearchShadowsPaginatedQuery,
+    SearchShadowsPaginatedQueryVariables
+  >(SearchShadowsPaginatedDocument, baseOptions);
+}
+export function useSearchShadowsPaginatedLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    SearchShadowsPaginatedQuery,
+    SearchShadowsPaginatedQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    SearchShadowsPaginatedQuery,
+    SearchShadowsPaginatedQueryVariables
+  >(SearchShadowsPaginatedDocument, baseOptions);
+}
+export type SearchShadowsPaginatedQueryHookResult = ReturnType<
+  typeof useSearchShadowsPaginatedQuery
+>;
+export type SearchShadowsPaginatedLazyQueryHookResult = ReturnType<
+  typeof useSearchShadowsPaginatedLazyQuery
+>;
+export type SearchShadowsPaginatedQueryResult = ApolloReactCommon.QueryResult<
+  SearchShadowsPaginatedQuery,
+  SearchShadowsPaginatedQueryVariables
 >;
 export const IsFollowingDocument = gql`
   query isFollowing($owner_uid: String!, $follower_uid: String) {

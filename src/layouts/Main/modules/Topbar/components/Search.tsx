@@ -2,6 +2,7 @@ import * as React from "react";
 import { Search as SearchIcon } from "@material-ui/icons";
 import { Theme, InputBase } from "@material-ui/core";
 import { createStyles, makeStyles, fade } from "@material-ui/core/styles";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -33,13 +34,27 @@ const useStyles = makeStyles((theme: Theme) => {
 
 export default function Search() {
   const classes = useStyles();
+  const [word, setWord] = React.useState("");
+  const RouterHelper = useRouterHelper();
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (event.keyCode === 13 && word) {
+      RouterHelper.gotoSearch(word);
+    }
+  };
+
   return (
     <div className={classes.search}>
       <SearchIcon className={classes.icon} />
       <InputBase
+        value={word}
+        onChange={e => setWord(e.target.value)}
         classes={{ input: classes.input }}
         placeholder="搜索"
         inputProps={{ "aria-label": "Search" }}
+        onKeyDown={handleKeyDown}
       />
     </div>
   );

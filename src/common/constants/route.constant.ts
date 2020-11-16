@@ -21,3 +21,6 @@ export const AUTH_COMPLETION = "/completion";
 
 // auth login page
 export const AUTH_LOGIN = "/login";
+
+// search page
+export const SEARCH = "/search";

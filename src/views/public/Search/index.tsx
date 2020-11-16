@@ -1,31 +1,28 @@
 import * as React from "react";
-import { MediaNormal } from "@/components/app/Media";
+import { useParams } from "react-router-dom";
 import {
-  ContentScreen,
-  AiderScreen,
+  FullScreen,
   BodyScreen,
-  FullScreen
+  ContentScreen,
+  AiderScreen
 } from "@/layouts/PageLayout";
-import { Filter, Sort } from "./modules";
-import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Box,
-  // Fab,
-  // useScrollTrigger,
-  // Zoom,
+  GridList,
+  GridListTile,
   Button,
   Typography,
-  GridList,
-  GridListTile
+  createStyles,
+  makeStyles,
+  Theme
 } from "@material-ui/core";
-// import { KeyboardArrowUp } from "@material-ui/icons";
-import { useShadowsPaginatedQuery } from "@/schema";
-import { useRouterHelper } from "@/hooks";
+import { MediaNormal } from "@/components/app/Media";
 import { SpecialBox } from "@/components/public/SpecialBox";
-
-interface Props {
-  window?: () => Window;
-}
+import {
+  useSearchShadowsPaginatedQuery,
+  SearchShadowsPaginatedQuery
+} from "@/schema";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,59 +60,64 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ShadowHome(props: Props) {
+export const Search: React.FC = () => {
+  const { word } = useParams();
   const RouterHelper = useRouterHelper();
-  const { data, loading, error, fetchMore } = useShadowsPaginatedQuery({
+  const classes = useStyles();
+  const { data, loading, error, fetchMore } = useSearchShadowsPaginatedQuery({
     variables: {
       query: {
         last: 16
-      }
+      },
+      word: word
     }
   });
+
   const loadMore = () => {
     fetchMore({
       variables: {
         query: {
           last: 8,
-          before: data?.shadows_paginated?.pageInfo?.endCursor
-        }
+          before: data?.search_shadows_paginated?.pageInfo?.endCursor
+        },
+        word: word
       },
-      updateQuery: (previousQueryResult, { fetchMoreResult }) => {
-        if (fetchMoreResult?.shadows_paginated?.edges) {
+      updateQuery: (
+        previousQueryResult: SearchShadowsPaginatedQuery,
+        { fetchMoreResult }
+      ) => {
+        if (fetchMoreResult?.search_shadows_paginated.edges) {
           const {
             edges,
             pageInfo,
             totalCount
-          } = fetchMoreResult.shadows_paginated;
+          } = fetchMoreResult.search_shadows_paginated;
           return {
-            shadows_paginated: {
+            search_shadows_paginated: {
               pageInfo,
               totalCount,
-              edges: [...previousQueryResult.shadows_paginated.edges, ...edges],
-              __typename: previousQueryResult.shadows_paginated.__typename
+              edges: [
+                ...previousQueryResult.search_shadows_paginated.edges,
+                ...edges
+              ],
+              __typename:
+                previousQueryResult.search_shadows_paginated.__typename
             }
           };
         }
+
         return previousQueryResult;
       }
     });
   };
 
-  const classes = useStyles();
-  // const { window } = props;
-  // const trigger = useScrollTrigger({
-  //   target: window ? window() : undefined,
-  //   disableHysteresis: true,
-  //   threshold: 500,
-  // });
-
   return (
     <FullScreen>
       <BodyScreen>
         <ContentScreen className={classes.content}>
-          {data?.shadows_paginated?.edges?.length ? (
+          {data?.search_shadows_paginated?.edges?.length ? (
             <Box className={classes.gridRoot}>
-              {data?.shadows_paginated?.edges?.map((edge: any) => {
+              {data?.search_shadows_paginated?.edges?.map((edge: any) => {
                 return (
                   <div key={edge.cursor} className={classes.gridCard}>
                     <MediaNormal
@@ -134,7 +136,7 @@ export default function ShadowHome(props: Props) {
               loading={loading}
               error={!!error}
               placeholder
-              placeholderTitle="暂无结果"
+              placeholderTitle="暂无搜索结果"
               loadingNode={
                 <GridList cellHeight="auto" cols={4}>
                   {[0, 0, 0, 0, 0, 0, 0, 0].map((_, index: number) => {
@@ -149,7 +151,7 @@ export default function ShadowHome(props: Props) {
             />
           )}
 
-          {data?.shadows_paginated?.pageInfo?.hasNextPage && (
+          {data?.search_shadows_paginated?.pageInfo?.hasNextPage && (
             <Box className={classes.footer}>
               <Button onClick={loadMore} disabled={loading}>
                 <Typography color="textSecondary" variant="caption">
@@ -160,16 +162,12 @@ export default function ShadowHome(props: Props) {
           )}
         </ContentScreen>
         <AiderScreen sticky className={classes.aider}>
-          <Sort />
-          <Filter />
+          {/* <Sort /> */}
+          {/* <Filter /> */}
         </AiderScreen>
-
-        {/* <Zoom in={trigger}>
-          <Fab size="small" className={classes.scollButton}>
-            <KeyboardArrowUp />
-          </Fab>
-        </Zoom> */}
       </BodyScreen>
     </FullScreen>
   );
-}
+};
+
+export default Search;
