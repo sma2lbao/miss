@@ -25,6 +25,7 @@ export default function ShadowRecommend() {
           onClick={RouterHelper.gotoShadowHome}
           color="textSecondary"
           variant="caption"
+          style={{ cursor: "pointer" }}
         >
           更多
         </Link>
