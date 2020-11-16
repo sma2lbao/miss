@@ -14,6 +14,7 @@ import { useParams, useLocation } from "react-router";
 import { useShadowQuery, ShadowQuery, ShadowMedium } from "@/schema";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import { Alert } from "@material-ui/lab";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,6 +72,9 @@ export default function ShadowPlay() {
 
   return (
     <Box className={classes.root}>
+      <Helmet>
+        <title>{data?.shadow.title}</title>
+      </Helmet>
       <ShadowPlayContext.Provider value={[data, shadowMedium]}>
         <FullScreen>
           <BodyScreen>

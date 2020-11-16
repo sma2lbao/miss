@@ -11,6 +11,7 @@ import {
 import { useShadowQuery, ShadowQuery } from "@/schema";
 import { useParams } from "react-router";
 import { SpecialBox } from "@/components/public/SpecialBox";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,6 +51,9 @@ export default function Shadow() {
 
   return (
     <Box>
+      <Helmet>
+        <title>{data?.shadow.title}</title>
+      </Helmet>
       {data?.shadow ? (
         <ShadowContext.Provider value={data}>
           <FullScreen>

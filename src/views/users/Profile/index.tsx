@@ -11,6 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useUserQuery, UserQuery, Shadow } from "@/schema";
 import { SpecialBox } from "@/components/public/SpecialBox";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,6 +44,9 @@ export default function Profile() {
 
   return (
     <FullScreen>
+      <Helmet>
+        <title>{data?.user.username || data?.user.nickname}的个人主页</title>
+      </Helmet>
       {data?.user ? (
         <BodyScreen>
           <ProfileContext.Provider value={[data, [topShadow, setTopShadow]]}>
