@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { ShadowPlayer } from "@/components/app/Player";
-import { Box } from "@material-ui/core";
+import { Box, Collapse } from "@material-ui/core";
 import {
   FullScreen,
   BodyScreen,
@@ -13,6 +13,7 @@ import { NextPlay, VideoInfo, Comment } from "./modules";
 import { useParams, useLocation } from "react-router";
 import { useShadowQuery, ShadowQuery, ShadowMedium } from "@/schema";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,6 +46,8 @@ export default function ShadowPlay() {
   const { id } = useParams();
   const location = useLocation();
 
+  const [notice, setNotice] = React.useState(true);
+
   const { medium_id } = (location.state as any) || {
     medium_id: undefined
   };
@@ -62,7 +65,6 @@ export default function ShadowPlay() {
       const playShadowMedium = data.shadow.sources.find(
         item => +item.id === +medium_id
       );
-      console.log("playShadowMedium: ", playShadowMedium);
       setShadowMedium(playShadowMedium || data.shadow.sources[0]);
     }
   }, [data, medium_id]);
@@ -71,6 +73,14 @@ export default function ShadowPlay() {
     <Box className={classes.root}>
       <ShadowPlayContext.Provider value={[data, shadowMedium]}>
         <FullScreen>
+          <BodyScreen>
+            <Collapse in={notice} style={{ width: "100%" }}>
+              <Alert severity="warning" onClose={() => setNotice(false)}>
+                {/* <AlertTitle>重要消息</AlertTitle> */}
+                服务器配置有限，请耐心等待加载...
+              </Alert>
+            </Collapse>
+          </BodyScreen>
           <BodyScreen>
             <ShadowPlayer
               controls
