@@ -45,7 +45,9 @@ export default function Profile() {
   return (
     <FullScreen>
       <Helmet>
-        <title>{data?.user.username || data?.user.nickname}的个人主页</title>
+        <title>
+          {`${data?.user.username || data?.user.nickname}`}的个人主页
+        </title>
       </Helmet>
       {data?.user ? (
         <BodyScreen>

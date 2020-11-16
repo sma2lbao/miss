@@ -33,12 +33,20 @@ export const Basic: React.FC = () => {
     data: fansData,
     loading: fansLoading,
     error: fansError
-  } = useFansTotalQuery();
+  } = useFansTotalQuery({
+    variables: {
+      owner_uid: userQuery?.user.uid.toString()
+    }
+  });
   const {
     data: followsData,
     loading: followsLoading,
     error: followsError
-  } = useFollowsTotalQuery();
+  } = useFollowsTotalQuery({
+    variables: {
+      follower_uid: userQuery?.user.uid.toString()
+    }
+  });
 
   return (
     <div className={classes.root}>

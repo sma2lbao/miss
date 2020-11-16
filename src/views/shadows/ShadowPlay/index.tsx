@@ -81,7 +81,7 @@ export default function ShadowPlay() {
             <Collapse in={notice} style={{ width: "100%" }}>
               <Alert severity="warning" onClose={() => setNotice(false)}>
                 {/* <AlertTitle>重要消息</AlertTitle> */}
-                服务器配置有限，请耐心等待加载...
+                服务器配置低，请耐心等待加载...
               </Alert>
             </Collapse>
           </BodyScreen>

@@ -23,8 +23,8 @@ export const AddComment = (props: AddCommentProps) => {
         onChange={e => setContent(e.target.value)}
         placeholder=""
       />
-      <Button onClick={handleSend} disabled={!content}>
-        Send
+      <Button variant="outlined" onClick={handleSend} disabled={!content}>
+        提交
       </Button>
     </div>
   );
