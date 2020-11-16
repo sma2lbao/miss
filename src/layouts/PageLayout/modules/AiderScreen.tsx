@@ -8,9 +8,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       maxWidth: 400,
-      flexGrow: 1,
-      flexShrink: 1,
-      flexBasis: "auto"
+      flex: 1
+      // flexGrow: 1,
+      // flexShrink: 1,
+      // flexBasis: "auto"
     },
     agent: (props: AiderScreenLayoutProps) => {
       const keys = Object.keys(theme.mixins.toolbar);
