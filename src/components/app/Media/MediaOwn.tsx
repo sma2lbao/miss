@@ -46,11 +46,11 @@ export const MediaOwn: React.FC<MediaOwnProps> = (props: MediaOwnProps) => {
           {props.title || props.name}
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="caption" color="textSecondary">
+          {/* <Typography variant="caption" color="textSecondary">
             观看次数：TODO
-          </Typography>
+          </Typography> */}
           <Typography variant="caption" color="textSecondary">
-            {moment(props.create_at).format("YYYY-MM-DD")}
+            发布于：{moment(props.create_at).format("YYYY-MM-DD")}
           </Typography>
         </Box>
       </Box>

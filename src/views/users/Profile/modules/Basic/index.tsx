@@ -57,11 +57,11 @@ export const Basic: React.FC = () => {
         </div>
         <Typography gutterBottom className={classes.pirmaryColor}>
           <SpecialBoxText loading={fansLoading} error={!!fansError} />
-          {fansData?.fans_total || 0} Subscribers
+          {fansData?.fans_total || 0} 粉丝
         </Typography>
         <Typography gutterBottom className={classes.pirmaryColor}>
           <SpecialBoxText loading={followsLoading} error={!!followsError} />
-          {followsData?.follows_total || 0} Follower
+          {followsData?.follows_total || 0} 关注
         </Typography>
         <Typography
           component="div"

@@ -77,8 +77,8 @@ export const Top: React.FC = () => {
             {shadowQuery?.shadow.description}
           </Typography>
           <Box mt={3}>
-            <IconButton onClick={goShadowPlay}>
-              <PlayCircleOutline />
+            <IconButton color="inherit" onClick={goShadowPlay}>
+              <PlayCircleOutline fontSize="large" />
             </IconButton>
           </Box>
         </div>

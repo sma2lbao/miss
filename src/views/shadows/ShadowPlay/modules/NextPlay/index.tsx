@@ -4,9 +4,11 @@ import { GridList, GridListTile, Typography, Box } from "@material-ui/core";
 import { useShadowNextUrgesByShadowQuery } from "@/schema";
 import { useParams } from "react-router-dom";
 import Placeholder from "@/components/base/Placeholder";
+import { useRouterHelper } from "@/hooks";
 
 export default function NextPlay() {
   const { id } = useParams();
+  const RouterHelper = useRouterHelper();
   const { data, error, loading } = useShadowNextUrgesByShadowQuery({
     variables: {
       shadow_id: id
@@ -28,7 +30,13 @@ export default function NextPlay() {
           {data.shadow_next_urges_by_shadow.map((item, idx) => {
             return (
               <GridListTile cols={1} key={idx}>
-                <MediaNormal {...item} />
+                <MediaNormal
+                  {...item}
+                  onClickRoot={() => RouterHelper.gotoShadow(item.id)}
+                  onClickAuthor={() =>
+                    RouterHelper.gotoProfile(item.author.username)
+                  }
+                />
               </GridListTile>
             );
           })}

@@ -235,7 +235,7 @@ export const EditTop = React.forwardRef<EditTopHandles, unknown>(
               placeholder="请输入电影描述..."
             />
             <Box mt={3}>
-              <IconButton size="medium" disabled>
+              <IconButton color="inherit" disabled>
                 <PlayCircleOutline fontSize="large" />
               </IconButton>
             </Box>
