@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center"
     },
-    icon: theme.custom.base.icon.small,
+    icon: theme.custom.base?.icon.small,
     tabPane: {
       marginTop: theme.spacing(2)
     }

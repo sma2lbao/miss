@@ -14,7 +14,10 @@ declare module "@material-ui/core/styles/createMuiTheme" {
 }
 
 const CustomThemeContext = React.createContext<
-  [Theme, (payload: ThemeOptions, customPayload?: CustomOption) => void]
+  [
+    Theme,
+    (payload: ThemeOptions, customPayload?: Partial<CustomOption>) => void
+  ]
 >([createMuiTheme(), () => {}]);
 
 export const CustomThemeProvider: React.FC = props => {
@@ -33,7 +36,7 @@ export const CustomThemeProvider: React.FC = props => {
 
   const handleChangeCustomTheme = (
     payload: ThemeOptions,
-    customPayload?: CustomOption
+    customPayload?: Partial<CustomOption>
   ) => {
     const newCustomTheme = createMuiTheme(
       {
@@ -63,7 +66,7 @@ export const CustomThemeProvider: React.FC = props => {
 
 export const useCustomTheme = (): [
   Theme,
-  (payload: ThemeOptions, customPayload?: CustomOption) => void
+  (payload: ThemeOptions, customPayload?: Partial<CustomOption>) => void
 ] => {
   const [custom, changeCustom] = React.useContext(CustomThemeContext);
   return [custom, changeCustom];
