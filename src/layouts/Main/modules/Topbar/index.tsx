@@ -13,6 +13,7 @@ import {
 import { AddCircle, Brightness1, Brightness2 } from "@material-ui/icons";
 import Search from "./components/Search";
 import Account from "./components/Account";
+// import ColorPicker from "./components/ColorPicker";
 // import Notice from "./components/Notice";
 import { useRouterHelper } from "@/hooks";
 import { Logo } from "@/components/base/Icons";
@@ -66,6 +67,7 @@ export default function Topbar() {
             </IconButton>
           </Box>
           <Box display="flex" alignItems="center">
+            {/* <ColorPicker /> */}
             <Search />
             {/* <Notice /> */}
             <>

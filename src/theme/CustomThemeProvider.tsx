@@ -35,7 +35,6 @@ export const CustomThemeProvider: React.FC = props => {
     payload: ThemeOptions,
     customPayload?: CustomOption
   ) => {
-    console.log("theme before: ", payload);
     const newCustomTheme = createMuiTheme(
       {
         palette,
@@ -48,7 +47,6 @@ export const CustomThemeProvider: React.FC = props => {
         ...customPayload
       }
     );
-    console.log("theme changing: ", newCustomTheme);
     setCustomTheme(newCustomTheme);
   };
 
