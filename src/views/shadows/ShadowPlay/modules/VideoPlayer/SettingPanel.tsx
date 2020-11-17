@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: 300,
       minHeight: 450,
-      backgroundColor: "#fff"
+      backgroundColor: theme.palette.background.paper
     }
   })
 );

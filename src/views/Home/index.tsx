@@ -15,12 +15,12 @@ import { Alert } from "@material-ui/lab";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      backgroundColor: "#fff",
+      backgroundColor: theme.palette.background.paper,
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8)
     },
     aider: {
-      backgroundColor: "#fff",
+      backgroundColor: theme.palette.background.paper,
       width: "100%",
       padding: theme.spacing(2, 2),
       borderLeft: "1px solid",
