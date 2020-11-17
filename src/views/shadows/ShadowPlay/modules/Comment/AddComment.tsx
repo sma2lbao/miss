@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, Button } from "@material-ui/core";
+import { Input, Button, Box } from "@material-ui/core";
 
 export interface AddCommentProps {
   onSubmit?: (text: string, callbacak: () => void) => void;
@@ -17,16 +17,17 @@ export const AddComment = (props: AddCommentProps) => {
   };
 
   return (
-    <div>
+    <Box display="flex">
       <Input
+        fullWidth
         value={content}
         onChange={e => setContent(e.target.value)}
-        placeholder=""
+        placeholder="随便发点~"
       />
       <Button variant="outlined" onClick={handleSend} disabled={!content}>
         提交
       </Button>
-    </div>
+    </Box>
   );
 };
 

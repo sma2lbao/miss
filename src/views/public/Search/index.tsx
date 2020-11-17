@@ -23,6 +23,7 @@ import {
   SearchShadowsPaginatedQuery
 } from "@/schema";
 import { useRouterHelper } from "@/hooks";
+import { Placeholder } from "@/components/base/Placeholder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -164,6 +165,7 @@ export const Search: React.FC = () => {
         <AiderScreen sticky className={classes.aider}>
           {/* <Sort /> */}
           {/* <Filter /> */}
+          <Placeholder title="更多功能，敬请期待" />
         </AiderScreen>
       </BodyScreen>
     </FullScreen>

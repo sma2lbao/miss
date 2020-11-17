@@ -72,9 +72,9 @@ export const EditInfo = React.forwardRef<EditInfoHandles, unknown>(
               />
             </Typography>
             <Box display="flex">
-              <Typography variant="caption" className={classes.infoItem}>
+              {/* <Typography variant="caption" className={classes.infoItem}>
                 观看: TODO
-              </Typography>
+              </Typography> */}
               <Typography variant="caption" className={classes.infoItem}>
                 发布时间: {moment(Date.now()).format("YYYY-MM-DD HH:mm")}
               </Typography>
@@ -85,13 +85,13 @@ export const EditInfo = React.forwardRef<EditInfoHandles, unknown>(
               <IconButton size="small">
                 <ThumbDownAlt fontSize="small" />
               </IconButton>
-              <Typography className={classes.toolText}>TODO</Typography>
+              <Typography className={classes.toolText}>--</Typography>
             </Box>
             <Box className={classes.toolBox}>
               <IconButton size="small">
                 <ThumbUpAlt fontSize="small" />
               </IconButton>
-              <Typography className={classes.toolText}>TODO</Typography>
+              <Typography className={classes.toolText}>--</Typography>
             </Box>
             <IconButton size="small">
               <MoreVert fontSize="small" />

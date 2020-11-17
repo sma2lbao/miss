@@ -6,7 +6,8 @@ import {
   Theme,
   createStyles,
   Typography,
-  Icon
+  Icon,
+  Box
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,8 +39,9 @@ export const PlaceholderDefault: React.FC<IPlaceholderProps> = (
   const { title, subtitle, children } = props;
   return (
     <div className={classes.root}>
-      {/* <div> */}
-      <Icon className={clsx("iconfont icon-404", classes.icon)}></Icon>
+      <Box mb={1}>
+        <Icon className={clsx("iconfont icon-logo", classes.icon)}></Icon>
+      </Box>
       {/* </div> */}
       {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}

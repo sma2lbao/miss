@@ -94,9 +94,9 @@ export default function VideoInfo() {
             {shadowPlayQuery?.shadow.title}
           </Typography>
           <Box display="flex">
-            <Typography variant="caption" className={classes.infoItem}>
+            {/* <Typography variant="caption" className={classes.infoItem}>
               观看: TODO
-            </Typography>
+            </Typography> */}
             <Typography variant="caption" className={classes.infoItem}>
               发布时间:{" "}
               {moment(shadowPlayQuery?.shadow.create_at).format(

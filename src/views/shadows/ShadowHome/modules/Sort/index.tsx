@@ -14,7 +14,7 @@ import Placeholder from "@/components/base/Placeholder";
 // );
 
 export default function Sort() {
-  return <Placeholder title="TODO Sort." />;
+  return <Placeholder title="排序功能正在开发中" />;
   // const classes = useStyles();
   // const [sorts, setSorts] = React.useState(() => [1, 2]);
 

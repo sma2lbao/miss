@@ -129,7 +129,7 @@ export default function SignIn() {
             variant="outlined"
             margin="normal"
           />
-          <Button variant="contained" onClick={_sendVerifyCode}>
+          <Button variant="text" onClick={_sendVerifyCode}>
             获取验证码
           </Button>
         </Box>

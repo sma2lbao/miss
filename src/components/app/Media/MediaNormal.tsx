@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
     avatar: {
       width: 56,
       height: 56,
-      backgroundColor: "#fff",
-      border: "3px solid #fff",
+      backgroundColor: theme.palette.background.paper,
+      border: "3px solid",
+      borderColor: theme.palette.background.paper,
       position: "absolute",
       bottom: -28,
       right: 10,

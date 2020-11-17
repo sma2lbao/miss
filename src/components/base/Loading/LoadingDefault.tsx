@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { LoadingBaseProps } from "./loading";
-import { Icon, Typography } from "@material-ui/core";
+import { Box, Icon, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,7 +49,9 @@ export const LoadingDefault: React.FC<LoadingBaseProps> = (
 
   return (
     <div className={classes.root}>
-      <Icon className={clsx("iconfont icon-logo", classes.logo)}></Icon>
+      <Box mb={1}>
+        <Icon className={clsx("iconfont icon-logo", classes.logo)}></Icon>
+      </Box>
       {title && <Typography variant="h6">{title}</Typography>}
       {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
       {children}
