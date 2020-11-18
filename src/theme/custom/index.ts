@@ -1,7 +1,7 @@
 import layout, { LayoutOptions } from "./layout";
 import base, { BaseOptions } from "./base";
 
-export interface customOption {
+export interface CustomOption {
   layout: LayoutOptions;
   base: BaseOptions;
 }

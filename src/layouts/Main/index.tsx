@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: "100%",
-      backgroundColor: "#f5f5f5"
+      backgroundColor: theme.palette.background.default
     },
     drawer: {
       width: 290

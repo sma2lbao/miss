@@ -3,6 +3,7 @@ import { SignIn, SignUp, Swiper } from "./modules";
 import { Button, Box } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Logo } from "@/components/base/Icons";
+import { useRouterHelper } from "@/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Login() {
   const classes = useStyles();
+  const RouterHelper = useRouterHelper();
   const [tag, setTag] = React.useState(0);
 
   return (
@@ -55,7 +57,7 @@ export default function Login() {
       </div>
       <div className={classes.right}>
         <div className={classes.rightHeader}>
-          <Logo fontSize="large" />
+          <Logo fontSize="large" onClick={RouterHelper.gotoHome} />
           {tag === 1 && (
             <Button variant="outlined" color="primary" onClick={_ => setTag(0)}>
               Sign In

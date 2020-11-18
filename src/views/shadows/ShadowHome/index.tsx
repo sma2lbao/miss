@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: theme.palette.background.paper
     },
     aider: {
-      backgroundColor: "#fff",
+      backgroundColor: theme.palette.background.paper,
       width: "100%",
       padding: theme.spacing(2, 2),
       borderLeft: "1px solid",

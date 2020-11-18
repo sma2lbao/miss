@@ -22,6 +22,7 @@ export interface PlayerBaseProps
 export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
   const classes = useStyles();
   const { url, ...rest } = props;
+  const isM3u8 = url?.toString().endsWith(".m3u8");
 
   return (
     <AspectRatioBox ratio={16 / 9}>
@@ -31,6 +32,7 @@ export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
         url={url}
         config={{
           file: {
+            forceHLS: isM3u8,
             attributes: {
               controlsList: "nodownload noremoteplayback",
               disablePictureInPicture: true,

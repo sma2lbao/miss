@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route, RouteProps } from "react-router-dom";
 import { LoadingDefault } from "@/components/base/Loading";
 import { useAuth, useRouterHelper } from "@/hooks";
+import { Helmet } from "react-helmet";
 // import Message from "@/components/base/Message";
 
 interface IProps extends RouteProps {
@@ -38,17 +39,22 @@ export const RouteWithLayout = (props: IProps) => {
     <Route
       {...rest}
       render={matchProps => (
-        <Layout>
-          {lazy ? (
-            <React.Suspense
-              fallback={Loading ? <Loading /> : <LoadingDefault />}
-            >
+        <>
+          <Helmet>
+            <title>miss | 相忘于江湖</title>
+          </Helmet>
+          <Layout>
+            {lazy ? (
+              <React.Suspense
+                fallback={Loading ? <Loading /> : <LoadingDefault />}
+              >
+                <Component {...matchProps} />
+              </React.Suspense>
+            ) : (
               <Component {...matchProps} />
-            </React.Suspense>
-          ) : (
-            <Component {...matchProps} />
-          )}
-        </Layout>
+            )}
+          </Layout>
+        </>
       )}
     />
   ) : (
@@ -57,14 +63,26 @@ export const RouteWithLayout = (props: IProps) => {
       render={matchProps => {
         if (lazy) {
           return (
-            <React.Suspense
-              fallback={Loading ? <Loading /> : <LoadingDefault />}
-            >
-              <Component {...matchProps} />
-            </React.Suspense>
+            <>
+              <Helmet>
+                <title>miss | 相忘于江湖</title>
+              </Helmet>
+              <React.Suspense
+                fallback={Loading ? <Loading /> : <LoadingDefault />}
+              >
+                <Component {...matchProps} />
+              </React.Suspense>
+            </>
           );
         } else {
-          return <Component {...matchProps} />;
+          return (
+            <>
+              <Helmet>
+                <title>miss | 相忘于江湖</title>
+              </Helmet>
+              <Component {...matchProps} />
+            </>
+          );
         }
       }}
     />

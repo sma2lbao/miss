@@ -6,14 +6,18 @@ import {
   // Typography,
   Box,
   Divider,
-  IconButton
+  IconButton,
+  Zoom,
+  Tooltip
 } from "@material-ui/core";
-import { AddCircle } from "@material-ui/icons";
+import { AddCircle, Brightness1, Brightness2 } from "@material-ui/icons";
 import Search from "./components/Search";
 import Account from "./components/Account";
-import Notice from "./components/Notice";
+// import ColorPicker from "./components/ColorPicker";
+// import Notice from "./components/Notice";
 import { useRouterHelper } from "@/hooks";
 import { Logo } from "@/components/base/Icons";
+import { useCustomTheme } from "@/theme";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -35,32 +39,25 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-type ToggleidebarFunc = (...args: any[]) => void;
-
-interface TopbarProps {}
-
-export default function Topbar(props: TopbarProps) {
+export default function Topbar() {
   const classes = useStyles();
   const RouterHelper = useRouterHelper();
+  const [customTheme, changeCustomTheme] = useCustomTheme();
+  const changeThemeType = (type: "dark" | "light") => {
+    // theme.palette.type = type;
+    changeCustomTheme({
+      palette: {
+        type: type
+      }
+    });
+  };
+
   return (
     <>
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Toolbar classes={{ root: classes.toolbar }}>
           <Box display="flex" alignItems="center">
             <Logo fontSize="large" onClick={RouterHelper.gotoHome} />
-            {/* <div>
-              <Icon
-                fontSize="large"
-                className={clsx("iconfont icon-logo")}
-              ></Icon>
-            </div> */}
-            {/* <IconButton
-              size="small"
-              onClick={props.toggleSidebar}
-              className={classes.icon}
-            >
-              <Menu fontSize="small" />
-            </IconButton> */}
             <IconButton
               onClick={RouterHelper.gotoShadowUpload}
               size="small"
@@ -70,8 +67,28 @@ export default function Topbar(props: TopbarProps) {
             </IconButton>
           </Box>
           <Box display="flex" alignItems="center">
+            {/* <ColorPicker /> */}
             <Search />
-            <Notice />
+            {/* <Notice /> */}
+            <>
+              <Tooltip
+                TransitionComponent={Zoom}
+                title="切换模式"
+                placement="bottom"
+                enterDelay={600}
+                arrow
+              >
+                {customTheme.palette.type === "dark" ? (
+                  <IconButton onClick={() => changeThemeType("light")}>
+                    <Brightness1 color="inherit" />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={() => changeThemeType("dark")}>
+                    <Brightness2 color="inherit" />
+                  </IconButton>
+                )}
+              </Tooltip>
+            </>
             <Account />
           </Box>
         </Toolbar>
