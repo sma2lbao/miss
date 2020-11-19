@@ -13,7 +13,8 @@ import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrap: {
-      position: "relative"
+      position: "relative",
+      width: "100%"
     },
     tool: {
       position: "absolute",
