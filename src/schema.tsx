@@ -29,6 +29,7 @@ export type Bullet = {
 export type Category = {
   readonly __typename?: "Category";
   readonly id: Scalars["ID"];
+  readonly mark: Scalars["String"];
   readonly label: Scalars["String"];
   readonly alias?: Maybe<Scalars["String"]>;
   readonly description?: Maybe<Scalars["String"]>;
@@ -54,6 +55,7 @@ export type CreateBulletInput = {
 };
 
 export type CreateCategoryInput = {
+  readonly mark: Scalars["String"];
   readonly label: Scalars["String"];
   readonly alias?: Maybe<Scalars["String"]>;
   readonly description?: Maybe<Scalars["String"]>;
@@ -101,6 +103,7 @@ export type CreateShadowInput = {
 export type CreateShadowMediumInput = {
   readonly name: Scalars["String"];
   readonly url: Scalars["String"];
+  readonly youtube_url?: Maybe<Scalars["String"]>;
   readonly sub_name?: Maybe<Scalars["String"]>;
   readonly alias_name?: Maybe<Scalars["String"]>;
   readonly cover?: Maybe<Scalars["String"]>;
@@ -203,6 +206,7 @@ export type Medium = {
   readonly medium_quality_url?: Maybe<Scalars["String"]>;
   readonly high_quality_url?: Maybe<Scalars["String"]>;
   readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly youtube_url?: Maybe<Scalars["String"]>;
   readonly votes?: Maybe<ReadonlyArray<Vote>>;
   readonly vote_like_count?: Maybe<Scalars["Float"]>;
   readonly vote_dislike_count?: Maybe<Scalars["Float"]>;
@@ -596,6 +600,7 @@ export type ShadowMedium = {
   readonly medium_quality_url?: Maybe<Scalars["String"]>;
   readonly high_quality_url?: Maybe<Scalars["String"]>;
   readonly super_quality_url?: Maybe<Scalars["String"]>;
+  readonly youtube_url?: Maybe<Scalars["String"]>;
   readonly votes?: Maybe<ReadonlyArray<Vote>>;
   readonly vote_like_count?: Maybe<Scalars["Float"]>;
   readonly vote_dislike_count?: Maybe<Scalars["Float"]>;
@@ -969,6 +974,7 @@ export type CurrentTopicQuery = {
             readonly medium_quality_url?: Maybe<string>;
             readonly low_quality_url?: Maybe<string>;
             readonly high_quality_url?: Maybe<string>;
+            readonly youtube_url?: Maybe<string>;
             readonly duration?: Maybe<number>;
             readonly description?: Maybe<string>;
             readonly alias_name?: Maybe<string>;
@@ -1014,6 +1020,7 @@ export type CurrentTopicQuery = {
           readonly medium_quality_url?: Maybe<string>;
           readonly low_quality_url?: Maybe<string>;
           readonly high_quality_url?: Maybe<string>;
+          readonly youtube_url?: Maybe<string>;
           readonly duration?: Maybe<number>;
           readonly description?: Maybe<string>;
           readonly alias_name?: Maybe<string>;
@@ -1065,6 +1072,7 @@ export type ShadowUrgesQuery = {
         readonly medium_quality_url?: Maybe<string>;
         readonly low_quality_url?: Maybe<string>;
         readonly high_quality_url?: Maybe<string>;
+        readonly youtube_url?: Maybe<string>;
         readonly duration?: Maybe<number>;
         readonly description?: Maybe<string>;
         readonly alias_name?: Maybe<string>;
@@ -1180,6 +1188,7 @@ export type ShadowQuery = {
         readonly medium_quality_url?: Maybe<string>;
         readonly low_quality_url?: Maybe<string>;
         readonly high_quality_url?: Maybe<string>;
+        readonly youtube_url?: Maybe<string>;
         readonly duration?: Maybe<number>;
         readonly description?: Maybe<string>;
         readonly alias_name?: Maybe<string>;
@@ -1236,6 +1245,7 @@ export type ShadowsPaginatedQuery = {
               readonly medium_quality_url?: Maybe<string>;
               readonly low_quality_url?: Maybe<string>;
               readonly high_quality_url?: Maybe<string>;
+              readonly youtube_url?: Maybe<string>;
               readonly duration?: Maybe<number>;
               readonly description?: Maybe<string>;
               readonly alias_name?: Maybe<string>;
@@ -1304,6 +1314,7 @@ export type UserShadowsPaginatedQuery = {
               readonly medium_quality_url?: Maybe<string>;
               readonly low_quality_url?: Maybe<string>;
               readonly high_quality_url?: Maybe<string>;
+              readonly youtube_url?: Maybe<string>;
               readonly duration?: Maybe<number>;
               readonly description?: Maybe<string>;
               readonly alias_name?: Maybe<string>;
@@ -1359,6 +1370,7 @@ export type ShadowUrgesByShadowQuery = {
         readonly medium_quality_url?: Maybe<string>;
         readonly low_quality_url?: Maybe<string>;
         readonly high_quality_url?: Maybe<string>;
+        readonly youtube_url?: Maybe<string>;
         readonly duration?: Maybe<number>;
         readonly description?: Maybe<string>;
         readonly alias_name?: Maybe<string>;
@@ -1411,6 +1423,7 @@ export type ShadowNextUrgesByShadowQuery = {
         readonly medium_quality_url?: Maybe<string>;
         readonly low_quality_url?: Maybe<string>;
         readonly high_quality_url?: Maybe<string>;
+        readonly youtube_url?: Maybe<string>;
         readonly duration?: Maybe<number>;
         readonly description?: Maybe<string>;
         readonly alias_name?: Maybe<string>;
@@ -1516,6 +1529,7 @@ export type SearchShadowsPaginatedQuery = {
               readonly medium_quality_url?: Maybe<string>;
               readonly low_quality_url?: Maybe<string>;
               readonly high_quality_url?: Maybe<string>;
+              readonly youtube_url?: Maybe<string>;
               readonly duration?: Maybe<number>;
               readonly description?: Maybe<string>;
               readonly alias_name?: Maybe<string>;
@@ -1650,6 +1664,7 @@ export const ShadowSourceFragmentDoc = gql`
     medium_quality_url
     low_quality_url
     high_quality_url
+    youtube_url
     duration
     description
     alias_name
