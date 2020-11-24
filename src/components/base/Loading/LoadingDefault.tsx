@@ -7,8 +7,8 @@ import { Box, Icon, Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      "-webkit-background-clip": "text",
       backgroundClip: "text",
+      "-webkit-background-clip": "text",
       fontWeight: "bold",
       color: "transparent",
       backgroundRepeat: "no-repeat",
