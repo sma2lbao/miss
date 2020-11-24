@@ -1,16 +1,16 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Recommend, Topic, Aider } from "./modules";
-import { Divider, Collapse, Link } from "@material-ui/core";
+// import { Topic } from "./modules";
+// import { Divider, Collapse, Link } from "@material-ui/core";
 import {
   BodyScreen,
   ContentScreen,
-  AiderScreen,
+  // AiderScreen,
   FullScreen
 } from "@/layouts/PageLayout";
-import { useReactiveVar } from "@apollo/client";
-import { noticeFlagVar } from "@/graphql/variables";
-import { Alert } from "@material-ui/lab";
+// import { useReactiveVar } from "@apollo/client";
+// import { noticeFlagVar } from "@/graphql/variables";
+// import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,14 +46,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Home() {
   const classes = useStyles();
-  const notice_flag = useReactiveVar(noticeFlagVar);
+  // const notice_flag = useReactiveVar(noticeFlagVar);
 
   return (
     <FullScreen>
-      <BodyScreen>
+      {/* <BodyScreen>
         <Collapse in={notice_flag} className={classes.alertWrap}>
           <Alert severity="warning" onClose={() => noticeFlagVar(false)}>
-            {/* <AlertTitle>重要消息</AlertTitle> */}
             网站功能正在完善中，如果在使用过程中遇到任何问题欢迎提bug。
             <Link
               target="_blank"
@@ -64,16 +63,16 @@ export default function Home() {
             </Link>
           </Alert>
         </Collapse>
-      </BodyScreen>
+      </BodyScreen> */}
       <BodyScreen>
         <ContentScreen className={classes.main}>
-          <Topic />
-          <Divider />
-          <Recommend />
+          {/* <Topic /> */}
+          {/* <Divider /> */}
+          {/* <Recommend /> */}
         </ContentScreen>
-        <AiderScreen sticky className={classes.aider}>
+        {/* <AiderScreen sticky className={classes.aider}>
           <Aider />
-        </AiderScreen>
+        </AiderScreen> */}
       </BodyScreen>
     </FullScreen>
   );

@@ -115,11 +115,17 @@
     "apollo": "^2.30.1",
     "env-cmd": "^10.1.0",
     "faker": "^5.1.0",
+    "prerender-spa-plugin": "^3.4.0",
     "react-app-rewired": "^2.1.5",
     "react-snap": "^1.23.0"
   },
   "reactSnap": {
+    "fixWebpackChunksIssue": false,
+    "puppeteerIgnoreHTTPSErrors": true,
     "inlineCss": true,
-    "puppeteerIgnoreHTTPSErrors": true
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
   }
 }
