@@ -1,16 +1,16 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Recommend, Topic, Aider } from "./modules";
-import { Divider, Collapse, Link } from "@material-ui/core";
 import {
+  AiderScreen,
   BodyScreen,
   ContentScreen,
-  AiderScreen,
   FullScreen
 } from "@/layouts/PageLayout";
-import { useReactiveVar } from "@apollo/client";
 import { noticeFlagVar } from "@/graphql/variables";
+import { Collapse, Link, Divider } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import { Topic, Aider, Recommend } from "./modules";
+import { useReactiveVar } from "@apollo/client";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,7 +53,6 @@ export default function Home() {
       <BodyScreen>
         <Collapse in={notice_flag} className={classes.alertWrap}>
           <Alert severity="warning" onClose={() => noticeFlagVar(false)}>
-            {/* <AlertTitle>重要消息</AlertTitle> */}
             网站功能正在完善中，如果在使用过程中遇到任何问题欢迎提bug。
             <Link
               target="_blank"

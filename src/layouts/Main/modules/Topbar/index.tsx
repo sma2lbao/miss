@@ -4,11 +4,11 @@ import {
   AppBar,
   Toolbar,
   // Typography,
-  Box,
   Divider,
   IconButton,
   Zoom,
-  Tooltip
+  Tooltip,
+  Box
 } from "@material-ui/core";
 import { AddCircle, Brightness1, Brightness2 } from "@material-ui/icons";
 import Search from "./components/Search";

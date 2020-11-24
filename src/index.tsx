@@ -23,13 +23,55 @@ Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN
 });
 
-// ReactDOM.render(<App />, document.getElementById("root"));
-const rootElement = document.getElementById("root");
-if (rootElement?.hasChildNodes()) {
-  ReactDOM.hydrate(<App />, rootElement);
-} else {
-  ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
+// create a public-path.js
+const isPrerender =
+  window["__PRERENDER_INJECTED__"] &&
+  window["__PRERENDER_INJECTED__"].isPrerender;
+
+if (isPrerender) {
+  // add your condition for the prerendering
+  const getAllCSS = () => {
+    let styles = "";
+    const stylesheets = document.styleSheets;
+
+    for (const stylesheet of stylesheets) {
+      if (
+        !stylesheet.href &&
+        stylesheet.cssRules &&
+        stylesheet.cssRules.length
+      ) {
+        for (const rule of stylesheet.cssRules) {
+          styles += rule.cssText;
+        }
+      }
+    }
+
+    return styles;
+  };
+  const styles = getAllCSS();
+
+  const removeAllStyleTagsFromHead = head => {
+    const styleTags = head.querySelectorAll("style");
+    for (const styleTag of styleTags) {
+      styleTag.remove();
+    }
+  };
+
+  const head = document.head;
+  removeAllStyleTagsFromHead(head);
+
+  const elStyle = document.createElement("style");
+  elStyle.innerHTML = styles;
+  head.appendChild(elStyle);
 }
+
+// const rootElement = document.getElementById("root");
+// if (rootElement?.hasChildNodes()) {
+//   ReactDOM.hydrate(<App />, rootElement);
+// } else {
+//   ReactDOM.render(<App />, document.getElementById("root"));
+// }
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

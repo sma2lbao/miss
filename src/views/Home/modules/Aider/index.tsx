@@ -59,7 +59,13 @@ export default function Aider() {
               );
             })
           ) : (
-            <SpecialBox loading={loading} error={!!error} />
+            <SpecialBox
+              loading={loading}
+              loadingTitle="加载中"
+              error={!!error}
+              placeholder
+              placeholderTitle="加载中"
+            />
           )}
         </List>
       </div>

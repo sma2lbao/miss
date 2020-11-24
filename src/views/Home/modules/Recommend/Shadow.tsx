@@ -64,6 +64,18 @@ export default function ShadowRecommend() {
               })}
             </GridList>
           }
+          placeholder
+          placeholderNode={
+            <GridList cellHeight="auto" cols={4}>
+              {[0, 0, 0, 0, 0, 0, 0, 0].map((_, index: number) => {
+                return (
+                  <GridListTile key={index} cols={1}>
+                    <MediaNormal loading />
+                  </GridListTile>
+                );
+              })}
+            </GridList>
+          }
         />
       )}
     </Box>
