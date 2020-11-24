@@ -56,6 +56,7 @@ export const SOURCE = gql`
     medium_quality_url
     low_quality_url
     high_quality_url
+    youtube_url
     duration
     description
     alias_name

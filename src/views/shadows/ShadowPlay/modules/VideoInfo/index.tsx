@@ -140,7 +140,7 @@ export default function VideoInfo() {
         </Box>
       </Box>
       <Typography className={classes.description} variant="body2">
-        {shadowPlayQuery?.shadow.description}
+        {shadowMedium?.description || shadowPlayQuery?.shadow.description}
       </Typography>
 
       <Box display="flex" justifyContent="space-between" alignItems="center">

@@ -22,20 +22,34 @@ export interface PlayerBaseProps
 export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
   const classes = useStyles();
   const { url, ...rest } = props;
+  const isM3u8 = url?.toString().endsWith(".m3u8");
+  const videoRef = React.createRef<ReactPlayer>();
 
   return (
     <AspectRatioBox ratio={16 / 9}>
       <ReactPlayer
+        ref={videoRef}
         className={classes.player}
         {...rest}
         url={url}
         config={{
           file: {
+            forceHLS: isM3u8,
             attributes: {
               controlsList: "nodownload noremoteplayback",
               disablePictureInPicture: true,
               onContextMenu: e => e.preventDefault()
             }
+          },
+          youtube: {
+            playerVars: {
+              autoplay: rest.playing,
+              modestbranding: 1,
+              rel: 0,
+              showinfo: 0,
+              controls: rest.controls
+            },
+            embedOptions: {}
           }
         }}
       />
@@ -44,7 +58,8 @@ export const ShadowPlayer: React.FC<PlayerBaseProps> = props => {
 };
 
 ShadowPlayer.defaultProps = {
-  controls: true
+  controls: true,
+  playing: true
 };
 
 export default ShadowPlayer;

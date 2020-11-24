@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { ShadowPlayer } from "@/components/app/Player";
+import { ShadowPlayer, withThird } from "@/components/app/Player";
 import { Box, Collapse } from "@material-ui/core";
 import {
   FullScreen,
@@ -15,6 +15,8 @@ import { useShadowQuery, ShadowQuery, ShadowMedium } from "@/schema";
 import { DEFULAT_SHADOW_COVER } from "@/common/constants/default.constant";
 import { Alert } from "@material-ui/lab";
 import { Helmet } from "react-helmet";
+
+const ThirdShadowPlayer = withThird(ShadowPlayer);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,9 +88,10 @@ export default function ShadowPlay() {
             </Collapse>
           </BodyScreen>
           <BodyScreen>
-            <ShadowPlayer
+            <ThirdShadowPlayer
               controls
               playing
+              youtubeUrl={shadowMedium?.youtube_url}
               url={shadowMedium?.url}
               light={
                 shadowMedium?.cover ? shadowMedium?.cover : DEFULAT_SHADOW_COVER
