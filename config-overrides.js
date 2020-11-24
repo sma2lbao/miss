@@ -2,7 +2,7 @@ const path = require("path");
 const PrerenderSPAPlugin = require("prerender-spa-plugin");
 
 module.exports = {
-  webpack: function(config, env) {
+  webpack: function (config, env) {
     // config.module.rules.push({
     //   test: /\.(graphql|gql)$/,
     //   exclude: /node_modules/,
@@ -32,11 +32,8 @@ module.exports = {
           renderer: new PrerenderSPAPlugin.PuppeteerRenderer({
             injectProperty: "__PRERENDER_INJECTED__",
             inject: {
-              isServer: true,
+              isPrerender: true,
             },
-            renderAfterTime: 1000000,
-            headless: false,
-            devtools: true,
           }),
         }),
       ]);
@@ -44,8 +41,8 @@ module.exports = {
 
     return config;
   },
-  devServer: function(configFunction) {
-    return function(proxy, allowedHost) {
+  devServer: function (configFunction) {
+    return function (proxy, allowedHost) {
       // Create the default config by calling configFunction with the proxy/allowedHost parameters
       const config = configFunction(proxy, allowedHost);
       // Change the https certificate options to match your certificate, using the .env file to
@@ -61,7 +58,7 @@ module.exports = {
       return config;
     };
   },
-  paths: function(paths, env) {
+  paths: function (paths, env) {
     // ...add your paths config
     return paths;
   },

@@ -8,8 +8,7 @@ import {
   IconButton,
   Zoom,
   Tooltip,
-  Box,
-  NoSsr
+  Box
 } from "@material-ui/core";
 import { AddCircle, Brightness1, Brightness2 } from "@material-ui/icons";
 import Search from "./components/Search";
@@ -57,18 +56,16 @@ export default function Topbar() {
     <>
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Toolbar classes={{ root: classes.toolbar }}>
-          <NoSsr>
-            <Box display="flex" alignItems="center">
-              <Logo fontSize="large" onClick={RouterHelper.gotoHome} />
-              <IconButton
-                onClick={RouterHelper.gotoShadowUpload}
-                size="small"
-                className={classes.icon}
-              >
-                <AddCircle fontSize="small" />
-              </IconButton>
-            </Box>
-          </NoSsr>
+          <Box display="flex" alignItems="center">
+            <Logo fontSize="large" onClick={RouterHelper.gotoHome} />
+            <IconButton
+              onClick={RouterHelper.gotoShadowUpload}
+              size="small"
+              className={classes.icon}
+            >
+              <AddCircle fontSize="small" />
+            </IconButton>
+          </Box>
           <Box display="flex" alignItems="center">
             {/* <ColorPicker /> */}
             <Search />

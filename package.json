@@ -43,8 +43,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "generate": "graphql-codegen --config codegen.yml",
-    "///postbuild": "react-snap"
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "husky": {
     "hooks": {
@@ -116,16 +115,6 @@
     "env-cmd": "^10.1.0",
     "faker": "^5.1.0",
     "prerender-spa-plugin": "^3.4.0",
-    "react-app-rewired": "^2.1.5",
-    "react-snap": "^1.23.0"
-  },
-  "reactSnap": {
-    "fixWebpackChunksIssue": false,
-    "puppeteerIgnoreHTTPSErrors": true,
-    "inlineCss": true,
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ]
+    "react-app-rewired": "^2.1.5"
   }
 }

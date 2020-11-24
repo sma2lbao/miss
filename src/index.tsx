@@ -22,8 +22,49 @@ Sentry.init({
   enabled: process.env.NODE_ENV === "production",
   dsn: process.env.REACT_APP_SENTRY_DSN
 });
-debugger;
+
 ReactDOM.render(<App />, document.getElementById("root"));
+// create a public-path.js
+const isPrerender =
+  window["__PRERENDER_INJECTED__"] &&
+  window["__PRERENDER_INJECTED__"].isPrerender;
+
+if (isPrerender) {
+  // add your condition for the prerendering
+  const getAllCSS = () => {
+    let styles = "";
+    const stylesheets = document.styleSheets;
+
+    for (const stylesheet of stylesheets) {
+      if (
+        !stylesheet.href &&
+        stylesheet.cssRules &&
+        stylesheet.cssRules.length
+      ) {
+        for (const rule of stylesheet.cssRules) {
+          styles += rule.cssText;
+        }
+      }
+    }
+
+    return styles;
+  };
+  const styles = getAllCSS();
+
+  const removeAllStyleTagsFromHead = head => {
+    const styleTags = head.querySelectorAll("style");
+    for (const styleTag of styleTags) {
+      styleTag.remove();
+    }
+  };
+
+  const head = document.head;
+  removeAllStyleTagsFromHead(head);
+
+  const elStyle = document.createElement("style");
+  elStyle.innerHTML = styles;
+  head.appendChild(elStyle);
+}
 
 // const rootElement = document.getElementById("root");
 // if (rootElement?.hasChildNodes()) {
