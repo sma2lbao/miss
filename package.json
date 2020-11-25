@@ -32,6 +32,7 @@
     "react-scripts": "3.2.0",
     "react-swipeable-views": "^0.13.3",
     "react-test-renderer": "^16.13.1",
+    "source-map-explorer": "^2.5.0",
     "subscriptions-transport-ws": "^0.9.17",
     "three": "^0.112.1",
     "typescript": "^3.9.7"
@@ -43,7 +44,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "husky": {
     "hooks": {
