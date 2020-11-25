@@ -23,48 +23,69 @@ Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN
 });
 
-ReactDOM.render(<App />, document.getElementById("root"));
-// create a public-path.js
-const isPrerender =
-  window["__PRERENDER_INJECTED__"] &&
-  window["__PRERENDER_INJECTED__"].isPrerender;
+const rootElement = document.getElementById("root");
+if (rootElement?.hasChildNodes()) {
+  ReactDOM.hydrate(<App />, rootElement, () => {
+    const ssStyles = document.getElementById("server-side-styles");
+    console.log("ssStyles", ssStyles);
+    ssStyles?.parentNode?.removeChild(ssStyles);
+  });
+} else {
+  ReactDOM.render(<App />, document.getElementById("root"), () => {
+    prerender();
+  });
+}
 
-if (isPrerender) {
-  // add your condition for the prerendering
-  const getAllCSS = () => {
-    let styles = "";
-    const stylesheets = document.styleSheets;
+function prerender() {
+  // create a public-path.js
+  const isPrerender =
+    window["__PRERENDER_INJECTED__"] &&
+    window["__PRERENDER_INJECTED__"].isPrerender;
 
-    for (const stylesheet of stylesheets) {
-      if (
-        !stylesheet.href &&
-        stylesheet.cssRules &&
-        stylesheet.cssRules.length
-      ) {
-        for (const rule of stylesheet.cssRules) {
-          styles += rule.cssText;
+  if (isPrerender) {
+    // add your condition for the prerendering
+    const getAllCSS = () => {
+      let styles = "";
+      const stylesheets = document.styleSheets;
+
+      for (const stylesheet of stylesheets) {
+        if (
+          !stylesheet.href &&
+          stylesheet.cssRules &&
+          stylesheet.cssRules.length
+        ) {
+          for (const rule of stylesheet.cssRules) {
+            styles += rule.cssText;
+          }
         }
       }
-    }
 
-    return styles;
-  };
-  const styles = getAllCSS();
+      return styles;
+    };
+    const styles = getAllCSS();
 
-  const removeAllStyleTagsFromHead = head => {
-    const styleTags = head.querySelectorAll("style");
-    for (const styleTag of styleTags) {
-      styleTag.remove();
-    }
-  };
+    const removeAllStyleTagsFromHead = head => {
+      const styleTags = head.querySelectorAll("style");
+      for (const styleTag of styleTags) {
+        styleTag.remove();
+      }
+    };
 
-  const head = document.head;
-  removeAllStyleTagsFromHead(head);
+    const head = document.head;
+    removeAllStyleTagsFromHead(head);
 
-  const elStyle = document.createElement("style");
-  elStyle.innerHTML = styles;
-  head.appendChild(elStyle);
+    const elStyle = document.createElement("style");
+    elStyle.id = "server-side-styles";
+    elStyle.innerHTML = styles;
+    head.appendChild(elStyle);
+  }
 }
+
+// ReactDOM.render(<App />, document.getElementById("root"), () => {
+//   const ssStyles = document.getElementById("server-side-styles");
+//   console.log("ssStyles", ssStyles);
+//   // ssStyles?.parentNode?.removeChild(ssStyles);
+// });
 
 // const rootElement = document.getElementById("root");
 // if (rootElement?.hasChildNodes()) {
