@@ -46,17 +46,21 @@ export const LoadingDefault: React.FC<LoadingBaseProps> = (
   const { title, subtitle, children } = props;
 
   return (
-    <div
-      style={{ WebkitBackgroundClip: "text", backgroundClip: "text" }}
-      className={classes.root}
-    >
-      <Box mb={1}>
-        <Icon className={clsx("iconfont icon-logo", classes.logo)}></Icon>
-      </Box>
-      {title && <Typography variant="h6">{title}</Typography>}
-      {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
-      {children}
-    </div>
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `.WebkitBackgroundClipText { background-clip: text; -webkit-background-clip: text; }`
+        }}
+      />
+      <div className={clsx("WebkitBackgroundClipText", classes.root)}>
+        <Box mb={1}>
+          <Icon className={clsx("iconfont icon-logo", classes.logo)}></Icon>
+        </Box>
+        {title && <Typography variant="h6">{title}</Typography>}
+        {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
+        {children}
+      </div>
+    </>
   );
 };
 
