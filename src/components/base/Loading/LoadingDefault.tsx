@@ -7,8 +7,6 @@ import { Box, Icon, Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundClip: "text",
-      "-webkit-background-clip": "text",
       fontWeight: "bold",
       color: "transparent",
       backgroundRepeat: "no-repeat",
@@ -48,7 +46,10 @@ export const LoadingDefault: React.FC<LoadingBaseProps> = (
   const { title, subtitle, children } = props;
 
   return (
-    <div className={classes.root}>
+    <div
+      style={{ WebkitBackgroundClip: "text", backgroundClip: "text" }}
+      className={classes.root}
+    >
       <Box mb={1}>
         <Icon className={clsx("iconfont icon-logo", classes.logo)}></Icon>
       </Box>

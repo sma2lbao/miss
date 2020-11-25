@@ -115,6 +115,7 @@
     "env-cmd": "^10.1.0",
     "faker": "^5.1.0",
     "prerender-spa-plugin": "^3.4.0",
+    "react-app-polyfill": "^2.0.0",
     "react-app-rewired": "^2.1.5"
   }
 }
