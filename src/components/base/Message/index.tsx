@@ -1,23 +1,24 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { SnackbarProvider, useSnackbar, OptionsObject } from "notistack";
+import { useSnackbar, OptionsObject, WithSnackbarProps } from "notistack";
 
-type SnackbarProps = {
-  message: React.ReactNode;
-  options?: OptionsObject | undefined;
+interface IProps {
+  setUseSnackbarRef: (showSnackbar: WithSnackbarProps) => void;
+}
+
+const InnerSnackbarUtilsConfigurator: React.FC<IProps> = (props: IProps) => {
+  props.setUseSnackbarRef(useSnackbar());
+  return null;
 };
 
-// add a <div> child to body under which to mount the snackbars
-const mountPoint = document.createElement("div");
-document.body.appendChild(mountPoint);
+let useSnackbarRef: WithSnackbarProps;
+const setUseSnackbarRef = (useSnackbarRefProp: WithSnackbarProps) => {
+  useSnackbarRef = useSnackbarRefProp;
+};
 
-const ShowSnackbar: React.FC<SnackbarProps> = (props: SnackbarProps) => {
-  const { enqueueSnackbar } = useSnackbar();
-  const { message, options } = props;
-  React.useEffect(() => {
-    enqueueSnackbar(message, options);
-  }, [enqueueSnackbar, message, options]);
-  return <div></div>;
+export const SnackbarUtilsConfigurator = () => {
+  return (
+    <InnerSnackbarUtilsConfigurator setUseSnackbarRef={setUseSnackbarRef} />
+  );
 };
 
 export const Message = {
@@ -34,14 +35,7 @@ export const Message = {
     this.toast(msg, { ...opts, variant: "error" });
   },
   toast: function(msg: React.ReactNode, opts?: OptionsObject | undefined) {
-    ReactDOM.render(
-      <div>
-        <SnackbarProvider maxSnack={3}>
-          <ShowSnackbar message={msg} options={opts} />
-        </SnackbarProvider>
-      </div>,
-      mountPoint
-    );
+    useSnackbarRef.enqueueSnackbar(msg, opts);
   }
 };
 
