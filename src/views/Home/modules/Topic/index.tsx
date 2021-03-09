@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Box, Typography, IconButton } from "@material-ui/core";
+import { Box, Typography, IconButton, Collapse } from "@material-ui/core";
 // import { Skeleton } from "@material-ui/lab";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import { MediaNormal } from "@/components/app/Media";
@@ -50,12 +50,12 @@ const useStyles = makeStyles((theme: Theme) =>
 function Topic() {
   const [index, setIndex] = React.useState(0);
   const classes = useStyles();
-  const { data, loading, error } = useCurrentTopicQuery();
+  const { data } = useCurrentTopicQuery();
   const RouterHelper = useRouterHelper();
 
   return (
     <>
-      {data ? (
+      <Collapse in={!!data} timeout={1200}>
         <div className={classes.head}>
           <div className={classes.headItem}>
             <Box>
@@ -182,7 +182,7 @@ function Topic() {
             </Box>
           </div>
           <div className={classes.headItem}>
-            {data.current_topic.top_shadow ? (
+            {data?.current_topic.top_shadow ? (
               <MediaNormal
                 showDescription
                 {...data?.current_topic.top_shadow}
@@ -200,15 +200,7 @@ function Topic() {
             )}
           </div>
         </div>
-      ) : (
-        <SpecialBox
-          loading={loading}
-          loadingTitle="加载中"
-          error={!!error}
-          placeholder
-          placeholderTitle="加载中"
-        />
-      )}
+      </Collapse>
     </>
   );
 }

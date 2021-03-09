@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, Box, Link } from "@material-ui/core";
+import { Typography, Box, Link, Fade } from "@material-ui/core";
 import { MediaNormal } from "@/components/app/Media";
 import { GridList, GridListTile } from "@material-ui/core";
 import { useShadowUrgesQuery } from "@/schema";
@@ -35,17 +35,22 @@ export default function ShadowRecommend() {
         <GridList cellHeight="auto" cols={4}>
           {data.shadow_urges.map((shadow, index: number) => {
             return (
-              // <Grow in>
-              <GridListTile key={index} cols={1}>
-                <MediaNormal
-                  {...shadow}
-                  onClickRoot={() => RouterHelper.gotoShadow(shadow.id)}
-                  onClickAuthor={() => {
-                    RouterHelper.gotoProfile(shadow.author.username);
-                  }}
-                />
-              </GridListTile>
-              // </Grow>
+              <Fade
+                key={index}
+                in={!!data.shadow_urges.length}
+                style={{ transformOrigin: "0 0 0" }}
+                timeout={index * 500}
+              >
+                <GridListTile cols={1}>
+                  <MediaNormal
+                    {...shadow}
+                    onClickRoot={() => RouterHelper.gotoShadow(shadow.id)}
+                    onClickAuthor={() => {
+                      RouterHelper.gotoProfile(shadow.author.username);
+                    }}
+                  />
+                </GridListTile>
+              </Fade>
             );
           })}
         </GridList>
