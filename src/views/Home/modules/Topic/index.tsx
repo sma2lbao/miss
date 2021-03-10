@@ -1,6 +1,12 @@
 import * as React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Box, Typography, IconButton, Collapse } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Collapse,
+  Divider
+} from "@material-ui/core";
 // import { Skeleton } from "@material-ui/lab";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import { MediaNormal } from "@/components/app/Media";
@@ -200,6 +206,7 @@ function Topic() {
             )}
           </div>
         </div>
+        <Divider />
       </Collapse>
     </>
   );

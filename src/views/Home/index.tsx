@@ -7,7 +7,7 @@ import {
   FullScreen
 } from "@/layouts/PageLayout";
 import { noticeFlagVar } from "@/graphql/variables";
-import { Collapse, Link, Divider } from "@material-ui/core";
+import { Collapse, Link } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { Topic, Aider, Recommend } from "./modules";
 import { useReactiveVar } from "@apollo/client";
@@ -67,7 +67,7 @@ export default function Home() {
       <BodyScreen>
         <ContentScreen className={classes.main}>
           <Topic />
-          <Divider />
+          {/* <Divider /> */}
           <Recommend />
         </ContentScreen>
         <AiderScreen sticky className={classes.aider}>
