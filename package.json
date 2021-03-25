@@ -34,7 +34,7 @@
     "react-test-renderer": "^16.13.1",
     "source-map-explorer": "^2.5.0",
     "subscriptions-transport-ws": "^0.9.17",
-    "three": "^0.112.1",
+    "three": "^0.125.0",
     "typescript": "^3.9.7"
   },
   "scripts": {
